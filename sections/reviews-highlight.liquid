@@ -247,13 +247,14 @@
     display: inline-block;
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
+    font-family: "Kumbh Sans", sans-serif; /* Set font */
     font-size: var(--button-text-size-mobile);
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 12px 24px;
-    border-radius: 8px; /* Rounded edges */
+    padding: 6px 16px;        /* Decreased size */
+    border-radius: 0;         /* No border radius */
     position: relative;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -318,7 +319,7 @@
 
     .reviews-highlight-section__btn {
       font-size: var(--button-text-size-desktop);
-      padding: 14px 28px;
+      padding: 10px 22px; /* Decreased desktop size */
     }
   }
 

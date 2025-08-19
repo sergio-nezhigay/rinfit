@@ -1,318 +1,487 @@
-<section id="shopify-section-{{ section.id }}" class="pp-footer {{ section.settings.custom_classes }}">
-  <div class="pp-footer-container">
-    <div class="pp-footer-left">
-      {% if section.settings.logo_image %}
-        <div class="pp-footer-logo">
-          <img src="{{ section.settings.logo_image | image_url: width: 200 }}" 
-               alt="{{ section.settings.logo_alt | default: shop.name }}" 
-               loading="lazy" 
-               decoding="async">
-        </div>
-      {% endif %}
-      
-      {% if section.settings.description != blank %}
-        <div class="pp-footer-description">
-          {{ section.settings.description }}
-        </div>
-      {% endif %}
-      
-      {% if section.settings.country_selector_enabled %}
-        <div class="pp-footer-country">
-          <div class="pp-footer-country-content">
-            <div class="pp-footer-country-text">
-              <div class="pp-footer-country-label">Country</div>
-              <div class="pp-footer-country-value">{{ section.settings.country_text | default: 'Cyprus (EUR)' }}</div>
+<footer id="shopify-section-{{ section.id }}" class="pp-footer {{ section.settings.custom_classes }}">
+  <div class="pp-footer-main">
+    <div class="pp-footer-container">
+      <div class="pp-footer-left">
+        {% if section.settings.logo_image %}
+          <div class="pp-footer-logo">
+            <img src="{{ section.settings.logo_image | image_url: width: 200 }}" alt="{{ section.settings.logo_alt | default: shop.name }}" loading="lazy" decoding="async" width="109" height="42">
+          </div>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="pp-footer-description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+        {% if section.settings.country_selector_enabled %}
+          <div class="pp-footer-localization">
+            <div class="localization-selectors">
+              <div class="relative">
+                {% render 'localization-selector',
+                  type: 'country',
+                  class: 'pp-footer-country-selector',
+                  button_class: 'localization-toggle heading text-xxs link-faded',
+                  popover_class: 'popover popover--top-start color-scheme color-scheme--dialog'
+                %}
+              </div>
             </div>
-            <div class="pp-footer-country-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+          </div>
+        {% endif %}
+        {% assign social_blocks = section.blocks | where: 'type', 'social' %}
+        {% if social_blocks.size > 0 %}
+          <div class="pp-footer-socials">
+            {% for block in social_blocks %}
+              {% if block.settings.url != blank %}
+                <a href="{{ block.settings.url }}" class="pp-footer-social-link" target="_blank" rel="noopener noreferrer" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon_svg != blank %}
+                    {{ block.settings.icon_svg }}
+                  {% elsif block.settings.icon_image %}
+                    <img src="{{ block.settings.icon_image | image_url: width: 32 }}" alt="{{ block.settings.platform | default: 'Social' }}" loading="lazy" decoding="async" width="32" height="32">
+                  {% endif %}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="pp-footer-right">
+        {% assign nav_blocks = section.blocks | where: 'type', 'navigation' %}
+        {% for block in nav_blocks %}
+          {% if block.settings.title != blank %}
+            <div class="pp-footer-nav-column" {{ block.shopify_attributes }}>
+              <h3 class="pp-footer-nav-title">{{ block.settings.title }}</h3>
+              {% if block.settings.menu != blank %}
+                <nav class="pp-footer-nav-list">
+                  {% for link in linklists[block.settings.menu].links %}
+                    <a href="{{ link.url }}" class="pp-footer-nav-link">{{ link.title }}</a>
+                  {% endfor %}
+                </nav>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="pp-footer-mobile-stack --mobile-only">
+      {% if section.settings.country_selector_enabled %}
+        <div class="pp-footer-localization">
+          <div class="localization-selectors">
+            <div class="relative">
+              {% render 'localization-selector',
+                type: 'country',
+                class: 'pp-footer-country-selector',
+                button_class: 'localization-toggle heading text-xxs link-faded',
+                popover_class: 'popover popover--top-start color-scheme color-scheme--dialog'
+              %}
             </div>
           </div>
         </div>
       {% endif %}
-      
-      {% if section.blocks.size > 0 %}
+      {% if social_blocks.size > 0 %}
         <div class="pp-footer-socials">
-          {% for block in section.blocks %}
-            {% if block.type == 'social' and block.settings.url != blank %}
-              <a href="{{ block.settings.url }}" 
-                 class="pp-footer-social-link"
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 {{ block.shopify_attributes }}>
+          {% for block in social_blocks %}
+            {% if block.settings.url != blank %}
+              <a href="{{ block.settings.url }}" class="pp-footer-social-link" target="_blank" rel="noopener noreferrer" {{ block.shopify_attributes }}>
                 {% if block.settings.icon_svg != blank %}
                   {{ block.settings.icon_svg }}
                 {% elsif block.settings.icon_image %}
-                  <img src="{{ block.settings.icon_image | image_url: width: 32 }}" 
-                       alt="{{ block.settings.platform | default: 'Social' }}" 
-                       loading="lazy" 
-                       decoding="async"
-                       width="32" 
-                       height="32">
+                  <img src="{{ block.settings.icon_image | image_url: width: 32 }}" alt="{{ block.settings.platform | default: 'Social' }}" loading="lazy" decoding="async" width="32" height="32">
                 {% endif %}
               </a>
             {% endif %}
           {% endfor %}
         </div>
       {% endif %}
-    </div>
-    
-    <div class="pp-footer-right">
-      {% assign nav_blocks = section.blocks | where: 'type', 'navigation' %}
-      {% for block in nav_blocks %}
-        {% if block.settings.title != blank %}
-          <div class="pp-footer-nav-column" {{ block.shopify_attributes }}>
-            <h3 class="pp-footer-nav-title">{{ block.settings.title }}</h3>
-            {% if block.settings.links != blank %}
-              <nav class="pp-footer-nav-list">
-                {% assign nav_links = block.settings.links | split: ',' %}
-                {% for link_pair in nav_links %}
-                  {% assign link_parts = link_pair | split: '|' %}
-                  {% if link_parts.size == 2 %}
-                    {% assign link_text = link_parts[0] | strip %}
-                    {% assign link_url = link_parts[1] | strip %}
-                    <a href="{{ link_url }}" class="pp-footer-nav-link">{{ link_text }}</a>
-                  {% endif %}
-                {% endfor %}
-              </nav>
-            {% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
+      <div class="pp-footer-legal">
+        {% assign legal_blocks = section.blocks | where: 'type', 'legal' %}
+        {% for block in legal_blocks %}
+          {% if block.settings.title != blank and block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" class="pp-footer-legal-link" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
-</section>
+
+  <div class="pp-footer-bottom">
+    <div class="pp-footer-bottom-container">
+      <div class="pp-footer-copyright">
+        {% if section.settings.copyright_text != blank %}
+          <span>{{ section.settings.copyright_text }}</span>
+        {% endif %}
+        {% if section.settings.rights_text != blank %}
+          <span>{{ section.settings.rights_text }}</span>
+        {% endif %}
+      </div>
+      <div class="pp-footer-legal">
+        {% assign legal_blocks = section.blocks | where: 'type', 'legal' %}
+        {% for block in legal_blocks %}
+          {% if block.settings.title != blank and block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" class="pp-footer-legal-link" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
 
 <style>
-.pp-footer {
-  --pp-bg-color: #e9e4e1;
-  --pp-text-color: #373a36;
-  --pp-text-muted: rgba(55, 57, 54, 0.6);
-  --pp-text-light: rgba(55, 57, 54, 0.4);
-  --pp-border-color: rgba(55, 57, 54, 0.2);
-  --pp-white: #ffffff;
-  --pp-font-family: 'Kumbh Sans', sans-serif;
-  --pp-logo-width: 109px;
-  --pp-logo-height: 42px;
-  --pp-section-padding: 40px 80px;
-  --pp-section-gap: 521px;
-  --pp-left-width: 197px;
-  --pp-column-gap: 20px;
-  --pp-row-gap: 20px;
-  --pp-nav-gap: 15px;
-  --pp-social-size: 32px;
-  --pp-country-padding: 10px;
-  --pp-country-border-radius: 5px;
-}
-
-.pp-footer {
-  background-color: var(--pp-bg-color);
-  color: var(--pp-text-color);
-  padding: var(--pp-section-padding);
-  font-family: var(--pp-font-family);
-}
-
-.pp-footer-container {
-  display: flex;
-  gap: var(--pp-section-gap);
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.pp-footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pp-row-gap);
-  width: var(--pp-left-width);
-  flex-shrink: 0;
-}
-
-.pp-footer-logo img {
-  width: var(--pp-logo-width);
-  height: var(--pp-logo-height);
-  object-fit: contain;
-}
-
-.pp-footer-description {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--pp-text-muted);
-  font-weight: 400;
-}
-
-.pp-footer-country {
-  background: var(--pp-white);
-  border: 1px solid var(--pp-border-color);
-  border-radius: var(--pp-country-border-radius);
-  padding: var(--pp-country-padding);
-}
-
-.pp-footer-country-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.pp-footer-country-label {
-  font-size: 12px;
-  color: var(--pp-text-light);
-  text-transform: capitalize;
-}
-
-.pp-footer-country-value {
-  font-size: 14px;
-  color: var(--pp-text-color);
-  text-transform: capitalize;
-}
-
-.pp-footer-country-arrow {
-  width: 24px;
-  height: 24px;
-  color: var(--pp-text-color);
-}
-
-.pp-footer-socials {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.pp-footer-social-link {
-  width: var(--pp-social-size);
-  height: var(--pp-social-size);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--pp-text-color);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.pp-footer-social-link:hover,
-.pp-footer-social-link:focus {
-  opacity: 0.7;
-}
-
-.pp-footer-social-link svg {
-  width: 100%;
-  height: 100%;
-}
-
-.pp-footer-right {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex: 1;
-  gap: var(--pp-column-gap);
-}
-
-.pp-footer-nav-column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pp-row-gap);
-}
-
-.pp-footer-nav-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--pp-text-color);
-  margin: 0;
-  text-transform: capitalize;
-}
-
-.pp-footer-nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pp-nav-gap);
-}
-
-.pp-footer-nav-link {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--pp-text-color);
-  text-decoration: none;
-  text-transform: capitalize;
-  transition: opacity 0.2s ease;
-}
-
-.pp-footer-nav-link:hover,
-.pp-footer-nav-link:focus {
-  opacity: 0.7;
-}
-
-@media (max-width: 768px) {
   .pp-footer {
-    --pp-section-padding: 30px 20px;
-    --pp-section-gap: 30px;
-    --pp-left-width: 100%;
-    --pp-column-gap: 15px;
-    --pp-row-gap: 15px;
-    --pp-nav-gap: 12px;
-  }
-  
-  .pp-footer-container {
-    flex-direction: column;
-  }
-  
-  .pp-footer-right {
-    flex-direction: column;
-    gap: var(--pp-row-gap);
     width: 100%;
   }
-  
-  .pp-footer-socials {
+
+  .pp-footer-main {
+    background-color: #e9e4e1;
+    color: #373a36;
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 40px 80px;
+  }
+
+  .pp-footer-container {
+    display: flex;
+    gap: 521px;
+    align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
+  }
+
+  .pp-footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 197px;
+    flex-shrink: 0;
+  }
+
+  .pp-footer-logo img {
+    width: 109px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  .pp-footer-description {
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(55, 57, 54, 0.6);
+    font-weight: 400;
+  }
+
+  .pp-footer-localization {
+    width: 100%;
+  }
+
+  .pp-footer-localization .localization-selectors {
+    width: 100%;
+  }
+
+  .pp-footer-localization .localization-toggle {
+    background: #ffffff;
+    border: 1px solid rgba(55, 57, 54, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 193px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 14px;
+    color: #373a36;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  .pp-footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .pp-footer-social-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #373a36;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .pp-footer-social-link:hover,
+  .pp-footer-social-link:focus {
+    opacity: 0.7;
+  }
+
+  .pp-footer-social-link svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pp-footer-right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 1;
+    gap: 40px;
+  }
+
+  .pp-footer-nav-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .pp-footer-nav-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #373a36;
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  .pp-footer-nav-list {
+    display: flex;
+    flex-direction: column;
     gap: 15px;
   }
-}
+
+  .pp-footer-nav-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: #373a36;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: opacity 0.2s ease;
+  }
+
+  .pp-footer-nav-link:hover,
+  .pp-footer-nav-link:focus {
+    opacity: 0.7;
+  }
+
+  .pp-footer-bottom {
+    background-color: #4f4e4e;
+    padding: 10px 80px;
+  }
+
+  .pp-footer-bottom-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .pp-footer-copyright {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: auto;
+  }
+
+  .pp-footer-copyright span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+
+  .pp-footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .pp-footer-legal-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #373a36;
+    text-decoration: none;
+    text-transform: capitalize;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .pp-footer-bottom .pp-footer-legal .pp-footer-legal-link {
+    color: #ffffff;
+  }
+
+  .pp-footer-mobile-stack.--mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .pp-footer-main {
+      padding: 20px 16px;
+    }
+
+    .pp-footer-container {
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .pp-footer-left {
+      width: 100%;
+      gap: 16px;
+    }
+
+    .pp-footer-right {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 20px;
+      width: 100%;
+    }
+
+    .pp-footer-nav-column {
+      min-width: 0;
+    }
+
+    .pp-footer-nav-title {
+      margin: 0 0 8px 0;
+      line-height: 20px;
+      font-weight: 600;
+    }
+
+    .pp-footer-nav-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pp-footer-nav-link {
+      line-height: 20px;
+      text-decoration: none;
+    }
+
+    .pp-footer-left .pp-footer-localization,
+    .pp-footer-left .pp-footer-socials {
+      display: none !important;
+    }
+
+    .pp-footer-mobile-stack.--mobile-only {
+      display: grid;
+      row-gap: 16px;
+      margin-top: 8px;
+    }
+
+    .pp-footer-mobile-stack .pp-footer-socials {
+      justify-content: space-between;
+    }
+
+    .pp-footer-mobile-stack .pp-footer-legal {
+      gap: 16px;
+      justify-content: flex-start;
+    }
+
+    .pp-footer-bottom {
+      padding: 10px 16px;
+    }
+
+    .pp-footer-bottom-container {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pp-footer-bottom .pp-footer-legal {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .pp-footer-mobile-stack.--mobile-only {
+      display: none !important;
+    }
+  }
 </style>
 
-#shopify-section-{{ section.id }} {
-  background-color: {{ section.settings.bg_color | default: '#e9e4e1' }};
-  padding: {{ section.settings.padding_desktop_top }}px {{ section.settings.padding_desktop_right }}px {{ section.settings.padding_desktop_bottom }}px {{ section.settings.padding_desktop_left }}px;
-}
-
-#shopify-section-{{ section.id }} .pp-footer-container {
-  max-width: {{ section.settings.section_max_width | default: '100%' }};
-  margin: 0 auto;
-}
-
-#shopify-section-{{ section.id }} .pp-footer-description {
-  color: {{ section.settings.description_color | default: 'rgba(55, 57, 54, 0.6)' }};
-  font-size: {{ section.settings.description_size_desktop }}px;
-}
-
-#shopify-section-{{ section.id }} .pp-footer-nav-title {
-  color: {{ section.settings.title_color | default: '#373a36' }};
-  font-size: {{ section.settings.title_size_desktop }}px;
-}
-
-#shopify-section-{{ section.id }} .pp-footer-nav-link {
-  color: {{ section.settings.text_color | default: '#373a36' }};
-  font-size: {{ section.settings.text_size_desktop }}px;
-}
-
-@media (max-width: 768px) {
-  #shopify-section-{{ section.id }} {
-    padding: {{ section.settings.padding_mobile_top }}px {{ section.settings.padding_mobile_right }}px {{ section.settings.padding_mobile_bottom }}px {{ section.settings.padding_mobile_left }}px;
+<style>
+  #shopify-section-{{ section.id }} .pp-footer-main {
+    background-color: {{ section.settings.main_bg_color | default: '#e9e4e1' }};
+    padding: {{ section.settings.padding_desktop_top }}px {{ section.settings.padding_desktop_right }}px {{ section.settings.padding_desktop_bottom }}px {{ section.settings.padding_desktop_left }}px;
   }
-  
+
+  #shopify-section-{{ section.id }} .pp-footer-bottom {
+    background-color: {{ section.settings.bottom_bg_color | default: '#4f4e4e' }};
+    padding: {{ section.settings.bottom_padding_desktop_top }}px {{ section.settings.bottom_padding_desktop_right }}px {{ section.settings.bottom_padding_desktop_bottom }}px {{ section.settings.bottom_padding_desktop_left }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-container {
+    max-width: {{ section.settings.section_max_width | default: '100%' }};
+    margin: 0 auto;
+  }
+
   #shopify-section-{{ section.id }} .pp-footer-description {
-    font-size: {{ section.settings.description_size_mobile }}px;
+    color: {{ section.settings.description_color | default: 'rgba(55, 57, 54, 0.6)' }};
+    font-size: {{ section.settings.description_size_desktop }}px;
   }
-  
+
   #shopify-section-{{ section.id }} .pp-footer-nav-title {
-    font-size: {{ section.settings.title_size_mobile }}px;
+    color: {{ section.settings.title_color | default: '#373a36' }};
+    font-size: {{ section.settings.title_size_desktop }}px;
   }
-  
+
   #shopify-section-{{ section.id }} .pp-footer-nav-link {
-    font-size: {{ section.settings.text_size_mobile }}px;
+    color: {{ section.settings.text_color | default: '#373a36' }};
+    font-size: {{ section.settings.text_size_desktop }}px;
   }
-}
+
+  #shopify-section-{{ section.id }} .pp-footer-legal-link {
+    color: {{ section.settings.text_color | default: '#373a36' }};
+    font-size: {{ section.settings.legal_size_desktop | default: 12 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-bottom .pp-footer-legal .pp-footer-legal-link {
+    color: {{ section.settings.legal_color | default: '#ffffff' }};
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-copyright span {
+    color: {{ section.settings.copyright_color | default: '#ffffff' }};
+    font-size: {{ section.settings.copyright_size_desktop }}px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .pp-footer-main {
+      padding: {{ section.settings.padding_mobile_top }}px {{ section.settings.padding_mobile_right }}px {{ section.settings.padding_mobile_bottom }}px {{ section.settings.padding_mobile_left }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-bottom {
+      padding: {{ section.settings.bottom_padding_mobile_top }}px {{ section.settings.bottom_padding_mobile_right }}px {{ section.settings.bottom_padding_mobile_bottom }}px {{ section.settings.bottom_padding_mobile_left }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-description {
+      font-size: {{ section.settings.description_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-nav-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-nav-link {
+      font-size: {{ section.settings.text_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-legal-link {
+      font-size: {{ section.settings.legal_size_mobile | default: 12 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-copyright span {
+      font-size: {{ section.settings.copyright_size_mobile }}px;
+    }
+  }
+</style>
+
+
 
 {% schema %}
 {
@@ -360,13 +529,35 @@
     },
     {
       "type": "header",
+      "content": "Copyright & Legal"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "©2025 Rinfit - Silicone Rings."
+    },
+    {
+      "type": "text",
+      "id": "rights_text",
+      "label": "Rights Text",
+      "default": "All Rights Reserved"
+    },
+    {
+      "type": "header",
       "content": "Colors"
     },
     {
       "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
+      "id": "main_bg_color",
+      "label": "Main Background Color",
       "default": "#e9e4e1"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bg_color",
+      "label": "Bottom Background Color",
+      "default": "#4f4e4e"
     },
     {
       "type": "color",
@@ -385,6 +576,18 @@
       "id": "description_color",
       "label": "Description Color",
       "default": "rgba(55, 57, 54, 0.6)"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Copyright Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "legal_color",
+      "label": "Legal Links Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
@@ -418,6 +621,26 @@
       "step": 1,
       "unit": "px",
       "label": "Description Size Desktop",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "copyright_size_desktop",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Copyright Size Desktop",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "legal_size_desktop",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Legal Links Size Desktop",
       "default": 12
     },
     {
@@ -455,8 +678,28 @@
       "default": 12
     },
     {
+      "type": "range",
+      "id": "copyright_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Copyright Size Mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "legal_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Legal Links Size Mobile",
+      "default": 12
+    },
+    {
       "type": "header",
-      "content": "Spacing Desktop"
+      "content": "Main Section Spacing Desktop"
     },
     {
       "type": "range",
@@ -465,7 +708,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Top Desktop",
+      "label": "Main Padding Top Desktop",
       "default": 40
     },
     {
@@ -475,7 +718,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Bottom Desktop",
+      "label": "Main Padding Bottom Desktop",
       "default": 40
     },
     {
@@ -485,7 +728,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Left Desktop",
+      "label": "Main Padding Left Desktop",
       "default": 80
     },
     {
@@ -495,12 +738,12 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Right Desktop",
+      "label": "Main Padding Right Desktop",
       "default": 80
     },
     {
       "type": "header",
-      "content": "Spacing Mobile"
+      "content": "Main Section Spacing Mobile"
     },
     {
       "type": "range",
@@ -509,7 +752,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Top Mobile",
+      "label": "Main Padding Top Mobile",
       "default": 30
     },
     {
@@ -519,7 +762,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Padding Bottom Mobile",
+      "label": "Main Padding Bottom Mobile",
       "default": 30
     },
     {
@@ -529,7 +772,7 @@
       "max": 60,
       "step": 5,
       "unit": "px",
-      "label": "Padding Left Mobile",
+      "label": "Main Padding Left Mobile",
       "default": 20
     },
     {
@@ -539,7 +782,95 @@
       "max": 60,
       "step": 5,
       "unit": "px",
-      "label": "Padding Right Mobile",
+      "label": "Main Padding Right Mobile",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Bottom Section Spacing Desktop"
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding Top Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding Bottom Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Left Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Right Desktop",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Bottom Section Spacing Mobile"
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_top",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom Padding Top Mobile",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom Padding Bottom Mobile",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_left",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Left Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_right",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Right Mobile",
       "default": 20
     },
     {
@@ -599,10 +930,26 @@
           "label": "Column Title"
         },
         {
-          "type": "textarea",
-          "id": "links",
-          "label": "Links",
-          "info": "Format: Link Text|URL, one per line. Example: Home|/, About|/about"
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "Select a menu from Navigation settings"
+        }
+      ]
+    },
+    {
+      "type": "legal",
+      "name": "Legal Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
         }
       ]
     }
@@ -649,22 +996,37 @@
         {
           "type": "navigation",
           "settings": {
-            "title": "Collections",
-            "links": "4Love|/collections/4love,Couture|/collections/couture,Eagle|/collections/eagle,Emerald Frame|/collections/emerald-frame,Gemstones|/collections/gemstones,Infinity|/collections/infinity,Infinity Stackable|/collections/infinity-stackable,Marquise|/collections/marquise,Marquise Frame|/collections/marquise-frame,Shop All|/collections/all"
+            "title": "Collections"
           }
         },
         {
           "type": "navigation",
           "settings": {
-            "title": "Shop",
-            "links": "Sale|/collections/sale,Best Sellers|/collections/best-sellers,New Arrivals|/collections/new-arrivals,Men's Rings|/collections/mens-rings,Women's Rings|/collections/womens-rings,Couple Bundles|/collections/couple-bundles,Sets|/collections/sets,Accessories|/collections/accessories,Rinfit X Qted|/collections/rinfit-x-qted,Smart Ring Covers|/collections/smart-ring-covers"
+            "title": "Shop"
           }
         },
         {
           "type": "navigation",
           "settings": {
-            "title": "Need Help?",
-            "links": "Ring Size Guide|/pages/ring-size-guide,FAQ|/pages/faq,Customer Support|/pages/contact"
+            "title": "Need Help?"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Privacy Policy"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Terms & Conditions"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Cookies Policy"
           }
         }
       ]

@@ -28,8 +28,6 @@
     width: 100%;
     display: flex;
     align-items: center;
-    --mobile-speed: {{ section.settings.mobile_speed | default: 20 }}s;
-    --desktop-speed: {{ section.settings.desktop_speed | default: 30 }}s;
   }
 
   .marquee-container {
@@ -53,7 +51,7 @@
     margin: 0;
     padding: 0;
     will-change: transform;
-    animation: marquee-scroll var(--mobile-speed) linear infinite;
+    animation: marquee-scroll 30s linear infinite;
     align-items: center;
     height: 100%;
   }
@@ -114,10 +112,6 @@
   @media (min-width: 768px) {
     .marquee-text {
       font-size: 14px;
-    }
-    
-    .marquee-track:not(.static) {
-      animation-duration: var(--desktop-speed);
     }
   }
 
@@ -187,32 +181,6 @@
       "label": "Static (centered) on desktop",
       "default": false,
       "info": "When enabled, marquee will be centered and static on desktop, animated on mobile"
-    },
-    {
-      "type": "header",
-      "content": "Animation Speed"
-    },
-    {
-      "type": "range",
-      "id": "mobile_speed",
-      "min": 5,
-      "max": 60,
-      "step": 5,
-      "unit": "s",
-      "label": "Mobile animation speed",
-      "default": 20,
-      "info": "Lower number = faster animation"
-    },
-    {
-      "type": "range",
-      "id": "desktop_speed",
-      "min": 10,
-      "max": 120,
-      "step": 5,
-      "unit": "s",
-      "label": "Desktop animation speed",
-      "default": 30,
-      "info": "Lower number = faster animation. Only applies when not static"
     }
   ],
   "blocks": [
