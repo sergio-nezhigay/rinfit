@@ -1,7 +1,7 @@
 <div
   id="section-{{ section.id }}"
   class="reviews-highlight-section {{ section.settings.custom_classes }}"
-  style="--section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px; --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px; --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px; --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px; --section-max-width: {{ section.settings.max_width }}px; --headline-color: {{ section.settings.headline_color }}; --headline-size-mobile: {{ section.settings.headline_size_mobile }}px; --headline-size-desktop: {{ section.settings.headline_size_desktop }}px; --review-text-color: {{ section.settings.review_text_color }}; --review-text-size-mobile: {{ section.settings.review_text_size_mobile }}px; --review-text-size-desktop: {{ section.settings.review_text_size_desktop }}px; --button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-text-size-mobile: {{ section.settings.button_text_size_mobile }}px; --button-text-size-desktop: {{ section.settings.button_text_size_desktop }}px; --quote-icon-color: {{ section.settings.quote_icon_color }};"
+  style="  --section-max-width: {{ section.settings.max_width }}px; "
 >
   <div class="reviews-highlight-section__container">
     {% if section.settings.headline != blank %}
@@ -53,13 +53,15 @@
 
     {% if section.settings.review_text != blank %}
       <div class="reviews-highlight-section__review">
-        <div class="reviews-highlight-section__quote-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 21C3 17.4 5.4 15 9 15H11V10H6C4.9 10 4 9.1 4 8V4C4 2.9 4.9 2 6 2H11C12.1 2 13 2.9 13 4V12C13 18.1 8.1 23 2 23L3 21ZM14 21C14 17.4 16.4 15 20 15H22V10H17C15.9 10 15 9.1 15 8V4C15 2.9 15.9 2 17 2H22C23.1 2 24 2.9 24 4V12C24 18.1 19.1 23 13 23L14 21Z" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="reviews-highlight-section__review-text">
-          {{ section.settings.review_text }}
+        <div class="reviews-highlight-section__review-row">
+          <div class="reviews-highlight-section__quote-icon">
+            <svg width="26" height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.09205 0.188286C3.69205 3.65633 0.692057 7.69306 0.0920572 12.2985C-0.842364 19.4676 5.56878 22.9766 8.81739 19.824C12.066 16.6715 10.119 12.6692 7.76679 11.5749C5.4146 10.4805 3.97604 10.8621 4.22703 9.39983C4.47803 7.9376 7.82416 3.88509 10.7644 1.99761C10.8684 1.90891 10.9348 1.78392 10.95 1.64804C10.9652 1.51217 10.928 1.37561 10.8462 1.26613L10.119 0.320238C9.80344 -0.0899608 9.50081 -0.0741842 9.09205 0.187569M23.3099 0.188286C17.9099 3.65633 14.9099 7.69306 14.3099 12.2985C13.3748 19.4676 19.7859 22.9766 23.0345 19.824C26.2831 16.6715 24.3361 12.6692 21.9832 11.5749C19.6303 10.4805 18.1924 10.8621 18.4434 9.39983C18.6944 7.9376 22.0413 3.88509 24.9815 1.99761C25.0854 1.90881 25.1517 1.78377 25.1667 1.6479C25.1818 1.51203 25.1445 1.37553 25.0625 1.26613L24.3361 0.320238C24.0206 -0.0899608 23.7179 -0.0741842 23.3099 0.187569" fill="#232222"/>
+            </svg>
+          </div>
+          <div class="reviews-highlight-section__review-text">
+            {{ section.settings.review_text }}
+          </div>
         </div>
       </div>
     {% endif %}
@@ -76,45 +78,11 @@
 
 <style>
   .reviews-highlight-section {
-    padding-top: var(--section-padding-top-mobile);
-    padding-bottom: var(--section-padding-bottom-mobile);
-    background: {{ section.settings.background_color }};
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: white;
     text-align: center;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out 0.2s forwards;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    font-family: 'Kumbh Sans', sans-serif;
   }
 
   .reviews-highlight-section__container {
@@ -124,17 +92,20 @@
   }
 
   .reviews-highlight-section__headline {
-    color: var(--headline-color);
-    font-size: var(--headline-size-mobile);
-    line-height: 1.2;
+    color: #373a36;
+    font-size: 34px;
+    line-height: 30px;
     margin-bottom: 20px;
-    font-weight: 400;
-    opacity: 0;
-    animation: slideInLeft 0.6s ease-out 0.4s forwards;
+    font-weight: 300;
   }
 
   .reviews-highlight-section__headline em {
+    font-family: 'Playfair Display', serif;
     font-style: italic;
+    font-size: 40px;
+    line-height: 30px;
+    font-weight: 400;
+    letter-spacing: -2%;
   }
 
   .reviews-highlight-section__customer-images {
@@ -142,215 +113,127 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 0.6s forwards;
+    opacity: 1;
   }
 
   .reviews-highlight-section__customer-image {
     border-radius: 50%;
     overflow: hidden;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
-    border: 2px solid #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid #b2abaa;
     position: relative;
   }
 
   .reviews-highlight-section__customer-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .reviews-highlight-section__customer-image:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    border-color: #f0f0f0;
-  }
-
-  .reviews-highlight-section__customer-image:hover::before {
-    opacity: 1;
+    content: none; /* remove overlay effect */
   }
 
   .reviews-highlight-section__customer-image:not(:first-child) {
-    margin-left: -12px; /* Creates 30% overlap for 40px width */
+    margin-left: -12px;
   }
 
   .reviews-highlight-section__customer-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .reviews-highlight-section__customer-image:hover img {
-    transform: scale(1.1);
   }
 
   .reviews-highlight-section__review {
-    margin-bottom: 25px;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 0.8s forwards;
+    margin-bottom: 30px;
+  }
+
+  .reviews-highlight-section__review-row {
+    display: flex;
+    gap: 11px;
   }
 
   .reviews-highlight-section__quote-icon {
-    color: var(--quote-icon-color);
-    margin-bottom: 10px;
+    color: #232222;
+    margin-left: 8px;
     display: flex;
-    justify-content: center;
-    animation: pulse 3s ease-in-out infinite;
-  }
-
-  .reviews-highlight-section__quote-icon svg {
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    flex-shrink: 0;
   }
 
   .reviews-highlight-section__review-text {
-    color: var(--review-text-color);
-    font-size: var(--review-text-size-mobile);
-    line-height: 1.4;
-    max-width: 400px;
-    margin: 0 auto;
+    color: #373936;
+    font-size: 14px;
+    line-height: 1.21;
+    max-width: 286px;
+    margin: 0;
     position: relative;
-    padding: 20px 0;
+    padding: 0;
+    text-align: center;
   }
 
   .reviews-highlight-section__review-text::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--quote-icon-color), transparent);
-    opacity: 0.3;
+    display: none; /* Remove the line above text in row layout */
   }
 
   .reviews-highlight-section__button {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 1s forwards;
+    opacity: 1;
   }
 
   .reviews-highlight-section__btn {
     display: inline-block;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    font-family: "Kumbh Sans", sans-serif; /* Set font */
-    font-size: var(--button-text-size-mobile);
+    background-color: #232222;
+    color: #ffffff;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.21;
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 6px 16px;        /* Decreased size */
-    border-radius: 0;         /* No border radius */
+    padding: 10px 30px;
+    border-radius: 4px;
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .reviews-highlight-section__btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .reviews-highlight-section__btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  .reviews-highlight-section__btn:hover::before {
-    left: 100%;
-  }
-
-  .reviews-highlight-section__btn:active {
-    transform: translateY(0);
+    content: none; /* remove shine effect */
   }
 
   @media (min-width: 768px) {
     .reviews-highlight-section {
-      padding-top: var(--section-padding-top-desktop);
-      padding-bottom: var(--section-padding-bottom-desktop);
+      padding-top: 14px;
+      padding-bottom: 14px;
     }
 
     .reviews-highlight-section__headline {
-      font-size: var(--headline-size-desktop);
-      margin-bottom: 25px;
+      font-size: 40px;
+      margin-bottom: 20px;
     }
 
     .reviews-highlight-section__customer-images {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .reviews-highlight-section__customer-image {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
     }
 
     .reviews-highlight-section__customer-image:not(:first-child) {
-      margin-left: -15px; /* Creates 30% overlap for 50px width */
+      margin-left: -15px;
+    }
+
+    .reviews-highlight-section__headline em {
+      font-size: 47px;
     }
 
     .reviews-highlight-section__review {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .reviews-highlight-section__review-text {
-      font-size: var(--review-text-size-desktop);
-      max-width: 500px;
+      font-size: 16px;
+      max-width: 400px;
     }
-
-    .reviews-highlight-section__btn {
-      font-size: var(--button-text-size-desktop);
-      padding: 10px 22px; /* Decreased desktop size */
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .reviews-highlight-section__customer-image {
-      width: 60px;
-      height: 60px;
-    }
-
-    .reviews-highlight-section__customer-image:not(:first-child) {
-      margin-left: -18px; /* Creates 30% overlap for 60px width */
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reviews-highlight-section,
-    .reviews-highlight-section__headline,
-    .reviews-highlight-section__customer-images,
-    .reviews-highlight-section__review,
-    .reviews-highlight-section__button {
-      animation: none;
-      opacity: 1;
-    }
-
-    .reviews-highlight-section__quote-icon {
-      animation: none;
-    }
-
-    .reviews-highlight-section__customer-image,
-    .reviews-highlight-section__btn {
-      transition: none;
+    .reviews-highlight-section__review-row {
+      justify-content: center;
+      gap: 10px;
     }
   }
 </style>
@@ -422,38 +305,7 @@
       "label": "Review Text",
       "default": "Love this ring! It's really comfortable and customer service was outstanding with helping me exchange it for the correct size!"
     },
-    {
-      "type": "range",
-      "id": "review_text_size_mobile",
-      "label": "Review Text Size Mobile",
-      "min": 14,
-      "max": 24,
-      "step": 1,
-      "default": 16,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "review_text_size_desktop",
-      "label": "Review Text Size Desktop",
-      "min": 14,
-      "max": 28,
-      "step": 1,
-      "default": 18,
-      "unit": "px"
-    },
-    {
-      "type": "color",
-      "id": "review_text_color",
-      "label": "Review Text Color",
-      "default": "#666666"
-    },
-    {
-      "type": "color",
-      "id": "quote_icon_color",
-      "label": "Quote Icon Color",
-      "default": "#cccccc"
-    },
+
     {
       "type": "header",
       "content": "Button"
@@ -468,32 +320,6 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link"
-    },
-    {
-      "type": "range",
-      "id": "button_text_size_mobile",
-      "label": "Button Text Size Mobile",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "default": 14,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "button_text_size_desktop",
-      "label": "Button Text Size Desktop",
-      "min": 14,
-      "max": 24,
-      "step": 1,
-      "default": 16,
-      "unit": "px"
-    },
-    {
-      "type": "color",
-      "id": "button_bg_color",
-      "label": "Button Background Color",
-      "default": "#000000"
     },
     {
       "type": "color",
@@ -512,46 +338,7 @@
       "default": "1200",
       "info": "Maximum width in pixels"
     },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "label": "Padding Top Mobile",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "label": "Padding Bottom Mobile",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_top_desktop",
-      "label": "Padding Top Desktop",
-      "min": 0,
-      "max": 150,
-      "step": 5,
-      "default": 60,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_desktop",
-      "label": "Padding Bottom Desktop",
-      "min": 0,
-      "max": 150,
-      "step": 5,
-      "default": 60,
-      "unit": "px"
-    },
+
     {
       "type": "color",
       "id": "background_color",
