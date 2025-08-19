@@ -1,0 +1,1030 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner_hwPG8G": {
+      "type": "hero-banner",
+      "blocks": {
+        "heading_BfNtW8": {
+          "type": "heading",
+          "settings": {
+            "banner_img": "shopify://shop_images/hero.png",
+            "main_text": "Built for Comfort. Made to Move.",
+            "main_description": "<p>Silicone Rings <em>that fit your Lifestyle</em></p>",
+            "button_text": "SHOP OUR SPARK COLLECTION",
+            "button_url": "shopify://products/his-and-hers-silicone-wedding-ring-bundle-set-32"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BfNtW8"
+      ],
+      "name": "Herro banner",
+      "settings": {}
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-1": {
+          "type": "image",
+          "settings": {
+            "subheading": "Tell your story",
+            "title": "Image slide",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        },
+        "slide-2": {
+          "type": "image",
+          "settings": {
+            "subheading": "Tell your story",
+            "title": "Image slide",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2) 0%, rgba(4, 4, 4, 0.65) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": true,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "Featured collection"
+      }
+    },
+    "multi-column": {
+      "type": "multi-column",
+      "blocks": {
+        "column-1": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "Column title",
+            "heading_tag": "h3",
+            "content": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "column-2": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "Column title",
+            "heading_tag": "h3",
+            "content": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "column-3": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "Column title",
+            "heading_tag": "h3",
+            "content": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": false,
+        "overlap_image": false,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing": "md",
+        "subheading": "About",
+        "title": "Multi-column",
+        "content": ""
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection-4": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection-5": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection-6": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "collection-1",
+        "collection-2",
+        "collection-3",
+        "collection-4",
+        "collection-5",
+        "collection-6"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image_size": "auto",
+        "show_text_outside": false,
+        "space_items": true,
+        "stack_collections": true,
+        "collections_per_row_mobile": "1",
+        "collections_per_row_desktop": 3,
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    },
+    "before-after": {
+      "type": "before-after",
+      "blocks": {
+        "before": {
+          "type": "before",
+          "settings": {
+            "color_scheme": "",
+            "text": "Before",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link"
+          }
+        },
+        "after": {
+          "type": "after",
+          "settings": {
+            "color_scheme": "",
+            "text": "After",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "before",
+        "after"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "subheading": "",
+        "title": "Before/after",
+        "content": "<p>Showcase your product benefit by using before/after image comparison.</p>",
+        "cursor_direction": "horizontal",
+        "cursor_initial_position": 50,
+        "cursor_background": "#ffffff",
+        "cursor_arrows_color": "#000000"
+      }
+    },
+    "image-with-text-scroll": {
+      "type": "images-with-text-scroll",
+      "blocks": {
+        "item-1": {
+          "type": "image_with_text",
+          "settings": {
+            "subheading": "",
+            "title": "#1",
+            "content": "<p>Welcome your customers to your store by sharing temporary offers or explaining to them what your products are about.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "item-2": {
+          "type": "image_with_text",
+          "settings": {
+            "subheading": "",
+            "title": "#2",
+            "content": "<p>Create trust with your customers by explaining the story of your brand. Share your values or what is important to you.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "item-3": {
+          "type": "image_with_text",
+          "settings": {
+            "subheading": "",
+            "title": "#3",
+            "content": "<p>Share information about your product with your customers. Describe a product, and share info about your production process...</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "image_position": "start",
+        "text_alignment": "center",
+        "heading_tag": "h3",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "multiple-media-with-text": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "rotation": 0
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "before_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "About",
+        "title": "Showcase your product",
+        "content": "<p>Write some content about your products, collections or brand. Use image or video to create an impactful layout.</p>",
+        "button_1_text": "",
+        "button_1_link": "",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image_size": "auto",
+        "subheading": "Keep me updated",
+        "title": "Newsletter",
+        "content": "<p>A short sentence describing what someone will receive by subscribing.</p>",
+        "button_text": "Subscribe",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "shop-the-look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "look-1": {
+          "type": "look",
+          "settings": {
+            "hot_spots_background": "#ffffff",
+            "product_1": "",
+            "product_1_horizontal_position": 55,
+            "product_1_vertical_position": 30,
+            "product_2": "",
+            "product_2_horizontal_position": 25,
+            "product_2_vertical_position": 40,
+            "product_3": "",
+            "product_3_horizontal_position": 65,
+            "product_3_vertical_position": 60,
+            "product_4": "",
+            "product_4_horizontal_position": 85,
+            "product_4_vertical_position": 85
+          }
+        }
+      },
+      "block_order": [
+        "look-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "subheading": "",
+        "title": "Shop the look",
+        "content": "",
+        "popover_title": "Shop the look"
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "blog": "",
+        "posts_count": 3,
+        "stack_on_mobile": false,
+        "show_category": true,
+        "show_date": false,
+        "show_excerpt": true,
+        "show_read_more": true,
+        "subheading": "",
+        "title": "Blog posts",
+        "content": "",
+        "button_link": "",
+        "button_text": "View all"
+      }
+    },
+    "text_image_text_h4378x": {
+      "type": "text-image-text",
+      "blocks": {
+        "left_text_t9EVie": {
+          "type": "left_text",
+          "settings": {
+            "title": "Explore Our",
+            "description": "",
+            "button_text": "",
+            "button_url": "",
+            "title_size_desktop": 32,
+            "title_size_mobile": 24,
+            "title_color": "#000000",
+            "description_size_desktop": 18,
+            "description_size_mobile": 16,
+            "description_color": "#666666",
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_border_color": "#000000"
+          }
+        },
+        "center_image_w8CHFp": {
+          "type": "center_image",
+          "settings": {
+            "icon_html": ""
+          }
+        },
+        "right_text_wxYBxw": {
+          "type": "right_text",
+          "settings": {
+            "title": "Best Sellers",
+            "description": "",
+            "button_text": "",
+            "button_url": "",
+            "title_size_desktop": 32,
+            "title_size_mobile": 24,
+            "title_color": "#000000",
+            "description_size_desktop": 18,
+            "description_size_mobile": 16,
+            "description_color": "#666666",
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_border_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "left_text_t9EVie",
+        "center_image_w8CHFp",
+        "right_text_wxYBxw"
+      ],
+      "disabled": true,
+      "name": "Text Image Text",
+      "settings": {
+        "max_width": "1200px",
+        "background_color": "#f0e1de",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "custom_classes": ""
+      }
+    },
+    "image_with_text_section_wNi7Jn": {
+      "type": "image-with-text-section",
+      "name": "Gemstone Promo",
+      "settings": {
+        "image": "shopify://shop_images/image.png",
+        "subheading": "NEW DROP IS HERE",
+        "title": "Gemstone <span>Collection</span>",
+        "description": "<p>Designed to shine with every move, these rings bring a bold, jewel-like look with the comfort of silicone. Perfect for everyday elegance with zero compromise.</p>",
+        "button_text": "SHOP ALL",
+        "button_url": "#",
+        "reverse_layout": false,
+        "mobile_text_alignment": "center",
+        "mobile_image_first": true,
+        "background_color_block": "#ffffff",
+        "max_width": "1064px",
+        "background_color": "#f5e5e1",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "subheading_size_desktop": 14,
+        "subheading_size_mobile": 14,
+        "subheading_color": "#373a36",
+        "title_size_desktop": 40,
+        "title_size_mobile": 30,
+        "title_color": "#373a36",
+        "description_size_desktop": 14,
+        "description_size_mobile": 14,
+        "description_color": "#8f908f",
+        "button_bg_color": "#232222",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#000000",
+        "custom_classes": ""
+      }
+    },
+    "instagram_gallery_6fUMRm": {
+      "type": "instagram-gallery",
+      "blocks": {
+        "instagram_post_68pFEM": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_RXAfzz": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_KQ6V8e": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_Y67DbT": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_DK6NFw": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_qdTGa7": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        },
+        "instagram_post_LmKLG6": {
+          "type": "instagram_post",
+          "settings": {
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "instagram_post_68pFEM",
+        "instagram_post_RXAfzz",
+        "instagram_post_KQ6V8e",
+        "instagram_post_Y67DbT",
+        "instagram_post_DK6NFw",
+        "instagram_post_qdTGa7",
+        "instagram_post_LmKLG6"
+      ],
+      "disabled": true,
+      "name": "Instagram Gallery",
+      "settings": {
+        "title": "Shop Our Instagram",
+        "instagram_handle": "@rinfitrings",
+        "button_text": "Follow Us",
+        "button_url": "",
+        "max_width": "1400px",
+        "background_color": "#f9f9f9",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "title_size_desktop": 48,
+        "title_size_mobile": 32,
+        "title_color": "#000000",
+        "title_weight": 400,
+        "title_italic": true,
+        "handle_size_desktop": 18,
+        "handle_size_mobile": 16,
+        "handle_color": "#666666",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#000000",
+        "custom_classes": ""
+      }
+    },
+    "banner_cta_VYT94p": {
+      "type": "banner-cta",
+      "disabled": true,
+      "name": "Banner cta",
+      "settings": {
+        "background_color": "#f5e5e1",
+        "main_image": "shopify://shop_images/image.png",
+        "background_color_block": "#ffffff"
+      }
+    },
+    "collection_main_igbpeA": {
+      "type": "collection-main",
+      "name": "Shop by collections",
+      "settings": {
+        "title": "<p>Shop by <em>Collections</em></p>",
+        "button_text": "SHOP ALL",
+        "button_url": "shopify://collections/all"
+      }
+    },
+    "smart_ring_e7a8hy": {
+      "type": "smart-ring",
+      "name": "Smart ring",
+      "settings": {
+        "background_color": "#f5e5e1",
+        "main_image": "shopify://shop_images/image_9.png",
+        "title": "<p>Enhance Your Smart Ring With <em>Silicone Comfort</em></p>",
+        "description": "Introducing the Smart Ring Enhancer, the perfect accessory for your smart ring. Designed with precision and innovation, our Smart Ring Enhancer provides exceptional protection and style.",
+        "button_text": "SHOP ALL",
+        "button_url": "shopify://collections",
+        "background_color_block": "#ffffff",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_left_desktop": 32,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "title_size_desktop": 40,
+        "title_size_mobile": 30,
+        "title_color": "#000000",
+        "description_size_desktop": 18,
+        "description_size_mobile": 16,
+        "description_color": "#666666"
+      }
+    },
+    "test_Yhqd4U": {
+      "type": "test",
+      "blocks": {
+        "item_FH9DhW": {
+          "type": "item",
+          "settings": {
+            "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n<path d=\"M6.09485 17.6636C5.96085 17.5472 5.82985 17.4254 5.70185 17.2981C2.52185 14.1181 2.82185 8.66158 6.37185 5.11158C11.7283 -0.245421 21.0578 1.94208 21.0578 1.94208C21.0578 1.94208 22.0018 5.96858 21.1308 10.2501M8.35535 19.0001C9.04035 19.2561 9.76235 19.4131 10.4998 19.4726\" stroke=\"#373A36\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n<path d=\"M18.5 4.5C16 6.1665 5 14.25 5 22.5M12.598 14.29C12.6705 13.464 13.184 12.805 14.005 12.689C14.724 12.5875 15.828 12.5 17.5 12.5C19.172 12.5 20.276 12.5875 20.995 12.689C21.816 12.805 22.33 13.464 22.4025 14.29C22.4545 14.8835 22.5 15.6465 22.5 16.5C22.5 18.757 21.309 20.869 19.302 21.902C18.6315 22.247 17.977 22.5 17.5 22.5C17.023 22.5 16.3685 22.247 15.698 21.902C13.691 20.869 12.5 18.757 12.5 16.5C12.5 15.6465 12.5455 14.8835 12.598 14.29Z\" stroke=\"#373A36\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n<path d=\"M15.5 16.8665L17.353 19L20 15\" stroke=\"#373A36\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n</svg>",
+            "text": "Skin-Friendly Comfort"
+          }
+        },
+        "item_WHTenA": {
+          "type": "item",
+          "settings": {
+            "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"24\" viewbox=\"0 0 25 24\" fill=\"none\">\n<path d=\"M21.5079 9.63937C21.1544 9.27 20.7888 8.88938 20.651 8.55469C20.5235 8.24813 20.516 7.74 20.5085 7.24781C20.4944 6.33281 20.4794 5.29594 19.7585 4.575C19.0376 3.85406 18.0007 3.83906 17.0857 3.825C16.5935 3.8175 16.0854 3.81 15.7788 3.6825C15.4451 3.54469 15.0635 3.17906 14.6941 2.82562C14.0472 2.20406 13.3122 1.5 12.3335 1.5C11.3547 1.5 10.6207 2.20406 9.97287 2.82562C9.6035 3.17906 9.22287 3.54469 8.88818 3.6825C8.5835 3.81 8.0735 3.8175 7.58131 3.825C6.66631 3.83906 5.62943 3.85406 4.9085 4.575C4.18756 5.29594 4.17725 6.33281 4.1585 7.24781C4.151 7.74 4.1435 8.24813 4.016 8.55469C3.87818 8.88844 3.51256 9.27 3.15912 9.63937C2.53756 10.2863 1.8335 11.0212 1.8335 12C1.8335 12.9788 2.53756 13.7128 3.15912 14.3606C3.51256 14.73 3.87818 15.1106 4.016 15.4453C4.1435 15.7519 4.151 16.26 4.1585 16.7522C4.17256 17.6672 4.18756 18.7041 4.9085 19.425C5.62943 20.1459 6.66631 20.1609 7.58131 20.175C8.0735 20.1825 8.58162 20.19 8.88818 20.3175C9.22193 20.4553 9.6035 20.8209 9.97287 21.1744C10.6197 21.7959 11.3547 22.5 12.3335 22.5C13.3122 22.5 14.0463 21.7959 14.6941 21.1744C15.0635 20.8209 15.4441 20.4553 15.7788 20.3175C16.0854 20.19 16.5935 20.1825 17.0857 20.175C18.0007 20.1609 19.0376 20.1459 19.7585 19.425C20.4794 18.7041 20.4944 17.6672 20.5085 16.7522C20.516 16.26 20.5235 15.7519 20.651 15.4453C20.7888 15.1116 21.1544 14.73 21.5079 14.3606C22.1294 13.7137 22.8335 12.9788 22.8335 12C22.8335 11.0212 22.1294 10.2872 21.5079 9.63937ZM20.4251 13.3228C19.976 13.7916 19.511 14.2763 19.2644 14.8716C19.0282 15.4434 19.0179 16.0969 19.0085 16.7297C18.9991 17.3859 18.9888 18.0731 18.6972 18.3638C18.4057 18.6544 17.7232 18.6656 17.0632 18.675C16.4304 18.6844 15.7769 18.6947 15.2051 18.9309C14.6097 19.1775 14.1251 19.6425 13.6563 20.0916C13.1876 20.5406 12.7085 21 12.3335 21C11.9585 21 11.4757 20.5387 11.0107 20.0916C10.5457 19.6444 10.0572 19.1775 9.46193 18.9309C8.89006 18.6947 8.23662 18.6844 7.60381 18.675C6.94756 18.6656 6.26037 18.6553 5.96975 18.3638C5.67912 18.0722 5.66787 17.3897 5.6585 16.7297C5.64912 16.0969 5.63881 15.4434 5.40256 14.8716C5.156 14.2763 4.691 13.7916 4.24193 13.3228C3.79287 12.8541 3.3335 12.375 3.3335 12C3.3335 11.625 3.79475 11.1422 4.24193 10.6772C4.68912 10.2122 5.156 9.72375 5.40256 9.12844C5.63881 8.55656 5.64912 7.90313 5.6585 7.27031C5.66787 6.61406 5.67818 5.92688 5.96975 5.63625C6.26131 5.34562 6.94381 5.33437 7.60381 5.325C8.23662 5.31562 8.89006 5.30531 9.46193 5.06906C10.0572 4.8225 10.5419 4.3575 11.0107 3.90844C11.4794 3.45937 11.9585 3 12.3335 3C12.7085 3 13.1913 3.46125 13.6563 3.90844C14.1213 4.35562 14.6097 4.8225 15.2051 5.06906C15.7769 5.30531 16.4304 5.31562 17.0632 5.325C17.7194 5.33437 18.4066 5.34469 18.6972 5.63625C18.9879 5.92781 18.9991 6.61031 19.0085 7.27031C19.0179 7.90313 19.0282 8.55656 19.2644 9.12844C19.511 9.72375 19.976 10.2084 20.4251 10.6772C20.8741 11.1459 21.3335 11.625 21.3335 12C21.3335 12.375 20.8722 12.8578 20.4251 13.3228ZM16.6141 9.21937C16.6839 9.28903 16.7392 9.37175 16.7769 9.46279C16.8147 9.55384 16.8341 9.65144 16.8341 9.75C16.8341 9.84856 16.8147 9.94616 16.7769 10.0372C16.7392 10.1283 16.6839 10.211 16.6141 10.2806L11.3641 15.5306C11.2945 15.6004 11.2118 15.6557 11.1207 15.6934C11.0297 15.7312 10.9321 15.7506 10.8335 15.7506C10.7349 15.7506 10.6373 15.7312 10.5463 15.6934C10.4552 15.6557 10.3725 15.6004 10.3029 15.5306L8.05287 13.2806C7.91214 13.1399 7.83308 12.949 7.83308 12.75C7.83308 12.551 7.91214 12.3601 8.05287 12.2194C8.1936 12.0786 8.38447 11.9996 8.5835 11.9996C8.78252 11.9996 8.97339 12.0786 9.11412 12.2194L10.8335 13.9397L15.5529 9.21937C15.6225 9.14964 15.7052 9.09432 15.7963 9.05658C15.8873 9.01884 15.9849 8.99941 16.0835 8.99941C16.1821 8.99941 16.2797 9.01884 16.3707 9.05658C16.4618 9.09432 16.5445 9.14964 16.6141 9.21937Z\" fill=\"#373A36\"></path>\n</svg>",
+            "text": "Patented Designs"
+          }
+        },
+        "item_8q4Hiq": {
+          "type": "item",
+          "settings": {
+            "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"24\" viewbox=\"0 0 25 24\" fill=\"none\">\n<path d=\"M23.9167 12.0004C23.9168 13.0388 23.6089 14.0539 23.032 14.9173C22.4552 15.7808 21.6352 16.4537 20.6758 16.8511C19.7165 17.2485 18.6608 17.3525 17.6424 17.1499C16.6239 16.9473 15.6884 16.4472 14.9542 15.7129L14.9233 15.6801L9.30294 9.33319C8.77676 8.81316 8.10851 8.46038 7.38229 8.31925C6.65607 8.17812 5.90434 8.25495 5.22168 8.54006C4.53903 8.82518 3.95596 9.30585 3.54585 9.92158C3.13574 10.5373 2.91692 11.2606 2.91692 12.0004C2.91692 12.7402 3.13574 13.4635 3.54585 14.0792C3.95596 14.6949 4.53903 15.1756 5.22168 15.4607C5.90434 15.7458 6.65607 15.8226 7.38229 15.6815C8.10851 15.5404 8.77676 15.1876 9.30294 14.6676L10.1017 13.7657C10.2336 13.6165 10.4194 13.5258 10.6181 13.5136C10.8169 13.5014 11.0124 13.5686 11.1615 13.7005C11.3107 13.8324 11.4014 14.0182 11.4136 14.217C11.4258 14.4157 11.3586 14.6112 11.2267 14.7604L10.412 15.6801L10.3811 15.7129C9.64682 16.4471 8.71136 16.947 7.69297 17.1495C6.67459 17.3521 5.61901 17.2481 4.65973 16.8507C3.70045 16.4533 2.88055 15.7804 2.30369 14.9171C1.72684 14.0537 1.41895 13.0387 1.41895 12.0004C1.41895 10.9621 1.72684 9.94704 2.30369 9.08369C2.88055 8.22035 3.70045 7.54744 4.65973 7.15006C5.61901 6.75269 6.67459 6.64869 7.69297 6.85122C8.71136 7.05375 9.64682 7.55371 10.3811 8.28788L10.412 8.32069L16.0323 14.6676C16.5585 15.1876 17.2268 15.5404 17.953 15.6815C18.6792 15.8226 19.4309 15.7458 20.1136 15.4607C20.7962 15.1756 21.3793 14.6949 21.7894 14.0792C22.1995 13.4635 22.4183 12.7402 22.4183 12.0004C22.4183 11.2606 22.1995 10.5373 21.7894 9.92158C21.3793 9.30585 20.7962 8.82518 20.1136 8.54006C19.4309 8.25495 18.6792 8.17812 17.953 8.31925C17.2268 8.46038 16.5585 8.81316 16.0323 9.33319L15.2336 10.2351C15.1017 10.3843 14.9159 10.4749 14.7171 10.4871C14.5184 10.4994 14.3229 10.4321 14.1737 10.3002C14.0245 10.1683 13.9339 9.98256 13.9216 9.7838C13.9094 9.58504 13.9767 9.38957 14.1086 9.24038L14.9233 8.32069L14.9542 8.28788C15.6884 7.55358 16.6239 7.0535 17.6424 6.8509C18.6608 6.6483 19.7165 6.75226 20.6758 7.14966C21.6352 7.54705 22.4552 8.22001 23.032 9.08344C23.6089 9.94687 23.9168 10.962 23.9167 12.0004Z\" fill=\"#373A36\"></path>\n</svg>",
+            "text": "lifetime Warranty"
+          }
+        },
+        "item_F3Hq9i": {
+          "type": "item",
+          "settings": {
+            "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n<path d=\"M0 4.5V6H14.25V17.25H9.633C9.2985 15.9607 8.139 15 6.75 15C5.361 15 4.2015 15.9607 3.867 17.25H3V13.5H1.5V18.75H3.867C4.2015 20.0393 5.361 21 6.75 21C8.139 21 9.2985 20.0393 9.633 18.75H15.867C16.2015 20.0393 17.361 21 18.75 21C20.139 21 21.2985 20.0393 21.633 18.75H24V12.633L23.9528 12.5153L22.4528 8.01525L22.29 7.5H15.75V4.5H0ZM0.75 7.5V9H7.5V7.5H0.75ZM15.75 9H21.2108L22.5 12.8438V17.25H21.633C21.2985 15.9607 20.139 15 18.75 15C17.361 15 16.2015 15.9607 15.867 17.25H15.75V9ZM1.5 10.5V12H6V10.5H1.5ZM6.75 16.5C7.58775 16.5 8.25 17.1622 8.25 18C8.25 18.8378 7.58775 19.5 6.75 19.5C5.91225 19.5 5.25 18.8378 5.25 18C5.25 17.1622 5.91225 16.5 6.75 16.5ZM18.75 16.5C19.5877 16.5 20.25 17.1622 20.25 18C20.25 18.8378 19.5877 19.5 18.75 19.5C17.9123 19.5 17.25 18.8378 17.25 18C17.25 17.1622 17.9123 16.5 18.75 16.5Z\" fill=\"#373A36\"></path>\n</svg>",
+            "text": "Fast Shipping"
+          }
+        }
+      },
+      "block_order": [
+        "item_FH9DhW",
+        "item_WHTenA",
+        "item_8q4Hiq",
+        "item_F3Hq9i"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "mobile_speed": 5,
+        "desktop_speed": 20
+      }
+    },
+    "instagram_feed_GzkijH": {
+      "type": "instagram-feed",
+      "blocks": {
+        "image_g8x4TP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_508cf969-2df1-48a6-80b8-a657b0dce6e2.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_QyrekD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_08b94e89-3abb-43b4-97a1-66814403f51d.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_3FQK6F": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_2.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_RpQnNi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_3.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_dh8mWF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_5.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_qxBzFB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_4.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        },
+        "image_H7nQ6z": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hero_1.png",
+            "alt_text": "Instagram post",
+            "url": "",
+            "open_in_new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "image_g8x4TP",
+        "image_QyrekD",
+        "image_3FQK6F",
+        "image_RpQnNi",
+        "image_dh8mWF",
+        "image_qxBzFB",
+        "image_H7nQ6z"
+      ],
+      "name": "Shop Our Instagram",
+      "settings": {
+        "text_color": "#373a36",
+        "bg_color": "#f1efed",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_left": 80,
+        "padding_right": 80,
+        "instagram_handle": "rinfitrings"
+      }
+    },
+    "reviews_highlight": {
+      "type": "reviews-highlight",
+      "settings": {
+        "headline": "<p>Over 1M Rings <em>Sold</em></p>",
+        "headline_size_mobile": 28,
+        "headline_size_desktop": 36,
+        "headline_color": "#000000",
+        "customer_image_1": "shopify://shop_images/man.png",
+        "customer_image_2": "shopify://shop_images/girl.png",
+        "customer_image_3": "shopify://shop_images/man_1.png",
+        "review_text": "Love this ring! It's really comfortable and customer service was outstanding with helping me exchange it for the correct size!",
+        "review_text_size_mobile": 16,
+        "review_text_size_desktop": 18,
+        "review_text_color": "#666666",
+        "quote_icon_color": "#cccccc",
+        "button_text": "READ ALL REVIEWS",
+        "button_link": "",
+        "button_text_size_mobile": 14,
+        "button_text_size_desktop": 16,
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "max_width": "1200",
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "background_color": "#ffffff",
+        "custom_classes": ""
+      }
+    },
+    "shop_by_category": {
+      "type": "shop-by-category",
+      "blocks": {
+        "category_HwNbbG": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Image_Aug_19_2025_09_41_04_AM_result.webp",
+            "category_title": "Wedding Bands",
+            "category_description": "Elegant bands in gold, platinum, and more to celebrate your forever bond.",
+            "category_url": "shopify://collections/couture-collection",
+            "category_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" stroke=\"currentColor\" viewbox=\"0 0 24 24\">\n  <circle cx=\"8\" cy=\"12\" r=\"5\" stroke-width=\"2\"></circle>\n  <circle cx=\"16\" cy=\"12\" r=\"5\" stroke-width=\"2\"></circle>\n</svg>",
+            "show_button": true,
+            "button_text": "Shop Now"
+          }
+        },
+        "category_AQzVht": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Image_Aug_19_2025_09_47_08_AM_result.webp",
+            "category_title": "Fashion Rings",
+            "category_description": "Trendy, everyday rings designed to express your unique style.",
+            "category_url": "shopify://collections/couture-collection",
+            "category_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" stroke=\"currentColor\" viewbox=\"0 0 24 24\">\n  <rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\" stroke-width=\"2\"></rect>\n</svg>",
+            "show_button": true,
+            "button_text": "Shop Now"
+          }
+        },
+        "category_PaC9mh": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Image_Aug_19_2025_09_38_35_AM_result.webp",
+            "category_title": "Engagement Rings",
+            "category_description": "Timeless diamond and gemstone rings, perfect for the big “Yes!” moment.",
+            "category_url": "shopify://collections/ring-bundles",
+            "category_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" stroke=\"currentColor\" viewbox=\"0 0 24 24\">\n  <path stroke-width=\"2\" d=\"M12 2l3 5h-6l3-5zm0 7a7 7 0 100 14 7 7 0 000-14z\"></path>\n</svg>",
+            "show_button": true,
+            "button_text": "Shop Now"
+          }
+        },
+        "category_cdb7B8": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Image_Aug_19_2025_09_43_58_AM_result.webp",
+            "category_title": "Promise Rings",
+            "category_description": "Symbolic rings to celebrate love, friendship, and commitment.",
+            "category_url": "",
+            "category_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" stroke=\"currentColor\" viewbox=\"0 0 24 24\">\n  <path stroke-width=\"2\" d=\"M12 21c-4.97 0-9-4.03-9-9a9 9 0 1118 0c0 4.97-4.03 9-9 9z\"></path>\n</svg>",
+            "show_button": true,
+            "button_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "category_HwNbbG",
+        "category_AQzVht",
+        "category_PaC9mh",
+        "category_cdb7B8"
+      ],
+      "settings": {
+        "title": "Discover by Style",
+        "title_size_mobile": 28,
+        "title_size_desktop": 42,
+        "title_color": "#1a1a1a",
+        "subtitle": "",
+        "subtitle_size_mobile": 16,
+        "subtitle_size_desktop": 18,
+        "subtitle_color": "#666666",
+        "text_alignment": "center",
+        "max_width": 1200,
+        "columns_mobile": 2,
+        "columns_desktop": 4,
+        "grid_gap": 24,
+        "image_aspect_ratio": "1/1",
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "section_background": "#ffffff",
+        "item_background": "#ffffff",
+        "border_radius": 12,
+        "hover_scale": 105,
+        "item_text_alignment": "center",
+        "item_title_size_mobile": 18,
+        "item_title_size_desktop": 22,
+        "item_title_color": "#1a1a1a",
+        "item_description_color": "#666666",
+        "icon_color": "#d4af37",
+        "button_color": "#d4af37",
+        "custom_classes": ""
+      }
+    }
+  },
+  "order": [
+    "hero_banner_hwPG8G",
+    "slideshow",
+    "featured-collections",
+    "multi-column",
+    "collection-list",
+    "before-after",
+    "image-with-text-scroll",
+    "multiple-media-with-text",
+    "newsletter",
+    "shop-the-look",
+    "blog-posts",
+    "text_image_text_h4378x",
+    "image_with_text_section_wNi7Jn",
+    "instagram_gallery_6fUMRm",
+    "banner_cta_VYT94p",
+    "collection_main_igbpeA",
+    "smart_ring_e7a8hy",
+    "test_Yhqd4U",
+    "instagram_feed_GzkijH",
+    "reviews_highlight",
+    "shop_by_category"
+  ]
+}
