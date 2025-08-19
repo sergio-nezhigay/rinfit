@@ -1,13 +1,14 @@
 <style>
-    .shop-by-category-{{ section.id }} {
-      padding-top: 20px;
-      padding-bottom: 30px;
-      background: #fff;
-      outline: 1px dotted blue;
-    }
+  /* Base styles (mobile first) */
+  .shop-by-category-{{ section.id }} {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    background: #fff;
+    outline: 1px dotted blue;
+  }
   .shop-by-category-{{ section.id }} .swiper-wrapper-category > .swiper-slide {
-     width: auto; /* Let Swiper control the width */
-  min-width: 0;
+    width: auto;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,37 +29,8 @@
   .shop-by-category-{{ section.id }} .swiper-button-prev {
     display: none;
   }
-  @media (min-width: 768px) {
-    .shop-by-category-{{ section.id }} {
-      padding-top: 14px;
-
-    }
-    .shop-by-category-{{ section.id }} .swiper-button-next,
-    .shop-by-category-{{ section.id }} .swiper-button-prev {
-      display: block;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-    .shop-by-category-{{ section.id }} .swiper-button-next {
-      right: -30px;
-    }
-    .shop-by-category-{{ section.id }} .swiper-button-prev {
-      left: -37px;
-    }
-    .shop-by-category-{{ section.id }} .main-swiper-category {
-      padding: 0;
-      width: fit-content;
-    }
-  }
   .shop-by-category-{{ section.id }} .swiper-pagination {
     display: block !important;
-  }
-  @media (min-width: 768px) {
-    .shop-by-category-{{ section.id }} .swiper-pagination {
-      display: none !important;
-    }
   }
   .shop-by-category-{{ section.id }} .main-swiper-category .swiper-pagination {
     position: relative;
@@ -160,45 +132,57 @@
     padding-top: 40px;
     padding-bottom: 40px;
   }
-  @media (min-width: 768px) {
-  .shop-by-category-{{ section.id }} .main-block-categories p {
-    font-size: 40px;
-  }
-  .shop-by-category-{{ section.id }} .main-block-categories p em {
 
-    font-size: 47px;
-    line-height: 30px;
-  }
-    .shop-by-category-{{ section.id }} .button-all-category {
-      font-family: 'Kumbh Sans', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      display: block;
-      color: white;
-      background: #232222;
-      min-width: 129px;
-      min-height: 37px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      border-radius: 4px;
-      border: 1px solid;
-      transition: all 0.3s ease;
-    }
-    .shop-by-category-{{ section.id }} .button-all-category:hover {
-      background: none !important;
-      color: #373a36 !important;
-      border-color: #c5c1c0 !important;
+  /* Media queries grouped at the end */
+  @media (min-width: 768px) {
+    .shop-by-category-{{ section.id }} {
+      padding-top: 14px;
     }
     .shop-by-category-{{ section.id }} .swiper-button-next,
-    .shop-by-category-{{ section.id }} .swiper-button-next {
+    .shop-by-category-{{ section.id }} .swiper-button-prev {
       display: block;
+      position: absolute;
+      top: auto;
+      bottom: 138px;
+      transform: none;
+      z-index: 2;
+    }
+    .shop-by-category-{{ section.id }} .swiper-button-next {
+      right: -37px;
+    }
+    .shop-by-category-{{ section.id }} .swiper-button-prev {
+      left: -37px;
     }
     .shop-by-category-{{ section.id }} .main-swiper-category {
       padding: 0;
       width: fit-content;
     }
+    .shop-by-category-{{ section.id }} .swiper-pagination {
+      display: none !important;
+    }
+      .shop-by-category-{{ section.id }} .main-block-categories {
+      margin-bottom: 30px;
+    }
+    .shop-by-category-{{ section.id }} .main-block-categories p {
+      font-size: 40px;
+    }
+    .shop-by-category-{{ section.id }} .main-block-categories p em {
+      font-size: 47px;
+      line-height: 30px;
+    }
+
+  .shop-by-category-{{ section.id }} .category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  text-transform: capitalize;
+  }
+     .shop-by-category-{{ section.id }} .category-link-text {
+        text-decoration: none;
+        text-transform: uppercase;
+  }
     .shop-by-category-{{ section.id }} .main-block-categories {
       padding-left: 0px;
     }
