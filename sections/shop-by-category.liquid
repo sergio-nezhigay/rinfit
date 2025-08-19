@@ -1,70 +1,68 @@
 <style>
-  .swiper-wrapper-category > .swiper-slide {
+    .shop-by-category-{{ section.id }} {
+      padding: 20px 0;
+    }
+  .shop-by-category-{{ section.id }} .swiper-wrapper-category > .swiper-slide {
+     width: auto; /* Let Swiper control the width */
+  min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .swiper-wrapper-category > .swiper-slide img {
+  .shop-by-category-{{ section.id }} .swiper-wrapper-category > .swiper-slide img {
     width: 100%;
     height: 360px;
     border-radius: 10px;
     object-fit: cover;
   }
-  .main-swiper-category {
+  .shop-by-category-{{ section.id }} .main-swiper-category {
     width: 100%;
     margin: 0 auto;
     position: relative;
     max-width: 1330px;
-    padding: 0 12px; /* Add horizontal padding for mobile */
+    padding: 0 12px;
   }
-  .main-title-category {
-    font-family: 'Kumbh Sans', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    text-align: center;
-    margin: 0;
-  }
-  .swiper-button-next,
-  .swiper-button-prev {
+  .shop-by-category-{{ section.id }} .swiper-button-next,
+  .shop-by-category-{{ section.id }} .swiper-button-prev {
     display: none;
   }
   @media (min-width: 768px) {
-    .swiper-button-next,
-    .swiper-button-prev {
+    .shop-by-category-{{ section.id }} .swiper-button-next,
+    .shop-by-category-{{ section.id }} .swiper-button-prev {
       display: block;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
     }
-    .swiper-button-next {
+    .shop-by-category-{{ section.id }} .swiper-button-next {
       right: -30px;
     }
-    .swiper-button-prev {
+    .shop-by-category-{{ section.id }} .swiper-button-prev {
       left: -37px;
     }
-    .swiper-pagination {
+    .shop-by-category-{{ section.id }} .swiper-pagination {
       display: none !important;
     }
-    .main-swiper-category {
-      padding: 0; /* Remove padding on desktop */
+    .shop-by-category-{{ section.id }} .main-swiper-category {
+      padding: 0;
       width: fit-content;
     }
   }
-  .swiper-pagination {
+  .shop-by-category-{{ section.id }} .swiper-pagination {
     display: block;
   }
   @media (min-width: 768px) {
-    .swiper-pagination {
+    .shop-by-category-{{ section.id }} .swiper-pagination {
       display: none !important;
     }
   }
-  .main-swiper-category .swiper-pagination {
+  .shop-by-category-{{ section.id }} .main-swiper-category .swiper-pagination {
     position: relative;
     margin-top: 30px;
     text-align: center;
   }
-  .main-swiper-category .swiper-pagination-bullet {
+  .shop-by-category-{{ section.id }} .main-swiper-category .swiper-pagination-bullet {
     width: 32px;
     height: 6px;
     border-radius: 10px;
@@ -74,33 +72,99 @@
     transition: background 0.3s;
     display: inline-block;
   }
-  .main-swiper-category .swiper-pagination-bullet-active {
+  .shop-by-category-{{ section.id }} .main-swiper-category .swiper-pagination-bullet-active {
     background: #6b6b6b;
   }
-  .main-block-categories {
+  .shop-by-category-{{ section.id }} .main-block-categories {
     display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 20px 0 20px 30px;
+    justify-content: center;
+    margin: 0 auto 20px;
     align-items: center;
+    text-align: center;
   }
-  .button-all-category {
+  .shop-by-category-{{ section.id }} .button-all-category {
     display: none;
   }
-  .main-block-categories p {
-    line-height: normal;
+  .shop-by-category-{{ section.id }} .main-block-categories p {
+    line-height: 30px;
     font-family: 'Kumbh Sans', sans-serif;
     font-weight: 300;
-    font-size: 40px;
+    font-size: 30px;
+    text-align: center;
   }
-  .main-block-categories p em {
-    font-weight: 700;
+  .shop-by-category-{{ section.id }} .main-block-categories p em {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -2%;
+    font-size: 40px;
+    line-height: 32px;
+  }
+  .shop-by-category-{{ section.id }} .category-rectangle {
+    width: 100%;
+    height: 360px;
+    border-radius: 10px;
+    background: #e0e0e0;
+    display: block;
+  }
+  .shop-by-category-{{ section.id }} .category-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+  .shop-by-category-{{ section.id }} .category-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: none;
+    color: #fff;
+    padding: 0 0 28px 0;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 2;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+  .shop-by-category-{{ section.id }} .category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+  .shop-by-category-{{ section.id }} .category-link-text {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    opacity: 0.95;
+  }
+  .shop-by-category-{{ section.id }} section {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
   @media (min-width: 768px) {
-    .main-block-categories {
+    .shop-by-category-{{ section.id }} .main-block-categories {
       padding: 17.5px 0 43.5px;
     }
-    .button-all-category {
+    .shop-by-category-{{ section.id }} .button-all-category {
       font-family: 'Kumbh Sans', sans-serif;
       font-weight: 600;
       font-size: 14px;
@@ -117,88 +181,49 @@
       border: 1px solid;
       transition: all 0.3s ease;
     }
-    .button-all-category:hover {
+    .shop-by-category-{{ section.id }} .button-all-category:hover {
       background: none !important;
       color: #373a36 !important;
       border-color: #c5c1c0 !important;
     }
-    .swiper-button-next,
-    .swiper-button-next {
+    .shop-by-category-{{ section.id }} .swiper-button-next,
+    .shop-by-category-{{ section.id }} .swiper-button-next {
       display: block;
     }
-    .main-swiper-category {
+    .shop-by-category-{{ section.id }} .main-swiper-category {
       padding: 0;
       width: fit-content;
     }
-    .swiper-pagination {
+    .shop-by-category-{{ section.id }} .swiper-pagination {
       display: none !important;
     }
-    .main-block-categories {
+    .shop-by-category-{{ section.id }} .main-block-categories {
       padding-left: 0px;
     }
-    .main-block-categories,
-    .mySwiper-category.swiper {
+    .shop-by-category-{{ section.id }} .main-block-categories,
+    .shop-by-category-{{ section.id }} .mySwiper-category.swiper {
       max-width: 660px;
     }
   }
   @media (min-width: 1024px) {
-    .main-block-categories,
-    .mySwiper-category.swiper {
+    .shop-by-category-{{ section.id }} .main-block-categories,
+    .shop-by-category-{{ section.id }} .mySwiper-category.swiper {
       max-width: 900px;
     }
   }
   @media (min-width: 1440px) {
-    .main-block-categories,
-    .mySwiper-category.swiper {
-      max-width: 1330px;
+    .shop-by-category-{{ section.id }} .main-block-categories,
+    .shop-by-category-{{ section.id }} .mySwiper-category.swiper {
+      max-width: 1282px;
     }
-  }
-  .category-rectangle {
-    width: 100%;
-    height: 360px;
-    border-radius: 10px;
-    background: #e0e0e0;
-    display: block;
-  }
-  .category-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-  }
-  .category-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: transparent; /* Remove dark overlay */
-    color: white;
-    padding: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    opacity: 1; /* Always show overlay */
-    transition: opacity 0.3s;
   }
 </style>
 
-<section>
+<section class="shop-by-category-{{ section.id }}">
   <div class="main-block-categories">
     {% if section.settings.title != blank %}
-      <p class="main-title-category">{{ section.settings.title }}</p>
+      {{ section.settings.title }}
     {% endif %}
-    {%- comment -%}
-      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
-        <a class="button-all-category" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
-      {% endif %}
-    {%- endcomment -%}
   </div>
   <div class="main-swiper-category">
     <div class="swiper mySwiper-category">
@@ -232,7 +257,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     import('https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js').then(() => {
       new Swiper('.mySwiper-category', {
-        slidesPerView: 1.2,
+        slidesPerView: 1.32,
         spaceBetween: 10,
         loop: false,
         pagination: {
