@@ -68,7 +68,7 @@
 
     {% if section.settings.button_text != blank and section.settings.button_link != blank %}
       <div class="reviews-highlight-section__button">
-        <a href="{{ section.settings.button_link }}" class="reviews-highlight-section__btn">
+        <a href="{{ section.settings.button_link }}" class="button hover:animate-icon-inline">
           {{ section.settings.button_text }}
         </a>
       </div>
@@ -146,6 +146,7 @@
 
   .reviews-highlight-section__review-row {
     display: flex;
+    justify-content: center;
     gap: 11px;
   }
 
@@ -175,24 +176,17 @@
     opacity: 1;
   }
 
-  .reviews-highlight-section__btn {
-    display: inline-block;
-    background-color: #232222;
-    color: #ffffff;
-    font-family: 'Kumbh Sans', sans-serif;
+  .reviews-highlight-section__button .button {
+    min-width: 196px;
+    height: 37px;
+    padding: 0 11px;
     font-size: 14px;
-    line-height: 1.21;
-    font-weight: 600;
-    text-decoration: none;
-    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
     letter-spacing: 0.5px;
-    padding: 10px 30px;
     border-radius: 4px;
-    position: relative;
-  }
-
-  .reviews-highlight-section__btn::before {
-    content: none; /* remove shine effect */
   }
 
   @media (min-width: 768px) {
@@ -233,6 +227,7 @@
     }
     .reviews-highlight-section__review-row {
       justify-content: center;
+
       gap: 10px;
     }
   }
