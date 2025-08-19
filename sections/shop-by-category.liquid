@@ -1,57 +1,68 @@
 <style>
   .swiper-wrapper-category > .swiper-slide {
-    width: 173.8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .swiper-wrapper-category > .swiper-slide img {
-    width: 173.8px;
-    height: 172.1px;
+    width: 100%;
+    height: 360px;
     border-radius: 10px;
     object-fit: cover;
   }
   .main-swiper-category {
-    position: relative;
-    width: fit-content;
-    margin: 0 auto;
-  }
-  .main-swiper-category {
     width: 100%;
-    padding-left: 20px;
+    margin: 0 auto;
+    position: relative;
+    max-width: 1330px;
+    padding: 0 12px; /* Add horizontal padding for mobile */
   }
   .main-title-category {
     font-family: 'Kumbh Sans', sans-serif;
     font-weight: 500;
     font-size: 14px;
     text-align: center;
-  }
-  .mySwiper-category.swiper {
-    max-width: 1330px;
-  }
-  .swiper-button-next {
-    right: -30px;
-  }
-  .swiper-button-next:after,
-  .swiper-button-prev:after {
-    display: none;
-  }
-  .swiper-button-prev img {
-    transform: rotate(180deg);
+    margin: 0;
   }
   .swiper-button-next,
-  .swiper-button-next {
+  .swiper-button-prev {
     display: none;
   }
-  .swiper-button-prev img,
-  .swiper-button-next img {
-    border: 1px solid #37393633;
-    border-radius: 50%;
-    padding: 7px 9.5px;
+  @media (min-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .swiper-button-next {
+      right: -30px;
+    }
+    .swiper-button-prev {
+      left: -37px;
+    }
+    .swiper-pagination {
+      display: none !important;
+    }
+    .main-swiper-category {
+      padding: 0; /* Remove padding on desktop */
+      width: fit-content;
+    }
   }
-  .swiper-button-prev {
-    left: -37px;
+  .swiper-pagination {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .swiper-pagination {
+      display: none !important;
+    }
   }
   .main-swiper-category .swiper-pagination {
     position: relative;
     margin-top: 30px;
+    text-align: center;
   }
   .main-swiper-category .swiper-pagination-bullet {
     width: 32px;
@@ -61,8 +72,8 @@
     opacity: 1;
     margin: 0 4px;
     transition: background 0.3s;
+    display: inline-block;
   }
-
   .main-swiper-category .swiper-pagination-bullet-active {
     background: #6b6b6b;
   }
@@ -142,6 +153,22 @@
       max-width: 1330px;
     }
   }
+  .category-rectangle {
+    width: 100%;
+    height: 360px;
+    border-radius: 10px;
+    background: #e0e0e0;
+    display: block;
+  }
+  .category-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
 </style>
 
 <section>
@@ -168,8 +195,8 @@
           {% assign category_url = category_info[2] %}
 
           <div class="swiper-slide">
-            <a href="{{ category_url }}">
-              <img src="{{ category_image }}" alt="{{ category_title }}">
+            <a href="{{ category_url }}" class="category-link">
+              <div class="category-rectangle"></div>
               <p class="main-title-category">{{ category_title }}</p>
             </a>
           </div>
@@ -186,7 +213,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     import('https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js').then(() => {
       new Swiper('.mySwiper-category', {
-        slidesPerView: 7,
+        slidesPerView: 1.2,
         spaceBetween: 10,
         loop: false,
         pagination: {
@@ -198,17 +225,11 @@
           prevEl: '.swiper-button-prev',
         },
         breakpoints: {
-          0: {
-            slidesPerView: 'auto',
-          },
           768: {
-            slidesPerView: 4,
+            slidesPerView: 2,
           },
           1024: {
-            slidesPerView: 5,
-          },
-          1440: {
-            slidesPerView: 7,
+            slidesPerView: 4,
           },
         },
       });
