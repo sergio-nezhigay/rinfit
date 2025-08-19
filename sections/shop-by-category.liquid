@@ -174,7 +174,7 @@
 <section>
   <div class="main-block-categories">
     {% if section.settings.title != blank %}
-      {{ section.settings.title }}
+      <p class="main-title-category">{{ section.settings.title }}</p>
     {% endif %}
     {% if section.settings.button_text != blank and section.settings.button_url != blank %}
       <a class="button-all-category" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
@@ -191,7 +191,7 @@
         {% for category_data in demo_categories %}
           {% assign category_info = category_data | split: '|' %}
           {% assign category_title = category_info[0] %}
-          {% assign category_image = category_info[1] %}
+
           {% assign category_url = category_info[2] %}
 
           <div class="swiper-slide">
