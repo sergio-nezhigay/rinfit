@@ -1,0 +1,2384 @@
+-------ФУТЕР---------
+<footer id="shopify-section-{{ section.id }}" class="pp-footer {{ section.settings.custom_classes }}">
+  <div class="pp-footer-main">
+    <div class="pp-footer-container">
+      <div class="pp-footer-left">
+        {% if section.settings.logo_image %}
+          <div class="pp-footer-logo">
+            <img src="{{ section.settings.logo_image | image_url: width: 200 }}" alt="{{ section.settings.logo_alt | default: shop.name }}" loading="lazy" decoding="async" width="109" height="42">
+          </div>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="pp-footer-description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+        {% if section.settings.country_selector_enabled %}
+          <div class="pp-footer-localization">
+            <div class="localization-selectors">
+              <div class="relative">
+                {% render 'custom-localization',
+                  type: 'country',
+                  class: 'pp-footer-country-selector',
+                  button_class: 'localization-toggle heading text-xxs link-faded',
+                  popover_class: 'popover popover--top-start color-scheme color-scheme--dialog'
+                %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% assign social_blocks = section.blocks | where: 'type', 'social' %}
+        {% if social_blocks.size > 0 %}
+          <div class="pp-footer-socials">
+            {% for block in social_blocks %}
+              {% if block.settings.url != blank %}
+                <a href="{{ block.settings.url }}" class="pp-footer-social-link" target="_blank" rel="noopener noreferrer" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon_svg != blank %}
+                    {{ block.settings.icon_svg }}
+                  {% elsif block.settings.icon_image %}
+                    <img src="{{ block.settings.icon_image | image_url: width: 32 }}" alt="{{ block.settings.platform | default: 'Social' }}" loading="lazy" decoding="async" width="32" height="32">
+                  {% endif %}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="pp-footer-right">
+        {% assign nav_blocks = section.blocks | where: 'type', 'navigation' %}
+        {% for block in nav_blocks %}
+          {% if block.settings.title != blank %}
+            <div class="pp-footer-nav-column" {{ block.shopify_attributes }}>
+              <h3 class="pp-footer-nav-title">{{ block.settings.title }}</h3>
+              {% if block.settings.menu != blank %}
+                <nav class="pp-footer-nav-list">
+                  {% for link in linklists[block.settings.menu].links %}
+                    <a href="{{ link.url }}" class="pp-footer-nav-link">{{ link.title }}</a>
+                  {% endfor %}
+                </nav>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="pp-footer-mobile-stack --mobile-only">
+      {% if section.settings.country_selector_enabled %}
+        <div class="pp-footer-localization">
+          <div class="localization-selectors">
+            <div class="relative">
+              {% render 'custom-localization',
+                type: 'country',
+                class: 'pp-footer-country-selector',
+                button_class: 'localization-toggle heading text-xxs link-faded',
+                popover_class: 'popover popover--top-start color-scheme color-scheme--dialog'
+              %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {% if social_blocks.size > 0 %}
+        <div class="pp-footer-socials">
+          {% for block in social_blocks %}
+            {% if block.settings.url != blank %}
+              <a href="{{ block.settings.url }}" class="pp-footer-social-link" target="_blank" rel="noopener noreferrer" {{ block.shopify_attributes }}>
+                {% if block.settings.icon_svg != blank %}
+                  {{ block.settings.icon_svg }}
+                {% elsif block.settings.icon_image %}
+                  <img src="{{ block.settings.icon_image | image_url: width: 32 }}" alt="{{ block.settings.platform | default: 'Social' }}" loading="lazy" decoding="async" width="32" height="32">
+                {% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="pp-footer-legal">
+        {% assign legal_blocks = section.blocks | where: 'type', 'legal' %}
+        {% for block in legal_blocks %}
+          {% if block.settings.title != blank and block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" class="pp-footer-legal-link" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="pp-footer-bottom">
+    <div class="pp-footer-bottom-container">
+      <div class="pp-footer-copyright">
+        {% if section.settings.copyright_text != blank %}
+          <span>{{ section.settings.copyright_text }}</span>
+        {% endif %}
+        {% if section.settings.rights_text != blank %}
+          <span>{{ section.settings.rights_text }}</span>
+        {% endif %}
+      </div>
+      <div class="pp-footer-legal">
+        {% assign legal_blocks = section.blocks | where: 'type', 'legal' %}
+        {% for block in legal_blocks %}
+          {% if block.settings.title != blank and block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" class="pp-footer-legal-link" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pp-footer {
+    width: 100%;
+  }
+
+  .pp-footer-main {
+    background-color: #e9e4e1;
+    color: #373a36;
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 40px 80px;
+  }
+
+  .pp-footer-container {
+    display: flex;
+    gap: 521px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .pp-footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 197px;
+    flex-shrink: 0;
+  }
+
+  .pp-footer-logo img {
+    width: 109px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  .pp-footer-description {
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(55, 57, 54, 0.6);
+    font-weight: 400;
+  }
+
+  .pp-footer-localization {
+    width: 100%;
+  }
+
+  .pp-footer-localization .localization-selectors {
+    width: 100%;
+  }
+
+  .pp-footer-localization .localization-toggle {
+    background: #ffffff;
+    border: 1px solid rgba(55, 57, 54, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 193px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 14px;
+    color: #373a36;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  .pp-footer-socials {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .pp-footer-social-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #373a36;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .pp-footer-social-link:hover,
+  .pp-footer-social-link:focus {
+    opacity: 0.7;
+  }
+
+  .pp-footer-social-link svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pp-footer-right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 1;
+    gap: 103px;
+  }
+
+  .pp-footer-nav-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .pp-footer-nav-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #373a36;
+    margin: 0;
+    text-transform: capitalize;
+    max-height: 17px;
+  }
+
+  .pp-footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .pp-footer-nav-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: #373a36;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: opacity 0.2s ease;
+    max-height: 17px;
+  }
+
+  .pp-footer-nav-link:hover,
+  .pp-footer-nav-link:focus {
+    opacity: 0.7;
+  }
+
+  .pp-footer-bottom {
+    background-color: #4f4e4e;
+    line-height: 35px;
+  }
+
+  .pp-footer-bottom-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .pp-footer-copyright {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: auto;
+  }
+
+
+
+  .pp-footer-copyright span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+
+  .pp-footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 73px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .pp-footer-legal-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #373a36;
+    text-decoration: none;
+    text-transform: capitalize;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .pp-footer-bottom .pp-footer-legal .pp-footer-legal-link {
+    color: #ffffff;
+  }
+
+  .pp-footer-mobile-stack.--mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .cloc {
+  max-width: none;
+}
+    .pp-footer-localization .localization-toggle {
+      width: -webkit-fill-available;
+    }
+ .pp-footer-copyright {
+  gap: 81px !important;
+}
+     .pp-footer-logo img {
+    width: 86px;
+    height: 32px;
+    object-fit: contain;
+  }
+    .pp-footer-main {
+      padding: 20px 16px;
+    }
+
+    .pp-footer-container {
+      flex-direction: column;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .pp-footer-left {
+      width: 100%;
+      gap: 10px;
+    }
+
+    .pp-footer-right {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 106px;
+      row-gap: 30px;
+      width: 100%;
+    }
+
+    .pp-footer-nav-column {
+      min-width: 0;
+    }
+
+    .pp-footer-nav-title {
+      max-height: 17px;
+      line-height: 20px;
+      font-weight: 600;
+    }
+
+    .pp-footer-nav-list {
+      display: grid;
+      gap: 15px;
+      white-space: nowrap;
+    }
+
+    .pp-footer-nav-link {
+      line-height: 20px;
+      text-decoration: none;
+    }
+
+    .pp-footer-left .pp-footer-localization,
+    .pp-footer-left .pp-footer-socials {
+      display: none !important;
+    }
+
+    .pp-footer-mobile-stack.--mobile-only {
+      display: grid;
+      row-gap: 20px;
+      margin-top: 30px;
+    }
+
+    .pp-footer-mobile-stack .pp-footer-socials {
+      justify-content: space-between;
+    }
+
+    .pp-footer-mobile-stack .pp-footer-legal {
+      gap: 0;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+   
+
+    .pp-footer-bottom-container {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pp-footer-bottom .pp-footer-legal {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .pp-footer-mobile-stack.--mobile-only {
+      display: none !important;
+    }
+  }
+  .localization-selectors .relative {
+    width: -webkit-fill-available;
+  }
+  @media (max-width: 1350px) and (min-width: 1024px) {
+  .pp-footer-container {
+    gap: 260px;
+  }
+  .pp-footer-right {
+    gap: 50px;
+  }
+}
+
+</style>
+
+<style>
+  #shopify-section-{{ section.id }} .pp-footer-main {
+    background-color: {{ section.settings.main_bg_color | default: '#e9e4e1' }};
+    padding: {{ section.settings.padding_desktop_top }}px {{ section.settings.padding_desktop_right }}px {{ section.settings.padding_desktop_bottom }}px {{ section.settings.padding_desktop_left }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-bottom {
+    background-color: {{ section.settings.bottom_bg_color | default: '#4f4e4e' }};
+    padding: {{ section.settings.bottom_padding_desktop_top }}px {{ section.settings.bottom_padding_desktop_right }}px {{ section.settings.bottom_padding_desktop_bottom }}px {{ section.settings.bottom_padding_desktop_left }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-container {
+    max-width: {{ section.settings.section_max_width | default: '100%' }};
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-description {
+    color: {{ section.settings.description_color | default: 'rgba(55, 57, 54, 0.6)' }};
+    font-size: {{ section.settings.description_size_desktop }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-nav-title {
+    color: {{ section.settings.title_color | default: '#373a36' }};
+    font-size: {{ section.settings.title_size_desktop }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-nav-link {
+    color: {{ section.settings.text_color | default: '#373a36' }};
+    font-size: {{ section.settings.text_size_desktop }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-legal-link {
+    color: {{ section.settings.text_color | default: '#373a36' }};
+    font-size: {{ section.settings.legal_size_desktop | default: 12 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-bottom .pp-footer-legal .pp-footer-legal-link {
+    color: {{ section.settings.legal_color | default: '#ffffff' }};
+  }
+
+  #shopify-section-{{ section.id }} .pp-footer-copyright span {
+    color: {{ section.settings.copyright_color | default: '#ffffff' }};
+    font-size: {{ section.settings.copyright_size_desktop }}px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .pp-footer-main {
+      padding: {{ section.settings.padding_mobile_top }}px {{ section.settings.padding_mobile_right }}px {{ section.settings.padding_mobile_bottom }}px {{ section.settings.padding_mobile_left }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-bottom {
+      padding: {{ section.settings.bottom_padding_mobile_top }}px {{ section.settings.bottom_padding_mobile_right }}px {{ section.settings.bottom_padding_mobile_bottom }}px {{ section.settings.bottom_padding_mobile_left }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-description {
+      font-size: {{ section.settings.description_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-nav-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-nav-link {
+      font-size: {{ section.settings.text_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-legal-link {
+      font-size: {{ section.settings.legal_size_mobile | default: 12 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .pp-footer-copyright span {
+      font-size: {{ section.settings.copyright_size_mobile }}px;
+    }
+  }
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "footer",
+  "class": "section",
+  "templates": ["article", "blog", "cart", "collection", "index", "list-collections", "page", "product", "search"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo & Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo Alt Text",
+      "default": "Logo"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Rinfit rings combine comfort, durability, and safety with a unique, stylish, and fashionable high-end designs.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Country Selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "country_selector_enabled",
+      "label": "Enable Country Selector",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "country_text",
+      "label": "Country Text",
+      "default": "Cyprus (EUR)"
+    },
+    {
+      "type": "header",
+      "content": "Copyright & Legal"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "©2025 Rinfit - Silicone Rings."
+    },
+    {
+      "type": "text",
+      "id": "rights_text",
+      "label": "Rights Text",
+      "default": "All Rights Reserved"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "main_bg_color",
+      "label": "Main Background Color",
+      "default": "#e9e4e1"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bg_color",
+      "label": "Bottom Background Color",
+      "default": "#4f4e4e"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#373a36"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#373a36"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "rgba(55, 57, 54, 0.6)"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Copyright Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "legal_color",
+      "label": "Legal Links Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography Desktop"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Size Desktop",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size Desktop",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size Desktop",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "copyright_size_desktop",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Copyright Size Desktop",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "legal_size_desktop",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Legal Links Size Desktop",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Typography Mobile"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Size Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size Mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "copyright_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Copyright Size Mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "legal_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Legal Links Size Mobile",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Main Section Spacing Desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Top Desktop",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Bottom Desktop",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Left Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Right Desktop",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Main Section Spacing Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Top Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Bottom Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile_left",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Left Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile_right",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Padding Right Mobile",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Bottom Section Spacing Desktop"
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding Top Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding Bottom Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Left Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_desktop_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Right Desktop",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Bottom Section Spacing Mobile"
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_top",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom Padding Top Mobile",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom Padding Bottom Mobile",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_left",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Left Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile_right",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Right Mobile",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "text",
+      "id": "section_max_width",
+      "label": "Section Max Width",
+      "default": "100%",
+      "info": "Use px, %, or rem. Example: 1200px"
+    },
+    {
+      "type": "text",
+      "id": "custom_classes",
+      "label": "Custom CSS Classes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social",
+      "name": "Social Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "platform",
+          "label": "Platform Name",
+          "default": "Social"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Social URL"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "SVG Icon",
+          "info": "Paste SVG code here for best quality"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image",
+          "info": "Fallback if no SVG provided"
+        }
+      ]
+    },
+    {
+      "type": "navigation",
+      "name": "Navigation Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "Select a menu from Navigation settings"
+        }
+      ]
+    },
+    {
+      "type": "legal",
+      "name": "Legal Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Instagram",
+            "icon_svg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z\"/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "TikTok",
+            "icon_svg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z\"/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Pinterest",
+            "icon_svg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.624 0 11.99-5.367 11.99-11.989C24.007 5.367 18.641.001 12.017.001z\"/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "YouTube",
+            "icon_svg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z\"/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Facebook",
+            "icon_svg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z\"/></svg>"
+          }
+        },
+        {
+          "type": "navigation",
+          "settings": {
+            "title": "Collections"
+          }
+        },
+        {
+          "type": "navigation",
+          "settings": {
+            "title": "Shop"
+          }
+        },
+        {
+          "type": "navigation",
+          "settings": {
+            "title": "Need Help?"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Privacy Policy"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Terms & Conditions"
+          }
+        },
+        {
+          "type": "legal",
+          "settings": {
+            "title": "Cookies Policy"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+ДЛЯ ФУТЕРА ВИКОРИСТОВУЄТЬСЯ ЩЕ СНІППЕТ 'custom-localization'
+{%- comment -%}
+  Custom Localization with inline label
+{%- endcomment -%}
+
+{%- assign _show_flag  = show_country_flag | default: false -%}
+{%- assign _show_name  = show_country_name | default: true -%}
+
+{%- capture _form_id -%}loc-form-{{ id_prefix }}-{{ section.id }}-{{ type }}{%- endcapture -%}
+{%- capture _panel_id -%}loc-panel-{{ id_prefix }}-{{ section.id }}-{{ type }}{%- endcapture -%}
+{%- capture _toggle_id -%}loc-toggle-{{ id_prefix }}-{{ section.id }}-{{ type }}{%- endcapture -%}
+
+<div class="cloc" data-loc-type="{{ type }}">
+  {%- case type -%}
+  {%- when 'country' -%}
+    <div class="cloc__control">
+      <button
+        id="{{ _toggle_id }}"
+        class="cloc__toggle"
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls="{{ _panel_id }}"
+      >
+        <span class="cloc__label-inside">
+          {{ 'general.localization.country' | t | default: 'Country' }}
+        </span>
+        <span class="cloc__current">
+          {%- if _show_flag -%}
+            {{ localization.country | image_url: width: 60, format: 'jpg' | image_tag: class: 'cloc__flag', loading: 'lazy' }}
+          {%- endif -%}
+          {%- if _show_name -%}
+            {{ localization.country.name }} ({{ localization.country.currency.iso_code }}{% if localization.country.currency.symbol %} {{ localization.country.currency.symbol }}{% endif %})
+          {%- else -%}
+            {{ localization.country.currency.iso_code }}{% if localization.country.currency.symbol %} {{ localization.country.currency.symbol }}{% endif %}
+          {%- endif -%}
+        </span>
+        <span class="cloc__chevron" aria-hidden="true">
+          {%- render 'icon' with 'chevron-down' -%}
+        </span>
+      </button>
+
+      <div id="{{ _panel_id }}" class="cloc__panel" role="listbox" tabindex="-1" hidden>
+        {%- form 'localization', id: _form_id -%}
+          <ul class="cloc__list">
+            {%- for country in localization.available_countries -%}
+              {%- assign selected = false -%}
+              {%- if country.iso_code == localization.country.iso_code -%}
+                {%- assign selected = true -%}
+              {%- endif -%}
+              <li class="cloc__item">
+                <button
+                  class="cloc__option{% if selected %} is-active{% endif %}"
+                  type="submit"
+                  name="country_code"
+                  value="{{ country.iso_code }}"
+                  role="option"
+                  aria-selected="{% if selected %}true{% else %}false{% endif %}"
+                >
+                  {%- if _show_flag -%}
+                    {{ country | image_url: width: 60, format: 'jpg' | image_tag: class: 'cloc__flag', loading: 'lazy' }}
+                  {%- endif -%}
+                  <span class="cloc__option-text">
+                    {{ country.name }} ({{ country.currency.iso_code }}{% if country.currency.symbol %} {{ country.currency.symbol }}{% endif %})
+                  </span>
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endform -%}
+      </div>
+    </div>
+  {%- endcase -%}
+</div>
+
+<style>
+.cloc {
+  width: 100%;
+  max-width: 280px;
+}
+@media (min-width: 992px) {
+  .cloc {
+    max-width: 240px;
+  }
+}
+.cloc__control {
+  position: relative;
+}
+.cloc__toggle {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  background: #fff;
+  border: 1px solid rgba(55, 57, 54, .2);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  max-height: 52px;
+}
+.cloc__label-inside {
+  font-size: 12px;
+  line-height: 14px;
+  color: #37393666;
+  letter-spacing: .02em;
+}
+.cloc__current {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.cloc__flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+.cloc__chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.cloc__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid rgba(55, 57, 54, .2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  max-height: 280px;
+  overflow: auto;
+  z-index: 50;
+}
+.cloc__list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+}
+.cloc__item + .cloc__item {
+  margin-top: 4px;
+}
+.cloc__option {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cloc__option:hover,
+.cloc__option:focus {
+  background: #f3f2f1;
+}
+.cloc__option.is-active {
+  background: #ecebea;
+}
+
+</style>
+
+<script>
+(function(){
+  var section = document.getElementById('shopify-section-{{ section.id }}');
+  if(!section) return;
+
+  section.querySelectorAll('.cloc').forEach(function(root){
+    var btn   = root.querySelector('.cloc__toggle');
+    var panel = root.querySelector('.cloc__panel');
+    if(!btn || !panel) return;
+
+    function open(){ panel.hidden = false; btn.setAttribute('aria-expanded','true'); }
+    function close(){ panel.hidden = true;  btn.setAttribute('aria-expanded','false'); }
+    function toggle(){ panel.hidden ? open() : close(); }
+
+    btn.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
+    panel.addEventListener('click', function(e){ e.stopPropagation(); });
+
+    document.addEventListener('click', function(e){
+      if (!root.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') close();
+    });
+  });
+})();
+</script>
+
+
+
+-----SHOP OUR INSTAGRAM--------
+<section id="shopify-section-{{ section.id }}" class="instagram-section"
+  style="
+    --section-bg-color: {{ section.settings.bg_color }};
+    --section-text-color: {{ section.settings.text_color }};
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --section-padding-left: {{ section.settings.padding_left }}px;
+    --section-padding-right: {{ section.settings.padding_right }}px;
+  ">
+  <div class="instagram-container">
+    <div class="instagram-title">
+      <h2 class="instagram-heading">
+        <span class="instagram-heading-light">shop our</span>
+        <span class="instagram-heading-italic"> instagram</span>
+      </h2>
+      {% if section.settings.instagram_handle != blank %}
+        <a href="https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}" 
+           class="instagram-button"
+           target="_blank" 
+           rel="noopener noreferrer">
+          @{{ section.settings.instagram_handle | remove: '@' }}
+        </a>
+      {% endif %}
+    </div>
+    
+    <div class="instagram-images">
+      {% comment %} Desktop Layout {% endcomment %}
+      {% if section.blocks.size > 0 %}
+        {% assign main_image = section.blocks.first %}
+        <div class="instagram-main-image">
+          {% if main_image.settings.image %}
+            {% if main_image.settings.url != blank %}
+              <a href="{{ main_image.settings.url }}" 
+                 {% if main_image.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                <img src="{{ main_image.settings.image | image_url: width: 522 }}" 
+                     alt="{{ main_image.settings.alt_text | default: 'Instagram post' | escape }}" 
+                     loading="lazy">
+              </a>
+            {% else %}
+              <img src="{{ main_image.settings.image | image_url: width: 522 }}" 
+                   alt="{{ main_image.settings.alt_text | default: 'Instagram post' | escape }}" 
+                   loading="lazy">
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endif %}
+      
+      <div class="instagram-grid">
+        <div class="instagram-grid-row">
+          {% for block in section.blocks limit: 3 offset: 1 %}
+            <div class="instagram-grid-item" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                {% if block.settings.url != blank %}
+                  <a href="{{ block.settings.url }}" 
+                     {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <img src="{{ block.settings.image | image_url: width: 233 }}" 
+                         alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                         loading="lazy">
+                  </a>
+                {% else %}
+                  <img src="{{ block.settings.image | image_url: width: 233 }}" 
+                       alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                       loading="lazy">
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        
+        <div class="instagram-grid-row">
+          {% for block in section.blocks limit: 3 offset: 4 %}
+            <div class="instagram-grid-item" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                {% if block.settings.url != blank %}
+                  <a href="{{ block.settings.url }}" 
+                     {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <img src="{{ block.settings.image | image_url: width: 233 }}" 
+                         alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                         loading="lazy">
+                  </a>
+                {% else %}
+                  <img src="{{ block.settings.image | image_url: width: 233 }}" 
+                       alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                       loading="lazy">
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      {% comment %} Mobile-only images for second row {% endcomment %}
+      <div class="instagram-mobile-second-row">
+        <div class="instagram-mobile-small-images">
+          {% for block in section.blocks limit: 2 offset: 3 %}
+            <div class="instagram-mobile-small-item" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                {% if block.settings.url != blank %}
+                  <a href="{{ block.settings.url }}" 
+                     {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <img src="{{ block.settings.image | image_url: width: 112 }}" 
+                         alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                         loading="lazy">
+                  </a>
+                {% else %}
+                  <img src="{{ block.settings.image | image_url: width: 112 }}" 
+                       alt="{{ block.settings.alt_text | default: 'Instagram post' | escape }}" 
+                       loading="lazy">
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        
+        {% if section.blocks.size > 5 %}
+          {% assign last_image = section.blocks[5] %}
+          <div class="instagram-mobile-large-item">
+            {% if last_image.settings.image %}
+              {% if last_image.settings.url != blank %}
+                <a href="{{ last_image.settings.url }}" 
+                   {% if last_image.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                  <img src="{{ last_image.settings.image | image_url: width: 228 }}" 
+                       alt="{{ last_image.settings.alt_text | default: 'Instagram post' | escape }}" 
+                       loading="lazy">
+                </a>
+              {% else %}
+                <img src="{{ last_image.settings.image | image_url: width: 228 }}" 
+                     alt="{{ last_image.settings.alt_text | default: 'Instagram post' | escape }}" 
+                     loading="lazy">
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .instagram-section{
+    padding: 0 !important;
+  }
+#shopify-section-{{ section.id }} {
+  background-color: var(--section-bg-color, #f1efed);
+  color: var(--section-text-color, #373a36);
+  padding: var(--section-padding-top, 40px) var(--section-padding-right, 80px) var(--section-padding-bottom, 40px) var(--section-padding-left, 80px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#shopify-section-{{ section.id }} .instagram-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+#shopify-section-{{ section.id }} .instagram-title {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 87px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+#shopify-section-{{ section.id }} .instagram-heading {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 700;
+  color: #373a36;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+  line-height: 30px;
+  width: min-content;
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+#shopify-section-{{ section.id }} .instagram-heading-light {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+}
+
+#shopify-section-{{ section.id }} .instagram-heading-italic {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 47px;
+  letter-spacing: -0.94px;
+}
+
+#shopify-section-{{ section.id }} .instagram-button {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #373a36;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: lowercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 138px;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease;
+  max-height: 37px;
+  margin-left: 15px;
+}
+
+#shopify-section-{{ section.id }} .instagram-button:hover {
+  opacity: 0.9;
+}
+
+/* Desktop Layout */
+#shopify-section-{{ section.id }} .instagram-images {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: 500px;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  max-width: 1280px;
+  flex-shrink: 0;
+}
+
+#shopify-section-{{ section.id }} .instagram-main-image {
+  height: 100%;
+  border-radius: 10px;
+  flex-shrink: 0;
+  width: 522px;
+  overflow: hidden;
+}
+
+#shopify-section-{{ section.id }} .instagram-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#shopify-section-{{ section.id }} .instagram-main-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  width: 738px;
+  flex-shrink: 0;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 0;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-item {
+  height: 100%;
+  border-radius: 10px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(1) {
+  width: 233px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(2) {
+  width: 232px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(3) {
+  width: 233px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(1) {
+  width: 232px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(2) {
+  width: 233px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(3) {
+  width: 233px;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#shopify-section-{{ section.id }} .instagram-grid-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide mobile elements on desktop */
+#shopify-section-{{ section.id }} .instagram-mobile-second-row {
+  display: none;
+}
+
+/* Проблемний діапазон 1200px - 1320px */
+@media (min-width: 1025px) and (max-width: 1320px) {
+  #shopify-section-{{ section.id }} {
+    padding: var(--section-padding-top, 40px) var(--section-padding-right, 60px) var(--section-padding-bottom, 40px) var(--section-padding-left, 60px);
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-container {
+    max-width: 1000px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-images {
+    height: 400px;
+    max-width: 1000px;
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-main-image {
+    width: 420px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid {
+    width: 565px;
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row {
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(1),
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(3) {
+    width: 183px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(2) {
+    width: 184px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(1) {
+    width: 184px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(2),
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(3) {
+    width: 183px;
+  }
+}
+
+/* Tablet Layout (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #shopify-section-{{ section.id }} {
+    padding: var(--section-padding-top, 40px) var(--section-padding-right, 40px) var(--section-padding-bottom, 40px) var(--section-padding-left, 40px);
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-container {
+    max-width: 100%;
+    gap: 30px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-images {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-main-image {
+    width: 100%;
+    height: 300px;
+    max-width: 450px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid {
+    width: 100%;
+    height: auto;
+    max-width: 450px;
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row {
+    height: 140px;
+    gap: 15px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(1),
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(2),
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(3),
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(1),
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(2),
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(3) {
+    flex: 1;
+    width: auto;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-light {
+    font-size: 36px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-italic {
+    font-size: 42px;
+    letter-spacing: -0.84px;
+  }
+}
+
+/* Малі екрани менше 360px */
+@media (max-width: 359px) {
+  #shopify-section-{{ section.id }} {
+    padding: var(--section-padding-top, 15px) var(--section-padding-right, 15px) var(--section-padding-bottom, 15px) var(--section-padding-left, 15px);
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-container {
+    gap: 15px;
+    max-width: 280px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-light {
+    font-size: 28px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-italic {
+    font-size: 32px;
+    letter-spacing: -0.6px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-button {
+    width: auto;
+    min-width: 110px;
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+  
+  /* Mobile: Компактна grid структура */
+  #shopify-section-{{ section.id }} .instagram-images {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 180px 90px;
+    grid-template-rows: repeat(2, 95px) 8px repeat(2, 95px);
+    gap: 8px 8px;
+    width: 280px;
+    height: auto;
+    align-content: start;
+    justify-content: center;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-main-image {
+    grid-row: 1 / 3;
+    grid-column: 1;
+    width: 180px;
+    height: 198px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    width: 90px;
+    height: 198px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row {
+    height: 95px;
+    width: 90px;
+    gap: 0;
+    flex: none;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(1) {
+    width: 90px;
+    height: 95px;
+    display: block;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(1) {
+    width: 90px;
+    height: 95px;
+    display: block;
+  }
+  
+  /* Mobile second row */
+  #shopify-section-{{ section.id }} .instagram-mobile-second-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 280px;
+    height: 198px;
+    grid-row: 4 / 6;
+    grid-column: 1 / 3;
+    align-items: center;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-images {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 90px;
+    height: 198px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-item {
+    width: 90px;
+    height: 95px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-large-item {
+    width: 180px;
+    height: 198px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+/* Mobile Layout (360px - 767px) - оригінальна верстка */
+@media (min-width: 360px) and (max-width: 767px) {
+  #shopify-section-{{ section.id }} {
+    padding: var(--section-padding-top, 20px) var(--section-padding-right, 20px) var(--section-padding-bottom, 20px) var(--section-padding-left, 20px);
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-container {
+    gap: 20px;
+    align-items: center;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-light {
+    font-size: 34px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-heading-italic {
+    font-size: 40px;
+    letter-spacing: -0.8px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-button {
+    text-transform: lowercase;
+    margin-left: 0;
+  }
+  
+  .instagram-heading {
+    white-space: nowrap;
+  }
+  
+  /* Mobile: Restructure layout completely */
+  #shopify-section-{{ section.id }} .instagram-images {
+    margin-top: -5px;
+    display: grid;
+    grid-template-columns: 228px 112px;
+    grid-template-rows: repeat(2, 120px) 10px repeat(2, 120px);
+    gap: 10px 10px;
+    width: 350px;
+    height: auto;
+    align-content: start;
+    justify-content: center;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-main-image {
+    grid-row: 1 / 3;
+    grid-column: 1;
+    width: 228px;
+    height: 250px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    width: 112px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row {
+    height: 120px;
+    width: 112px;
+    gap: 0;
+    flex: none;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(1) {
+    width: 112px;
+    height: 120px;
+    display: block;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(2) {
+    display: none;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:first-child .instagram-grid-item:nth-child(3) {
+    display: none;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(1) {
+    width: 112px;
+    height: 120px;
+    display: block;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(2) {
+    display: none;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-grid-row:last-child .instagram-grid-item:nth-child(3) {
+    display: none;
+  }
+  
+  /* Mobile second row */
+  #shopify-section-{{ section.id }} .instagram-mobile-second-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 350px;
+    height: 250px;
+    grid-row: 4 / 6;
+    grid-column: 1 / 3;
+    align-items: center;
+    margin-top: -20px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-images {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 112px;
+    height: 250px;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-item {
+    width: 112px;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-small-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-large-item {
+    width: 228px;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-large-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  #shopify-section-{{ section.id }} .instagram-mobile-large-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Shop Our Instagram",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#373a36"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f1efed"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Left padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Right padding",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram handle",
+      "default": "rinfitrings",
+      "info": "Enter without @ symbol"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Instagram image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "default": "Instagram post"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Our Instagram",
+      "settings": {
+        "instagram_handle": "rinfitrings"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+
+
+
+
+--------MARQUE--------
+
+<section id="marquee-{{ section.id }}" class="custom-marquee" role="region" aria-label="Marquee content">
+  <div class="marquee-container">
+    <div class="marquee-viewport" aria-hidden="true">
+      <ul class="marquee-track" role="list">
+        {% for block in section.blocks %}
+          <li class="marquee-item" {{ block.shopify_attributes }}>
+            {% if block.settings.svg_icon != blank %}
+              <div class="marquee-icon">
+                {{ block.settings.svg_icon }}
+              </div>
+            {% endif %}
+            
+            {% if block.settings.text != blank %}
+              <span class="marquee-text">{{ block.settings.text }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-marquee {
+    background-color: #F9F9F8;
+    height: 50px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    --mobile-speed: {{ section.settings.mobile_speed | default: 20 }}s;
+    --desktop-speed: {{ section.settings.desktop_speed | default: 30 }}s;
+  }
+
+  .marquee-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .marquee-viewport {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    mask-image: linear-gradient(90deg, transparent 0%, black 2%, black 98%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 2%, black 98%, transparent 100%);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 27px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    will-change: transform;
+    animation: marquee-scroll var(--mobile-speed) linear infinite;
+    align-items: center;
+    height: 100%;
+    background: #F9F9F8;
+  }
+
+  .marquee-track.static {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    background: #F9F9F8;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 30px;
+  }
+
+  .marquee-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .marquee-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .marquee-text {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #373A36;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation-duration: 60s !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .marquee-text {
+      font-size: 14px;
+    }
+    
+    .marquee-track:not(.static) {
+      animation-duration: var(--desktop-speed);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .marquee-track {
+      gap: 125px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  const section = document.querySelector('#marquee-{{ section.id }}');
+  const track = section.querySelector('.marquee-track');
+
+  if (!track) return;
+
+  // Check if marquee should be static
+  const isStatic = {{ section.settings.static_on_desktop | json }};
+  
+  if (isStatic && window.innerWidth >= 768) {
+    track.classList.add('static');
+  } else {
+    // Duplicate items for seamless loop
+    const items = Array.from(track.children);
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      track.appendChild(clone);
+    });
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (isStatic) {
+      if (window.innerWidth >= 768) {
+        track.classList.add('static');
+      } else {
+        track.classList.remove('static');
+        // Re-add clones if needed for mobile
+        if (track.children.length === {{ section.blocks.size }}) {
+          const items = Array.from(track.children);
+          items.forEach(item => {
+            const clone = item.cloneNode(true);
+            track.appendChild(clone);
+          });
+        }
+      }
+    }
+  });
+
+  // Handle reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    track.style.animationDuration = '60s';
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Marquee",
+  "tag": "section",
+  "class": "custom-marquee-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "static_on_desktop",
+      "label": "Static (centered) on desktop",
+      "default": false,
+      "info": "When enabled, marquee will be centered and static on desktop, animated on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Animation Speed"
+    },
+    {
+      "type": "range",
+      "id": "mobile_speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Mobile animation speed",
+      "default": 20,
+      "info": "Lower number = faster animation"
+    },
+    {
+      "type": "range",
+      "id": "desktop_speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Desktop animation speed",
+      "default": 30,
+      "info": "Lower number = faster animation. Only applies when not static"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "svg_icon",
+          "label": "SVG Icon Code",
+          "info": "Paste your SVG code here (optional)"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Your text here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Marquee",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping worldwide",
+            "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 7H21L19 15H5L3 7Z\" stroke=\"#373A36\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5 7L4 3H2\" stroke=\"#373A36\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"9\" cy=\"19\" r=\"1\" stroke=\"#373A36\" stroke-width=\"2\"/><circle cx=\"15\" cy=\"19\" r=\"1\" stroke=\"#373A36\" stroke-width=\"2\"/></svg>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "30-day return policy",
+            "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9 12L11 14L15 10\" stroke=\"#373A36\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z\" stroke=\"#373A36\" stroke-width=\"2\"/></svg>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Quality guaranteed",
+            "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z\" stroke=\"#373A36\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "24/7 customer support",
+            "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z\" stroke=\"#373A36\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+

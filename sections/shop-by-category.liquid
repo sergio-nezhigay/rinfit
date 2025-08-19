@@ -176,28 +176,27 @@
     {% if section.settings.title != blank %}
       <p class="main-title-category">{{ section.settings.title }}</p>
     {% endif %}
-    {% if section.settings.button_text != blank and section.settings.button_url != blank %}
-      <a class="button-all-category" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
-    {% endif %}
+    {%- comment -%}
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a class="button-all-category" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+      {% endif %}
+    {%- endcomment -%}
   </div>
   <div class="main-swiper-category">
     <div class="swiper mySwiper-category">
       <div class="swiper-wrapper swiper-wrapper-category">
-        {% comment %} Fixed demo categories data {% endcomment %}
-        {% assign demo_categories = 'Electronics|https://picsum.photos/400/400?random=1|/collections/electronics,Fashion|https://picsum.photos/400/400?random=2|/collections/fashion,Home & Garden|https://picsum.photos/400/400?random=3|/collections/home-garden,Sports|https://picsum.photos/400/400?random=4|/collections/sports,Books|https://picsum.photos/400/400?random=5|/collections/books,Beauty|https://picsum.photos/400/400?random=6|/collections/beauty,Jewelry|https://picsum.photos/400/400?random=7|/collections/jewelry,Toys|https://picsum.photos/400/400?random=8|/collections/toys'
-          | split: ','
-        %}
-
-        {% for category_data in demo_categories %}
-          {% assign category_info = category_data | split: '|' %}
-          {% assign category_title = category_info[0] %}
-
-          {% assign category_url = category_info[2] %}
-
+        {% for block in section.blocks %}
           <div class="swiper-slide">
-            <a href="{{ category_url }}" class="category-link">
-              <div class="category-rectangle"></div>
-              <p class="main-title-category">{{ category_title }}</p>
+            <a href="{{ block.settings.link }}" class="category-link">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | img_url: '600x600' }}" alt="{{ block.settings.title }}">
+              {% else %}
+                <div class="category-rectangle"></div>
+              {% endif %}
+              <p class="main-title-category">{{ block.settings.title }}</p>
+              <span class="category-link-text">
+                {{ section.settings.category_link_text }}
+              </span>
             </a>
           </div>
         {% endfor %}
@@ -249,19 +248,75 @@
     },
     {
       "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "VIEW ALL"
-    },
+      "id": "category_link_text",
+      "label": "Category Link Text",
+      "default": "Shop Now"
+    }
+  ],
+  "blocks": [
     {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL"
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category Name"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Shop by Category"
+      "name": "Shop by Category",
+      "settings": {
+        "title": "<p><em>Shop by</em> Category</p>"
+      },
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Rings",
+            "image": "shopify:\/\/shop_images\/rings.jpg",
+            "link": "/collections/rings"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Necklaces",
+            "image": "shopify:\/\/shop_images\/necklaces.jpg",
+            "link": "/collections/necklaces"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bracelets",
+            "image": "shopify:\/\/shop_images\/bracelets.jpg",
+            "link": "/collections/bracelets"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Earrings",
+            "image": "shopify:\/\/shop_images\/earrings.jpg",
+            "link": "/collections/earrings"
+          }
+        }
+      ]
     }
   ]
 }
