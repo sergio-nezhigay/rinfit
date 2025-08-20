@@ -13,11 +13,12 @@ Supported variables
 * block: the block containing all the information about the menu to render
 {%- endcomment -%}
 
-{%- for i in (1..2) -%}
+{%- for i in (1..5) -%}
   {%- assign image_setting = 'image_' | append: i -%}
   {%- assign heading_setting = 'image_' | append: i | append: '_heading' -%}
   {%- assign text_setting = 'image_' | append: i | append: '_text' -%}
   {%- assign link_setting = 'image_' | append: i | append: '_link' -%}
+  {%- assign menu_setting = 'image_' | append: i | append: '_menu' -%}
 
   {%- capture image_content -%}
     {%- if block.settings[image_setting] -%}
@@ -30,6 +31,18 @@ Supported variables
       <div class="v-stack text-center {% if context == 'menu' %}gap-2.5{% else %}gap-0.5{% endif %}">
         {%- if block.settings[heading_setting] != blank -%}
           <p class="h6">{{ block.settings[heading_setting] }}</p>
+           
+          {%- if block.settings[menu_setting] != blank -%}
+            <nav class="promo-menu  promo-menu-main-header">
+              <ul>
+                {%- for link in linklists[block.settings[menu_setting]].links -%}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
         {%- endif -%}
 
         {%- if block.settings[text_setting] != blank -%}

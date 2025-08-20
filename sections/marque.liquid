@@ -1,25 +1,3 @@
-<section id="marquee-{{ section.id }}" class="custom-marquee" role="region" aria-label="Marquee content">
-  <div class="marquee-container">
-    <div class="marquee-viewport" aria-hidden="true">
-      <ul class="marquee-track" role="list">
-        {% for block in section.blocks %}
-          <li class="marquee-item" {{ block.shopify_attributes }}>
-            {% if block.settings.svg_icon != blank %}
-              <div class="marquee-icon">
-                {{ block.settings.svg_icon }}
-              </div>
-            {% endif %}
-            
-            {% if block.settings.text != blank %}
-              <span class="marquee-text">{{ block.settings.text }}</span>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</section>
-
 <style>
   .custom-marquee {
     background-color: #F9F9F8;
@@ -130,6 +108,30 @@
     }
   }
 </style>
+
+<section id="marquee-{{ section.id }}" class="custom-marquee" role="region" aria-label="Marquee content">
+  <div class="marquee-container">
+    <div class="marquee-viewport" aria-hidden="true">
+      <ul class="marquee-track" role="list">
+        {% for block in section.blocks %}
+          <li class="marquee-item" {{ block.shopify_attributes }}>
+            {% if block.settings.svg_icon != blank %}
+              <div class="marquee-icon">
+                {{ block.settings.svg_icon }}
+              </div>
+            {% endif %}
+            
+            {% if block.settings.text != blank %}
+              <span class="marquee-text">{{ block.settings.text }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
 
 <script>
 (function() {

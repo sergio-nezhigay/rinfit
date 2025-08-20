@@ -1,95 +1,78 @@
-<style>
-.hero-single{
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 593px;
-}
-.main-title-banner{
-    font-family: "Kumbh Sans", sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    color: #807371;
-}
-.main-description-banner p{
-    line-height: 59px;
-}
-.main-description-banner p em{
-    font-weight: 400;
-}
-.main-description-banner{
-    font-family: "Kumbh Sans", sans-serif;
-    font-weight: 200;
-    font-size: 59px;
-    color: #807371;
-    max-width: 662px;
-}
-.main-button-banner{
-    background: #807371;
-    color: white;
-    min-width: 311px;
-    min-height: 40px;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-}
-</style>
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
 <section class="hero-banner">
-  {% if section.blocks.size == 1 %}
-    {% assign block = section.blocks[0] %}
-    <div class="hero-single" style="background-image:url('{{ block.settings.banner_img | img_url: 'master' }}');">
-      <div class="hero-content">
-        <h2 class="main-title-banner">{{ block.settings.main_text }}</h2>
-        <div class="main-description-banner">{{ block.settings.main_description }}</div>
-        {% if block.settings.button_text != blank %}
-          <a class="main-button-banner" href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
-        {% endif %}
-      </div>
-    </div>
-  {% elsif section.blocks.size > 1 %}
-    <div class="swiper hero-swiper">
-      <div class="swiper-wrapper">
-        {% for block in section.blocks %}
-          <div class="swiper-slide">
-            <div class="hero-single" style="background-image:url('{{ block.settings.banner_img | img_url: 'master' }}');">
-              <div class="hero-content">
-                <h2>{{ block.settings.main_text }}</h2>
-                <div>{{ block.settings.main_description }}</div>
-                {% if block.settings.button_text != blank %}
-                  <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
-                {% endif %}
-              </div>
+    {% if section.blocks.size == 1 %}
+        {% assign block = section.blocks[0] %}
+            <div class="hero-single hero-{{ block.id }}">
+                <div class="hero-content">
+                    <h2 class="main-title-banner">{{ block.settings.main_text }}</h2>
+                    <div class="main-description-banner">{{ block.settings.main_description }}</div>
+                    {% if block.settings.button_text != blank %}
+                        <a class="main-button-banner" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+                    {% endif %}
+                </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-  {% endif %}
+            <style>
+                .hero-{{ block.id }} .main-title-banner,
+                .hero-{{ block.id }} .main-description-banner{
+                    color: {{ block.settings.color_text }}
+                }
+                .hero-{{ block.id }} {
+                    background-image: url({{ block.settings.banner_img_desk | img_url: 'master' }});
+                }
+                
+                @media (max-width: 768px) {
+                    .hero-{{ block.id }} .main-title-banner,
+                    .hero-{{ block.id }} .main-description-banner{
+                        color: {{ block.settings.color_text_mob }}
+                    }
+                    .hero-{{ block.id }} {
+                        background-image: url({{ block.settings.banner_img_mob | img_url: 'master' }});
+                    }
+                }
+            </style>
+        {% elsif section.blocks.size > 1 %}
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+                    {% for block in section.blocks %}
+                        <div class="swiper-slide">
+                            <div class="hero-single hero-{{ block.id }}">
+                                <div class="hero-content">
+                                    <h2 class="main-title-banner">{{ block.settings.main_text }}</h2>
+                                    <div class="main-description-banner">{{ block.settings.main_description }}</div>
+                                    {% if block.settings.button_text != blank %}
+                                        <a class="main-button-banner" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            .hero-{{ block.id }} .main-title-banner,
+                            .hero-{{ block.id }} .main-description-banner{
+                                color: {{ block.settings.color_text }}
+                            }
+                            .hero-{{ block.id }} {
+                                background-image: url({{ block.settings.banner_img_desk | img_url: 'master' }});
+                            }
+
+                            @media (max-width: 768px) {
+                                .hero-{{ block.id }} .main-title-banner,
+                                .hero-{{ block.id }} .main-description-banner{
+                                    color: {{ block.settings.color_text_mob }}
+                                }
+                                .hero-{{ block.id }} {
+                                    background-image: url({{ block.settings.banner_img_mob | img_url: 'master' }});
+                                }
+                            }
+                        </style>
+                    {% endfor %}
+                </div>
+            <div class="swiper-pagination custom-progress"></div>
+        </div>
+    {% endif %}
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    if (document.querySelectorAll('.hero-swiper .swiper-slide').length > 1) {
-      new Swiper(".hero-swiper", {
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    }
-  });
-</script>
-
+{{ 'hero-banner.js' | asset_url | script_tag }}
 
 {% schema %}
 {
@@ -102,8 +85,13 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "banner_img",
-          "label": "Image",
+          "id": "banner_img_desk",
+          "label": "Image desktop",
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_img_mob",
+          "label": "Image mobile",
         },
         {
           "type": "text",
@@ -125,6 +113,16 @@
             "type": "url",
             "id": "button_url",
             "label": "Button URL"
+        },
+        {
+            "type": "color",
+            "id": "color_text",
+            "label": "Text color desktop"
+        },
+        {
+            "type": "color",
+            "id": "color_text_mob",
+            "label": "Text color mobile"
         },
       ]
     },
