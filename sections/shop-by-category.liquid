@@ -229,10 +229,8 @@
           </div>
         {% endfor %}
       </div>
+      <div class="swiper-pagination"></div>
     </div>
-    <div
-      class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
-    ></div>
     <div class="swiper-button-next"><img src="{{ 'Vector.svg' | asset_url }}" alt="Next"></div>
     <div class="swiper-button-prev"><img src="{{ 'Vector.svg' | asset_url }}" alt="Prev"></div>
   </div>
@@ -246,7 +244,7 @@
         spaceBetween: 10,
         loop: false,
         pagination: {
-          el: '.shop-by-category-{{ section.id }} .swiper-pagination',
+          el: '.swiper-pagination',
           clickable: true,
         },
         navigation: {
