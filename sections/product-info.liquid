@@ -6,33 +6,27 @@
   <div class="product-info-container">
     <div class="product-info-content">
       <div class="product-info-text">
-        {% if section.settings.reverse_layout %}
-          {% assign desktop_order = 'order-2' %}
-        {% else %}
-          {% assign desktop_order = 'order-1' %}
-        {% endif %}
-
-        <div class="product-info-text-inner {{ desktop_order }}">
+        <div class="product-info-text-inner ">
           {% if section.settings.title != blank %}
-            <h2 class="product-info-title">{{ section.settings.title }}</h2>
+            {% assign title_words = section.settings.title | split: ' ' %}
+            <h2 class="product-info-title">
+              {{ title_words[0] }}
+              <span class="title-highlight">
+                {{ title_words | slice: 1, title_words.size | join: ' ' }}
+              </span>
+            </h2>
           {% endif %}
 
           {% if product.metafields.custom.information != blank %}
             <div class="product-info-description">
-              {{ product.metafields.custom.information }}
+              {{ product.metafields.custom.information | metafield_tag }}
             </div>
           {% endif %}
         </div>
       </div>
 
       <div class="product-info-media">
-        {% if section.settings.reverse_layout %}
-          {% assign desktop_media_order = 'order-1' %}
-        {% else %}
-          {% assign desktop_media_order = 'order-2' %}
-        {% endif %}
-
-        <div class="product-info-media-inner {{ desktop_media_order }}">
+        <div class="product-info-media-inner">
           {% if product.media.size > 0 %}
             {% assign selected_media = product.media.first %}
             {% for media in product.media %}
@@ -75,14 +69,10 @@
     --product-info-max-width: {{ section.settings.max_width }}px;
     --product-info-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
     --product-info-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
-    --product-info-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
-    --product-info-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
     --product-info-title-color: {{ section.settings.title_color }};
     --product-info-text-color: {{ section.settings.text_color }};
     --product-info-title-size-desktop: {{ section.settings.title_size_desktop }}px;
-    --product-info-title-size-mobile: {{ section.settings.title_size_mobile }}px;
     --product-info-text-size-desktop: {{ section.settings.text_size_desktop }}px;
-    --product-info-text-size-mobile: {{ section.settings.text_size_mobile }}px;
     --product-info-gap: {{ section.settings.content_gap }}px;
   }
 
@@ -167,54 +157,7 @@
     width: 100%;
     height: auto;
     border-radius: {{ section.settings.media_border_radius }}px;
-    box-shadow: {{ section.settings.media_shadow }};
-  }
-
-  @media (max-width: 768px) {
-    #{{ section.id }}.product-info-section {
-      padding-top: var(--product-info-padding-top-mobile);
-      padding-bottom: var(--product-info-padding-bottom-mobile);
     }
-
-    #{{ section.id }} .product-info-content {
-      flex-direction: column;
-      gap: calc(var(--product-info-gap) / 2);
-      min-height: auto;
-    }
-
-    {% if section.settings.mobile_content_order == 'media-first' %}
-      #{{ section.id }} .product-info-text {
-        order: 2;
-      }
-
-      #{{ section.id }} .product-info-media {
-        order: 1;
-      }
-    {% endif %}
-
-    #{{ section.id }} .product-info-title {
-      font-size: var(--product-info-title-size-mobile);
-      margin-bottom: 16px;
-    }
-
-    #{{ section.id }} .product-info-description {
-      font-size: var(--product-info-text-size-mobile);
-    }
-
-    #{{ section.id }} .product-info-container {
-      padding: 0 16px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    #{{ section.id }} .order-1 {
-      order: 1;
-    }
-
-    #{{ section.id }} .order-2 {
-      order: 2;
-    }
-  }
 </style>
 
 {% schema %}
@@ -276,30 +219,6 @@
     },
     {
       "type": "header",
-      "content": "Mobile Padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "label": "Padding Top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "label": "Padding Bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "header",
       "content": "Layout Settings"
     },
     {
@@ -307,22 +226,6 @@
       "id": "reverse_layout",
       "label": "Reverse Layout (Image Left, Content Right)",
       "default": false
-    },
-    {
-      "type": "select",
-      "id": "mobile_content_order",
-      "label": "Mobile Content Order",
-      "options": [
-        {
-          "value": "content-first",
-          "label": "Content First"
-        },
-        {
-          "value": "media-first",
-          "label": "Media First"
-        }
-      ],
-      "default": "content-first"
     },
     {
       "type": "range",
@@ -350,32 +253,12 @@
     },
     {
       "type": "range",
-      "id": "title_size_mobile",
-      "label": "Title Size Mobile",
-      "min": 20,
-      "max": 40,
-      "step": 2,
-      "default": 28,
-      "unit": "px"
-    },
-    {
-      "type": "range",
       "id": "text_size_desktop",
       "label": "Text Size Desktop",
       "min": 12,
       "max": 24,
       "step": 1,
       "default": 16,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "text_size_mobile",
-      "label": "Text Size Mobile",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "default": 14,
       "unit": "px"
     },
     {
@@ -422,12 +305,6 @@
       "step": 2,
       "default": 8,
       "unit": "px"
-    },
-    {
-      "type": "text",
-      "id": "media_shadow",
-      "label": "Media Shadow (CSS)",
-      "default": "0 10px 30px rgba(0,0,0,0.1)"
     },
     {
       "type": "header",
