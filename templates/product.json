@@ -107,9 +107,26 @@
       }
     },
     "product_info": {
-      "type": "product-info"
+      "type": "product-info",
+      "settings": {
+        "title": "Product Information",
+        "max_width": "1440",
+        "background_color": "#ffffff",
+        "custom_classes": "",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "content_gap": 20,
+        "title_size_desktop": 40,
+        "text_size_desktop": 14,
+        "title_color": "#373a36",
+        "text_color": "#373936",
+        "selected_media_id": "",
+        "media_width": 500,
+        "media_border_radius": 8,
+        "video_autoplay": false,
+        "video_loop": true
+      }
     },
-
     "warranty_features": {
       "type": "warranty-features",
       "blocks": {
@@ -164,7 +181,6 @@
         "icon_color": "#f793be",
         "title_size_mobile": 12,
         "title_size_desktop": 14,
-        "description_size_mobile": 13,
         "description_size_desktop": 14,
         "custom_classes": ""
       }
@@ -187,5 +203,10 @@
       }
     }
   },
-  "order": ["main", "product_info", "warranty_features", "related-products"]
+  "order": [
+    "main",
+    "product_info",
+    "warranty_features",
+    "related-products"
+  ]
 }
