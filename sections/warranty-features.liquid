@@ -89,12 +89,12 @@
     font-weight: 700;
     color: var(--warranty-title-color);
     text-transform: uppercase;
+    letter-spacing: 0.0em;
     line-height: 2.5;
   }
 
   #{{ section_id }} .warranty-feature-description {
     margin: 0;
-    /* font-size: var(--warranty-description-size-mobile); */ /* Removed for mobile */
     color: var(--warranty-description-color);
     line-height: 1.5;
     text-align: center;
@@ -108,30 +108,24 @@
 
     #{{ section_id }} .warranty-features-grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    #{{ section_id }} .warranty-feature-item {
-      gap: 20px;
-    }
-
-    #{{ section_id }} .warranty-feature-icon {
-      width: 32px;
-      height: 32px;
+      gap: 129px;
     }
 
     #{{ section_id }} .warranty-feature-title {
       font-size: var(--warranty-title-size-desktop);
+      margin-bottom: 5px;
     }
 
     #{{ section_id }} .warranty-feature-description {
       font-size: var(--warranty-description-size-desktop);
+      line-height: 1.43;
+      opacity: 0.7;
     }
   }
 
   @media (min-width: 1200px) {
     #{{ section_id }} .warranty-features-container {
-      padding: 0 40px;
+      padding: 0 80px;
     }
   }
 

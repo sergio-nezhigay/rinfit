@@ -106,6 +106,10 @@
         "max_image_zoom_level": 3
       }
     },
+    "product_info": {
+      "type": "product-info"
+    },
+
     "warranty_features": {
       "type": "warranty-features",
       "blocks": {
@@ -183,9 +187,5 @@
       }
     }
   },
-  "order": [
-    "main",
-    "warranty_features",
-    "related-products"
-  ]
+  "order": ["main", "product_info", "warranty_features", "related-products"]
 }
