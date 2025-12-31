@@ -1,0 +1,642 @@
+{%- assign sidebar = sidebar | default: section.settings.sidebar -%}
+{% capture container_class %}{% if sidebar != 'off' %} product-page__container--with-sidebar{% endif %}{% if sidebar == 'left' %} order-xl-1{% endif %}{% endcapture %}
+{% capture sidebar_class %}{% if sidebar == 'left' %} product-page__sidebar--left pr-xl-30 mt-40 mt-md-60 mt-xl-0 mr-xl-30{% elsif sidebar == 'right' %} product-page__sidebar--right pl-xl-30 mt-40 mt-md-60 mt-xl-0 ml-xl-30{% endif %}{% endcapture %}
+{% assign enable_sticky_sidebar = enable_sticky_sidebar | default: section.settings.enable_sticky_sidebar %}
+{% assign enable_sticky_gallery = enable_sticky_gallery | default: section.settings.enable_sticky_gallery %}
+{% capture sidebar_html %}
+  {%- if sidebar != 'off' -%}
+    <div class="product-page__sidebar{{ sidebar_class }}" data-sticky-sidebar-parent>
+      <div{% if enable_sticky_sidebar %} class="js-sticky-sidebar" data-top-spacing="10" data-disable-moz{% endif %}>
+        <div data-sticky-sidebar-inner>
+          {% include 'product-get-page-sidebar' %}
+        </div>
+      </div>
+    </div>
+    {% if enable_sticky_sidebar %}
+      <script>
+        Loader.require({type: "script", name: "plugin_sticky_sidebar"});
+        Loader.require({type: "script", name: "sticky_sidebar"});
+      </script>
+    {% endif %}
+  {%- endif -%}
+{% endcapture %}
+{% include 'product-res-variables' %}
+{%- assign layout = layout | default: section.settings.layout -%}
+{%- assign show_btn_fullscreen = show_btn_fullscreen | default: section.settings.show_btn_fullscreen -%}
+{%- assign video_autoplay = video_autoplay | default: section.settings.video_autoplay -%}
+{%- assign show_arrows = show_arrows | default: section.settings.show_arrows -%}
+{%- assign enable_zoom = enable_zoom | default: section.settings.enable_zoom -%}
+{%- assign show_label_in_stock = show_label_in_stock | default: section.settings.show_label_in_stock -%}
+{%- assign show_label_out_stock = show_label_out_stock | default: section.settings.show_label_out_stock -%}
+{%- assign show_label_sale = show_label_sale | default: section.settings.show_label_sale -%}
+{%- assign show_label_new = show_label_new | default: section.settings.show_label_new -%}
+{%- assign show_label_hot = show_label_hot | default: section.settings.show_label_hot -%}
+{%- assign show_collections = show_collections | default: section.settings.show_collections -%}
+{%- assign show_title = show_title | default: section.settings.show_title -%}
+{%- assign show_sku = show_sku | default: section.settings.show_sku -%}
+{%- assign show_barcode = show_barcode | default: section.settings.show_barcode -%}
+{%- assign show_availability = show_availability | default: section.settings.show_availability -%}
+{%- assign show_type = show_type | default: section.settings.show_type -%}
+{%- assign show_vendor = show_vendor | default: section.settings.show_vendor -%}
+{%- assign show_price = show_price | default: section.settings.show_price -%}
+{%- assign show_sale_separator_status = show_sale_separator_status | default: section.settings.show_sale_price_separator -%}
+{%- assign show_sale_details = show_sale_details | default: section.settings.show_sale_details -%}
+{%- assign show_taxes = show_taxes | default: section.settings.show_taxes -%}
+{%- assign show_countdown = show_countdown | default: section.settings.show_countdown -%}
+{%- assign show_stock_countdown = show_stock_countdown | default: section.settings.show_stock_countdown -%}
+{%- assign show_stock_countdown_range = show_stock_countdown_range | default: section.settings.show_stock_countdown_range -%}
+{%- assign stock_countdown_min = stock_countdown_min | default: settings.product_stock_countdown_min | abs -%}
+{%- assign show_text_countdown = show_text_countdown | default: section.settings.show_text_countdown -%}
+{%- assign show_visitors = show_visitors | default: section.settings.show_visitors -%}
+{%- assign show_options = show_options | default: section.settings.show_options -%}
+{%- assign show_custom_options = show_custom_options | default: settings.product_show_custom_options -%}
+{%- assign hide_options_without_availability = hide_options_without_availability | default: settings.product_hide_options_without_availability -%}
+{%- assign show_addthis = show_addthis | default: section.settings.show_addthis -%}
+{%- assign show_size_guide = show_size_guide | default: section.settings.show_size_guide -%}
+{%- assign show_delivery_return = show_delivery_return | default: section.settings.show_delivery_return -%}
+{%- assign show_quantity = show_quantity | default: section.settings.show_quantity -%}
+{%- assign show_button_add_to_cart = show_button_add_to_cart | default: section.settings.show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = show_button_add_to_wishlist | default: section.settings.show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare = show_button_add_to_compare | default: section.settings.show_button_add_to_compare -%}
+{%- assign show_button_dynamic_checkout = show_button_dynamic_checkout | default: section.settings.show_button_dynamic_checkout -%}
+{%- assign show_dynamic_checkout_confirmation = show_dynamic_checkout_confirmation | default: section.settings.show_dynamic_checkout_confirmation -%}
+{%- assign styled_dynamic_checkout = styled_dynamic_checkout | default: section.settings.styled_dynamic_checkout -%}
+{%- assign show_free_shipping = show_free_shipping | default: section.settings.show_free_shipping -%}
+{%- assign show_reviews = show_reviews | default: section.settings.show_reviews -%}
+{%- assign hide_reviews_counter = hide_reviews_counter | default: section.settings.hide_reviews_counter -%}
+{%- assign hide_empty_reviews = hide_empty_reviews | default: section.settings.hide_empty_reviews -%}
+{%- assign show_payments = show_payments | default: section.settings.show_payments -%}
+{%- assign payments_type = payments_type | default: section.settings.payments_type -%}
+{%- assign show_tabs = show_tabs | default: section.settings.show_tabs -%}
+{%- assign show_tab_description = show_tab_description | default: section.settings.show_tab_description -%}
+{%- assign show_tab_reviews = show_tab_reviews | default: section.settings.show_tab_reviews -%}
+{% capture content_margins %}mt-{{ settings.offset_product_page_content_margin_top_d }} mb-{{ settings.offset_product_page_content_margin_bottom_d }}{% endcapture %}
+<div data-section-id="{{ section.id }}" data-section-type="product-page" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+    <meta itemprop="url" content="{{ url }}">
+    <meta itemprop="identifier" content="{{ barcode }}">
+    <meta itemprop="mpn" content="{{ barcode }}">
+    <meta itemprop="gtin8" content="{{ barcode }}">
+    <meta itemprop="gtin" content="{{ barcode }}">
+    <meta itemprop="sku" content="{{ sku }}">
+    <meta itemprop="brand" content="{{ product.vendor }}">
+    <meta itemprop="image" content="{{ image | img_url: '600x600' }}">
+    <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+    {%- case layout -%}
+    {%- when '1' -%}
+        <div class="product-page {{ content_margins }}">
+            <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                <div class="product-page__container{{ container_class }}">
+                    <div class="product-page__main">
+                        {% include 'product-get-page-main' %}
+                    </div>
+                    {%- if section.settings.show_tabs -%}
+                      <div class="product-page__tabs mt-40">
+                          {% include 'product-get-page-tabs' %}
+                      </div>
+                    {%- endif -%}
+                </div>
+                {{ sidebar_html }}
+            </div>
+        </div>
+    {%- when '2' -%}
+      <div class="product-page {{ content_margins }}">
+        <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+          <div class="product-page__container{{ container_class }}">
+            <div class="product-page__main">
+              {% include 'product-get-page-main' %}
+            </div>
+          </div>
+          {{ sidebar_html }}
+        </div>
+      </div>
+    {%- when '3' -%}
+        <div class="product-page {{ content_margins }}">
+            <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                <div class="product-page__container{{ container_class }}">
+                    <div class="product-page__main">
+                        {% include 'product-get-page-main' %}
+                    </div>
+                    {%- if section.settings.show_tabs -%}
+                      <div class="product-page__tabs mt-40">
+                          {% include 'product-get-page-tabs' %}
+                      </div>
+                    {%- endif -%}
+                </div>
+                {{ sidebar_html }}
+            </div>
+        </div>
+    {%- when '4' -%}
+      <div class="product-page {{ content_margins }}">
+        <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+          <div class="product-page__container{{ container_class }}">
+            <div class="product-page__main">
+              {% include 'product-get-page-main' %}
+            </div>
+          </div>
+          {{ sidebar_html }}
+        </div>
+      </div>
+    {%- when '5' -%}
+      <div class="product-page {{ content_margins }}">
+        <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+          <div class="product-page__container{{ container_class }}">
+            <div class="product-page__main">
+              {% include 'product-get-page-main' %}
+            </div>
+          </div>
+          {{ sidebar_html }}
+        </div>
+      </div>
+    {%- when '6' -%}
+        <div class="product-page {{ content_margins }}">
+            <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                <div class="product-page__container{{ container_class }}">
+                    <div class="product-page__main">
+                        {% include 'product-get-page-main' %}
+                    </div>
+                    {%- if section.settings.show_tabs -%}
+                      <div class="product-page__tabs mt-40">
+                          {% include 'product-get-page-tabs' %}
+                      </div>
+                    {%- endif -%}
+                </div>
+                {{ sidebar_html }}
+            </div>
+        </div>
+    {%- endcase -%}
+</div>
+
+<script>
+  Loader.require({type: "script", name: "product"});
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "sidebar",
+      "label": "Sidebar",
+      "default": "off",
+      "options": [
+        {
+          "value": "off",
+          "label": "Off"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_gallery",
+      "label": "Enable sticky gallery",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_sidebar",
+      "label": "Enable sticky sidebar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_btn_fullscreen",
+      "label": "Show button 'Fullscreen'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Enable autoplay video",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Zoom",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_in_stock",
+      "label": "Show label 'In stock'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_out_stock",
+      "label": "Show label 'Out stock'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_sale",
+      "label": "Show label 'Sale'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_new",
+      "label": "Show label 'New'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_hot",
+      "label": "Show label 'Hot'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collections",
+      "label": "Show collections",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_price_separator",
+      "label": "Show sale price separator",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_details",
+      "label": "Show sale price details",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_taxes",
+      "label": "Show taxes",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_barcode",
+      "label": "Show barcode",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_availability",
+      "label": "Show availability",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "label": "Show type",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_empty_reviews",
+      "label": "Hide empty reviews",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_reviews_counter",
+      "label": "Hide reviews counter",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show countdown",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_countdown",
+      "label": "Show stock countdown",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_countdown_range",
+      "label": "Show range of stock countdown",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_countdown",
+      "label": "Show text countdown",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_visitors",
+      "label": "Show real time visitors",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_options",
+      "label": "Show options (variants)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_guide",
+      "label": "Show button 'Size guide'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery_return",
+      "label": "Show button 'Delivery return",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_add_to_cart",
+      "label": "Show button 'Add to cart'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_add_to_wishlist",
+      "label": "Show button 'Add to wish list'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_add_to_compare",
+      "label": "Show button 'Add to compare'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_dynamic_checkout",
+      "label": "Show dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout_confirmation",
+      "label": "Show dynamic checkout confirmation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "styled_dynamic_checkout",
+      "label": "Custom style for dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_free_shipping",
+      "label": "Show free shipping",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payments",
+      "label": "Show payments",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "payments_type",
+      "label": "Payments type",
+      "default": "dark",
+      "options": [
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_addthis",
+      "label": "Show addthis",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Show tabs",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tab_description",
+      "label": "Show tab 'Description'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tab_reviews",
+      "label": "Show tab 'Reviews'",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_custom_html",
+      "name": "Custom html tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Custom HTML"
+        },
+        {
+          "type": "page",
+          "id": "page_content",
+          "label": "Page content"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "tab_custom_text",
+      "name": "Custom text tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Custom text"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Text content of Tab goes here!</p><p>You can make&nbsp;text <strong>bold</strong>, <em>italic</em> or add <a href=\"\/blogs\/news\" title=\"News\">link</a> using rich text editor.</p><p></p>"
+        }
+      ]
+    },
+    {
+      "type": "custom_html",
+      "name": "Custom HTML",
+      "settings": [
+        {
+          "type": "page",
+          "id": "page_content",
+          "label": "Page content"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "products",
+      "name": "Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FEATURED PRODUCTS"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "max_count",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "pds",
+          "label": "Max count",
+          "info": "0 is infinite",
+          "default": 3
+        },
+        {
+          "type": "select",
+          "id": "product_type",
+          "label": "Products type",
+          "default": "short",
+          "options": [
+            {
+              "value": "short",
+              "label": "Short"
+            },
+            {
+              "value": "full",
+              "label": "Full"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

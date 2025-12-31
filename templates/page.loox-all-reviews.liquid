@@ -1,0 +1,19 @@
+{% if shop.metafields.loox["global_stats"] %}
+{% assign looxstats = shop.metafields.loox["global_stats"] | split: "," %}
+<div itemscope itemtype="https://schema.org/Product">
+<meta itemprop="name" content="{{ shop.name | escape }}"/>
+<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+<meta itemprop="ratingValue" content="{{ looxstats[0] }}"/>
+<meta itemprop="ratingCount" content="{{ looxstats[1] }}"/>
+</div>
+</div>
+{% endif %}
+{% include 'breadcrumbs' %}
+<div class="container {% if settings.offset_pages_margin_top_d > 0 %} mt-lg-{{ settings.offset_pages_margin_top_d }}{% endif %} mb-60{% if settings.offset_pages_margin_bottom_d > 0 %} mb-lg-{{ settings.offset_pages_margin_bottom_d }}{% endif %}">
+  <h1 class="h3 mt-30 text-center">{{ page.title }}</h1>
+  <div class="rte">
+    {% include 'content-load-template' content: page.content %}
+<div id="looxReviews" data-loox-aggregate=""></div>
+  </div>
+</div>
+

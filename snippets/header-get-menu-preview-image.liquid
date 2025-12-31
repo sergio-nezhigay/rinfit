@@ -1,0 +1,34 @@
+{%- if link != blank and sub_link != blank and sub_sub_link != blank -%}
+    {%- assign link_handle = link.handle -%}
+    {%- assign sub_link_handle = sub_link.handle -%}
+    {%- if sub_sub_link != 'empty_lvl' -%}
+        {%- assign sub_sub_link_handle = sub_sub_link.handle -%}
+    {%- else -%}
+        {%- assign sub_sub_link_handle = sub_sub_link -%}
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+        {%- if block.type == 'preview_image' -%}
+            {%- for i in (1..20) -%}
+                {%- assign prop_for_item_name = 'for_item_' | append: i -%}
+                {%- assign prop_image_name = 'image_' | append: i -%}
+                {%- if block.settings[prop_for_item_name] == blank or block.settings[prop_image_name] == blank -%}
+                    {%- break -%}
+                {%- endif -%}
+                {%- assign for_item_array = block.settings[prop_for_item_name] | split: '+' -%}
+                {%- assign for_item_link_handle = for_item_array[0] | handle -%}
+                {%- assign for_item_sub_link_handle = for_item_array[1] | handle -%}
+                {%- assign for_item_sub_sub_link_handle = for_item_array[2] | handle -%}
+                {%- if sub_sub_link_handle == 'empty_lvl' and for_item_sub_sub_link_handle == blank -%}
+                    {%- assign for_item_sub_sub_link_handle = 'empty_lvl' -%}
+                {%- endif -%}
+                {%- if link_handle == for_item_link_handle and sub_link_handle == for_item_sub_link_handle and sub_sub_link_handle == for_item_sub_sub_link_handle -%}
+                    <div class="menu__preview-image order-1 d-none d-lg-block position-lg-relative mt-lg-auto ml-lg-auto pointer-events-none" data-js-menu-preview-image>
+                        <div class="menu__preview-image_image position-lg-absolute top-lg-0 left-lg-0 ml-lg-5">        
+                            {% include 'rimage' with image: block.settings[prop_image_name] size: '969x' format: 'pjpg' %}
+                        </div>
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}

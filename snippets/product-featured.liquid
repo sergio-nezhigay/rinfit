@@ -1,0 +1,96 @@
+{%- if settings.product_format_pjpg -%}
+    {%- assign image_format = 'pjpg' -%}
+{%- else -%}
+    {%- assign image_format = null -%}
+{%- endif -%}
+{% include 'product-res-variables' %}
+{%- assign image_size = '300x' -%}
+{%- assign show_label_in_stock = show_label_in_stock | default: false -%}
+{%- assign show_label_out_stock = show_label_out_stock | default: false -%}
+{%- assign show_label_sale = show_label_sale | default: true -%}
+{%- assign show_label_new = show_label_new | default: true -%}
+{%- assign show_label_hot = show_label_hot | default: true -%}
+{%- assign show_more_info = show_more_info | default: settings.product_collection_show_more_info -%}
+{%- assign show_title = show_title | default: true -%}
+{%- assign show_price = show_price | default: true -%}
+{%- assign show_sale_price_separator = show_sale_price_separator  | default: settings.product_collection_show_sale_price_separator -%}
+{%- assign show_reviews = show_reviews | default: true -%}
+{%- assign hide_empty_reviews = hide_empty_reviews | default: true -%}
+{%- assign hide_reviews_counter = hide_reviews_counter | default: true -%}
+{%- assign img_hover_url = hover_image | img_url: '1x1', format: image_format | replace: '_1x1.', '_{width}x.' -%}
+<div class="product-featured d-flex flex-row align-items-start mb-20">
+    <div class="product-featured__image mr-20 js-product-images-hovered-end{% if settings.product_replace_images_hover %} js-product-images-hover{% endif %}"{% if settings.product_replace_images_hover and hover_image != blank %} data-js-product-image-hover="{{ img_hover_url }}" data-js-product-image-hover-id="{{ hover_image.id }}"{% endif %}>
+        <a href="{{ url }}" class="d-block">
+            {% include 'rimage' with image: image size: image_size alt: title %}
+        </a>
+    </div>
+    <div class="product-featured__content d-flex flex-column align-items-start">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            {% assign has_labels = null %}
+            {%- capture labels -%}
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            {%- endcapture -%}
+            {%- if has_labels -%}
+                <div class="product-featured__labels d-flex flex-column align-items-start mb-10">
+                    {{ labels }}
+                </div>
+            {%- endif -%}
+        {%- endif -%}
+        {%- if show_more_info -%}
+            {%- case settings.product_collection_more_info_type -%}
+                {% when 'type' %}
+                    {%- if product.type != blank -%}
+                        <div class="product-collection__more-info mb-3">
+                            <a href="/collections/all?constraint=custom-filter+type={{ product.type | handleize }}">{{ product.type }}</a>
+                        </div>
+                    {%- endif -%}
+                {% when 'collections' %}
+                    {%- if product.collections.size > 0 -%}
+                        <div class="product-collection__more-info mb-3">
+                            {% include 'product-get-collections' %}
+                        </div>
+                    {%- endif -%}
+                {% when 'vendor' %}
+                    {%- if product.vendor.size > 0 -%}
+                        <div class="product-collection__more-info mb-3">
+                            {%- for vendor in product.vendor -%}
+                                <a href="/collections/all?constraint=custom-filter+vendor={{ vendor | handleize }}">{{ vendor }}{% if forloop.last != true %},{% endif %}</a>{% if forloop.last != true %} {% endif %}
+                            {%- endfor -%}
+                        </div>
+                    {%- endif -%}
+            {%- endcase -%}
+        {%- endif -%}
+        {%- if show_title -%}
+            <div class="product-featured__title mb-3">
+                <h3 class="h6 m-0{% unless settings.font_heading_product_title %} ff-main{% endunless %}">
+                    <a href="{{ url }}">{{ title }}</a>
+                </h3>
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="product-featured__price mb-10">
+                {% include 'product-get-price' with price: price compare_at_price: compare_at_price show_sale_separator: show_sale_price_separator %}
+            </div>
+        {%- endif -%}
+        {%- if show_reviews -%}
+            <div class="product-featured__reviews">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter %}
+            </div>
+        {%- endif -%}
+    </div>
+</div>
+{% include 'product-res-variables-clear' %}

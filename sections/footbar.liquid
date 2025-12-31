@@ -1,0 +1,358 @@
+<div data-section-id="{{ section.id }}" data-section-type="footbar">
+    <div class="footbar d-flex flex-column align-items-lg-start position-fixed bottom-0 left-0 w-100 pointer-events-none">
+        {%- if section.settings.notification_products_enable and section.settings.notification_products_collection != blank -%}
+            <div class="notification position-relative js-notification">
+                <div class="notification__inner d-none px-sm-10 px-lg-15 mb-sm-10 mb-lg-15 js-notification-products" data-js-delay="{{ section.settings.notification_products_delay }}" data-js-interval-min="{{ section.settings.notification_products_interval_min }}" data-js-interval-max="{{ section.settings.notification_products_interval_max }}" data-js-max-time-life="{{ section.settings.notification_products_time_life }}" data-js-notification-inner>
+                    <div class="notification-products p-10 pointer-events-all">
+                        {%- assign product_minutes_text = section.settings.notification_products_minutes | split: '|' -%}
+                        {%- for product in collections[section.settings.notification_products_collection].products limit: 20 -%}
+                            {%- assign notification_text_01 = section.settings.notification_products_text_line_01 -%}
+                            {%- assign random_time_diff = section.settings.notification_products_range_max | minus: section.settings.notification_products_range_min -%}
+                            {%- assign random_time = "now" | date: "%N" | modulo: random_time_diff | plus: section.settings.notification_products_range_min -%}
+                            {%- assign products_places_arr = section.settings.notification_products_places | split: '|' -%}
+                            {%- assign products_places_arr_size_0 = products_places_arr.size | minus: 1 -%}
+                            {%- assign random_place_index = "now" | date: "%N" | modulo: products_places_arr_size_0 -%}
+                            {% capture time %}{{ random_time }} {% if random_time == 1 %}{{ product_minutes_text[0] }}{% else %}{{ product_minutes_text[1] }}{% endif %}{% endcapture %}
+                            {% capture place %}{{ products_places_arr[random_place_index] }}{% endcapture %}
+                            {%- assign notification_text_02 = section.settings.notification_products_text_line_02 | replace: '{time}', time | replace: '{place}', place -%}
+                            <div class="d-none" data-js-notification-products-item>
+                                {% include 'product-notification' %}
+                            </div>
+                        {%- endfor -%}
+                    </div>
+                </div>
+            </div>
+            <script>
+                Loader.require({type: "script", name: "notifications"});
+                Loader.require({type: "script", name: "footbar"});
+            </script>
+        {%- endif -%}
+        {%- if section.settings.notification_cookies_enable -%}
+            <div class="notification position-relative js-notification">
+                <div class="notification__inner d-none px-sm-10 px-lg-15 mb-sm-10 mb-lg-15 js-notification-cookies" data-js-show-once="{{ section.settings.notification_cookies_show_once }}" data-js-delay="{{ section.settings.notification_cookies_delay }}" data-js-cookies-life="{{ section.settings.notification_cookies_cookies_life }}" data-js-notification-inner>
+                    <div class="notification-cookies position-relative p-20 text-center text-sm-left pointer-events-all">
+                        <div class="notification-cookies__bg position-absolute absolute-stretch"></div>
+                        <div class="position-relative">
+                            <p class="mb-0">{{ section.settings.notification_cookies_text }}</p>
+                            <div class="d-flex align-items-center justify-content-center justify-content-sm-end mt-15">
+                                <a href="{{ section.settings.notification_cookies_button_information_link | default: '/pages/cookie-policy' }}" target="_blank" class="notification-cookies__button-info btn-link py-10 py-sm-0 mr-20">{{ section.settings.notification_cookies_button_information }}</a>
+                                <div class="notification-cookies__button-close btn-link py-10 py-sm-0 d-flex align-items-center" data-js-action="close">{{ section.settings.notification_cookies_button_close }}<i>{% include 'icon-theme-146' %}</i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                Loader.require({type: "script", name: "notifications"});
+                Loader.require({type: "script", name: "footbar"});
+            </script>
+        {%- endif -%}
+        {%- if template == 'product' and section.settings.product_footbar_enable -%}
+            {% include 'product-res-variables' %}
+            {%- assign show_title = show_title | default: section.settings.show_title -%}
+            {%- assign show_price = show_price | default: section.settings.show_price -%}
+            {%- assign show_sale_price_separator = show_sale_price_separator | default: section.settings.show_sale_price_separator -%}
+            {%- assign show_options = show_options | default: section.settings.show_options -%}
+            {%- assign show_custom_options = show_custom_options | default: settings.product_show_custom_options -%}
+            {%- assign hide_options_without_availability = hide_options_without_availability | default: settings.product_hide_options_without_availability -%}
+            {%- assign show_button_add_to_cart = show_button_add_to_cart | default: section.settings.show_button_add_to_cart -%}
+            {%- assign show_quantity = show_quantity | default: section.settings.show_quantity -%}
+            {%- assign show_reviews = show_reviews | default: section.settings.show_reviews -%}
+            {%- assign hide_reviews_counter = hide_reviews_counter | default: section.settings.hide_reviews_counter -%}
+            {%- assign hide_empty_reviews = hide_empty_reviews | default: section.settings.hide_empty_reviews -%}
+            {%- assign image_size = image_size | default: '60x' -%}
+            <div class="footbar-product d-none w-100 js-footbar-product pointer-events-all" data-product-handle="{{ product.handle }}" data-js-product-clone="footbar">
+                <div class="container d-flex">
+                    <div class="d-flex align-items-center w-100 py-2">
+                        <div class="footbar-product__image mr-20 mr-lg-15">
+                            <div data-js-product-image>
+                                {%- capture image_id -%} data-image-id="{{ image.id }}"{%- endcapture -%}
+                                {% include 'rimage' with image: image size: image_size alt: title attr: image_id %}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column py-4 mr-15">
+                            {%- if show_title -%}
+                                <div class="footbar-product__title d-none d-lg-block">
+                                    <h4 class="m-0">{{ title }}</h4>
+                                </div>
+                            {%- endif -%}
+                            {%- if show_price -%}
+                                <div class="footbar-product__price">
+                                    {% include 'product-get-price' with price: price compare_at_price: compare_at_price show_sale_separator: show_sale_price_separator %}
+                                </div>
+                            {%- endif -%}
+                            {%- if show_reviews -%}
+                                <div class="footbar-product__reviews d-none d-lg-block">
+                                    {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter %}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                        {%- if show_options and show_custom_options -%}
+                            <div class="footbar-product__options d-none d-lg-block py-4 ml-auto mr-15">
+                                {% include 'product-get-options' with options_type: 3 select_dropdown_position: 'top' hide_options_without_availability: hide_options_without_availability options_show_title: true trigger: 'footbar' %}
+                            </div>
+                        {%- endif -%}
+                        <div class="d-flex align-items-center py-4 ml-auto">
+                            {%- if show_quantity -%}
+                                <div class="footbar-product__quantity d-none d-lg-block ml-auto mr-15">
+                                    {% include 'product-get-quantity' with quantity_type: 2 quantity_connect: 'footbar' %}
+                                </div>
+                            {%- endif -%}
+                            {%- if show_button_add_to_cart -%}
+                                <div class="footbar-product__button-add-to-cart">
+                                    <button type="button" class="btn btn--status" name="add" data-js-trigger="add-to-cart" data-js-button-add-to-cart-clone="footbar" data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% else %}{% if enable_select_variant_button %} data-button-status="select"{% endif %}{% endunless %}>
+                                        <span class="d-flex flex-center text-nowrap">{{ 'products.product.add_to_cart.title' | t }}</span>
+                                        <span class="d-flex flex-center text-nowrap" data-button-content="added"><i class="mr-5 mb-4">{% render 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                        {%- if enable_select_variant_button -%}
+                                            <span class="d-flex flex-center text-nowrap" data-button-content="select">{{ 'products.product.add_to_cart.select_options' | t }}</span>
+                                        {%- endif -%}
+                                        <span class="d-flex flex-center text-nowrap" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                    </button>
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            getComputedStyle(document.body).marginTop;
+                Loader.require({type: "script", name: "trigger"});
+                Loader.require({type: "script", name: "product_footbar"});
+                Loader.require({type: "script", name: "footbar"});
+            </script>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Footbar",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Notification cookies"
+        },
+        {
+            "type": "checkbox",
+            "id": "notification_cookies_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_text",
+            "label": "Text",
+            "default": "This is a standard cookie notice which you can easily adapt or disable as you like in the admin. We use cookies to ensure that we give you the best experience on our website."
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_button_information",
+            "label": "Button information",
+            "default": "PRIVACY POLICY"
+        },
+        {
+            "type": "url",
+            "id": "notification_cookies_button_information_link",
+            "label": "Button information link"
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_button_close",
+            "label": "Button close",
+            "default": "ACCEPT"
+        },
+        {
+            "type": "range",
+            "id": "notification_cookies_delay",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Delay",
+            "default": 0
+        },
+        {
+            "type": "checkbox",
+            "id": "notification_cookies_show_once",
+            "label": "Show once?",
+            "info": "If user close notification",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "notification_cookies_cookies_life",
+            "label": "Cookies life",
+            "default": "1",
+            "options": [
+                { "value": "1", "label": "1 day" },
+                { "value": "3", "label": "3 days" },
+                { "value": "7", "label": "1 week" },
+                { "value": "31", "label": "1 month" },
+                { "value": "365", "label": "1 year" }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Notification products"
+        },
+        {
+            "type": "checkbox",
+            "id": "notification_products_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "collection",
+            "id": "notification_products_collection",
+            "label": "Collection"
+        },
+        {
+            "type": "text",
+            "id": "notification_products_text_line_01",
+            "label": "Text line #1",
+            "default": "Someone purched a"
+        },
+        {
+            "type": "text",
+            "id": "notification_products_text_line_02",
+            "label": "Text line #2",
+            "default": "{time} ago from {place}"
+        },
+        {
+            "type": "range",
+            "id": "notification_products_range_min",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "label": "Min time value in line #2 (minutes)",
+            "default": 2
+        },
+        {
+            "type": "range",
+            "id": "notification_products_range_max",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "label": "Max time value in line #2 (minutes)",
+            "default": 20
+        },
+        {
+            "type": "text",
+            "id": "notification_products_minutes",
+            "label": "Text for minutes",
+            "info": "Example: minute|minutes",
+            "default": "minute|minutes"
+        },
+        {
+            "type": "text",
+            "id": "notification_products_places",
+            "label": "Place values in line #2",
+            "default": "New York, USA|Moscow, Russian|London, Great Britain|Amsterdam, Netherlands|Berlin, Germany|Rome, Italy|Madrid, Spain"
+        },
+        {
+            "type": "range",
+            "id": "notification_products_delay",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Delay",
+            "default": 8
+        },
+        {
+            "type": "range",
+            "id": "notification_products_interval_min",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Min interval",
+            "default": 5
+        },
+        {
+            "type": "range",
+            "id": "notification_products_interval_max",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Max interval",
+            "default": 15
+        },
+        {
+            "type": "range",
+            "id": "notification_products_time_life",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Max time life",
+            "default": 8
+        },
+        {
+            "type": "header",
+            "content": "Product footbar"
+        },
+        {
+            "type": "checkbox",
+            "id": "product_footbar_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_title",
+            "label": "Show title",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_price",
+            "label": "Show price",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_sale_price_separator",
+            "label": "Show sale price separator",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "show_reviews",
+            "label": "Show reviews",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "hide_empty_reviews",
+            "label": "Hide empty reviews",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "hide_reviews_counter",
+            "label": "Hide reviews counter",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "show_options",
+            "label": "Show options (variants)",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_quantity",
+            "label": "Show quantity",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_button_add_to_cart",
+            "label": "Show button 'Add to cart'",
+            "default": true
+        }
+    ]
+}
+{% endschema %}

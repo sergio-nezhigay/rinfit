@@ -1,0 +1,80 @@
+{%- assign group_name = group_name | default: null -%}
+{%- for block in section.blocks -%}
+    {%- assign for_item_handle = block.settings.for_item | handle -%}
+    {%- if for_item_handle == link.handle -%}
+        {%- if group_name == null and block.settings.for_group == blank -%}
+            {%- assign add_content = true -%}
+        {%- elsif group_name and block.settings.for_group == group_name -%}
+            {%- assign add_content = true -%}
+        {%- else -%}
+            {%- assign add_content = false -%}
+        {%- endif -%}
+        {%- capture content -%}
+            {%- if group_name == null and block.type == 'megamenu_group' -%}
+                {%- assign group_name = block.settings.name -%}
+                {%- assign offset = block.settings.offset -%}
+                <div class="menu__group{% if offset == 'small' %} menu__group--offset-small{% endif %} row">
+                    {% include 'header-res-menu-megamenu-content' %}
+                </div>
+                {%- assign group_name = null -%}
+                {%- assign offset = null -%}
+            {%- elsif add_content -%}
+                {%- if block.type == 'megamenu_custom_html' -%}
+                    {{ block.settings.content }}
+                {%- elsif block.type == 'megamenu_products' -%}
+                    {%- assign title_url = collections[block.settings.collection].url -%}
+                    {%- assign products = collections[block.settings.collection].products -%}
+                    <div class="menu__products row">
+                        {%- if products.size > 0 -%}
+                            {%- assign limit = block.settings.products_per_row | times: block.settings.products_rows -%}
+                            {%- for product in products limit: limit -%}
+                                <div class="col-lg-{{ 12 | divided_by: block.settings.products_per_row }}">
+                                    {% include 'product-search' %}
+                                </div>
+                            {%- endfor -%}
+                        {%- endif -%}
+                    </div>
+                {%- elsif block.type == 'megamenu_promobox' -%}
+                    {% include 'promobox' %}
+                {%- elsif block.type == 'megamenu_subscription' -%}
+                    {%- if settings.subscription_method == 'shopify' -%}
+                        {% form 'customer', id: null, novalidate: 'novalidate', class: 'd-flex mb-20' %}
+                            {% include 'form-get-check-error-popup' %}
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <input type="email" name="contact[email]" class="mb-0 mr-10{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn btn--secondary" name="commit" value="{{ block.settings.button_text }}">
+                        {% endform %}
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="d-flex mb-20" target="_blank">
+                            <input type="email" name="EMAIL" class="mb-0 mr-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn btn--secondary" value="{{ block.settings.button_text }}">
+                        </form>
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endcapture -%}
+        {%- if add_content -%}
+            {%- capture column -%}
+                <div class="col-lg-{{ block.settings.grid }} d-none d-lg-block{% if offset == 'small' %} px-lg-5 mb-lg-10{% else %} mb-lg-30{% endif %}">
+                    {%- if block.settings.title != blank -%}
+                        {%- assign title_url = title_url | default: block.settings.title_url -%}
+                        {%- if title_url -%}
+                            <a href="{{ title_url }}" class="menu__title mb-lg-10">{{ block.settings.title }}</a>
+                        {%- else -%}
+                            <div class="menu__title mb-lg-10">{{ block.settings.title }}</div>
+                        {%- endif -%}
+                        {%- assign title_url = null -%}
+                    {%- endif -%}
+                    {{ content }}
+                </div>
+            {%- endcapture -%}
+            {%- if group_name -%}
+                {{ column }}
+            {%- elsif block.settings.float == 'left' -%}
+                {%- assign columns_left = columns_left | append: column -%}
+            {%- elsif block.settings.float == 'right' -%}
+                {%- assign columns_right = columns_right | append: column -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}

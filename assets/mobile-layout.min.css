@@ -1,0 +1,370 @@
+html {
+    padding-bottom: 0!important
+}
+body {
+    position: relative;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden
+}
+#MainContent {
+    position: relative;
+    z-index: 1
+}
+.h1,h1 {
+    margin-bottom: 33px
+}
+.h3,h3 {
+    margin-bottom: 24px
+}
+.h4,h4 {
+    margin-bottom: 28px
+}
+.h5,h5 {
+    margin-bottom: 25px
+}
+.h6,h6 {
+    margin-bottom: 26px
+}
+img {
+    max-width: 100%;
+    image-rendering: auto
+}
+p {
+    margin-bottom: 20px
+}
+a {
+    display: inline-block;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent
+}
+a:active,a:hover,a:link,a:visited {
+    text-decoration: none
+}
+label {
+    display: inline-block;
+    margin-bottom: 7px
+}
+video {
+    display: block
+}
+.cursor-pointer {
+    cursor: pointer!important
+}
+.cursor-default {
+    cursor: default!important
+}
+.pointer-events-none {
+    pointer-events: none
+}
+.pointer-events-all {
+    pointer-events: all
+}
+.position-fixed {
+    position: fixed!important
+}
+.position-absolute {
+    position: absolute!important
+}
+.position-relative {
+    position: relative!important
+}
+.bottom-0 {
+    bottom: 0!important
+}
+.left-0 {
+    left: 0!important
+}
+.right-0 {
+    right: 0!important
+}
+.d-none-important {
+    display: none!important
+}
+.absolute-stretch {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+.fixed-stretch {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+.overflow-hidden {
+    overflow: hidden!important
+}
+.rimage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+}
+.rimage__img {
+    position: absolute;
+    max-width: initial;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition-property: opacity
+}
+.rimage__img--fade-in:not(.loaded) {
+    opacity: 0
+}
+.rimage__img--cover {
+    object-fit: cover
+}
+.rimage__img--contain {
+    object-fit: contain
+}
+.scroll-offset-example {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    overflow-y: scroll;
+    visibility: hidden;
+    pointer-events: none;
+    left: 0;
+    bottom: -100%
+}
+input,select,textarea {
+    border-radius: 0
+}
+input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],select,textarea {
+    padding: 0 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: solid 1px transparent;
+    will-change: background-color,border-color,color;
+    transition-property: background-color,border-color,color
+}
+input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],select {
+    height: 35px
+}
+label {
+    margin-bottom: 2px;
+    margin-right: 15px
+}
+form {
+    margin-bottom: 20px
+}
+.btn,.spr-button,.spr-summary-actions-newreview {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 1px solid transparent;
+    box-sizing: border-box
+}
+.btn,.spr-button,.spr-summary-actions-newreview {
+        min-height:50px
+}
+.btn,.btn span,.btn-link,.btn-link span {
+    white-space: normal
+}
+.btn,.btn-link,.spr-summary-actions-newreview {
+    will-change: background-color,border-color,color
+}
+.btn--status:not([data-button-status=added]) [data-button-content=added],.btn--status:not([data-button-status=select]) [data-button-content=select],.btn--status:not([data-button-status=sold-out]) [data-button-content=sold-out] {
+    display: none!important
+}
+.price {
+    display: inline-block
+}
+
+.price--sale>span:first-child {
+    text-decoration: line-through
+}
+.price--sale>span:not(:first-child)::before {
+    display: inline-block;
+    content: '\00a0'
+}
+.header {
+    z-index: 3
+}
+.header__spacer {
+    display: none
+}
+.header__spacer--visible {
+    display: block;
+    position: relative;
+    width: 100%
+}
+.header__tape {
+    min-height: 35px
+}
+.header__content--sticky {
+    position: fixed!important;
+    width: 100%!important;
+    top: 0!important;
+    left: 0!important;
+    z-index: 2;
+    will-change: opacity;
+    transition-property: opacity
+}
+.header__line-top {
+        min-height:50px;
+        z-index: 2
+    }
+    .header__counter {
+    position: absolute;
+    top: -3px;
+    left: 22px
+}
+.header__counter[data-js-cart-count-mobile='0'],.header__counter[data-js-compare-count='0'],.header__counter[data-js-wishlist-count='0'] {
+    display: none!important
+}
+.header__btn-account,.header__btn-cart,.header__btn-compare,.header__btn-currency,.header__btn-language,.header__btn-search,.header__btn-services,.header__btn-wishlist {
+    transition-property: color;
+    will-change: color
+}
+.header__btn-account>i .icon,.header__btn-cart>i .icon,.header__btn-compare>i .icon,.header__btn-currency>i .icon,.header__btn-language>i .icon,.header__btn-search>i .icon,.header__btn-services>i .icon,.header__btn-wishlist>i .icon {
+    transition-property: fill;
+    will-change: fill
+}
+[data-js-accordion-button] {
+    cursor: pointer
+}
+.social-media {
+    margin-bottom: -5px
+}
+.product-options__value {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    outline: 0
+}
+.product-options__value {
+        margin-bottom:15px
+}
+.product-options__value:not(:last-child) {
+        margin:8px
+}
+.product-options__value--circle {
+    display: inline-flex;
+    position: relative
+}
+.product-options__value--circle.active {
+    justify-content: center;
+    align-items: center
+}
+.product-options__value--circle.active::before {
+    content: '';
+    position: absolute;
+    border: solid 1px transparent;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0)
+}
+.product-options--type-collection .product-options__value--circle {
+        width:48px;
+        height: 48px
+}
+.product-options--type-collection .product-options__value--circle.active::before {
+        width: 48px;
+        height: 48px
+}
+.product-options__section[data-disable-auto-select] .product-options__value--circle.active::before {
+    display: none!important
+}
+.product-images-navigation span {
+    width: 35px;
+    height: 35px;
+    will-change: background-color;
+    transition-property: background-color
+}
+.product-images-navigation span i {
+    will-change: color;
+    transition-property: color
+}
+.product-image img {
+    width: 100%
+}
+.product-collection__buttons {
+        overflow:hidden
+}
+.one-product__image {
+    max-width: 470px
+}
+.one-product__image-navigation {
+    z-index: 1
+}
+.popup {
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 999999;
+    backface-visibility: hidden;
+    outline: 0;
+    -webkit-overflow-scrolling: touch
+}
+.footbar {
+        z-index:2
+}
+.fixed-sidebar {
+    top: 45%;
+    margin-top: -80px;
+    z-index: 1
+}
+.promobox a {
+    pointer-events: all
+}
+.footer .container {
+        max-width:none
+}
+.footer__section-btn {
+        width:30px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        margin-right: -10px
+}
+.footer__social-media-mobile {
+        padding-left:7%;
+        padding-right: 7%
+}
+.footer__payments {
+    margin-left: -5px;
+    margin-right: -5px
+}
+.footer__payments {
+        padding-left:12%;
+        padding-right: 12%
+}
+.footer__payments svg {
+    max-width: 50px;
+    width: 100%
+}
+.footer__payments .icon-payment-shopify-secure,.footer__payments .icon-payment-shopify-secure-light {
+    max-width: 53px
+}
+.footer__payments .icon-payment-aes-256bit,.footer__payments .icon-payment-aes-256bit-light {
+    max-width: 34px
+}
+.footer__payments .icon-payment-visa,.footer__payments .icon-payment-visa-light {
+    max-width: 36px
+}
+.footer__payments .icon-payment-mastercard,.footer__payments .icon-payment-mastercard-light {
+    max-width: 30px
+}
+.footer__payments .icon-payment-discover-network,.footer__payments .icon-payment-discover-network-light {
+    max-width: 40px
+}
+.footer__payments .icon-payment-american-express,.footer__payments .icon-payment-american-express-light {
+    max-width: 47px
+}
+.footer__back-to-top {
+    min-height:35px
+}
+.product-collection__options {
+    min-height: 70px;
+}
+

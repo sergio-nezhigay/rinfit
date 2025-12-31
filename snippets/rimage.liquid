@@ -1,0 +1,70 @@
+{%- if disable_lazyload != blank -%}
+    {%- assign disable_lazyload = disable_lazyload | default: false -%}
+{%- else -%}
+    {%- if settings.layout_images_lazyload == false -%}
+        {%- assign disable_lazyload = true -%}
+    {%- endif -%}
+{%- endif -%}
+{%- if height_procent -%}
+    {%- assign aspect_ratio = height_procent | divided_by: 100.0 -%}
+    {%- assign aspect_ratio = 1 | divided_by: aspect_ratio -%}
+{%- endif -%}
+{%- assign aspect_ratio = aspect_ratio | default: image.aspect_ratio | default: 1 -%}
+{%- if format -%}
+    {%- assign img_url = image | img_url: '1x1', format: format | replace: '_1x1.', '_{width}x.' -%}
+{%- elsif image contains '.jpg' or image.src contains '.jpg' -%}
+    {%- assign img_url = image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', '_{width}x.' -%}
+{%- else -%}
+    {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+{% endif -%}
+{%- if stretch_size == blank -%}
+    {%- if responsive_height != blank or min_height != blank -%}
+        {%- assign stretch_size = stretch_size | default: 'cover' -%}
+    {%- endif -%}
+{%- endif -%}
+<div class="rimage" style="{% unless responsive_height != blank %}padding-top:{{ 1 | divided_by: aspect_ratio | times: 100 }}%;{% endunless %}{% if width %} width: {{ width }}px;{% endif %}{% if min_height != blank %} min-height: {{ min_height }}px;{% endif %}">
+    {%- if responsive_height != blank -%}
+        {%- assign responsive_height_arr = responsive_height | split: ',' -%}
+        <div class="d-sm-none" style="padding-top: {{ responsive_height_arr[4] | default: responsive_height_arr[0] }};"></div>
+        <div class="d-none d-sm-block d-md-none" style="padding-top: {{ responsive_height_arr[3] | default: responsive_height_arr[0] }};"></div>
+        <div class="d-none d-md-block d-lg-none" style="padding-top: {{ responsive_height_arr[2] | default: responsive_height_arr[0] }};"></div>
+        <div class="d-none d-lg-block d-xl-none" style="padding-top: {{ responsive_height_arr[1] | default: responsive_height_arr[0] }};"></div>
+        <div class="d-none d-xl-block" style="padding-top: {{ responsive_height_arr[0] }};"></div>
+    {%- endif -%}
+    <img class="rimage__img{% if stretch_size %} rimage__img--{{ stretch_size }}{% endif %}{% unless disable_lazyload %} rimage__img--{{ settings.layout_images_lazyload_effect }} lazyload{% endunless %}{% if image_class %} {{ image_class }}{% endif %}"
+     {%-unless custom_src %}
+         data-master="{{ img_url }}"
+         data-aspect-ratio="{{ aspect_ratio }}"
+     {% endunless %}
+     {% if custom_src %}
+         {% unless disable_lazyload %}data-{% endunless %}srcset="{{ custom_src }}"
+     {% elsif format %}
+         {% unless disable_lazyload %}data-{% endunless %}srcset="{{ image | img_url: size, format: format }} 1x, {{ image.src | img_url: size, format: format, scale: 2 }} 2x"
+     {% elsif image contains '.jpg' or image.src contains '.jpg' %}
+         {% unless disable_lazyload %}data-{% endunless %}srcset="{{ image | img_url: size, format: 'pjpg' }} 1x, {{ image.src | img_url: size, format: 'pjpg', scale: 2 }} 2x"
+     {% else %}
+         {% unless disable_lazyload %}data-{% endunless %}srcset="{{ image | img_url: size }} 1x, {{ image.src | img_url: size, scale: 2 }} 2x"
+     {% endif %}
+     {% if scale %}data-scale="{{ scale }}"{% endif %}
+     {% if scale_perspective %}data-scale-perspective="{{ scale_perspective }}"{% endif %}
+     {% if is_parallax %}data-parallax-image{% endif %}
+     {% if attr %}{{ attr }}{% endif %}
+     alt="{{ alt | default: image.alt | escape }}">
+</div>
+{%- assign image = null -%}
+{%- assign custom_src = null -%}
+{%- assign disable_lazyload = null -%}
+{%- assign size = null -%}
+{%- assign format = null -%}
+{%- assign set_pjpg = true -%}
+{%- assign width = null -%}
+{%- assign aspect_ratio = null -%}
+{%- assign height_procent = null -%}
+{%- assign stretch_size = null -%}
+{%- assign scale = null -%}
+{%- assign scale_perspective = null -%}
+{%- assign is_parallax = null -%}
+{%- assign attr = null -%}
+{%- assign image_class = null -%}
+{%- assign responsive_height = null -%}
+{%- assign min_height = null -%}

@@ -1,0 +1,116 @@
+<div class="menu__megamenu d-lg-none position-lg-absolute"{% if vertical_menu and block.settings.enable_width_limit %} data-js-width-limit="{{ block.settings.width_limit }}"{% endif %}>
+    <div class="container{% if vertical_menu %} px-lg-30{% endif %} py-lg-40">
+        {%- assign columns_left = null -%}
+        {%- assign columns_right = null -%}
+        {% include 'header-res-menu-megamenu-content' %}
+        {%- assign columns_in_row = 12 | divided_by: megamenu.grid -%}
+        {%- if megamenu.second_level_column != true -%}
+            <div class="menu__grid{% if link.levels > 0 %} menu__list{% endif %} menu__level-02 row">
+                {{ columns_left }}
+                {% if link.levels > 0 %}
+                    {%- if megamenu.wrap -%}
+                        <div class="col-lg-{{ megamenu.wrapper_grid }}">
+                            <div class="row">
+                    {%- endif -%}
+                    <div class="menu__item menu__back d-lg-none"><a href="{{ link.url }}">{{ link.title }}</a></div>
+                    {%- for sub_link in link.links -%}
+                        <div class="menu__item{% if sub_link.levels > 0 %} menu__item--has-children{% endif %} col-lg-{{ megamenu.grid }}{% if forloop.index > columns_in_row %} mt-lg-25{% endif %}">
+                            {% include 'header-res-menu-labels' with link: link sub_link: sub_link %}
+                            <a href="{{ sub_link.url }}" class="menu__title d-flex align-items-center mb-lg-10"><span>{{ sub_link.title }}</span>{{ labels }}{% if sub_link.levels > 0 %} <i class="d-lg-none ml-auto">{% include 'icon-theme-231' %}</i>{% endif %}</a>
+                            {%- for block in section.blocks -%}
+                                {%- if block.type == 'megamenu_title_image' -%}
+                                    {%- assign for_item_array = block.settings.for_item | split: '+' -%}
+                                    {%- assign for_item_link_handle = for_item_array[0] | handle -%}
+                                    {%- assign for_item_sub_link_handle = for_item_array[1] | handle -%}
+                                    {%- if link.handle == for_item_link_handle and sub_link.handle == for_item_sub_link_handle -%}
+                                        <a href="{{ block.settings.url | default: sub_link.url }}" class="d-none d-lg-block mb-10">
+                                            {%- capture image_size -%}{{ block.settings.image_size }}x{%- endcapture -%}
+                                            {% include 'rimage' with image: block.settings.image size: image_size format: 'pjpg' %}
+                                        </a>
+                                    {%- endif -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                            {%- if sub_link.levels > 0 -%}
+                                <div class="menu__list menu__level-03 row">
+                                    <div class="menu__item menu__back d-lg-none"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></div>
+                                    {%- assign sub_sub_links_html = null -%}
+                                    {%- assign links_html = null -%}
+                                    {%- for sub_sub_link in sub_link.links -%}
+                                        {%- capture links_html -%}
+                                            {% include 'header-res-menu-labels' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}
+                                            <div class="menu__item"><a href="{{ sub_sub_link.url }}" class="d-flex align-items-center px-lg-5"><span>{{ sub_sub_link.title }}</span>{{ labels }}{% include 'header-get-menu-preview-image' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}</a></div>
+                                        {%- endcapture -%}
+                                        {%- assign sub_sub_links_html = sub_sub_links_html | append: links_html -%}
+                                        {%- assign index_modulo = forloop.index | modulo: megamenu.second_level_column_size -%}
+                                        {%- if forloop.last or index_modulo == 0 -%}
+                                            <div class="col-lg">
+                                                <div class="menu__list--styled">
+                                                    {{ sub_sub_links_html }}
+                                                </div>
+                                            </div>
+                                            {%- assign sub_sub_links_html = null -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    {%- endfor -%}
+                    {%- if megamenu.wrap -%}
+                            </div>
+                        </div>
+                    {%- endif -%}
+                {% endif %}
+                {{ columns_right }}
+            </div>
+        {%- else -%}
+            <div class="menu__grid menu__list menu__level-02 row">
+                {{ columns_left }}
+                {%- if link.levels > 0 -%}
+                    {%- if megamenu.wrap -%}
+                        <div class="col-lg-{{ megamenu.wrapper_grid }}">
+                            <div class="row">
+                    {%- endif -%}
+                    <div class="menu__item menu__back d-lg-none"><a href="{{ link.url }}">{{ link.title }}</a></div>
+                    {%- assign columns_size = 0 -%}
+                    {%- assign sub_links_html = null -%}
+                    {%- for sub_link in link.links -%}
+                         <!-- {{ sub_link }} -->
+
+                        {%- capture links_html -%}
+                            {% include 'header-res-menu-labels' with link: link sub_link: sub_link %}
+                            <div class="menu__item{% if sub_link.levels > 0 %} menu__item--has-children position-lg-relative{% endif %}">
+                                <a href="{{ sub_link.url }}" class="d-flex align-items-center px-lg-5"><span>{{ sub_link.title }}</span>{{ labels }}{% if sub_link.levels > 0 %} <i class="ml-auto">{% include 'icon-theme-231' %}</i>{% endif %}{% include 'header-get-menu-preview-image' with link: link sub_link: sub_link sub_sub_link: 'empty_lvl' preview_margin_top: true %}</a>
+                                {%- if sub_link.levels > 0 -%}
+                                    <div class="menu__list menu__level-03 position-lg-absolute p-lg-15">
+                                        <div class="menu__item menu__back d-lg-none"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></div>
+                                        {%- for sub_sub_link in sub_link.links -%}
+                                       
+                                            {% include 'header-res-menu-labels' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}
+                                            <div class="menu__item"><a href="{{ sub_sub_link.url }}" class="d-flex align-items-center px-lg-5"><span>{{ sub_sub_link.title }}</span>{{ labels }}{% include 'header-get-menu-preview-image' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}</a></div>
+                                        {%- endfor -%}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                        {%- endcapture -%}
+                        {%- assign sub_links_html = sub_links_html | append: links_html -%}
+                        {%- assign index_modulo = forloop.index | modulo: megamenu.second_level_column_size -%}
+                        {%- if forloop.last or index_modulo == 0 -%}
+                            {%- assign columns_size = columns_size | append: 1 -%}
+                            <div class="col-lg-{{ megamenu.grid }} mt-lg-25">
+                                <div class="menu__list--styled">
+                                    {{ sub_links_html }}
+                                </div>
+                            </div>
+                            {%- assign sub_links_html = null -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- if megamenu.wrap -%}
+                            </div>
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+                {{ columns_right }}
+            </div>
+        {%- endif -%}
+    </div>
+</div>

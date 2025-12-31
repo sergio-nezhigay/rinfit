@@ -1,0 +1,36 @@
+{%- unless product.has_only_default_variant -%}
+{% assign product_option_enable_tooltips = true %}
+    <div class="product-options product-options--type-page product-options--left product-options--mobile-centered js-product-options" data-js-product-options data-js-change-history>
+    {% assign product_variant_size = product.options_with_values | where: "name", "Size" %}
+    {%- for option in product_variant_size -%}        
+        <div class="popup-size-product">
+            <label class="d-block" id="product-color-label-{{ current_variant_id }}">{{ option.name }}: </label>
+            {%- assign clear_name = option.name | escape | downcase -%}
+            <div class="product-options__section flex-wrap" data-style="large-text" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}" data-disable-auto-select>
+                <div class="guide-container">
+                <a class="guide-link" target="_blank" href="/pages/ring-size-guide" title="Size guide" tabindex="0">
+                <span>{{ 'products.product.need_sizing_help' | t }}</span>
+                </a>
+                </div>
+                <div class="product-size-calc">
+            {%- for value in option.values -%}
+            {%- assign option_index0 = forloop.index0 -%}
+                {% include 'product-get-options-res-status-page-size' with option_index0: option_index0 %}
+                <div class="product-options__calc_value product-options__value product-options__value--large-text d-flex flex-center border cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                     data-js-option-value
+                     data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                        {{ trigger_attr }}
+                     data-bg="none"
+                     data-scale="2"
+                     data-id="{{ current_variant_id }}"
+                >{{ value | remove: "Size " }}</div>
+            {%- endfor -%}
+                </div>                  
+        </div>              
+        </div>
+    {%- endfor -%}
+</div>
+{%- endunless -%}
+{%- assign change_history = false -%}
+{%- assign trigger = null -%}
+{%- assign trigger_id = null -%}

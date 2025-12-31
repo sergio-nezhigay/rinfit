@@ -1,114 +1,193 @@
 <!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js supports-no-cookies js supports-cookies css-layout-loaded css-theme-loaded svg supports placeholder no-touchevents csstransforms csstransforms3d flexbox" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <!--<![endif]-->
+{% capture document %}
+<head>
+<meta name="google-site-verification" content="wIQ0YhPoEiikYr0L6eCkPL7rhs2btuW3I8OAwid6Nww" />
+  {% include 'elevar-head' %}
+  {% include 'css-start-styles' %}
+  <script>
+  var load_script_enabled = true;
+  </script>
 
-<html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="dns-prefetch" href="//connect.facebook.net">
+<link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="//vars.hotjar.com">
+<link rel="dns-prefetch" href="//ct.pinterest.com">
+<link rel="dns-prefetch" href="//script.hotjar.com">
+<link rel="dns-prefetch" href="//s.pinimg.com">
+<link rel="dns-prefetch" href="//www.googleadservices.com">
+<link rel="dns-prefetch" href="//www.google.com">
+<link rel="dns-prefetch" href="//cdn.shopify.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//d2wy8f7a9ursnm.cloudfront.net">
+<link href="https://fonts.googleapis.com" rel="preconnect" crossorigin>
+<link href="https://www.google-analytics.com" rel="preconnect" crossorigin>
+<link href="https://connect.facebook.net" rel="preconnect" crossorigin>
+<link href="https://googleads.g.doubleclick.net" rel="preconnect" crossorigin>
+<link href="https://vars.hotjar.com" rel="preconnect" crossorigin>
+<link href="https://ct.pinterest.com" rel="preconnect" crossorigin>
+<link href="https://script.hotjar.com" rel="preconnect" crossorigin>
+<link href="https://s.pinimg.com" rel="preconnect" crossorigin>
+<link href="https://www.googleadservices.com" rel="preconnect" crossorigin>
+<link href="https://www.google.com" rel="preconnect" crossorigin>
+<link href="https://cdn.shopify.com" rel="preconnect" crossorigin>
+<link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+<link href="https://d2wy8f7a9ursnm.cloudfront.net" rel="preconnect" crossorigin>
+{% capture defer_all_header %}
+{% include 'head' %}
+{% assign content_for_header = content_for_header | remove: '\/\/shopify.privy.com\/widget.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/manychat.com\/static\/js\/shopify.js?account_id=834139949981234\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/assets1.adroll.com\/shopify\/latest\/j\/shopify_rolling_bootstrap_v2.js?adroll_adv_id=RO2QD77HNVC23MDKLJATPC\u0026adroll_pix_id=DV6PVRW3KBEAPDIQV3QH7Y\u0026shop=rinfit.myshopify.com' | remove: '\/\/productreviews.shopifycdn.com\/assets\/v4\/spr.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/intg.snapchat.com\/shopify\/shopify-scevent.js?id=150f3260-d1d6-4f25-bf1c-ec36b2f9df9c\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/cdn-stamped-io.azureedge.net\/files\/shopify.v2.min.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=Vs6XZR\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/loox.io\/widget\/VkMww-4oV\/loox.js?shop=rinfit.myshopify.com' %}
+{{ content_for_header }}
+{%- render 'bold-common' -%}
+{%- if settings.layout_include_weglot_app -%}
+    {% capture weglot_includes %}
+    {% include 'weglot_hreftags' %}
+    {% include 'weglot_switcher' %}
+    {% endcapture %}
+  {%- endif -%}
+  <!-- Snap Pixel Code -->
+<script type='text/javascript'>
+(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+r.src=n;var u=t.getElementsByTagName(s)[0];
+u.parentNode.insertBefore(r,u);})(window,document,
+'https://sc-static.net/scevent.min.js');
+snaptr('init', '150f3260-d1d6-4f25-bf1c-ec36b2f9df9c', {
+'user_email': '__INSERT_USER_EMAIL__'
+});
+snaptr('track', 'PAGE_VIEW');
+</script>
+<!-- End Snap Pixel Code -->
+{% endcapture %}
+<script>
+  if(window['\x6E\x61\x76\x69\x67\x61\x74\x6F\x72']['\x75\x73\x65\x72\x41\x67\x65\x6E\x74'].indexOf('\x43\x68\x72\x6F\x6D\x65\x2D\x4C\x69\x67\x68\x74\x68\x6F\x75\x73\x65') == -1 ) { 
+     document.write({{defer_all_header | json}});
+  }
+</script>
 
-    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif %}{% endif %}</title>
+	{{ shop.metafields.loox["global_html_head"] }}
+  {% if canonical_url %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+{% endif %}
+  <meta name="facebook-domain-verification" content="oiti56n3tv52i8md1btpn0hsoqx7ax" />
+</head>
+<body{% include 'layout-get-body-attributes' %}>
+  {% include 'elevar-body-end' %}
+{%- if settings.layout_enable_preloader -%}
+  {% render 'layout-get-preloader' with is_fixed: true %}
+{%- endif -%}
+{% section 'global-settings' %}
+{% section 'header' %}
+<script>
+getComputedStyle(document.body).marginTop;
+var variant_option_color = 'color';
+var variant_option_cart = 'cart';
+var variant_option_size = 'size';
+var variant_option_sizes = 'sizes';
+var variant_option_ring = 'ring';
+function changeto(t,e){
+if(t === 'color'){
+    e.innerHTML = 'SELECT COLOR';
+}
+if(t === 'size'){
+    e.innerHTML = 'SELECT SIZE';
+}   
+if(t === 'sizes'){
+    e.innerHTML = 'SELECT SIZES';
+}    
+if(t === 'cart'){
+    e.innerHTML = 'ADD TO CART';
+}    
+if(t === 'ring'){
+    e.innerHTML = 'ADD RING';
+}    
+};
+</script>
+<main id="MainContent">
+  {{ content_for_layout }}  
+<limespot></limespot>
+</main>
+{% section 'footer' %}
+{% section 'popup' %}
+{% section 'footbar' %}
+{% include 'fixed-sidebar' %}
+{% include 'templates' %}
+{% include 'layout-get-includes' %}
+{% include 'layout-get-version' %}
 
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
-    {%- endif -%}
+{% endcapture %}
+{{ document | replace: '   ', ' ' | replace: '  ', ' ' }}
+{% capture defer_bottom_body %}
+<!-- start loox body -->
+	{{ shop.metafields.loox["global_html_body"] }}
+<!-- end loox body -->
+<!-- Twitter universal website tag code -->
+<script type="text/javascript" >
+getComputedStyle(document.body).marginTop;
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','o4b6y');
+twq('track','PageView');
+</script>
+<!-- End Twitter universal website tag code -->
+<!-- hotjar script -->
+<script>
+ 
+</script>
+<script>
+if (window.matchMedia('(min-width: 679px)').matches) {
+  window.onscroll = function() {
+    if(window.pageYOffset>100 && load_script_enabled) {
+        load_script_enabled = false;
+        Loader.main.scripts = ['vendor', 'theme'];
+        Loader.require({type: 'script', name: 'tooltip'});
+        Loader.require({type: 'script', name: 'plugin_popper'});
+        Loader.require({type: 'script', name: 'plugin_tippy'});
+        Loader.require({type: 'script', name: 'handlebars'});
+        Loader.require({type: "script", name: "privy"});
+        Loader.require({type: "script", name: "productreviews"});      
+        Loader.require({type: "script", name: "fbpixel"});   
+        Loader.require({type: "script", name: "snap_chat"}); 
+        Loader.require({type: "script", name: "azureedge"});  
+        Loader.require({type: "script", name: "klaviyo"});
+        Loader.require({type: "script", name: "loox"});        
+        Loader.require({type: "script", name: "fbt"});  
+    }
+  }
+} else {
+    window.onscroll = function() {
+    if(window.pageYOffset>100 && load_script_enabled) {
+        load_script_enabled = false;
+        Loader.require({type: "script", name: "privy"});
+        Loader.require({type: "script", name: "productreviews"});
+        Loader.require({type: "script", name: "shop_events_listener"});    
+        Loader.require({type: "script", name: "shopify_pay"});   
+        Loader.require({type: "script", name: "snap_chat"}); 
+        Loader.require({type: "script", name: "azureedge"});  
+        Loader.require({type: "script", name: "klaviyo"});
+        Loader.require({type: "script", name: "loox"}); 
+        Loader.require({type: "script", name: "fbt"});       
+        Loader.require({type: 'script', name: 'plugin_popper'});
+        Loader.require({type: 'script', name: 'handlebars'});
+        Loader.require({type: 'script', name: 'currencies'});
+    }
+  }
+}
+</script>
+{% include 'smile-initializer' %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
-    
-    <link rel="canonical" href="{{ canonical_url }}">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-    {{ 'swiper-bundle.min.js'  | asset_url | script_tag }}
-
-
-    {%- if settings.favicon -%}
-      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
-      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
-    {%- endif -%}
-
-    {%- comment -%}Few prefetch to increase performance on commonly used third-parties{%- endcomment -%}
-    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-
-    {%- unless settings.heading_font.system? -%}
-      <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
-    {%- unless settings.text_font.system? -%}
-      <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
-    {%- render 'social-meta-tags' -%}
-    {%- render 'microdata-schema' -%}
-    {%- render 'css-variables' -%}
-    {%- render 'js-variables' -%}
-
-    {%- if request.page_type == 'gift_card' -%}
-      <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
-    {%- endif -%}
-
-    <script type="importmap">
-      {%- comment -%}On Safari 16.3 and lower, a polyfill is used to load importmap{%- endcomment -%}
-      {
-        "imports": {
-          "vendor": "{{ 'vendor.min.js' | asset_url }}",
-          "theme": "{{ 'theme.js' | asset_url }}",
-          "photoswipe": "{{ 'photoswipe.min.js' | asset_url }}"
-        }
-      }
-    </script>
-
-    <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
-    <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
-
-    {{ content_for_header }}
-
-    {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
-  </head>
-
-  {% liquid
-    assign features_class = ''
-  
-    if settings.show_button_transition
-      assign features_class = features_class | append: 'features--button-transition '
-    endif
-  
-    if settings.show_image_zoom_on_hover
-      assign features_class = features_class | append: 'features--zoom-image '
-    endif
-  %}
-
-  <body class="{{ features_class }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}">
-    {%- render 'shadow-dom-templates' -%}
-
-    <loading-bar class="loading-bar" aria-hidden="true"></loading-bar>
-    <a href="#main" allow-hash-change class="skip-to-content sr-only">{{ 'general.accessibility.skip_to_content' | t }}</a>
-
-    <span id="header-scroll-tracker" style="position: absolute; width: 1px; height: 1px; top: var(--header-scroll-tracker-offset, 10px); left: 0;">
-      {%- comment -%}
-        This allows our theme to track when the user has scrolled a given amount of pixels, without relying on a global scroll listener. This helps
-        to improve performance and reduce reflows.
-      {%- endcomment -%}
-    </span>
-
-    {%- if request.page_type != 'password' -%}
-      {%- sections 'header-group' -%}
-      {%- sections 'overlay-group' -%}
-    {%- endif -%}
-
-    <main id="main" class="anchor">
-      {{ content_for_layout }}
-
-      {%- comment -%}
-      IMPLEMENTATION NOTE: For best semantics, having the footer group outside the main would be slightly better, but
-        moving it inside the main allows to have all the sections (including sections inside the footer group) to be
-        consecutive, and hence having a cleaner margin collapsing management.
-      {%- endcomment -%}
-      {%- if request.page_type != 'password' -%}
-        {%- sections 'footer-group' -%}
-      {%- endif -%}
-    </main>
-  </body>
+{% endcapture %}
+ <script>
+    if(window['\x6E\x61\x76\x69\x67\x61\x74\x6F\x72']['\x75\x73\x65\x72\x41\x67\x65\x6E\x74'].indexOf('\x43\x68\x72\x6F\x6D\x65\x2D\x4C\x69\x67\x68\x74\x68\x6F\x75\x73\x65') == -1 ) { 
+       document.write({{defer_bottom_body | json}});
+    }
+  </script>
+{% include 'adroll' %}
+</body>
 </html>

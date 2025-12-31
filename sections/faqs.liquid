@@ -1,0 +1,53 @@
+<div class="container container--sm">
+    {%- for block in section.blocks -%}
+        <div class="faqs border-top" data-js-accordion="all">
+            <h2 class="faqs__head h5 d-flex align-items-center py-10 mb-0 cursor-pointer{% if block.settings.is_open %} open{% endif %}" data-js-accordion-button><span class="mr-15">{{ block.settings.question }}</span> <i class="faqs__cross ml-auto">{% include 'icon-theme-190' %}</i> </h2>
+            <div{% unless block.settings.is_open %} class="d-none"{% endunless %} data-js-accordion-content>
+                <div class="rte pt-10 pb-30">
+                    {%- if block.settings.page_content != blank -%}
+                        {% include 'content-load-template' content: pages[block.settings.page_content].content %}
+                    {%- else -%}
+                        {% include 'content-load-template' content: block.settings.answer %}
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+    {%- endfor -%}
+</div>
+
+
+{% schema %}
+{
+    "name": "FAQs",
+    "blocks": [
+        {
+            "type": "section",
+            "name": "Section",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "question",
+                    "label": "Question",
+                    "default": "QUESTION"
+                },
+                {
+                    "type": "page",
+                    "id": "page_content",
+                    "label": "Page content answer"
+                },
+                {
+                    "type": "textarea",
+                    "id": "answer",
+                    "label": "Answer"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "is_open",
+                    "label": "Is open",
+                    "default": true
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

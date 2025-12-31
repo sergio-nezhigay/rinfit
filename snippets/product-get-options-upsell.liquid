@@ -1,0 +1,411 @@
+{%- unless product.has_only_default_variant -%}
+    {%- assign product_option_enable_tooltips = true -%}
+    {%- assign options_type_circle_color = settings.product_options_type_circle_color | escape | downcase | split: '|' -%}
+    {%- assign options_type_circle_image = settings.product_options_type_circle_image | escape | downcase | split: '|' -%}
+    {%- assign options_type_square_image = settings.product_options_type_square_image | escape | downcase | split: '|' -%}
+    {%- assign options_type_square_color = settings.product_options_type_square_color | escape | downcase | split: '|' -%}
+    {%- assign options_type_select = settings.product_options_type_select | escape | downcase | split: '|' -%}
+    {%- assign options_type_large_text = settings.product_options_type_large_text | escape | downcase | split: '|' -%}
+    {%- assign auto_selected_options = settings.product_auto_selected_options | escape | downcase | split: '|' -%}
+    {%- assign options_show_title = options_show_title | default: false -%}
+    {%- assign options_type = options_type | default: 1 -%}
+    {% capture options_type_class %}
+        {%- case options_type -%}
+        {%- when 1 %}product-options--type-collection
+        {%- when 2 %}product-options--type-page
+        {%- when 3 %}product-options--type-footbar
+{%- endcase -%}
+    {% endcapture %}
+    {% assign current_variant.option1 = "" %}
+    {% assign current_variant.option2 = "" %}
+    {% assign product_option_enable_tooltips = true %}
+<div class="product-options {{ options_type_class }}{% if centered %} product-options--centered{% endif %}{% if mobile_centered %} product-options--mobile-centered{% endif %}{% unless trigger %} js-product-options{% endunless %}" data-js-product-options{% if options_type == 1 and settings.product_variant_change_on_hover %} data-js-options-onhover{% endif %}{% if change_history %} data-js-change-history{% endif %}>
+    {%- assign options_limit = 3 -%}
+    {%- if options_type == 1 and settings.product_options_listing_visibility != 'all' -%}
+        {%- assign options_limit = settings.product_options_listing_visibility | abs -%}
+        {%- assign enable_select_options_button = false -%}
+        {%- assign options_with_values_size = product.options_with_values | size -%}
+        {%- if options_with_values_size > options_limit -%}
+            {%- assign enable_select_options_button = true -%}
+        {%- endif -%}
+    {%- endif -%}
+    {%- for option in product.options_with_values -%}
+        {%- assign option_index0 = forloop.index0 -%}
+        {% assign option_name_down = option.name | downcase %}
+        <div class="{%if option_name_down contains "size" %}upsell-popup-size{% endif %}">
+            <label class="d-none">{{ option.name }}:</label>
+            {%- assign clear_name = option.name | escape | downcase -%}
+            {%- if product.selected_variant.id == blank and settings.product_variant_auto_select != 'enable' -%}
+                {%- assign disable_auto_select = false -%}
+                {%- if settings.product_variant_auto_select == 'disable' -%}
+                    {%- assign disable_auto_select = true -%}
+                    {%- elsif settings.product_variant_auto_select == 'first' and forloop.index != 1 -%}
+                    {%- assign disable_auto_select = true -%}
+                    {%- elsif settings.product_variant_auto_select == 'first_n_second' and forloop.index != 1 and forloop.index != 2 -%}
+                    {%- assign disable_auto_select = true -%}
+                {%- endif -%}
+                {%- if auto_selected_options contains clear_name -%}
+                    {%- assign disable_auto_select = false -%}
+                {%- endif -%}
+            {%- endif -%}
+            {%- if disable_auto_select -%}
+                {%- assign enable_select_variant_button = true -%}
+            {%- endif -%}
+            {%- if options_type_circle_color contains clear_name -%}
+                <div class="product-options__section d-flex flex-wrap px-2 {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %} product-option-justify-center" data-style="color" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    <div class="{%if option_name_down contains "women" %}upsell-close-overlay-women{% else %}upsell-close-overlay{% endif %}" tabindex="0" data-id="{{ current_variant_id }}"></div>                       
+                    <div class="color-container">
+                    <div class="size-label">{{ 'products.product.selected_color' | t }}</div>
+                    <div id="upsell-color-image-{%if option_name_down contains "women" %}women-{% endif %}clone--{{ current_variant_id }}"></div>
+                    </div>
+                    <div class="guide-container">
+                        <span class="size-label" id="upsell-selected_size_{%if option_name_down contains "select women's size" %}women_{% elsif option_name_down contains "select men's size" %}men_{% endif %}{{ current_variant_id}}">{{ 'products.product.select_size' | t }}</span>
+                        <div class="guide-link guide-label js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                    </div>
+                    {%if option_name_down contains "men" %}
+                    <div class="product-with-men-women-size">
+                    <label class="option-men-size {% if option_name_down contains "select men's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click here for men's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Men</label>
+                    <label class="option-women-size {% if option_name_down contains "select women's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click here for women's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Women</label>
+                    </div>
+                    {% endif %}
+                    {%- for value in option.values -%}
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div data-id="{{ current_variant_id }}" class="product-options__value product-options__value--circle {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} {% if option_name_down contains "women" %}ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} standard-color-{{ value | handleize }} rounded-circle text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                             data-bg="none"
+                             data-scale="2"
+                                {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                    data-js-tooltip
+                                    data-tippy-content="Click {{ value }}"
+                                    data-tippy-placement="top"
+                                    data-tippy-distance="6"
+                                {%- endif -%}
+                        >{{ value }}</div>
+                    {%- endfor -%}
+                    {% if option_name_down contains "size" %}
+                    <div data-id="{{ current_variant_id }}" data-default-color="{{ default_color }}" class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}"></div>
+                    {% endif %}
+                </div>
+                {%- elsif options_type_circle_image contains clear_name -%}              
+                <div class="product-options__section d-flex flex-wrap px-2 {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %} product-option-justify-center" data-style="circle-image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    {%- for value in option.values -%}                  
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% include 'product-get-options-res-image' %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div data-id="{{ current_variant_id }}" class="product-options__value product-options__value--circle {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} {% if option_name_down contains "women" and option_name_down contains "size" %}ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} rounded-circle text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                                {%- if settings.product_format_pjpg -%}
+                                    data-master="url({{ option_image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', '_[width]x.' }})"
+                                    data-bg="url({{ option_image | img_url: '48x', format: 'pjpg' }})"
+                                {%- else -%}
+                                    data-master="url({{ option_image | img_url: '1x1' | replace: '_1x1.', '_[width]x.' }})"
+                                    data-bg="url({{ option_image | img_url: '48x' }})"
+                                {%- endif -%}
+                             data-scale="2"
+                                {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                    data-js-tooltip
+                                    data-tippy-content="Click {{ value }}"
+                                    data-tippy-placement="top"
+                                    data-tippy-distance="6"
+                                {%- endif -%}
+                        >{{ value }}</div>
+                    {%- endfor -%}
+                   {% if option_name_down contains "size" %}
+                    <div data-id="{{ current_variant_id }}" class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}" style="background-image: url(&quot;{{ product.featured_image | img_url: '48x' }}&quot;);"></div>
+                    {% endif %}
+                </div>
+                {%- elsif options_type_square_color contains clear_name -%}
+                <div class="product-options__section flex-wrap {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %}" data-style="image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    <div class="{%if option_name_down contains "women" %}upsell-close-overlay-women{% else %}upsell-close-overlay{% endif %}" tabindex="0" data-id="{{ current_variant_id }}"></div>                       
+                    <div class="color-container">
+                    <div class="size-label">{{ 'products.product.selected_color' | t }}</div>
+                    <div id="upsell-color-image-{%if option_name_down contains "women" %}women-{% endif %}clone--{{ current_variant_id }}"></div>
+                    </div>
+                    <div class="guide-container">
+                        <span class="size-label" id="upsell-selected_size_{%if option_name_down contains "select women's size" %}women_{% elsif option_name_down contains "select men's size" %}men_{% endif %}{{ current_variant_id}}">{{ 'products.product.select_size' | t }}</span>
+                        <div class="guide-link guide-label js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                    </div>
+                    {%if option_name_down contains "men" %}
+                    <div class="product-with-men-women-size">
+                    <label class="option-men-size {% if option_name_down contains "select men's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click here for men's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Men</label>
+                    <label class="option-women-size {% if option_name_down contains "select women's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click here for women's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Women</label>
+                    </div>
+                    {% endif %}
+                    {%- for value in option.values -%}
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div data-id="{{ current_variant_id }}" class="product-options__value product-options__value--square {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} {% if option_name_down contains "women" and option_name_down contains "size" %}ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} standard-color-{{ value | handleize }} text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                             data-bg="none"
+                             data-scale="2"
+                                {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                    data-js-tooltip
+                                    data-tippy-content="Click {{ value }}"
+                                    data-tippy-placement="top"
+                                    data-tippy-distance="6"
+                                {%- endif -%}
+                        >{{ value }}</div>
+                    {%- endfor -%}
+                    {% if option_name_down contains "size" %}
+                    <div data-id="{{ current_variant_id }}" class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}" style="background-image: url(&quot;{{ product.featured_image | img_url: '48x' }}&quot;);"></div>
+                    {% endif %}
+                </div>
+                {%- elsif options_type_square_image contains clear_name -%}
+                <div class="product-options__section flex-wrap {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %}" data-style="image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    <div class="{%if option_name_down contains "women" %}upsell-close-overlay-women{% else %}upsell-close-overlay{% endif %}" tabindex="0" data-id="{{ current_variant_id }}"></div>                       
+                        <div class="color-container">
+                        <div class="size-label">{{ 'products.product.selected_color' | t }}</div>
+                        <div id="upsell-color-image-{%if option_name_down contains "women" %}women-{% endif %}clone--{{ current_variant_id }}"></div>
+                        </div>
+                        <div class="guide-container">
+                            <span class="size-label" id="upsell-selected_size_{%if option_name_down contains "select women's size" %}women_{% elsif option_name_down contains "select men's size" %}men_{% endif %}{{ current_variant_id}}">{{ 'products.product.select_size' | t }}</span>
+                            <div class="guide-link guide-label js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        </div>
+                        {%if option_name_down contains "men" %}
+                        <div class="product-with-men-women-size">
+                        <label class="option-men-size {% if option_name_down contains "select men's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="Click here for men's size"
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%}
+                        >Men</label>
+                        <label class="option-women-size {% if option_name_down contains "select women's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="Click here for women's size"
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%}
+                        >Women</label>
+                        </div>
+                        {% endif %}
+                    {%- for value in option.values -%}
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% include 'product-get-options-res-image' %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div class="product-options__value product-options__value--square {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} {% if option_name_down contains "women" and option_name_down contains "size" %}ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                                {%- if settings.product_format_pjpg -%}
+                                    data-master="url({{ option_image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', '_[width]x.' }})"
+                                    data-bg="url({{ option_image | img_url: '92x', format: 'pjpg' }})"
+                                {%- else -%}
+                                    data-master="url({{ option_image | img_url: '1x1' | replace: '_1x1.', '_[width]x.' }})"
+                                    data-bg="url({{ option_image | img_url: '92x' }})"
+                                {%- endif -%}
+                             data-scale="2"
+                                {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                    data-js-tooltip
+                                    data-tippy-content="Click {{ value }}"
+                                    data-tippy-placement="top"
+                                    data-tippy-distance="6"
+                                {%- endif -%}
+                        >{{ value | remove: "Size " }}</div>
+                    {%- endfor -%} 
+                        {% if option_name_down contains "size" %}
+                        <div data-id="{{ current_variant_id }}" class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}" style="background-image: url(&quot;{{ product.featured_image | img_url: '48x' }}&quot;);"></div>
+                        {% endif %}          
+                </div>
+                {%- elsif options_type_large_text contains clear_name -%}         
+                <div class="product-options__section flex-wrap {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %}" data-style="large-text" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    <div class="{%if option_name_down contains "women" %}upsell-close-overlay-women{% else %}upsell-close-overlay{% endif %}" tabindex="0" data-id="{{ current_variant_id }}"></div>                       
+                        <div class="color-container">
+                        <div class="size-label">{{ 'products.product.selected_color' | t }}</div>
+                        <div id="upsell-color-image-{%if option_name_down contains "women" %}women-{% endif %}clone--{{ current_variant_id }}"></div>                       
+                        </div>
+                        <div class="guide-container">
+                            <span class="size-label" id="upsell-selected_size_{%if option_name_down contains "select women's size" %}women_{% elsif option_name_down contains "select men's size" %}men_{% endif %}{{ current_variant_id}}">{{ 'products.product.select_size' | t }}</span>
+                            <div class="guide-link guide-label js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        </div>
+                        {%if option_name_down contains "men" %}
+                        <div class="product-with-men-women-size">
+                        <label class="option-men-size {% if option_name_down contains "select men's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="Click here for men's size"
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%}
+                        >Men</label>
+                        <label class="option-women-size {% if option_name_down contains "select women's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="Click here for women's size"
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%} 
+                        >Women</label>
+                        </div>
+                        {% endif %}
+                    {%- for value in option.values -%}
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div data-id="{{ current_variant_id }}" class="product-options__value product-options__value--large-text {% if option_name_down contains "women" and option_name_down contains "size" %}ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} d-flex flex-center border cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                             data-bg="none"
+                             data-scale="2"
+                             data-id="{{ current_variant_id }}"
+                        >{{ value | remove: "Size " }}</div>
+                    {%- endfor -%} 
+                        {% if option_name_down contains "size" %}
+                        <div class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}"  data-id="{{ current_variant_id }}" style="background-image: url(&quot;{{ product.featured_image | img_url: '48x' }}&quot;);"></div>
+                        {% endif %}
+                        <div id="upsell-buyringsize-{%if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" class="btn btn--full btn--status"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="To buy, select ring size."
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%}
+                        >
+                        <span class="d-flex flex-center"><span class="btn__text">{% if option_name_down contains "men" %}{{ 'products.product.add_to_cart.select_sizes' | t }}{% else %}{{ 'products.product.add_to_cart.select_size' | t }}{% endif %}</span></span>
+                        </div>       
+                        <button id="upsell-finaladdtocart-{%if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" type="submit" class="btn btn--full btn--secondary btn--status js-product-button-add-to-cart d-none" name="add" data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar" data-js-product-button-add-to-cart style>
+                        <span class="d-flex flex-center"><span class="btn__text">{{ 'products.product.add_to_cart.select_options' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+                        <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                        </button>                     
+                </div>
+                {%- elsif options_type_select contains clear_name -%}
+                <div class="select position-relative js-dropdown js-select {% if option_name_down contains "size" %}d-none popup-size-calc upsell-size-selection-overlay{% endif %}" {% if option_name_down == "size" %} id="upsell-popup-size-{{ current_variant_id }}" {% endif %}>
+                    {%- assign select_dropdown_html = '' -%}
+                    <div data-js-dropdown-button>
+                        <select class="product-options__section" data-style="select" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}" data-js-option-select{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+                            {%- for value in option.values -%}
+                                {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                                <option{% if active_value %} selected="selected"{% endif %} data-value="{% render 'product-get-options-strip-symbols' with value: value %}" value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %}>{{ value }}</option>
+                                {% capture select_dropdown_html %}
+                                {{ select_dropdown_html }}
+                                <span{% if active_value %} class="selected"{% endif %} data-value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %} {{ trigger_attr }}>{{ value }}</span>
+                                {% endcapture %}
+                            {%- endfor -%}
+                        </select>
+                        <i class="position-absolute right-0 mr-10">{% render 'icon-theme-229' %}</i>
+                    </div>
+                    <div class="select__dropdown dropdown d-none position-lg-absolute {% if select_dropdown_position == 'top' %}bottom{% else %}top{% endif %}-lg-100 left-lg-0" data-js-dropdown data-js-select-dropdown{% if disable_auto_select %} data-dropdown-unselected{% endif %}>
+                        <div class="px-15 pb-30 py-lg-15">
+                            {{ select_dropdown_html }}
+                        </div>
+                    </div>
+                </div>
+            {%- else -%}
+                <div class="product-options__section flex-wrap d-none popup-size-calc upsell-size-selection-overlay" data-style="text" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %} {% if option_name_down contains "size" %} id="upsell-popup-size-{% if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" {% endif %}>
+                    <div class="{%if option_name_down contains "women" %}upsell-close-overlay-women{% else %}upsell-close-overlay{% endif %}" tabindex="0" data-id="{{ current_variant_id }}"></div>                       
+                    <div class="color-container">
+                    <div class="size-label">{{ 'products.product.selected_color' | t }}</div>
+                    <div id="upsell-color-image-{%if option_name_down contains "women" %}women-{% endif %}clone--{{ current_variant_id }}"></div>
+                    </div>
+                    <div class="guide-container">
+                        <span class="size-label" id="selected_size_{%if option_name_down contains "women's size" %}women_{% elsif option_name_down contains "men's size" %}men_{% endif %}{{ current_variant_id}}">{{ 'products.product.select_size' | t }}</span>
+                        <div class="guide-link guide-label js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                    </div>
+                    {%if option_name_down contains "men" %}
+                    <div class="product-with-men-women-size">
+                    <label class="option-men-size {% if option_name_down contains "select men's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click for men's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Men</label>
+                    <label class="option-women-size {% if option_name_down contains "select women's size" %}active{% endif %}" data-id="{{ current_variant_id }}"
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click for women's size"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >Women</label>
+                    </div>
+                    {% endif %}
+                    {%- for value in option.values -%}
+                        {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+                        {% if forloop.first and option_name_down contains "color" %}
+                        {% assign default_color = value %}
+                        {% endif %}
+                        <div data-id="{{ current_variant_id }}" class="product-options__value product-options__value--text{% if option_name_down contains "women" %}--women{% endif %} {% if option_name_down contains "color" %}product-options__value--circle--{{ current_variant_id }}{% endif %} {% if option_name_down contains "women" and option_name_down contains "size" %} ring-size-women-active-{{ current_variant_id }}{% elsif option_name_down contains "size" %}ring-size-active-{{ current_variant_id }}{% endif %} d-flex flex-center border cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+                             data-js-option-value
+                             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+                                {{ trigger_attr }}
+                             data-bg="none"
+                             data-scale="2"
+                        >{{ value | remove: "Size " }}</div>
+                    {%- endfor -%}
+                    {% if option_name_down contains "size" %}
+                    <div class="product-option-color-selected d-none product-options__value--circle--{{ current_variant_id }}" data-id="{{ current_variant_id }}" style="background-image: url(&quot;{{ product.featured_image | img_url: '48x' }}&quot;);"></div>
+                    {% endif %}
+                        <div id="upsell-buyringsize-{%if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" class="btn btn-upsell btn--full btn--status"
+                        {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                        data-js-tooltip
+                        data-tippy-content="To buy, select ring size."
+                        data-tippy-placement="top"
+                        data-tippy-distance="6"
+                        {%- endif -%}
+                        >
+                        <span class="d-flex flex-center"><span class="btn__text">{% if option_name_down contains "men" %}{{ 'products.product.add_to_cart.select_sizes' | t }}{% else %}{{ 'products.product.add_to_cart.select_size' | t }}{% endif %}</span></span>
+                        </div>       
+                        <button id="upsell-finaladdtocart-{%if option_name_down contains "women" %}women-{% endif %}{{ current_variant_id }}" type="submit" class="btn btn-upsell btn--full btn--secondary btn--status js-product-button-add-to-cart d-none" name="add" data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar" data-js-product-button-add-to-cart style>
+                        <span class="d-flex flex-center"><span class="btn__text">{{ 'products.product.add_to_cart.select_options' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+                        <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                        </button>       
+                </div>
+            {%- endif -%}
+        </div>
+    {%- endfor -%}
+</div>
+{%- endunless -%}
+{%- assign change_history = false -%}
+{%- assign trigger = null -%}
+{%- assign trigger_id = null -%}

@@ -1,0 +1,15 @@
+{%- assign countdown_type = countdown_type | default: 1 -%}
+<div class="d-none-important" data-js-product-countdown>
+    {%- case countdown_type -%}
+    {% when 1 %}
+        <div class="countdown countdown--type-01 d-flex flex-wrap justify-content-center js-countdown"{% if date %} data-date="{{ date }}"{% endif %}></div>
+    {% when 2 %}
+        {%- if countdown_title -%}
+            <p class="h5 mb-10 ls-0 text-center{% if centered != true %} text-lg-left{% endif %}">{{ countdown_title }}</p>
+        {%- endif -%}
+        <div class="countdown countdown--type-02 d-flex flex-wrap js-countdown justify-content-center{% if centered != true %} justify-content-lg-start{% endif %}"{% if date %} data-date="{{ date }}"{% endif %}></div>
+    {%- endcase -%}
+</div>
+{%- assign countdown_type = null -%}
+{%- assign centered = null -%}
+

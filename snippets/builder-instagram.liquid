@@ -1,0 +1,67 @@
+{%- if block.settings.inner_grid_responsive != blank -%}
+    {%- assign inner_grid_responsive = block.settings.inner_grid_responsive | split: ',' -%}
+    {% capture inner_grid %}col col-{{ inner_grid_responsive[4] }} col-sm-{{ inner_grid_responsive[3] }} col-md-{{ inner_grid_responsive[2] }} col-lg-{{ inner_grid_responsive[1] }} col-xl-{{ inner_grid_responsive[0] }}{% endcapture %}
+{%- else -%}
+    {% capture inner_grid %}col-3 col-md-{{ block.settings.inner_grid }}{% endcapture %}
+{%- endif -%}
+{%- assign fixed_height = block.settings.fixed_height -%}
+{%- for inner_block in section.blocks -%}
+    {%- if inner_block.type == 'instagram_block' -%}
+        {% capture instagram_blocks %}
+            {{ instagram_blocks }}
+            <div class="instafeed__item {{ inner_grid }}{% unless block.settings.inner_disable_paddings %} mb-10 mb-lg-30{% endunless %}">
+                <a href="{{ inner_block.settings.url | default: '#' }}" class="d-block position-relative" target="_blank">
+                    {%- if fixed_height > 0 -%}
+                        {% include 'rimage' with image: inner_block.settings.image format: 'pjpg' height_procent: fixed_height stretch_size: 'cover' disable_lazyload: block.settings.disable_lazyload %}
+                    {%- else -%}
+                        {% include 'rimage' with image: inner_block.settings.image format: 'pjpg' stretch_size: 'cover' disable_lazyload: block.settings.disable_lazyload %}
+                    {%- endif -%}
+                    <div class="instafeed__curtain absolute-stretch d-none d-lg-flex flex-lg-center">
+                        {%- if inner_block.settings.content -%}
+                            {% include 'content-load-template' content: inner_block.settings.content %}
+                        {%- endif -%}
+                    </div>
+                </a>
+            </div>
+        {% endcapture %}
+    {%- endif -%}
+{%- endfor -%}
+{%- if instagram_blocks -%}
+    <div class="instafeed row{% if block.settings.inner_disable_paddings %} no-gutters{% endif %} position-relative">
+        {{ instagram_blocks }}
+    </div>
+{%- else -%}
+    <div id="instafeed"
+         class="instafeed d-none row{% if block.settings.inner_disable_paddings %} no-gutters{% endif %} position-relative"
+         data-userid="{{ block.settings.user_id }}"
+         data-clientid="{{ block.settings.client_id }}"
+         data-accesstoken="{{ block.settings.access_token }}"
+         data-limit="{{ block.settings.limit }}">
+        <template>
+            <div>
+                <div class="instafeed__item {{ inner_grid }}{% unless block.settings.inner_disable_paddings %} mb-10 mb-lg-30{% endunless %}">
+                    <a href="post-link" class="d-block position-relative" target="_blank">
+                        {%- if fixed_height > 0 -%}
+                            {% include 'rimage' with custom_src: 'post-image' height_procent: fixed_height stretch_size: 'cover' disable_lazyload: block.settings.disable_lazyload %}
+                        {%- else -%}
+                            <img src="" {% unless block.settings.disable_lazyload %}data-{% endunless %}srcset="post-image"{% unless block.settings.disable_lazyload %} class="lazyload"{% endunless %} alt="Instagram">
+                        {%- endif -%}
+                        <div class="instafeed__curtain absolute-stretch d-none d-lg-flex flex-lg-center">
+                            <div class="d-flex position-relative align-items-center mr-15">
+                                <i class="mr-5">{% include 'icon-theme-180' %}</i>
+                                <span class="mt-2">{\{likes}}</span>
+                            </div>
+                            <div class="d-flex position-relative align-items-center">
+                                <i class="mr-5">{% include 'icon-theme-176' %}</i>
+                                <span class="mt-2">{\{comments}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </div>
+    <script>
+        Loader.require({type: "script", name: "plugin_instafeed"});
+    </script>
+{%- endif -%}

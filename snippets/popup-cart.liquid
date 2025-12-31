@@ -1,0 +1,70 @@
+<div class="popup-cart py-25 px-20 js-popup-cart-ajax" data-popup-content>
+    <div class="popup-cart__head d-flex align-items-center">
+        <h5 class="m-0">{{ 'general.popups.cart.title' | t }} <span data-js-popup-cart-count></span></h5>
+        <i class="popup-cart__close ml-auto cursor-pointer" data-js-popup-close>{% include 'icon-theme-164' %}</i>
+    </div>
+    <div class="popup-cart__content d-none-important">
+        <div class="popup-cart__items mt-15 border-bottom"></div>
+        <div class="popup-cart__subtotal h5 d-flex align-items-center mt-15 mb-0">
+            <p class="m-0">{{ 'general.popups.cart.subtotal' | t }}</p>
+            <span class="ml-auto">
+                <span class="price" data-js-popup-cart-subtotal></span>
+            </span>
+        </div>     
+        {% if section.settings.upsell_enabled %}
+            {% if section.settings.upsell_title != blank %}
+            <p class="mt-20 popup-upsell-title">{{ section.settings.upsell_title }}</p>
+            {% endif %}
+                <div class="popup-upsell">       
+                    {% for block in section.blocks %}                    
+                            {% if block.type == "upsell" and block.settings.upsellfilter %}
+                                    {%- assign item_collection = "" -%}        
+                                    {%- for line_item in cart.items -%}
+                                        {%- for collection in line_item.product.collections -%}
+                                        {%- assign item_collection = item_collection | append: collection.handle | append: "," -%}
+                                        {%- endfor -%}
+                                    {%- endfor -%}
+                                    {% assign item_collection = item_collection | remove_last: "," | split: "," %}    
+                                    {% assign item_collection = item_collection | uniq %}
+                                    {% assign collection_count = item_collection | size %}
+                                    {% assign product1 = false %}  
+                                    {% assign product2 = false %}    
+                                    {% for i in (1..collection_count) %}
+                                        {% assign index = i | minus: 1 %}                                                                                
+                                                    {% for product in collections[item_collection[index]].products %}
+                                                        {% if all_products[block.settings.upsellproduct1] != blank and product.handle == all_products[block.settings.upsellproduct1].handle and product1 == false %}
+                                                            {% include "upsell-product-collection" %}
+                                                            {% assign product1 = true %}
+                                                        {% endif %}
+                                                        {% if all_products[block.settings.upsellproduct2] != blank and product.handle == all_products[block.settings.upsellproduct2].handle and product2 == false %}
+                                                            {% include "upsell-product-collection" %}
+                                                            {% assign product2 = true %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                    {% endfor %}
+                            {% elsif block.type == "upsell" and block.settings.upsellfilter == false %}
+                                    {% if all_products[block.settings.upsellproduct1] != blank %}
+                                    {% assign product1 = all_products[block.settings.upsellproduct1] %}
+                                    {% include "upsell-product-collection" with product: product1 %}
+                                    {% endif %}
+                                    {% if all_products[block.settings.upsellproduct2] != blank %}
+                                    {% assign product2 = all_products[block.settings.upsellproduct2] %}                                                        
+                                    {% include "upsell-product-collection" with product: product2 %}  
+                                    {% endif %}                   
+                            {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="mt-15 border-bottom"></div>
+        {% endif %}
+        {%- if section.settings.cart_show_free_shipping and settings.show_free_shipping -%}
+            <div class="popup-cart__free-shipping my-20">
+                {% include 'free-shipping' %}
+            </div>
+        {%- endif -%}
+        <div class="popup-cart__buttons mt-15">
+            <a href="/checkout" class="btn btn--full btn--secondary" style="display: flex;">{{ 'general.popups.cart.button_to_checkout' | t }}</a>
+            <a href="/cart" class="btn btn--full mt-20" style="display: flex;">{{ 'general.popups.cart.button_to_cart' | t }}</a>
+        </div>
+    </div>
+    <div class="popup-cart__empty mt-20 d-none-important">{{ 'general.popups.cart.empty' | t }}</div>
+</div>

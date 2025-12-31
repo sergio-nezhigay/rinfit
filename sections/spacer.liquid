@@ -1,0 +1,90 @@
+<div{% if section.settings.section_custom_class != blank %} class="{{ section.settings.section_custom_class }}"{% endif %}>
+    <div data-section-id="{{ section.id }}" data-section-type="spacer"{% include 'layout-get-container-class' %}>
+        <div class="overflow-hidden">
+            {% include 'section-res-margins' %}
+            <div class="{{ section_margins }}">
+                {%- if section.settings.show_separator -%}
+                    <div class="border-top"></div>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Spacer",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_custom_class",
+            "label": "Custom class for section"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_separator",
+            "label": "Show separator",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "container",
+            "label": "Content width",
+            "default": "boxed",
+            "options": [
+                {
+                    "value": "inherit",
+                    "label": "Inherit global settings"
+                },
+                {
+                    "value": "fullwidth",
+                    "label": "Full width"
+                },
+                {
+                    "value": "boxed",
+                    "label": "Boxed"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 30
+        },
+        {
+            "type": "text",
+            "id": "margin_top_responsive",
+            "label": "Responsive margin top",
+            "info": "Example is '10,10,15,15,15'"
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin bottom",
+            "default": 30
+        },
+        {
+            "type": "text",
+            "id": "margin_bottom_responsive",
+            "label": "Responsive margin bottom",
+            "info": "Example is '10,10,15,15,15'"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Spacer",
+            "category": "4) Builder (Slider Revolution, promobox, instagram, custom HTML)"
+        }
+    ]
+}
+{% endschema %}

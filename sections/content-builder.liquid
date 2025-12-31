@@ -1,0 +1,1584 @@
+<div data-section-id="{{ section.id }}" data-section-type="content-builder">
+    <div class="content-builder{% if section.settings.enable_developer_mode %} content-builder--developer-mode{% endif %} pb-20 colorize-theme4-bg border-bottom border--dashed js-content-builder">
+        <h5 class="px-10 px-lg-20 py-20 m-0">{{ section.settings.name | default: 'No name' }}</h5>
+        <div{% include 'layout-get-container-class' %}>
+            <div class="content-builder__curtain px-4 py-60 colorize-theme2-bg"{%- if section.settings.color_dev_bg != blank and section.settings.color_dev_bg != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.color_dev_bg }};"{% endif %}>
+                <div data-js-content-builder-content-wrap>
+                    {%- assign container_max_width = section.settings.container_max_width -%}
+                    {%- if container_max_width > 0 and section.settings.container_max_width_postfix == '%' -%}
+                        {%- assign container_max_width = container_max_width | divided_by: 10 -%}
+                    {%- endif -%}
+                    {%- if container_max_width > 0 %}{% capture container_style_attr %} style="max-width: {{ container_max_width }}{{ section.settings.container_max_width_postfix }};"{% endcapture %}{% endif -%}
+                    {%- assign section_style_attr = null -%}
+                    {%- assign section_max_width = section.settings.max_width -%}
+                    {%- if section_max_width > 0 and section.settings.max_width_postfix == '%' -%}
+                        {%- assign section_max_width = section_max_width | divided_by: 10 -%}
+                    {%- endif -%}
+                    {%- if section_max_width > 0 %}{% capture section_style_attr %}max-width: {{ section_max_width }}{{ section.settings.max_width_postfix }};{% endcapture %}{% endif -%}
+                    {%- if section.settings.bordered and section.settings.border_width > 1 %}{% capture section_style_attr %}{{ section_style_attr }}{% if section_style_attr != null %} {% endif %}border-width: {{ section.settings.border_width }}px !important;{% endcapture %}{% endif -%}
+                    {%- if section.settings.color_bd != blank and section.settings.color_bd != 'rgba(0,0,0,0)' %}{% capture section_style_attr %}{{ section_style_attr }}{% if section_style_attr != null %} {% endif %}border-color: {{ section.settings.color_bd }} !important;{% endcapture %}{% endif -%}
+                    {%- capture custom_text_html -%}
+                        <div class="custom-build w-100 d-flex justify-content-{{ section.settings.position_horizontal }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class }}{% endif %}{% if container_style_attr != blank %} mx-auto{% endif %}"{{ container_style_attr }}>
+                            <div class="position-relative h-100{% if section.settings.width == 'stretch' %} w-100{% endif %}{% if section.settings.position_horizontal == 'center' %} mx-auto{% endif %}{% if section.settings.padding_vertical > 0 %} py-{{ section.settings.padding_vertical }}{% endif %}{% if section.settings.padding_horizontal > 0 %} px-{{ section.settings.padding_horizontal }}{% endif %}{% if section.settings.margin_top > 0 %} mt-{{ section.settings.margin_top }}{% endif %}{% if section.settings.margin_bottom > 0 %} mb-{{ section.settings.margin_bottom }}{% endif %}{% if section.settings.bordered %} border{% endif %}"{% if section_style_attr != null %} style="{{ section_style_attr }}"{% endif %}>
+                                {%- if section.settings.color_bg != blank and section.settings.color_bg != 'rgba(0,0,0,0)' %}{% raw %}
+                                {% endraw %}<!-- Background --><div class="custom-build__bg{% unless section.settings.color_bg_mobile %} d-none d-lg-block{% endunless %} absolute-stretch" style="/* start:bg */background-color: {{ section.settings.color_bg }};/* end:bg */{% if section.settings.background_opacity != 1 %} opacity: {{ section.settings.background_opacity }};{% endif %}{% if section.settings.background_border_radius != blank %} border-radius: {{ section.settings.background_border_radius }};{% endif %}"></div>{% endif %}
+                                <div class="h-100 d-flex flex-column justify-content-center{% if section.settings.color_bg != blank and section.settings.color_bg != 'rgba(0,0,0,0)' %} position-relative{% endif %} text-{{ section.settings.text_align }}">
+                                    {%- assign text_numb = 1 -%}
+                                    {%- assign btn_numb = 1 -%}
+                                    {%- assign list_numb = 1 -%}
+                                    {%- assign custom_html_numb = 1 -%}
+                                    {%- for block in section.blocks %}
+                                        {%- assign block_style_attr = null -%}
+                                        {%- assign type_class = null -%}
+                                        {%- assign block_max_width = block.settings.max_width -%}
+                                        {%- if block_max_width > 0 and block.settings.max_width_postfix == '%' -%}
+                                            {%- assign block_max_width = block_max_width | divided_by: 10 -%}
+                                        {%- endif -%}
+                                        {%- if block_max_width > 0 %}{% capture block_style_attr %}max-width: {{ block_max_width }}{{ block.settings.max_width_postfix }};{% endcapture %}{% endif -%}
+                                        {%- if block.settings.color != blank and block.settings.color != 'rgba(0,0,0,0)' %}{% capture block_style_attr %}{{ block_style_attr }}{% if block_style_attr != null %} {% endif %}color: {{ block.settings.color }};{% endcapture %}{% endif -%}
+                                        {%- if block.type == 'text' -%}
+                                            {%- capture type_class -%}
+                                                {%- case block.settings.type -%}
+                                                    {%- when 'paragraph' %}paragraph fs
+                                                    {%- when 'large_paragraph' %}paragraph fs-lg
+                                                    {%- when 'h6' %}h6
+                                                    {%- when 'h5' %}h5
+                                                    {%- when 'h4' %}h4
+                                                    {%- when 'h3' %}h3
+                                                    {%- when 'h2' %}h2
+                                                    {%- when 'h1' %}h1
+                                                {%- endcase -%}
+                                            {%- endcapture -%}
+                                            <!-- Text #{{ text_numb }} --><{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}p{% endif %} class="custom-build__text-{{ text_numb }} {{ type_class }} link-unstyled{% if block.settings.display == 'desktop' %} d-none d-lg-inline{% elsif block.settings.display == 'mobile' %} d-lg-none{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %} align-self-{{ block.settings.position_horizontal }} mt-{{ block.settings.margin_top }} mb-{{ block.settings.margin_bottom }}{% if block.settings.text_align != 'inherit' %} text-{{ block.settings.text_align }}{% endif %}{% if block.settings.font_weight != 'inherit' %} font-weight-{{ block.settings.font_weight }}{% endif %}{% if block.settings.text_decoration == 'underline' %} text-underline{% elsif block.settings.text_decoration == 'underline_hover' %} text-underline-hover{% elsif block.settings.text_decoration == 'underline_hover_disable' %} text-underline-hover-disable{% endif %}{% if block.settings.font_italic %} font-italic{% endif %}{% if block.settings.font_alternative %} ff-alternative{% endif %}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class }}{% endif %}"{% if block_style_attr != null %} style="{{ block_style_attr }}"{% endif %}{% if block.settings.color_hover != blank and block.settings.color_hover != 'rgba(0,0,0,0)' %} onmouseover="this.style.color = '{{ block.settings.color_hover }}';" onmouseout="this.style.color = '';"{% endif %}><!-- start:text-{{ text_numb }} -->{{ block.settings.content }}<!-- end:text-{{ text_numb }} --></{% if block.settings.url != blank %}a{% else %}p{% endif %}><!-- END:Text #{{ text_numb }} -->
+                                            {%- assign text_numb = text_numb | plus: 1 -%}
+                                        {%- elsif block.type == 'custom_html' -%}
+                                            <!-- Custom HTML #{{ custom_html_numb }} --><div class="custom-build__custom-html-{{ custom_html_numb }}{% if block.settings.display == 'desktop' %} d-none d-lg-inline{% elsif block.settings.display == 'mobile' %} d-lg-none{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %} align-self-{{ block.settings.position_horizontal }} mt-{{ block.settings.margin_top }} mb-{{ block.settings.margin_bottom }}{% if block.settings.text_align != 'inherit' %} text-{{ block.settings.text_align }}{% endif %}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class }}{% endif %}"{% if block_style_attr != null %} style="{{ block_style_attr }}"{% endif %}>{{ block.settings.content }}</div>
+                                            {%- assign custom_html_numb = custom_html_numb | plus: 1 -%}
+                                        {%- elsif block.type == 'button' -%}
+                                            {%- capture type_class -%}
+                                                {%- case block.settings.type -%}
+                                                    {%- when '1' -%}btn--default
+                                                    {%- when '2' %}btn--secondary
+                                                    {%- when '3' %}btn--invert
+                                                {%- endcase -%}
+                                            {%- endcapture -%}
+                                            <!-- Button #{{ btn_numb }} --><{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="custom-build__btn-{{ btn_numb }} {{ type_class }} btn{% if block.settings.button_transparent %} btn--transparent{% endif %}{% if block.settings.display == 'desktop' %} d-none d-lg-flex{% elsif block.settings.display == 'mobile' %} d-lg-none{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %} align-self-{% if block.settings.position_horizontal == 'inherit' %}{% if section.settings.text_align == 'left' %}start{% elsif section.settings.text_align == 'center' %}center{% elsif section.settings.text_align == 'right' %}end{% endif %}{% else %}{{ block.settings.position_horizontal }}{% endif %}{% if block.settings.padding_horizontal > 0 %} px-{{ block.settings.padding_horizontal }}{% endif %} mt-{{ block.settings.margin_top }} mb-{{ block.settings.margin_bottom }}{% if block.settings.text_align != 'inherit' %} justify-content-{{ block.settings.text_align }}{% endif %}{% if block.settings.font_weight != 'inherit' %} font-weight-{{ block.settings.font_weight }}{% endif %}{% if block.settings.font_italic %} font-italic{% endif %}{% if block.settings.font_alternative %} ff-alternative{% endif %}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class }}{% endif %}"{% if block_style_attr != null %} style="{{ block_style_attr }}"{% endif %}><!-- start:btn-{{ btn_numb }} -->{{ block.settings.content }}<!-- end:btn-{{ btn_numb }} --></{% if block.settings.url != blank %}a{% else %}div{% endif %}><!-- END:Button #{{ btn_numb }} -->
+                                            {%- assign btn_numb = btn_numb | plus: 1 -%}
+                                        {%- elsif block.type == 'buttons_group' -%}
+                                            <div class="overflow-hidden{% if block.settings.display == 'desktop' %} d-none d-lg-block{% elsif block.settings.display == 'mobile' %} d-lg-none{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %} align-self-{% if block.settings.position_horizontal == 'inherit' %}{% if section.settings.text_align == 'left' %}start{% elsif section.settings.text_align == 'center' %}center{% elsif section.settings.text_align == 'right' %}end{% endif %}{% else %}{{ block.settings.position_horizontal }}{% endif %} mt-{{ block.settings.margin_top }} mb-{{ block.settings.margin_bottom }}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class }}{% endif %}"{% if block_style_attr != null %} style="{{ block_style_attr }}"{% endif %}>
+                                                <div class="row no-gutters">
+                                                    <div class="col-12 {% if block.settings.group_type == 'row' %}col-lg-6 mb-10 mb-lg-0 pr-lg-5{% elsif block.settings.group_type == 'column'%}mb-10{% endif %}">
+                                                        {%- capture type_class -%}
+                                                            {%- case block.settings.type_1 -%}
+                                                                {%- when '1' -%}btn--default
+                                                                {%- when '2' %}btn--secondary
+                                                                {%- when '3' %}btn--invert
+                                                            {%- endcase -%}
+                                                        {%- endcapture %}
+                                                        <!-- Button #{{ btn_numb }} --><{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="custom-build__btn-{{ btn_numb }} {{ type_class }} btn{% if block.settings.button_transparent_1 %} btn--transparent{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %}{% if block.settings.padding_horizontal > 0 %} px-{{ block.settings.padding_horizontal }}{% endif %}{% if block.settings.text_align != 'inherit' %} justify-content-{{ block.settings.text_align }}{% endif %}{% if block.settings.font_weight != 'inherit' %} font-weight-{{ block.settings.font_weight }}{% endif %}{% if block.settings.font_italic %} font-italic{% endif %}{% if block.settings.font_alternative %} ff-alternative{% endif %}"><!-- start:btn-{{ btn_numb }} -->{{ block.settings.content_1 }}<!-- end:btn-{{ btn_numb }} --></{% if block.settings.url != blank %}a{% else %}div{% endif %}><!-- END:Button #{{ btn_numb }} -->
+                                                        {%- assign btn_numb = btn_numb | plus: 1 %}
+                                                    </div>
+                                                    <div class="col-12 {% if block.settings.group_type == 'row' %}col-lg-6 pl-lg-5{% endif %}">
+                                                        {%- capture type_class -%}
+                                                            {%- case block.settings.type_2 -%}
+                                                                {%- when '1' -%}btn--default
+                                                                {%- when '2' %}btn--secondary
+                                                                {%- when '3' %}btn--invert
+                                                            {%- endcase -%}
+                                                        {%- endcapture %}
+                                                        <!-- Button #{{ btn_numb }} --><{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="custom-build__btn-{{ btn_numb }} {{ type_class }} btn{% if block.settings.button_transparent_2 %} btn--transparent{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %}{% if block.settings.padding_horizontal > 0 %} px-{{ block.settings.padding_horizontal }}{% endif %}{% if block.settings.text_align != 'inherit' %} justify-content-{{ block.settings.text_align }}{% endif %}{% if block.settings.font_weight != 'inherit' %} font-weight-{{ block.settings.font_weight }}{% endif %}{% if block.settings.font_italic %} font-italic{% endif %}{% if block.settings.font_alternative %} ff-alternative{% endif %}"><!-- start:btn-{{ btn_numb }} -->{{ block.settings.content_2 }}<!-- end:btn-{{ btn_numb }} --></{% if block.settings.url != blank %}a{% else %}div{% endif %}><!-- END:Button #{{ btn_numb }} -->
+                                                        {%- assign btn_numb = btn_numb | plus: 1 %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {%- elsif block.type == 'list' -%}
+                                            {%- capture type_class -%}
+                                                {%- case block.settings.type -%}
+                                                    {%- when 'default' %}list
+                                                    {%- when 'large' %}list-lg
+                                                {%- endcase -%}
+                                            {%- endcapture -%}
+                                            <!-- List #{{ list_numb }} --><ul class="custom-build__list-{{ list_numb }} {{ type_class }}{% if block.settings.unstyled %} list-unstyled{% endif %}{% if block.settings.display == 'desktop' %} d-none d-lg-inline{% elsif block.settings.display == 'mobile' %} d-lg-none{% endif %}{% if block.settings.width == 'stretch' %} w-100{% endif %} align-self-{{ block.settings.position_horizontal }}{% if block_max_width > 0 %} w-100{% endif %} mt-{{ block.settings.margin_top }} mb-{{ block.settings.margin_bottom }}{% if block.settings.text_align != 'inherit' %} text-{{ block.settings.text_align }}{% endif %}{% if block.settings.font_weight != 'inherit' %} font-weight-{{ block.settings.font_weight }}{% endif %}{% if block.settings.font_italic %} font-italic{% endif %}{% if block.settings.font_alternative %} ff-alternative{% endif %}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class }}{% endif %}"{% if block_style_attr != null %} style="{{ block_style_attr }}"{% endif %}><!-- start:list-{{ list_numb }} -->
+                                                {%- if linklists[block.settings.menu].links.size > 0 -%}
+                                                    {%- for link in linklists[block.settings.menu].links -%}
+                                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                                    {%- endfor -%}
+                                                {%- else -%}
+                                                    {%- if block.settings.content_01 != blank -%}
+                                                        <li>{{ block.settings.content_01 }}</li>
+                                                    {%- endif -%}
+                                                    {%- if block.settings.content_02 != blank -%}
+                                                        <li>{{ block.settings.content_02 }}</li>
+                                                    {%- endif -%}
+                                                    {%- if block.settings.content_03 != blank -%}
+                                                        <li>{{ block.settings.content_03 }}</li>
+                                                    {%- endif -%}
+                                                    {%- if block.settings.content_04 != blank -%}
+                                                        <li>{{ block.settings.content_04 }}</li>
+                                                    {%- endif -%}
+                                                    {%- if block.settings.content_05 != blank -%}
+                                                        <li>{{ block.settings.content_05 }}</li>
+                                                    {%- endif -%}
+                                                {%- endif -%}
+                                            <!-- end:list-{{ list_numb }} --></ul><!-- END:List #{{ list_numb }} -->
+                                            {%- assign list_numb = list_numb | plus: 1 -%}
+                                        {%- endif -%}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {%- endcapture -%}
+                    {%- for i in (1..1000) -%}
+                        {%- if custom_text_html contains ' <' -%}
+                            {%- assign custom_text_html = custom_text_html | replace: ' <', '<' -%}
+                        {%- else -%}
+                            {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign custom_text_html_clean = custom_text_html -%}
+                    {%- assign text_numb = 1 -%}
+                    {%- assign btn_numb = 1 -%}
+                    {%- assign list_numb = 1 -%}
+                    {%- for block in section.blocks -%}
+                        {%- if block.type == 'text' -%}
+                            {%- assign shortcode_start = '<!-- start:text-' | append: text_numb | append: ' -->' -%}
+                            {%- assign shortcode_end = '<!-- end:text-' | append: text_numb | append: ' -->' -%}
+                            {%- assign tag_end = '<!-- END:Text #' | append: text_numb | append: ' -->' -%}
+                            {%- assign text_numb = text_numb | plus: 1 -%}
+                            {%- assign custom_text_html_clean = custom_text_html_clean | remove: shortcode_start | remove: shortcode_end | remove: tag_end -%}
+                        {%- elsif block.type == 'button' -%}
+                            {%- assign shortcode_start = '<!-- start:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign shortcode_end = '<!-- end:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign tag_end = '<!-- END:Button #' | append: btn_numb | append: ' -->' -%}
+                            {%- assign btn_numb = btn_numb | plus: 1 -%}
+                            {%- assign custom_text_html_clean = custom_text_html_clean | remove: shortcode_start | remove: shortcode_end | remove: tag_end  -%}
+                        {%- elsif block.type == 'buttons_group' -%}
+                            {%- assign shortcode_start = '<!-- start:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign shortcode_end = '<!-- end:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign tag_end = '<!-- END:Button #' | append: btn_numb | append: ' -->' -%}
+                            {%- assign btn_numb = btn_numb | plus: 1 -%}
+                            {%- assign custom_text_html_clean = custom_text_html_clean | remove: shortcode_start | remove: shortcode_end | remove: tag_end  -%}
+                            {%- assign shortcode_start = '<!-- start:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign shortcode_end = '<!-- end:btn-' | append: btn_numb | append: ' -->' -%}
+                            {%- assign tag_end = '<!-- END:Button #' | append: btn_numb | append: ' -->' -%}
+                            {%- assign btn_numb = btn_numb | plus: 1 -%}
+                            {%- assign custom_text_html_clean = custom_text_html_clean | remove: shortcode_start | remove: shortcode_end | remove: tag_end  -%}
+                        {%- elsif block.type == 'list' -%}
+                            {%- assign shortcode_start = '<!-- start:list-' | append: list_numb | append: ' -->' -%}
+                            {%- assign shortcode_end = '<!-- end:list-' | append: list_numb | append: ' -->' -%}
+                            {%- assign tag_end = '<!-- END:List #' | append: list_numb | append: ' -->' -%}
+                            {%- assign list_numb = list_numb | plus: 1 -%}
+                            {%- assign custom_text_html_clean = custom_text_html_clean | remove: shortcode_start | remove: shortcode_end | remove: tag_end  -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign custom_text_html_clean = custom_text_html_clean | replace: ' data-link-click>', '>' -%}
+                    {%- if section.settings.color_bg != blank and section.settings.color_bg != 'rgba(0,0,0,0)' -%}
+                        {%- assign custom_text_html_clean = custom_text_html_clean | remove: '/* start:bg */' | remove: '/* end:bg */' -%}
+                    {%- endif -%}
+                    {{- custom_text_html_clean -}}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="py-20" data-js-accordion="all">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="d-flex flex-column flex-lg-row align-items-center">
+                            <div class="content-builder__btn btn mb-20 mr-lg-20" data-js-content-builder-copy data-textarea-name="content-shortcode">Copy with Shortcodes</div>
+                            <p class="content-builder__btn-link btn-link" data-js-accordion-button data-js-accordion-select="all">Show Code</p>
+                        </div>
+                        <div class="d-none" data-js-accordion-content>
+                            <textarea name="content-shortcode" cols="30" rows="10" class="fs-lg mb-20 mb-0" data-js-content-builder-textarea>
+                                {{- custom_text_html -}}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex flex-column flex-lg-row align-items-center">
+                            <div class="content-builder__btn btn mb-20" data-js-content-builder-copy data-textarea-name="content">Copy clean HTML</div>
+                        </div>
+                        <div class="d-none" data-js-accordion-content>
+                            <textarea name="content" cols="30" rows="10" class="fs-lg mb-20 mb-0" data-js-content-builder-textarea>
+                                {{- custom_text_html_clean -}}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    Loader.require({type: 'style', name: 'content_builder'});
+    Loader.require({type: "script", name: "content_builder"});
+</script>
+
+
+{% schema %}
+{
+    "name": "Content builder",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Development settings"
+        },
+        {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+        },
+        {
+            "type": "select",
+            "id": "container",
+            "label": "Content width",
+            "default": "boxed",
+            "options": [
+                {
+                    "value": "inherit",
+                    "label": "Inherit global settings"
+                },
+                {
+                    "value": "fullwidth",
+                    "label": "Full width"
+                },
+                {
+                    "value": "boxed",
+                    "label": "Boxed"
+                }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "color_dev_bg",
+            "label": "Canvas background"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_developer_mode",
+            "label": "Enable developer mode",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Settings"
+        },
+        {
+            "type": "range",
+            "id": "container_max_width",
+            "min": 0,
+            "max": 1000,
+            "step": 10,
+            "label": "Container max width",
+            "info": "0 - is 100%",
+            "default": 0
+        },
+        {
+            "type": "radio",
+            "id": "container_max_width_postfix",
+            "label": "Container max width postfix",
+            "default": "px",
+            "options": [
+                {
+                    "value": "px",
+                    "label": "px"
+                },
+                {
+                    "value": "%",
+                    "label": "%"
+                }
+            ]
+        },
+        {
+            "type": "radio",
+            "id": "position_horizontal",
+            "label": "Horizontal position",
+            "default": "center",
+            "options": [
+                {
+                    "value": "start",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "end",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "radio",
+            "id": "text_align",
+            "label": "Text align",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": "Margin top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": "Margin bottom",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "max_width",
+            "min": 0,
+            "max": 1000,
+            "step": 10,
+            "label": "Max width",
+            "info": "0 - is 100%",
+            "default": 0
+        },
+        {
+            "type": "radio",
+            "id": "max_width_postfix",
+            "label": "Max width postfix",
+            "default": "px",
+            "options": [
+                {
+                    "value": "px",
+                    "label": "px"
+                },
+                {
+                    "value": "%",
+                    "label": "%"
+                }
+            ]
+        },
+        {
+            "type": "radio",
+            "id": "width",
+            "label": "Width",
+            "default": "auto",
+            "options": [
+                {
+                    "value": "auto",
+                    "label": "Auto"
+                },
+                {
+                    "value": "stretch",
+                    "label": "Stretch"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "padding_vertical",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": "Vertical padding",
+            "default": 10
+        },
+        {
+            "type": "range",
+            "id": "padding_horizontal",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "label": "Horizontal padding",
+            "default": 10
+        },
+        {
+            "type": "checkbox",
+            "id": "bordered",
+            "label": "Bordered",
+            "default": false
+        },
+        {
+            "type": "range",
+            "id": "border_width",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "label": "Border width",
+            "default": 1
+        },
+        {
+            "type": "color",
+            "id": "color_bd",
+            "label": "Border color"
+        },
+        {
+            "type": "color",
+            "id": "color_bg",
+            "label": "Background color"
+        },
+        {
+            "type": "range",
+            "id": "background_opacity",
+            "min": 0.1,
+            "max": 1,
+            "step": 0.1,
+            "label": "Background opacity",
+            "default": 0.6
+        },
+        {
+            "type": "text",
+            "id": "background_border_radius",
+            "label": "Background border radius",
+            "info": "Example: 5px"
+        },
+        {
+            "type": "checkbox",
+            "id": "color_bg_mobile",
+            "label": "Enable background on mobile",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "custom_class",
+            "label": "Custom class"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "content",
+                    "label": "Content",
+                    "info": "'<br>' - is line break",
+                    "default": "Text line"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type",
+                    "default": "paragraph",
+                    "options": [
+                        {
+                            "value": "paragraph",
+                            "label": "Paragraph"
+                        },
+                        {
+                            "value": "large_paragraph",
+                            "label": "Large paragraph"
+                        },
+                        {
+                            "value": "h6",
+                            "label": "Heading h6"
+                        },
+                        {
+                            "value": "h5",
+                            "label": "Heading h5"
+                        },
+                        {
+                            "value": "h4",
+                            "label": "Heading h4"
+                        },
+                        {
+                            "value": "h3",
+                            "label": "Heading h3"
+                        },
+                        {
+                            "value": "h2",
+                            "label": "Heading h2"
+                        },
+                        {
+                            "value": "h1",
+                            "label": "Heading h1"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "font_weight",
+                    "label": "Font weight",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "light",
+                            "label": "Light"
+                        },
+                        {
+                            "value": "normal",
+                            "label": "Normal"
+                        },
+                        {
+                            "value": "bold",
+                            "label": "Bold"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "text_decoration",
+                    "label": "Text decoration",
+                    "default": "none",
+                    "options": [
+                        {
+                            "value": "none",
+                            "label": "None"
+                        },
+                        {
+                            "value": "underline",
+                            "label": "Underline"
+                        },
+                        {
+                            "value": "underline_hover",
+                            "label": "Underline on hover"
+                        },
+                        {
+                            "value": "underline_hover_disable",
+                            "label": "Underline and disable on hover"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_italic",
+                    "label": "Font italic",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_alternative",
+                    "label": "Enable alternative font"
+                },
+                {
+                    "type": "radio",
+                    "id": "position_horizontal",
+                    "label": "Horizontal position",
+                    "default": "center",
+                    "options": [
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "margin_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin top",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "margin_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin bottom",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "max_width",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 10,
+                    "label": "Max width",
+                    "info": "0 - is 100%",
+                    "default": 0
+                },
+                {
+                    "type": "radio",
+                    "id": "max_width_postfix",
+                    "label": "Max width postfix",
+                    "default": "px",
+                    "options": [
+                        {
+                            "value": "px",
+                            "label": "px"
+                        },
+                        {
+                            "value": "%",
+                            "label": "%"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "width",
+                    "label": "Width",
+                    "default": "stretch",
+                    "options": [
+                        {
+                            "value": "auto",
+                            "label": "Auto"
+                        },
+                        {
+                            "value": "stretch",
+                            "label": "Stretch"
+                        }
+                    ]
+                },
+                {
+                    "type": "url",
+                    "id": "url",
+                    "label": "Url"
+                },
+                {
+                    "type": "color",
+                    "id": "color",
+                    "label": "Color"
+                },
+                {
+                    "type": "color",
+                    "id": "color_hover",
+                    "label": "Hover color"
+                },
+                {
+                    "type": "radio",
+                    "id": "display",
+                    "label": "Display",
+                    "default": "all",
+                    "options": [
+                        {
+                            "value": "all",
+                            "label": "All"
+                        },
+                        {
+                            "value": "desktop",
+                            "label": "Only on desktop"
+                        },
+                        {
+                            "value": "mobile",
+                            "label": "Only on mobile"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "custom_class",
+                    "label": "Custom class"
+                }
+            ]
+        },
+        {
+            "type": "button",
+            "name": "Button",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "content",
+                    "label": "Content",
+                    "default": "BUTTON TEXT"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Color type",
+                    "default": "1",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "Type #1"
+                        },
+                        {
+                            "value": "2",
+                            "label": "Type #2"
+                        },
+                        {
+                            "value": "3",
+                            "label": "Type #3"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "button_transparent",
+                    "label": "Transparent background",
+                    "default": false
+                },
+                {
+                    "type": "select",
+                    "id": "font_weight",
+                    "label": "Font weight",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "light",
+                            "label": "Light"
+                        },
+                        {
+                            "value": "normal",
+                            "label": "Normal"
+                        },
+                        {
+                            "value": "bold",
+                            "label": "Bold"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_italic",
+                    "label": "Font italic",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_alternative",
+                    "label": "Enable alternative font"
+                },
+                {
+                    "type": "radio",
+                    "id": "position_horizontal",
+                    "label": "Horizontal position",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "default": "center",
+                    "options": [
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "margin_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin top",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "margin_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin bottom",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "max_width",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 10,
+                    "label": "Max width",
+                    "info": "0 - is 100%",
+                    "default": 0
+                },
+                {
+                    "type": "radio",
+                    "id": "max_width_postfix",
+                    "label": "Max width postfix",
+                    "default": "px",
+                    "options": [
+                        {
+                            "value": "px",
+                            "label": "px"
+                        },
+                        {
+                            "value": "%",
+                            "label": "%"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "width",
+                    "label": "Width",
+                    "default": "auto",
+                    "options": [
+                        {
+                            "value": "auto",
+                            "label": "Auto"
+                        },
+                        {
+                            "value": "stretch",
+                            "label": "Stretch"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "padding_horizontal",
+                    "min": 0,
+                    "max": 60,
+                    "step": 5,
+                    "label": "Horizontal padding",
+                    "info": "0 - is default button padding",
+                    "default": 0
+                },
+                {
+                    "type": "url",
+                    "id": "url",
+                    "label": "Url"
+                },
+                {
+                    "type": "radio",
+                    "id": "display",
+                    "label": "Display",
+                    "default": "all",
+                    "options": [
+                        {
+                            "value": "all",
+                            "label": "All"
+                        },
+                        {
+                            "value": "desktop",
+                            "label": "Only on desktop"
+                        },
+                        {
+                            "value": "mobile",
+                            "label": "Only on mobile"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "custom_class",
+                    "label": "Custom class"
+                }
+            ]
+        },
+        {
+            "type": "buttons_group",
+            "name": "Buttons group",
+            "settings": [
+                {
+                    "type": "radio",
+                    "id": "group_type",
+                    "label": "Group type",
+                    "default": "row",
+                    "options": [
+                        {
+                            "value": "row",
+                            "label": "Row"
+                        },
+                        {
+                            "value": "column",
+                            "label": "Column"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "content_1",
+                    "label": "Content #1",
+                    "default": "BUTTON TEXT"
+                },
+                {
+                    "type": "text",
+                    "id": "content_2",
+                    "label": "Content #2",
+                    "default": "BUTTON TEXT"
+                },
+                {
+                    "type": "select",
+                    "id": "type_1",
+                    "label": "Color type for button #1",
+                    "default": "1",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "Type #1"
+                        },
+                        {
+                            "value": "2",
+                            "label": "Type #2"
+                        },
+                        {
+                            "value": "3",
+                            "label": "Type #3"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "button_transparent_1",
+                    "label": "Transparent background for button #1",
+                    "default": false
+                },
+                {
+                    "type": "select",
+                    "id": "type_2",
+                    "label": "Color type for button #2",
+                    "default": "1",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "Type #1"
+                        },
+                        {
+                            "value": "2",
+                            "label": "Type #2"
+                        },
+                        {
+                            "value": "3",
+                            "label": "Type #3"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "button_transparent_2",
+                    "label": "Transparent background for button #2",
+                    "default": false
+                },
+                {
+                    "type": "select",
+                    "id": "font_weight",
+                    "label": "Font weight",
+                    "default": "inherit",
+                    "options": [
+                    {
+                        "value": "inherit",
+                        "label": "Inherit"
+                    },
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "normal",
+                        "label": "Normal"
+                    },
+                    {
+                        "value": "bold",
+                        "label": "Bold"
+                    }
+                ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_italic",
+                    "label": "Font italic",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_alternative",
+                    "label": "Enable alternative font"
+                },
+                {
+                    "type": "radio",
+                    "id": "position_horizontal",
+                    "label": "Horizontal position",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "default": "center",
+                    "options": [
+                    {
+                        "value": "start",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "end",
+                        "label": "Right"
+                    }
+                ]
+                },
+                {
+                    "type": "range",
+                    "id": "margin_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin top",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "margin_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin bottom",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "max_width",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 10,
+                    "label": "Max width",
+                    "info": "0 - is 100%",
+                    "default": 0
+                },
+                {
+                    "type": "radio",
+                    "id": "max_width_postfix",
+                    "label": "Max width postfix",
+                    "default": "px",
+                    "options": [
+                        {
+                            "value": "px",
+                            "label": "px"
+                        },
+                        {
+                            "value": "%",
+                            "label": "%"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "width",
+                    "label": "Width",
+                    "default": "auto",
+                    "options": [
+                        {
+                            "value": "auto",
+                            "label": "Auto"
+                        },
+                        {
+                            "value": "stretch",
+                            "label": "Stretch"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "padding_horizontal",
+                    "min": 0,
+                    "max": 60,
+                    "step": 5,
+                    "label": "Horizontal padding",
+                    "info": "0 - is default button padding",
+                    "default": 0
+                },
+                {
+                    "type": "url",
+                    "id": "url_1",
+                    "label": "Url for button #1"
+                },
+                {
+                    "type": "url",
+                    "id": "url_2",
+                    "label": "Url for button #2"
+                },
+                {
+                    "type": "radio",
+                    "id": "display",
+                    "label": "Display",
+                    "default": "all",
+                    "options": [
+                        {
+                            "value": "all",
+                            "label": "All"
+                        },
+                        {
+                            "value": "desktop",
+                            "label": "Only on desktop"
+                        },
+                        {
+                            "value": "mobile",
+                            "label": "Only on mobile"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "custom_class",
+                    "label": "Custom class"
+                }
+            ]
+        },
+        {
+            "type": "list",
+            "name": "List",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "content_01",
+                    "label": "Content #1",
+                    "default": "List line #1"
+                },
+                {
+                    "type": "text",
+                    "id": "content_02",
+                    "label": "Content #2",
+                    "default": "List line #2"
+                },
+                {
+                    "type": "text",
+                    "id": "content_03",
+                    "label": "Content #3"
+                },
+                {
+                    "type": "text",
+                    "id": "content_04",
+                    "label": "Content #4"
+                },
+                {
+                    "type": "text",
+                    "id": "content_05",
+                    "label": "Content #5"
+                },
+                {
+                    "type": "link_list",
+                    "id": "menu",
+                    "label": "Menu"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type",
+                    "default": "default",
+                    "options": [
+                        {
+                            "value": "default",
+                            "label": "Default"
+                        },
+                        {
+                            "value": "large",
+                            "label": "Large"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "unstyled",
+                    "label": "Unstyled",
+                    "default": false
+                },
+                {
+                    "type": "select",
+                    "id": "font_weight",
+                    "label": "Font weight",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "light",
+                            "label": "Light"
+                        },
+                        {
+                            "value": "normal",
+                            "label": "Normal"
+                        },
+                        {
+                            "value": "bold",
+                            "label": "Bold"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_italic",
+                    "label": "Font italic",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "font_alternative",
+                    "label": "Enable alternative font"
+                },
+                {
+                    "type": "radio",
+                    "id": "position_horizontal",
+                    "label": "Horizontal position",
+                    "default": "start",
+                    "options": [
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "default": "left",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "margin_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin top",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "margin_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin bottom",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "max_width",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 10,
+                    "label": "Max width",
+                    "info": "0 - is 100%",
+                    "default": 0
+                },
+                {
+                    "type": "radio",
+                    "id": "max_width_postfix",
+                    "label": "Max width postfix",
+                    "default": "px",
+                    "options": [
+                        {
+                            "value": "px",
+                            "label": "px"
+                        },
+                        {
+                            "value": "%",
+                            "label": "%"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "width",
+                    "label": "Width",
+                    "default": "stretch",
+                    "options": [
+                        {
+                            "value": "auto",
+                            "label": "Auto"
+                        },
+                        {
+                            "value": "stretch",
+                            "label": "Stretch"
+                        }
+                    ]
+                },
+                {
+                    "type": "color",
+                    "id": "color",
+                    "label": "Color"
+                },
+                {
+                    "type": "radio",
+                    "id": "display",
+                    "label": "Display",
+                    "default": "all",
+                    "options": [
+                        {
+                            "value": "all",
+                            "label": "All"
+                        },
+                        {
+                            "value": "desktop",
+                            "label": "Only on desktop"
+                        },
+                        {
+                            "value": "mobile",
+                            "label": "Only on mobile"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "custom_class",
+                    "label": "Custom class"
+                }
+            ]
+        },
+        {
+            "type": "custom_html",
+            "name": "Custom HTML",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "content",
+                    "label": "Content",
+                    "default": "<p class=\"mb-0\">Custom HTML</p>"
+                },
+                {
+                    "type": "radio",
+                    "id": "position_horizontal",
+                    "label": "Horizontal position",
+                    "default": "center",
+                    "options": [
+                        {
+                            "value": "start",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "end",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "default": "inherit",
+                    "options": [
+                        {
+                            "value": "inherit",
+                            "label": "Inherit"
+                        },
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "margin_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin top",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "margin_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "label": "Margin bottom",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "max_width",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 10,
+                    "label": "Max width",
+                    "info": "0 - is 100%",
+                    "default": 0
+                },
+                {
+                    "type": "radio",
+                    "id": "max_width_postfix",
+                    "label": "Max width postfix",
+                    "default": "px",
+                    "options": [
+                        {
+                            "value": "px",
+                            "label": "px"
+                        },
+                        {
+                            "value": "%",
+                            "label": "%"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "width",
+                    "label": "Width",
+                    "default": "stretch",
+                    "options": [
+                        {
+                            "value": "auto",
+                            "label": "Auto"
+                        },
+                        {
+                            "value": "stretch",
+                            "label": "Stretch"
+                        }
+                    ]
+                },
+                {
+                    "type": "radio",
+                    "id": "display",
+                    "label": "Display",
+                    "default": "all",
+                    "options": [
+                        {
+                            "value": "all",
+                            "label": "All"
+                        },
+                        {
+                            "value": "desktop",
+                            "label": "Only on desktop"
+                        },
+                        {
+                            "value": "mobile",
+                            "label": "Only on mobile"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "custom_class",
+                    "label": "Custom class"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Content builder",
+            "category": "Content builder (custom HTML)"
+        }
+    ]
+}
+{% endschema %}

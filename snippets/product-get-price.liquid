@@ -1,0 +1,10 @@
+{%- if show_sale_separator != null -%}
+    {%- assign show_sale_separator_status = show_sale_separator -%}
+{%- else -%}
+    {%- assign show_sale_separator_status = settings.price_show_sale_separator -%}
+{%- endif -%}
+{%- if compare_at_price > price -%}
+    <span class="price price--sale" data-js-product-price{% if show_sale_separator_status %} data-js-show-sale-separator{% endif %}><span>{{ compare_at_price | money }}</span>{% if show_sale_separator_status %}{{ 'products.product.price_sale_separator' | t }}{% endif %}<span>{{ price | money }}</span></span>
+{%- else -%}
+    <span class="price" data-js-product-price{% if show_sale_separator_status %} data-js-show-sale-separator{% endif %}><span>{{ price | money }}</span></span>
+{%- endif -%}

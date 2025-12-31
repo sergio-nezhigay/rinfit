@@ -1,0 +1,52 @@
+{% layout none %}
+{% include 'product-res-variables' %}
+{%- assign is_quick_view = true -%}
+{%- assign layout = layout | default: settings.quick_view_layout -%}
+{%- assign sidebar = sidebar | default: 'off' -%}
+{%- assign show_btn_fullscreen = show_btn_fullscreen | default: settings.quick_view_show_btn_fullscreen -%}
+{%- assign video_autoplay = video_autoplay | default: settings.quick_view_video_autoplay -%}
+{%- assign show_arrows = show_arrows | default: settings.quick_view_show_arrows -%}
+{%- assign enable_zoom = enable_zoom | default: settings.quick_view_enable_zoom -%}
+{%- assign show_label_in_stock = show_label_in_stock | default: settings.quick_view_show_label_in_stock -%}
+{%- assign show_label_out_stock = show_label_out_stock | default: settings.quick_view_show_label_out_stock -%}
+{%- assign show_label_sale = show_label_sale | default: settings.quick_view_show_label_sale -%}
+{%- assign show_label_new = show_label_new | default: settings.quick_view_show_label_new -%}
+{%- assign show_label_hot = show_label_hot | default: settings.quick_view_show_label_hot -%}
+{%- assign show_collections = show_collections | default: settings.quick_view_show_collections -%}
+{%- assign show_title = show_title | default: settings.quick_view_show_title -%}
+{%- assign show_sku = show_sku | default: settings.quick_view_show_sku -%}
+{%- assign show_barcode = show_barcode | default: settings.quick_view_show_barcode -%}
+{%- assign show_availability = show_availability | default: settings.quick_view_show_availability -%}
+{%- assign show_type = show_type | default: settings.quick_view_show_type -%}
+{%- assign show_vendor = show_vendor | default: settings.quick_view_show_vendor -%}
+{%- assign show_price = show_price | default: settings.quick_view_show_price -%}
+{%- assign show_sale_separator_status = show_sale_separator_status | default: settings.quick_view_show_sale_price_separator -%}
+{%- assign show_sale_details = show_sale_details | default: settings.quick_view_show_sale_details -%}
+{%- assign show_taxes = show_taxes | default: settings.quick_view_show_taxes -%}
+{%- assign show_countdown = show_countdown | default: settings.quick_view_show_countdown -%}
+{%- assign show_stock_countdown = show_stock_countdown | default: settings.quick_view_show_stock_countdown -%}
+{%- assign show_stock_countdown_range = show_stock_countdown_range | default: settings.quick_view_show_stock_countdown_range -%}
+{%- assign stock_countdown_min = stock_countdown_min | default: settings.product_stock_countdown_min | abs -%}
+{%- assign show_text_countdown = show_text_countdown | default: settings.quick_view_show_text_countdown -%}
+{%- assign show_visitors = show_visitors | default: settings.quick_view_show_visitors -%}
+{%- assign show_options = show_options | default: settings.quick_view_show_options -%}
+{%- assign show_custom_options = show_custom_options | default: settings.product_show_custom_options -%}
+{%- assign hide_options_without_availability = hide_options_without_availability | default: settings.product_hide_options_without_availability -%}
+{%- assign show_size_guide = show_size_guide | default: settings.quick_view_show_size_guide -%}
+{%- assign show_delivery_return = show_delivery_return | default: settings.quick_view_show_delivery_return -%}
+{%- assign show_quantity = show_quantity | default: settings.quick_view_show_quantity -%}
+{%- assign show_button_add_to_cart = show_button_add_to_cart | default: settings.quick_view_show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = show_button_add_to_wishlist | default: settings.quick_view_show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare = show_button_add_to_compare | default: settings.quick_view_show_button_add_to_compare -%}
+{%- assign show_free_shipping = show_free_shipping | default: settings.quick_view_show_free_shipping -%}
+{%- assign show_reviews = show_reviews | default: settings.quick_view_show_reviews -%}
+{%- assign hide_reviews_counter = hide_reviews_counter | default: settings.quick_view_hide_reviews_counter -%}
+{%- assign hide_empty_reviews = hide_empty_reviews | default: settings.quick_view_hide_empty_reviews -%}
+{%- assign show_payments = show_payments | default: settings.quick_view_show_payments -%}
+{%- assign payments_type = payments_type | default: settings.quick_view_payments_type -%}
+{%- assign full_details = full_details | default: settings.quick_view_full_details -%}
+<div class="quick-view">
+    <div class="container">
+        {% include 'product-get-page-main' %}
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{%- assign root = root | default: section -%}
+{%- if root.settings.margin_top_responsive != blank -%}
+    {%- assign margin_top_responsive = root.settings.margin_top_responsive | split: ',' -%}
+    {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} mt-xl-{{ margin_top_responsive[4] }}{% endcapture %}
+{%- elsif root.settings.margin_top != blank -%}
+    {% capture margin_top %}mt-{{ root.settings.margin_top }}{% endcapture %}
+{%- endif -%}
+{%- if root.settings.margin_bottom_responsive != blank -%}
+    {%- assign margin_bottom_responsive = root.settings.margin_bottom_responsive | split: ',' -%}
+    {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} mb-xl-{{ margin_bottom_responsive[4] }}{% endcapture %}
+{%- elsif root.settings.margin_bottom != blank -%}
+    {% capture margin_bottom %}mb-{{ root.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+{% capture section_margins %} {{ margin_top }} {{ margin_bottom }}{% endcapture %}
+{%- assign root = null -%}

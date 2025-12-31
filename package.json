@@ -1,0 +1,24 @@
+{
+  "name": "rinfit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "shopify theme dev --store=rinfit.myshopify.com --theme 124245442602",
+    "push": "shopify theme push --store=rinfit.myshopify.com --theme 124245442602",
+    "pull": "shopify theme pull --store=rinfit.myshopify.com --theme 124245442602"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergio-nezhigay/rinfit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sergio-nezhigay/rinfit/issues"
+  },
+  "homepage": "https://github.com/sergio-nezhigay/rinfit#readme"
+}

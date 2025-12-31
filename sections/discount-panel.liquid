@@ -1,0 +1,63 @@
+{% schema %}
+{
+  "name": "Discount Manager",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Discount Manager"
+    },
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Discount Title"
+      },
+    {
+        "type": "select",
+        "id": "discount_type",
+        "label": "Discount type",
+        "default": "fixed",
+        "options": [
+          {
+            "value": "fixed",
+            "label": "Fixed Amount"
+          },
+          {
+            "value": "percentage",
+            "label": "Percentage"
+          },
+          {
+            "value": "buyxgety",
+            "label": "Buy X Get Y"
+          }
+        ]
+    },
+
+    {
+      "type": "text",
+      "id": "discount_value",
+      "label": "Discount Value"
+    },
+    {
+        "type": "select",
+        "id": "applies_to",
+        "label": "Applies To",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All Products"
+          },
+          {
+            "value": "specific_collection",
+            "label": "Specific Collections"
+          },
+          {
+            "value": "specific_products",
+            "label": "Specific Products"
+          }
+        ]
+    }
+
+   ]
+}
+{% endschema %}

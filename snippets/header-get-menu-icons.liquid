@@ -1,0 +1,21 @@
+{%- if link != blank -%}
+    {%- assign link_handle = link.handle -%}
+    {%- if vertical_menu == true -%}
+        {%- assign link_handle = link_handle | prepend: 'vertical-' -%}
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+        {%- if block.type == 'icon' -%}
+            {%- for i in (1..20) -%}
+                {%- assign prop_for_item_name = 'for_item_' | append: i -%}
+                {%- assign prop_icon_name = 'icon_' | append: i -%}
+                {%- if block.settings[prop_for_item_name] == blank or block.settings[prop_icon_name] == blank -%}
+                    {%- break -%}
+                {%- endif -%}
+                {%- assign for_item_link_handle = block.settings[prop_for_item_name] | handle -%}
+                {%- if link_handle == for_item_link_handle -%}
+                    <i class="menu__item_icon{% if settings.vertical_menu_icons_size == 'large' %} menu__item_icon--large{% endif %} mr-10">{% include block.settings[prop_icon_name] %}</i>
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}

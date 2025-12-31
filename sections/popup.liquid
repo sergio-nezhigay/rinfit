@@ -1,0 +1,446 @@
+{%- assign template = template.name | handle -%}
+<div class="popup fixed-stretch d-none js-popup" tabindex="0">
+    <div class="popup__bg fixed-stretch cursor-pointer pointer-events-none" data-js-popup-bg></div>
+    <div class="popup__body position-relative d-none flex-lg-column" data-js-popup-name="navigation" data-popup-mobile-left data-popup-desktop-top>
+        {% include 'popup-navigation' %}
+    </div>
+    {%- if template contains 'collection' and settings.collection_show_sidebar == 'desktop_and_mobile' -%}
+        <div class="popup__body position-relative d-none" data-js-popup-name="sidebar" data-popup-left{% if settings.collection_sidebar_position != 'dropdown' %} data-js-popup-mobile-only{% endif %}>
+            {% include 'popup-sidebar' %}
+        </div>
+    {%- endif -%}
+    {%- if template contains 'blog' and settings.blog_show_sidebar == 'desktop_and_mobile' -%}
+        <div class="popup__body position-relative d-none" data-js-popup-name="sidebar" data-popup-left{% if settings.blog_sidebar_position != 'dropdown' %} data-js-popup-mobile-only{% endif %}>
+            {% include 'popup-sidebar' %}
+        </div>
+    {%- endif -%}
+    {%- if template contains 'article' and settings.article_show_sidebar == 'desktop_and_mobile' -%}
+        <div class="popup__body position-relative d-none" data-js-popup-name="sidebar" data-popup-left{% if settings.article_sidebar_position != 'dropdown' %} data-js-popup-mobile-only{% endif %}>
+            {% include 'popup-sidebar' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.cart_enable -%}
+        <div class="popup__body position-relative d-none justify-content-end" data-js-popup-name="cart" data-popup-right data-js-popup-ajax>
+            {% include 'popup-cart' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.wishlist_enable -%}
+        <div class="popup__body position-relative d-none justify-content-end" data-js-popup-name="wishlist" data-popup-right data-js-popup-ajax>
+            {% include 'popup-wishlist' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.wishlist_enable -%}
+        <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="wishlist-full" data-popup-center data-js-popup-ajax>
+            {% include 'popup-wishlist-full' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.compare_enable -%}
+        <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="compare-full" data-popup-center data-js-popup-ajax>
+            {% include 'popup-compare-full' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.account_enable and shop.customer_accounts_enabled -%}
+        <div class="popup__body position-relative d-none justify-content-end" data-js-popup-name="account" data-popup-right>
+            {% include 'popup-account' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.services_enable -%}
+        <div class="popup__body position-relative d-none justify-content-end" data-js-popup-name="services" data-popup-right>
+            {% include 'popup-services' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.subscription_enable and template == 'index' -%}
+        <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="subscription" data-popup-center>
+            {% include 'popup-subscription' %}
+        </div>
+    {%- endif -%}
+    {%- if section.settings.subscription_confirmation_enable -%}
+        <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="subscription-confirmation" data-popup-center>
+            {% include 'popup-subscription-confirmation' %}
+        </div>
+    {%- endif -%}
+    {%- if settings.product_collection_show_button_quick_view -%}
+        <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="quick-view" data-popup-center data-js-popup-ajax>
+            {% include 'popup-quick-view' %}
+        </div>
+    {%- endif -%}
+    {%- if template == 'password' -%}
+        <div class="popup__body position-relative d-none justify-content-end" data-js-popup-name="password" data-popup-right data-js-popup-mobile-only>
+            {% include 'popup-password' %}
+        </div>
+    {%- endif -%}
+    <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="size-guide" data-popup-center>
+        {% include 'popup-size-guide' %}
+    </div>
+    <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="delivery-return" data-popup-center>
+        {% include 'popup-delivery-return' %}
+    </div>
+    <div class="popup__body position-relative d-none flex-center px-15 py-30" data-js-popup-name="confirm-transfer-data" data-popup-center>
+        {% include 'popup-confirm-transfer-data' %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Popups",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Upsell Settings"
+        },
+        {
+            "type": "text",
+            "id": "upsell_title",
+            "label": "Upsell Title"
+        },
+        {
+            "type": "checkbox",
+            "id": "upsell_enabled",
+            "label": "Upsell Enabled (default: enabled)",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Search"
+        },
+        {
+            "type": "checkbox",
+            "id": "search_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "search_ajax",
+            "label": "Ajax search",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Cart"
+        },
+        {
+            "type": "checkbox",
+            "id": "cart_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "cart_show_free_shipping",
+            "label": "Show free shipping",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Wishlist"
+        },
+        {
+            "type": "checkbox",
+            "id": "wishlist_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Compare"
+        },
+        {
+            "type": "checkbox",
+            "id": "compare_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Account"
+        },
+        {
+            "type": "checkbox",
+            "id": "account_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "page",
+            "id": "account_sign_up_info_page_content",
+            "label": "Page content"
+        },
+        {
+            "type": "html",
+            "id": "account_sign_up_info",
+            "label": "Sign up information"
+        },
+        {
+            "type": "checkbox",
+            "id": "account_show_subscribe",
+            "label": "Show subscribe",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Services"
+        },
+        {
+            "type": "checkbox",
+            "id": "services_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Subscription"
+        },
+        {
+            "type": "checkbox",
+            "id": "subscription_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "subscription_layout",
+            "label": "Layout",
+            "default": "1",
+            "options": [
+                { "value": "1", "label": "1" },
+                { "value": "2", "label": "2" },
+                { "value": "3", "label": "3" },
+                { "value": "4", "label": "4" }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "subscription_show_icon",
+            "label": "Show icon",
+            "default": true
+        },
+        {
+            "type": "paragraph",
+            "content": "Note! Remove text from the field to hide the block"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_line_01",
+            "label": "Text line #1",
+            "default": "NEWSLETTER SUBSCRIPTION"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_line_02",
+            "label": "Text line #2",
+            "default": "Sign up for Shella updates to receive information about new arrivals, future events and special."
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_line_03",
+            "label": "Text line #3",
+            "default": "Get 10% off by signing up to our newsletter."
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_line_04",
+            "label": "Text line #4",
+            "default": "I don’t want to see this website."
+        },
+        {
+            "type": "checkbox",
+            "id": "subscription_show_form",
+            "label": "Show form",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_input_placeholder",
+            "label": "Input placeholder",
+            "default": "Enter Please Your Email Address"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_submit_button_text",
+            "label": "Button submit text",
+            "default": "SUBSCRIBE!"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_button",
+            "label": "Link button text",
+            "default": "SHOP NOW!"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_dont_show_again",
+            "label": "Text 'Don't show again'",
+            "default": "Don't show this popup again"
+        },
+        {
+            "type": "text",
+            "id": "subscription_text_close",
+            "label": "Text 'Close popup'",
+            "default": "NO, THANK YOU"
+        },
+        {
+            "type": "image_picker",
+            "id": "subscription_image",
+            "label": "Image"
+        },
+        {
+            "type": "range",
+            "id": "subscription_image_width",
+            "min": 100,
+            "max": 1200,
+            "step": 50,
+            "unit": "px",
+            "label": "Image width",
+            "default": 600
+        },
+        {
+            "type": "checkbox",
+            "id": "subscription_image_format_pjpg",
+            "label": "Enable format 'pjpg'",
+            "info": "Don't work with transparent images",
+            "default": true
+        },
+        {
+            "type": "url",
+            "id": "subscription_link",
+            "label": "Link"
+        },
+        {
+            "type": "select",
+            "id": "subscription_show_once",
+            "label": "Show once?",
+            "default": "false",
+            "options": [
+                { "value": "false", "label": "Unless user select 'don't show'" },
+                { "value": "true", "label": "Once" }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "subscription_delay",
+            "min": 1,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Delay",
+            "default": 8
+        },
+        {
+            "type": "select",
+            "id": "subscription_cookies_life",
+            "label": "Cookies life",
+            "default": "1",
+            "options": [
+                { "value": "1", "label": "1 day" },
+                { "value": "3", "label": "3 days" },
+                { "value": "7", "label": "1 week" },
+                { "value": "31", "label": "1 month" },
+                { "value": "365", "label": "1 year" }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Subscription confirmation"
+        },
+        {
+            "type": "checkbox",
+            "id": "subscription_confirmation_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "subscription_confirmation_success_message",
+            "label": "Success message",
+            "default": "Thanks for subscribing!"
+        },
+        {
+            "type": "text",
+            "id": "subscription_confirmation_success_button",
+            "label": "Success button text",
+            "default": "Continue shopping"
+        },
+        {
+            "type": "header",
+            "content": "Size guide"
+        },
+        {
+            "type": "page",
+            "id": "size_guide_page_content",
+            "label": "Page content"
+        },
+        {
+            "type": "html",
+            "id": "size_guide_content",
+            "label": "Content of 'Size guide'"
+        },
+        {
+            "type": "header",
+            "content": "Delivery return"
+        },
+        {
+            "type": "page",
+            "id": "delivery_return_page_content",
+            "label": "Page content"
+        },
+        {
+            "type": "html",
+            "id": "delivery_return_content",
+            "label": "Content of 'Delivery return'"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "services",
+            "name": "Services",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "TITLE"
+                },
+                {
+                    "type": "page",
+                    "id": "page_content",
+                    "label": "Page content"
+                },
+                {
+                    "type": "html",
+                    "id": "content",
+                    "label": "Content"
+                }
+            ]
+        },
+        {
+            "type": "upsell",
+            "name": "Upsell",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "upsellproduct1",
+                    "label": "Select upsell 1st product"
+                },
+                {
+                    "type": "product",
+                    "id": "upsellproduct2",
+                    "label": "Select upsell 2nd product"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "upsellfilter",
+                    "label": "Enable Filter Collection (default: disabled)",
+                    "default": false
+                },
+                {
+                    "type": "collection",
+                    "id": "upsellcollection",
+                    "label": "Select what collection this upsell products appear.",
+                    "info": "This will only work when filter is enabled."
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

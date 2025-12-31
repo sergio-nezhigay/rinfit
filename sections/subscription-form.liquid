@@ -1,0 +1,137 @@
+<div{% if section.settings.section_custom_class != blank %} class="{{ section.settings.section_custom_class }}"{% endif %} data-section-id="{{ section.id }}" data-section-type="subscription-form">
+    {% include 'section-res-margins' %}
+    <div class="subscription-form{{ section_margins }}">
+        {%- if section.settings.show_top_separator -%}
+            <div class="border-top"></div>
+        {%- endif -%}
+        <div class="container py-20">
+            <div class="row">
+                {%- if section.settings.title != blank or section.settings.paragraph != blank -%}
+                    <div class="col-12 col-lg-6 d-lg-flex flex-lg-column justify-content-lg-center align-items-lg-stretch">
+                        <div class="subscription-form__info text-center text-lg-left">
+                            {%- if section.settings.title != blank -%}
+                                <h5 class="subscription-form__title mb-0">{{ section.settings.title }}</h5>
+                            {%- endif -%}
+                            {%- if section.settings.paragraph != blank -%}
+                                <p class="subscription-form__paragraph mb-0">{{ section.settings.paragraph }}</p>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {%- endif -%}
+                <div class="col-12 d-lg-flex flex-lg-column justify-content-lg-center align-items-lg-stretch col-lg-6{% if section.settings.title != blank or section.settings.paragraph != blank %} mt-20 mt-lg-0{% else %} offset-lg-3{% endif %}">
+                    <div class="subscription-form__form">
+                        {% capture subscription_button_class %}{% if settings.color_subscription_section_button_type == '2' %} btn--invert{% elsif settings.color_subscription_section_button_type == '3' %} btn--secondary{% endif %}{% endcapture %}
+                        {%- if settings.subscription_method == 'shopify' -%}
+                            {% form 'customer', id: null, novalidate: 'novalidate', class: 'd-flex d-flex flex-column flex-lg-row mb-0' %}
+                                {% include 'form-get-check-error-popup' %}
+                                <input type="hidden" name="contact[tags]" value="newsletter">
+                                <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10{% if settings.color_subscription_section_bd_disable %} border-0{% endif %}{% if form.errors %} input--error{% endif %}" placeholder="{{ section.settings.placeholder }}" required="required">
+                                <input type="submit" class="btn{{ subscription_button_class }}" name="commit" value="{{ section.settings.button_text }}">
+                            {% endform %}
+                        {%- elsif settings.subscription_method == 'mailchimp' -%}
+                            <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="d-flex d-flex flex-column flex-lg-row mb-30" target="_blank">
+                                <input type="email" name="EMAIL" id="PopupSubscribe" class="mb-10 mb-lg-0 mr-lg-10{% if settings.color_subscription_section_bd_disable %} border-0{% endif %}" placeholder="{{ section.settings.placeholder }}" required="required">
+                                <input type="submit" class="btn{{ subscription_button_class }}" value="{{ section.settings.button_text }}">
+                            </form>
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%- if section.settings.show_bottom_separator -%}
+            <div class="border-top"></div>
+        {%- endif -%}
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Subscription form",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_custom_class",
+            "label": "Custom class for section"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_top_separator",
+            "label": "Show top separator",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_bottom_separator",
+            "label": "Show bottom separator",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 0
+        },
+        {
+            "type": "text",
+            "id": "margin_top_responsive",
+            "label": "Responsive margin top",
+            "info": "Example is '10,10,15,15,15'"
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin bottom",
+            "default": 60
+        },
+        {
+            "type": "text",
+            "id": "margin_bottom_responsive",
+            "label": "Responsive margin bottom",
+            "info": "Example is '10,10,15,15,15'"
+        },
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "NEWSLETTER SUBSCRIPTION"
+        },
+        {
+            "type": "text",
+            "id": "paragraph",
+            "label": "Paragraph",
+            "default": "Sign up for Shella updates to receive information about new arrivals, future events and specials."
+        },
+        {
+            "type": "text",
+            "id": "placeholder",
+            "label": "Placeholder",
+            "default": "Enter Your Email Address"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button text",
+            "default": "SUBSCRIBE!"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Subscription form",
+            "category": "3) Static content"
+        }
+    ]
+}
+{% endschema %}

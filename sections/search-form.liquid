@@ -1,0 +1,157 @@
+<div{% if section.settings.section_custom_class != blank %} class="{{ section.settings.section_custom_class }}"{% endif %}>
+    <div data-section-id="{{ section.id }}" data-section-type="search-form"{% include 'layout-get-container-class' %}>
+        {% include 'section-res-margins' %}
+        <div class="search-form py-55{{ section_margins }} text-center">
+            {%- if section.settings.title != blank -%}
+                <h3 class="search-form__title mb-10">{{ section.settings.title }}</h3>
+            {%- endif -%}
+            {%- if section.settings.paragraph != blank -%}
+                <p class="search-form__paragraph mb-15">{{ section.settings.paragraph }}</p>
+            {%- endif -%}
+            <div class="search-form__form mx-auto">
+                {% case section.settings.type %}
+                {% when '1' %}
+                    <form action="/search" method="get" role="search" class="mb-0">
+                        <label class="position-relative d-flex align-items-center mr-0">
+                            <input type="search"
+                                   class="pl-20 pr-40 mb-0"
+                                   name="q"
+                                   value="{{ search.terms | escape }}"
+                                   placeholder="{{ section.settings.placeholder }}">
+                            <i class="position-absolute right-0 mr-15">
+                                {% include 'icon-theme-168' %}
+                            </i>
+                        </label>
+                    </form>
+                {% when '2' %}
+                    <form action="/search" method="get" role="search" class="mb-0">
+                        <div class="d-flex">
+                            <input type="search"
+                                   class="mb-0 mr-15"
+                                   name="q"
+                                   value="{{ search.terms | escape }}"
+                                   placeholder="{{ section.settings.placeholder }}">
+                            <button type="submit" class="btn btn-invert">{{ section.settings.button_text }}</button>
+                        </div>
+                    </form>
+                {% endcase %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Image and text",
+"settings": [
+{
+"type": "text",
+"id": "section_custom_class",
+"label": "Custom class for section"
+},
+{
+"type": "select",
+"id": "container",
+"label": "Content width",
+"default": "fullwidth",
+"options": [
+{
+"value": "inherit",
+"label": "Inherit global settings"
+},
+{
+"value": "fullwidth",
+"label": "Full width"
+},
+{
+"value": "boxed",
+"label": "Boxed"
+}
+]
+},
+{
+"type": "range",
+"id": "margin_top",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Margin top",
+"default": 0
+},
+{
+"type": "text",
+"id": "margin_top_responsive",
+"label": "Responsive margin top",
+"info": "Example is '10,10,15,15,15'"
+},
+{
+"type": "range",
+"id": "margin_bottom",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Margin bottom",
+"default": 60
+},
+{
+"type": "text",
+"id": "margin_bottom_responsive",
+"label": "Responsive margin bottom",
+"info": "Example is '10,10,15,15,15'"
+},
+{
+"type": "header",
+"content": "Content"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Search Our Shop"
+},
+{
+"type": "text",
+"id": "paragraph",
+"label": "Paragraph",
+"default": "We've got tons of great products."
+},
+{
+"type": "select",
+"id": "type",
+"label": "Search design type",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Type #1"
+},
+{
+"value": "2",
+"label": "Type #2"
+}
+]
+},
+{
+"type": "text",
+"id": "placeholder",
+"label": "Placeholder",
+"default": "Search products..."
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button text",
+"default": "Search"
+}
+],
+"presets": [
+{
+"name": "Search form",
+"category": "3) Static content"
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{%- assign disabled_value = true -%}
+{%- assign active_value = false -%}
+{% assign product_variants = product.variants | sort: "options" %}
+{% if option_index0 == 0 %}{% assign option_index = 1 %}{% endif %}
+{% if option_index0 == 1 %}{% assign option_index = 0 %}{% endif %}
+{% if option_index0 == 2 %}{% assign option_index = 2 %}{% endif %}
+{%- for variant in product.variants -%}
+    {%- if variant.available != true and settings.product_hide_options_without_availability_variants -%}
+        {%- continue -%}
+    {%- endif -%}
+             <!-- {{ 'actual index: ' | append: option_index0 }} -->
+             <!-- {{ 'index: ' | append: option_index }} -->
+             <!-- {{ 'value: ' | append: value }} -->
+             <!-- {{ 'current variant.option1: ' | append: current_variant.option1 }} -->
+             <!-- {{ 'variant option1: ' | append: variant.option1 }} -->
+             <!-- {{ 'current variant.option2: ' | append: current_variant.option2 }} -->
+             <!-- {{ 'variant option2: ' | append: variant.option2 }} -->
+             <!-- {{ 'variant option3: ' | append: variant.option3 }} -->
+         {%- if option_index0 == 0 and value == variant.option2 -%}
+             {%- assign disabled_value = false -%}
+             {%- break -%}
+             {%- elsif option_index0 == 1 and current_variant.option1 == variant.option1 and value == variant.option1 -%}
+             {%- assign disabled_value = false -%}
+             {%- break -%}
+             {%- elsif option_index0 == 2 and current_variant.option2 == variant.option2 and current_variant.option1 == variant.option1 and value == variant.option3 -%}
+             {%- assign disabled_value = false -%}
+             {%- break -%}
+         {%- endif -%}
+{%- endfor -%}
+{%- unless disabled_value == true -%}
+<!-- {{ product.options | append: ' ' | append: option.name }} -->
+    {%- if product.options contains option.name -%}
+        {%- if current_variant.option1 == value or current_variant.option2 == value or current_variant.option3 == value -%}
+            {%- assign active_value = true -%}
+        {%- endif -%}
+    {%- endif -%}
+    <!-- {{ active_value }} -->
+{%- endunless -%}
+{% capture trigger_attr %}{% if trigger %} data-js-trigger="{{ trigger }}-{% render 'product-get-options-strip-symbols' with value: option.name %}-{% render 'product-get-options-strip-symbols' with value: value %}"{% elsif trigger_id %} data-js-trigger-id="{{ trigger_id }}-{% render 'product-get-options-strip-symbols' with value: option.name %}-{% render 'product-get-options-strip-symbols' with value: value %}"{% endif %}{% endcapture %}

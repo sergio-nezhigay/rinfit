@@ -1,0 +1,220 @@
+<style>
+.main-color-class-products .product-page-info__dynamic-checkout{
+    display: none !important;
+}
+</style>
+{% assign product_option_enable_tooltips = true %}
+{%- if settings.compare_enable != true -%}
+    {%- assign show_button_add_to_compare = false -%}
+{%- endif -%}
+{%- if settings.wishlist_enable != true -%}
+    {%- assign show_button_add_to_wishlist = false -%}
+{%- endif -%}
+{%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+    
+    {% assign option1 = product.options[0] %}
+    {% assign option2 = product.options[1] %}
+    
+    {% if option1 == "Color" and option2 == blank %}
+        {% assign colorClass = "main-color-class-products" %}
+    {% else %}
+        {% assign colorClass = "" %}
+    {% endif %}
+
+    <div {% if colorClass %}class="{{colorClass }}" {% endif %}{% if layout == '5' %} class="product-page-info__section--max-width mx-lg-auto mb-25 "{% endif %} data-js-footbar-product-limit >
+        {%- if settings.product_info_button_layout == '1' -%}
+            {%- if show_button_add_to_cart -%}            
+                <div class="product-page-info__button-add-to-cart mb-10">
+                    <button type="submit" class="btn--secondary btn{% if settings.product_button_addtocart_size == 'large' %} btn--size-large{% endif %} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% else %}{% if enable_select_variant_button %} data-button-status="select" data-button-select-disable{% endif %}{% endunless %}
+                    {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                    data-js-tooltip
+                    data-tippy-content="Click {{ value }}"
+                    data-tippy-placement="top"
+                    data-tippy-distance="6"
+                    {%- endif -%}
+                    >
+                        <span class="d-flex flex-center"><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+                        <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                        {%- if enable_select_variant_button -%}
+                            <span class="d-flex flex-center" data-button-content="select"><span class="btn__text">{{ 'products.product.add_to_cart.select_options' | t }}</span></span>
+                        {%- endif -%}
+                    </button>
+                </div>
+            {%- endif -%}
+            {%- if show_button_add_to_wishlist -%}
+                {% capture button_add_to_wishlist_html %}
+                <div class="product-page-info__button-add-to-wishlist mb-10">
+                    {%- if customer and customer.metafields.wishlist -%}
+                        {%- for item in customer.metafields.wishlist -%}
+                            {%- assign wishlist_id = item[0] | abs -%}
+                            {%- assign wishlist_handle = item[1] -%}
+                            {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                {%- assign present_in_wishlist = true -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    {%- endif -%}
+                    <a href="/account" class="btn btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                        <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% render 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% render 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                    </a>
+                    {%- assign present_in_wishlist = false -%}
+                </div>
+                {% endcapture %}
+            {%- endif -%}
+            {%- if show_button_add_to_compare -%}
+                {% capture button_add_to_compare_html %}
+                    <div class="product-page-info__button-add-to-compare mb-10">
+                        {%- if customer and customer.metafields.compare -%}
+                            {%- for item in customer.metafields.compare -%}
+                                {%- assign compare_id = item[0] | abs -%}
+                                {%- assign compare_handle = item[1] -%}
+                                {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                    {%- assign present_in_compare = true -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                        {%- endif -%}
+                        <a href="/account" class="btn btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                            <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% render 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                            <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% render 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                        </a>
+                        {%- assign present_in_compare = false -%}
+                    </div>
+                {% endcapture %}
+            {%- endif -%}
+            {%- if button_add_to_wishlist_html or button_add_to_compare_html -%}
+                <div class="buttons-group-grid-px-5 row">
+                    {%- if button_add_to_wishlist_html -%}
+                        <div class="col-12{% if button_add_to_compare_html %} col-md-6{% endif %}">
+                            {{ button_add_to_wishlist_html }}
+                        </div>
+                    {%- endif -%}
+                    {%- if button_add_to_compare_html -%}
+                        <div class="col-12{% if button_add_to_wishlist_html %} col-md-6{% endif %}">
+                            {{ button_add_to_compare_html }}
+                        </div>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+            {%- if show_button_dynamic_checkout -%}
+                <div class="product-page-info__dynamic-checkout mt-15 mb-20{% if enable_select_variant_button or current_variant.available != true %} d-none{% endif %}" data-js-product-button-dynamic-checkout>
+                    <div class="dynamic-checkout js-dynamic-checkout">
+                        {%- if show_dynamic_checkout_confirmation -%}
+                            <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                    <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                    <span class="position-relative d-block mr-10 border"><i class="d-none">{% render 'icon-theme-146' %}</i></span>
+                                    <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                </label>
+                            </div>
+                        {%- endif -%}
+                        <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-10{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                            {{ form | payment_button }}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        {%- elsif settings.product_info_button_layout == '2' -%}
+            {%- if show_button_add_to_cart -%}
+                {% assign option1 = product.options[0] %}
+                {% assign option2 = product.options[1] %}
+                
+                {% if option1 == "Color" and option2 == blank %}
+                    
+                    {% assign product_options_selection = product.options | escape %}            
+                    <div class="product-page-info__button-add-to-cart mb-10">
+                        {% if product.product.has_only_default_variant == false %}<label>To buy, select <strong>Ring size</strong></label>{% endif %}
+                        <div id="buycartpage-{%if option.name contains "Women" %}women-{% endif %}{{ current_variant_id }}" class="full_disabled_add_to_cart disabled btn btn--full btn--status d-none">
+                            <span class="d-flex flex-center"><span class="btn__text">{% if product_options_selection contains "Color" and product_options_selection contains "Size" %}{{ 'products.product.add_to_cart.title' | t }}{% elsif product_options_selection contains "Size" %}{{ 'products.product.add_to_cart.title' | t }}{% endif %}</span></span>
+                        </div>  
+                        <button id="addcartpage-{%if option.name contains "Women" %}women-{% endif %}{{ current_variant_id }}" type="submit" class="btn--secondary btn{% if settings.product_button_addtocart_size == 'large' %} btn--size-large{% endif %} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %} " name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                            <span class="d-flex flex-center"><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                            <span class="d-flex flex-center" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+                            <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.select_options' | t }}</span>
+                        </button>
+                    </div>
+                    <script>
+                        window.addEventListener('load', function() {
+                            const optionSections = document.querySelectorAll('.product-page-info__options .product-options__section');
+                            
+                            optionSections.forEach((section) => {
+                                const firstOption = section.querySelector('.product-options__value');
+                                if (firstOption) {
+                                    firstOption.click();
+                                }
+                            });
+                        });
+                    </script>
+                {% else %}
+                    {% assign product_options_selection = product.options | escape %}            
+                    <div class="product-page-info__button-add-to-cart mb-10">
+                        {% if product.product.has_only_default_variant == false %}<label>To buy, select <strong>Ring size</strong></label>{% endif %}
+                        <div id="buycartpage-{%if option.name contains "Women" %}women-{% endif %}{{ current_variant_id }}" class="full_disabled_add_to_cart disabled btn btn--full btn--status {% if product.has_only_default_variant %}d-none{% endif %}">
+                            <span class="d-flex flex-center"><span class="btn__text">{% if product_options_selection contains "Color" and product_options_selection contains "Size" %}{{ 'products.product.add_to_cart.title' | t }}{% elsif product_options_selection contains "Size" %}{{ 'products.product.add_to_cart.title' | t }}{% endif %}</span></span>
+                        </div>  
+                         
+                        <button id="addcartpage-{%if option.name contains "Women" %}women-{% endif %}{{ current_variant_id }}" type="submit" class="btn--secondary btn{% if settings.product_button_addtocart_size == 'large' %} btn--size-large{% endif %} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %} {% if product.has_only_default_variant == false %}d-none{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                            <span class="d-flex flex-center"><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                            <span class="d-flex flex-center" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+                            <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.select_options' | t }}</span>
+                        </button>
+                    </div>
+                {%endif %}
+            {%- endif -%}
+            {%- if show_button_add_to_wishlist -%}
+                <div class="product-page-info__button-add-to-wishlist mb-10">
+                    {%- if customer and customer.metafields.wishlist -%}
+                        {%- for item in customer.metafields.wishlist -%}
+                            {%- assign wishlist_id = item[0] | abs -%}
+                            {%- assign wishlist_handle = item[1] -%}
+                            {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                {%- assign present_in_wishlist = true -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    {%- endif -%}
+                    <a href="/account" class="btn btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                        <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% render 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% render 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                    </a>
+                    {%- assign present_in_wishlist = false -%}
+                </div>
+            {%- endif -%}
+            {%- if show_button_add_to_compare -%}
+                <div class="product-page-info__button-add-to-compare mb-10">
+                    {%- if customer and customer.metafields.compare -%}
+                        {%- for item in customer.metafields.compare -%}
+                            {%- assign compare_id = item[0] | abs -%}
+                            {%- assign compare_handle = item[1] -%}
+                            {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                {%- assign present_in_compare = true -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    {%- endif -%}
+                    <a href="/account" class="btn btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                        <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% render 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                        <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% render 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                    </a>
+                    {%- assign present_in_compare = false -%}
+                </div>
+            {%- endif -%}
+            {%- if show_button_dynamic_checkout -%}
+                <div class="product-page-info__dynamic-checkout mt-15 mb-20{% if enable_select_variant_button or current_variant.available != true %} d-none{% endif %}" data-js-product-button-dynamic-checkout>
+                    <div class="dynamic-checkout js-dynamic-checkout">
+                        {%- if show_dynamic_checkout_confirmation -%}
+                            <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                    <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                    <span class="position-relative d-block mr-10 border"><i class="d-none">{% render 'icon-theme-146' %}</i></span>
+                                    <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                </label>
+                            </div>
+                        {%- endif -%}
+                        <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-10{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                            {{ form | payment_button }}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        {%- endif -%}
+    </div>
+{%- endif -%}

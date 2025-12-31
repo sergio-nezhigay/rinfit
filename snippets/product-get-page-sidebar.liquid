@@ -1,0 +1,36 @@
+<div class="row pb-lg-35">
+    {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'custom_html' -%}
+        {%- if block.settings.content != blank or block.settings.page_content != blank -%}
+            <div class="col-12 col-md-6 col-xl-12 pb-30 pb-xl-50">
+                {%- if block.settings.page_content != blank -%}
+                    {% include 'content-load-template' content: pages[block.settings.page_content].content %}
+                {%- else -%}
+                    {% include 'content-load-template' content: block.settings.content %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- when 'products' -%}
+        {%- assign products = collections[block.settings.collection].products -%}
+        {%- assign limit = block.settings.max_count -%}
+        {%- if limit == 0 -%}
+            {%- assign limit = products.size -%}
+        {%- endif -%}
+        {%- if products.size > 0 -%}
+            <div class="col-12 col-md-6 col-xl-12 pb-30 pb-xl-50">
+                {%- if block.settings.title != blank -%}
+                    <h5 class="mb-10">{{ block.settings.title }}</h5>
+                {%- endif -%}
+                {%- for product in products limit: limit -%}
+                    {%- if block.settings.product_type == 'full' -%}
+                        {% include 'product-collection' %}
+                    {%- else -%}
+                        {% include 'product-featured' %}
+                    {%- endif -%}
+                {%- endfor -%}
+            </div>
+        {%- endif -%}
+        {%- endcase -%}
+    {%- endfor -%}
+</div>

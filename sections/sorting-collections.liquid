@@ -1,0 +1,156 @@
+<div{% if section.settings.section_custom_class != blank %} class="{{ section.settings.section_custom_class }}"{% endif %} data-section-id="{{ section.id }}" data-section-type="sorting-collections">
+    {% include 'section-res-margins' %}
+    <div class="container{{ section_margins }}">
+        <div class="sorting-collections">
+            <div class="sorting-collections__head row justify-content-center mb-25"{% if section.blocks.size > 1 %} data-sorting-collections-control{% endif %}>
+                {%- for block in section.blocks -%}
+                    <h4 class="col-auto mb-10 text-center sorting-collection-tooltips">
+                        <a href="{{ collections[block.settings.collection].url }}"{% if section.blocks.size > 1 %}{% if forloop.index == 1 %} class="active"{% endif %} data-collection="{{ collections[block.settings.collection].handle }}"{% endif %}>{% if block.settings.title != blank %}{{ block.settings.title }}{% else %}{{ collections[block.settings.collection].title }}{% endif %}</a>
+                    </h4>
+                {%- endfor -%}
+            </div>
+            {%- if section.settings.grid_responsive != blank -%}
+                {%- assign grid_responsive = section.settings.grid_responsive | split: ',' -%}
+                {% capture grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+                {% capture grid %}col-6 col-sm-6 col-md-4 col-lg-{{ 12 | divided_by: section.settings.products_per_row }}{% endcapture %}
+            {%- endif -%}
+            {%- for block in section.blocks limit: 1 -%}
+                <div class="sorting-collections__products row" data-sorting-collections-items data-limit="{{ section.settings.max_count }}" data-grid="{{ grid }}">
+                    {%- assign products = collections[block.settings.collection].products -%}
+                    {%- for product in products limit: section.settings.max_count -%}
+                        <div class="{{ grid }}">
+                            {%- assign disable_lazyload = section.settings.disable_lazyload -%}
+                            {% include 'product-collection' with url_without_collection: true %}
+                        </div>
+                    {%- endfor -%}
+                </div>
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+<script>
+    Loader.require({type: "script", name: "sorting_collections"});
+</script>
+
+{% schema %}
+{
+    "name": "Collections",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_custom_class",
+            "label": "Custom class for section"
+        },
+        {
+            "type": "select",
+            "id": "products_per_row",
+            "label": "Products per row",
+            "default": "4",
+            "options": [
+                {
+                    "value": "2",
+                    "label": "2"
+                },
+                {
+                    "value": "3",
+                    "label": "3"
+                },
+                {
+                    "value": "4",
+                    "label": "4"
+                },
+                {
+                    "value": "6",
+                    "label": "6"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "max_count",
+            "min": 1,
+            "max": 24,
+            "step": 1,
+            "unit": "pds",
+            "label": "Max count",
+            "default": 8
+        },
+        {
+            "type": "text",
+            "id": "grid_responsive",
+            "label": "Responsive size",
+            "info": "Example is '12,12,12,12,12', 1 < value < 12"
+        },
+        {
+            "type": "range",
+            "id": "margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 0
+        },
+        {
+            "type": "text",
+            "id": "margin_top_responsive",
+            "label": "Responsive margin top",
+            "info": "Example is '10,10,15,15,15'"
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Margin bottom",
+            "default": 20
+        },
+        {
+            "type": "text",
+            "id": "margin_bottom_responsive",
+            "label": "Responsive margin bottom",
+            "info": "Example is '10,10,15,15,15'"
+        },
+        {
+            "type": "checkbox",
+            "id": "disable_lazyload",
+            "label": "Disable lazy load",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "button_title",
+            "label": "Button Title"
+        }
+
+    ],
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Collections",
+            "category": "6) Collections"
+        }
+    ]
+}
+{% endschema %}

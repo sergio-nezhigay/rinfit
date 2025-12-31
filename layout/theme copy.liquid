@@ -1,0 +1,123 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+ <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <!--<![endif]-->
+{% capture document %}
+<head>
+  <link rel="preconnect" href="https://www.googleadservices.com" crossorigin>
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+  <link rel="preconnect" href="https://www.google.com" crossorigin>
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+  <link rel="preconnect" href="https://s.pinimg.com" crossorigin>
+  <link rel="preconnect" href="https://vars.hotjar.com" crossorigin>
+  <link rel="preconnect" href="https://ct.pinterest.com" crossorigin>
+  <link rel="preconnect" href="https://script.hotjar.com" crossorigin>
+  <meta name="google-site-verification" content="wIQ0YhPoEiikYr0L6eCkPL7rhs2btuW3I8OAwid6Nww" />
+<script>
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:2243255,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<script>
+var loox = document.createElement("link");
+loox.href = "https://loox.io/widget/VkMww-4oV/loox.js?shop=rinfit.myshopify.com";
+loox.rel = "preload";
+loox.as = "script";
+document.head.appendChild(loox);
+var snapchat = document.createElement("link");
+snapchat.href = "https://intg.snapchat.com/shopify/shopify-scevent.js?id=150f3260-d1d6-4f25-bf1c-ec36b2f9df9c\u0026shop=rinfit.myshopify.com";
+snapchat.rel = "preload";
+snapchat.as = "script";
+document.head.appendChild(snapchat);
+</script>
+<script src="https://loox.io/widget/VkMww-4oV/loox.js?shop=rinfit.myshopify.com" defer="defer"></script>
+<script src="https://intg.snapchat.com/shopify/shopify-scevent.js?id=150f3260-d1d6-4f25-bf1c-ec36b2f9df9c\u0026shop=rinfit.myshopify.com" defer="defer"></script>
+{% include 'defer-js' %}
+{% comment %}
+{% include 'limespot' %}
+{% endcomment %}
+{% include 'head' %}
+{% assign content_for_header = content_for_header | remove: '\/\/shopify.privy.com\/widget.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/cdn-stamped-io.azureedge.net\/files\/shopify.v2.min.js?shop=rinfit.myshopify.com' | remove: '\/\/productreviews.shopifycdn.com\/assets\/v4\/spr.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/loox.io\/widget\/VkMww-4oV\/loox.js?shop=rinfit.myshopify.com' | remove: 'https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=Vs6XZR\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=Vs6XZR\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/manychat.com\/static\/js\/shopify.js?account_id=834139949981234\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/assets1.adroll.com\/shopify\/latest\/j\/shopify_rolling_bootstrap_v2.js?adroll_adv_id=RO2QD77HNVC23MDKLJATPC\u0026adroll_pix_id=DV6PVRW3KBEAPDIQV3QH7Y\u0026shop=rinfit.myshopify.com' | remove: 'https:\/\/intg.snapchat.com\/shopify\/shopify-scevent.js?id=150f3260-d1d6-4f25-bf1c-ec36b2f9df9c\u0026shop=rinfit.myshopify.com' %}
+{{ content_for_header }}
+{%- render 'bold-common' -%}
+{%- if settings.layout_include_weglot_app -%}
+    {% capture weglot_includes %}
+    {% include 'weglot_hreftags' %}
+    {% include 'weglot_switcher' %}
+    {% endcapture %}
+  {%- endif -%}
+ {% comment %}
+ {{ shop.metafields.loox["global_html_head"] }} 
+ {% include "manychat-header" %}
+ {% endcomment %}  
+</head>
+<body{% include 'layout-get-body-attributes' %}>
+{%- if settings.layout_enable_preloader -%}
+  {% include 'layout-get-preloader' with is_fixed: true %}
+{%- endif -%}
+{% section 'global-settings' %}
+{% section 'header' %}
+<script>
+var variant_option_color = 'color';
+var variant_option_cart = 'cart';
+var variant_option_size = 'size';
+var variant_option_sizes = 'sizes';
+var variant_option_ring = 'ring';
+function changeto(t,e){
+if(t === 'color'){
+    e.innerHTML = 'SELECT COLOR';
+}
+if(t === 'size'){
+    e.innerHTML = 'SELECT SIZE';
+}   
+if(t === 'sizes'){
+    e.innerHTML = 'SELECT SIZES';
+}    
+if(t === 'cart'){
+    e.innerHTML = 'ADD TO CART';
+}    
+if(t === 'ring'){
+    e.innerHTML = 'ADD RING';
+}    
+};
+</script>
+<main id="MainContent">
+  {{ content_for_layout }}  
+<limespot></limespot>
+</main>
+{% section 'footer' %}
+{% section 'popup' %}
+{% section 'footbar' %}
+{% include 'fixed-sidebar' %}
+{% include 'templates' %}
+{% include 'layout-get-includes' %}
+{% include 'layout-get-version' %}
+{% endcapture %}
+{{ document | replace: '   ', ' ' | replace: '  ', ' ' }}
+{% comment %}
+<!-- start loox body -->
+	{{ shop.metafields.loox["global_html_body"] }}
+<!-- end loox body -->
+{% endcomment %}
+<!-- Twitter universal website tag code -->
+<script type="text/javascript">
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','o4b6y');
+twq('track','PageView');
+</script>
+<script src="//shopify.privy.com/widget.js?shop=rinfit.myshopify.com" defer="defer"></script>
+<!-- End Twitter universal website tag code -->
+{{ 'speed-optimizer.js' | asset_url | script_tag }}
+</body>
+</html>
+

@@ -1,0 +1,668 @@
+<style>
+    
+    @media (max-width: 768px) {
+                .stack_builder_bg {
+                    background-image: url("{{ section.settings.mobilebanner | img_url: '378x' }}");
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+    }
+    @media (min-width: 769px) {
+                .stack_builder_bg {
+                    background-image: url("{{ section.settings.banner | img_url: '1908x' }}");
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+    }
+    @media(max-width: 768px) {
+                .stack {
+                margin-top: 0 !important;
+                }
+    }
+    @media(min-width: 769px) {
+                .stack {
+                    margin-top: 0 !important;
+                    margin-bottom: -16px !important;
+                }
+    }
+    @media(max-width: 768px) {
+    .single-product-container {
+                max-width: 33%;
+                flex: 1 0 100%;
+                position: relative;
+    }
+    }
+    @media(min-width: 769px) {
+    .single-product-container {
+                max-width: 25%;
+                flex: 1 0 21%;
+                position: relative;
+    }
+    }
+    .has-item {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+    }
+    .has-no-item {
+        margin: 0 auto !important;
+        justify-content: center;
+        margin-bottom: 8px !important;
+        margin-top: 4px !important;
+    }
+
+    .item-delete span {
+        color:{{ section.settings.stack_builder_bg_color }};
+        font-weight: bold;
+        vertical-align: middle;
+        padding: 8px;
+    }
+    .item-reorder span {
+        color:{{ section.settings.stack_builder_bg_color }};
+        font-weight: bold;
+        vertical-align: middle;
+        padding: 8px;
+        cursor: text !important;
+    }
+@media(min-width: 769px) {
+    .has-item, .item-reorder {
+        width: auto;
+        display: table;
+        margin: 0 auto;
+    }
+}
+@media(max-width: 768px) {
+    .has-item, .item-reorder {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+    }
+}
+    .has-item, .item-reorder img {
+        margin: 0 auto;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .has-item, .ring-stack {
+        width: 48%;
+        object-fit: contain !important;
+    }
+    .has-item, .item-delete {
+        width: auto;
+        display: table;
+        margin: 0 auto;
+    }
+    .has-item, .item-delete img {
+        margin: 0 auto;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .has-item, .single-product img {
+        object-fit: contain !important;
+        margin: 0 auto;
+    }
+    .droppable {
+        background: #fff !important;
+    }
+    .has-item, .item-delete {
+        cursor: pointer;
+        margin-bottom: 28px;
+    }
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 118px;
+  height: 118px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid{{ section.settings.stack_builder_text_color }};
+  border-radius: 50%;
+  border-top: 16px solid {{ section.settings.stack_builder_bg_color }};
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+.product-price__price {
+    display: inline-block;
+    color: {{ section.settings.stack_builder_bg_color }};
+}
+.product-price__price {
+    font-size: 12px;
+    color:  {{ section.settings.stack_builder_bg_color }};
+    font-weight: 700;
+    padding: 0 2px;
+}
+@media(max-width: 768px) {
+    .product_info_details {
+        display: flex;
+        top: 8px;
+    }
+}
+@media(min-width: 769px) {
+    .product_info_details {
+        display: flex;
+        position: absolute;
+        top: 8px;
+    }
+}
+.salePrice {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 0 8px;
+    border-radius: 3px;
+    vertical-align: text-bottom;
+    color:{{ section.settings.stack_builder_bg_color }};
+    border: 2px dashed {{ section.settings.stack_builder_bg_color }};
+    background-color: {{ section.settings.stack_builder_text_color }};
+    margin-left: 8px;
+    padding-top: 0px;
+}
+@media(min-width: 769px) {
+.stack_builder_mt {
+    padding-top: 3px;
+    height:338px;
+  }
+}
+@media(max-width: 768px) {
+.stack_builder_mt {
+    padding-top: 3px;
+    height:284px;
+  }
+}
+@media(max-width: 768px){
+.icon-arrow {
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    width: 80px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 8;
+    transform: rotate(90deg);
+    }
+}
+@media(min-width: 769px){
+.icon-arrow {
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 8;
+    }
+}
+
+.tiparrow {
+  position: absolute;
+  top: 25px;
+  width: 90%;
+  height: 10px;
+  background-color:{{ section.settings.stack_builder_bg_color }};
+  box-shadow: 0 3px 5px {{ section.settings.stack_builder_bg_color }};
+  animation: arrow 700ms linear infinite;
+}
+
+.tiparrow::after, .tiparrow::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 10px;
+  right: -8px;
+  background-color:{{ section.settings.stack_builder_bg_color }};
+}
+
+.tiparrow::after {
+  top: -12px;
+  transform: rotate(45deg);
+}
+
+.tiparrow::before {
+  top: 12px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  transform: rotate(-45deg);
+}
+.stack-builder__head__sizes {
+    margin-bottom: 12px;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .stack-builder__head__sizes__title {
+    font-size: 16px;
+    color:#15315c;
+    text-align: center;
+    }
+    .stack-builder__tab_instruction {
+    margin-top: 8px;
+    justify-content: center;
+    width: 100%;
+    }
+.stack-builder__tab_instruction p {
+    background: {{ section.settings.stack_builder_bg_color }};
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 42px;
+    line-height: 20px;
+    border-radius: 18px;
+    border: 1px solid;
+    color: {{ section.settings.stack_builder_text_color }};
+    font-size: 12px;
+    cursor: pointer;
+}
+}
+@media (min-width: 769px) {
+.stack-builder__head__sizes__title {
+    font-size: 18px;
+    color: {{ section.settings.stack_builder_text_color }};
+    padding: 8px;
+    margin: 0 auto;
+    }
+    .stack-builder__tab_instruction {
+    margin-top: 8px;
+    justify-content: center;
+    width: 100%;
+    }
+.stack-builder__tab_instruction p {
+    background:{{ section.settings.stack_builder_bg_color }};
+    width: 58%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 23px;
+    line-height: 20px;
+    border-radius: 18px;
+    border: 1px solid;
+    color: {{ section.settings.stack_builder_text_color }};
+    cursor: pointer;
+}
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: {{ section.settings.stack_builder_text_color }};
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: {{ section.settings.stack_builder_text_color }};
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: {{ section.settings.stack_builder_bg_color }};
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px{{ section.settings.stack_builder_bg_color }};
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+@media(max-width: 768px) {
+    .sidebar_switch {
+            display: none;
+            position: relative;
+            justify-content: center;
+            z-index: 8;
+    }
+}
+@media(min-width: 769px) {
+        .sidebar_switch {
+            display: none;
+            right: 18px;
+            position: absolute;
+        }
+}
+.sidebar_switch p {
+    text-align: center;
+    line-height: 32px;
+    color: {{ section.settings.stack_builder_text_color }};
+    margin-right: 8px;
+}
+@media(min-width: 769px) {
+  .stack_desktop_image {
+  display: block;
+  }
+  .stack_mobile_image {
+  display: none;
+  }
+}
+@media(max-width: 768px) {
+  .stack_desktop_image {
+  display: none;
+  }
+  .stack_mobile_image {
+  display: block;
+  }
+}
+.stack_builder_tab_deflex {
+  display: flex;
+  position: relative;
+}
+.div_col1 {
+  width: 50%;
+}
+.div_col2 {
+  width: 50%;
+  text-align: center;
+  line-height: 16px;
+  font-size: 18px;
+}
+.div_col2 span {
+  color:#fff;
+}
+</style>
+<script>
+    //Loader 
+function loadingStart() {
+    var loading = document.getElementById("loader");
+    loading.style.display = 'block';
+};
+
+function loadingStop() {
+    var loading = document.getElementById("loader");
+    loading.style.display = 'none';
+};
+var stack_arrow_down = "{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}";
+var stack_arrow_up = "{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}";
+var stack_delete_icon = "{{ 'icon-delete.png' | asset_img_url: '18x' }}";
+var stack_total_zero = "{{ '0.00' | money | remove: '0.00' }}";
+var stack_total_products = 0;
+</script>
+
+{{ 'stack-builder.scss.css' | asset_url | stylesheet_tag }}
+<div class="stack-wrapper">
+    <div id="loader" style="display: none"></div>
+    <div class="icon-arrow" id="icon-arrow" style="display: none;">       
+        <div class="tiparrow"></div>
+    </div>  
+    <div class="stack-builder">
+      <div class="tool_tips_picker" id="tool_tips_picker" style="display: none;"><p>{{ section.settings.addringtips | strip_html }}</p></div>
+        <div class="container stack">
+          <div class="stack_desktop_image">
+          {% include 'rimage' image: section.settings.banner size: '1908x' alt: image_alt %}
+          </div>
+          <div class="stack_mobile_image">
+          {% include 'rimage' image: section.settings.mobilebanner size: '580x' alt: image_alt %}
+          </div>         
+          <div class="stack-builder__head">
+                                    <div class="stackables-promo" style="display: none;">
+                                                    <span class="stack-price">
+                                                    <span class="stack-product-price">
+                                                        <span>$11.95</span> each*{{ template }}</span> 
+                                                        <span class="price-condition">when you buy 1</span></span> 
+                                                        <span class="stack-price">
+                                                    <span class="stack-product-price"><span>$9.95</span> each*</span> 
+                                                    <span class="price-condition">when you buy 3+</span></span>
+                                    </div>
+                             <div class="stack-builder__head__sizes">
+                             <p class="stack-builder__head__sizes__title stack_builder_steps">{{ section.settings.steps1 | strip_html }}</p> 
+                                <div class="stack-builder__head__sizes__circles">
+                                    {% for ring in (section.settings.ring_min..section.settings.ring_max) %}                                   
+                                    <div id="stack-builder__ring_size{{ ring }}" data-size="{{ ring }}" class="stack-builder__head__sizes__circles__single">
+                                    {{ ring }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+</div>
+</div> 
+        </div>
+<div class="stack_builder_tab_deflex">
+  <div class="div_col1"></div>
+  <div class="div_col2">
+    <span>{{ section.settings.steps2 | strip_html }}</span>
+  </div>  
+</div>
+<div class="stack-builder__flex">
+    <div class="dropzone-wrapper">
+                <div class="dropzone centered" id="dropzoneitem"> 
+                    <div  class="droppable-container has-no-item" style="display: block">
+                        <div class="ring-stack droppable">
+                            <span class="droppable-placeholder">ADD RING</span>
+                        </div>
+                    </div> 
+                    <div class="droppable-container has-no-item" style="display: block">
+                        <div class="ring-stack droppable">
+                            <span class="droppable-placeholder">ADD RING</span>
+                        </div> 
+                    </div>
+                </div> 
+                                <div class="dropzone-actions">    
+                                <p class="stack-builder-last-step stack_builder_steps" id="stack_builder_laststep" style="display: none">{{ section.settings.steps6 | strip_html }}</p>               
+                                <p class="stack-total-label" id="totalcartamount">Total: <span>{{ '0.00' | money }}</span></p> 
+                                <button id="stack-button-to-cart" class="stack-btn add-stack disabled" disabled onclick="additemtocart(this);">Add stack(0 item) to cart</button> 
+                                </div> 
+                    </div> 
+                    <div class="stack-products-wrapper">
+                        <div class="stack-products">                            
+                            <div class="stackables-tabs_mobile_helper">                             
+                            <div id="prev-arrow" class="arrow-container"><img src="{{ 'icon-long-arrow-left.svg' | asset_url }}" alt="previous" class="arrow"></div>
+                             <div class="stackables-tabs" id="stackables-tabs">
+                                        {% for block in section.blocks %}
+                                        {% if block.type == 'tab' %}
+                                        {% if forloop.first %}
+                                        <div id="{{ collections[block.settings.tabcollection].handle }}" class="tab-item active" data-handle="{{ collections[block.settings.tabcollection].handle }}">
+                                          <span class="tab-title">{{ block.settings.tabname }}</span>
+                                        </div>
+                                        <script>
+                                        var selected_tab_first_load = '{{ collections[block.settings.tabcollection].handle }}';
+                                        var collection_handle = ["{{ collections[block.settings.tabcollection].handle }}"];
+                                        </script>
+                                        {% else %}
+                                        <div id="{{ collections[block.settings.tabcollection].handle }}" class="tab-item" data-handle="{{ collections[block.settings.tabcollection].handle }}">
+                                          <span class="tab-title">{{ block.settings.tabname }}</span>
+                                        </div>
+                                        <script>
+                                        collection_handle.push("{{ collections[block.settings.tabcollection].handle }}");
+                                        </script>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
+                                       
+                             </div> 
+                                    <div id="next-arrow" class="arrow-container">
+                                        <img src="{{ 'icon-long-arrow-right.svg' | asset_url }}" alt="next" class="arrow"></div>
+                                    </div> 
+                                             <div class="stack-products-grid">                                                       
+                                                        {% for block in section.blocks %}
+                                                        {% if block.type == "tab" %}  
+                                                        {% if forloop.first %}
+                                                        <div id="stack-products-slider-{{ collections[block.settings.tabcollection].handle }}" data-handle="{{ collections[block.settings.tabcollection].handle }}" class="stack-products-slider" style="display: flex;">                                                        
+                                                        </div>
+                                                        {% else %}  
+                                                        <div id="stack-products-slider-{{ collections[block.settings.tabcollection].handle }}" data-handle="{{ collections[block.settings.tabcollection].handle }}" class="stack-products-slider" style="display: none;">                                                        
+                                                        </div>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        {% endfor %}                                         
+                                            </div>
+                                                                                                            </div> 
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+  </div>
+<script src="{{ 'plugin.jquery.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'stack-builder.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" defer="defer"></script>
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+<script src="{{ 'customer_area.js'  | shopify_asset_url }}" defer="defer"></script>
+<script>
+    var div_currently_view = document.getElementById("currently_viewed");
+    var stack_bulider_step1 = document.getElementById("stack-bulider-step1");
+    var load_min_size = "{{ section.settings.ring_min }}";
+    var load_max_size = "{{ section.settings.ring_max }}";
+    var first_load_total_stack = 0;
+    var selected_circle_size = "all";
+    function run_at_first_load(){
+        first_load_total_stack = 0;
+        for (r = Number(load_min_size); r <= Number(load_max_size); r++) {               
+          ajaxcollection(selected_tab_first_load,r);
+        }
+      }
+    window.onload = run_at_first_load;
+</script>
+  {% schema %}
+  {
+    "name": "Stack Builder",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Stack Builder"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Select Banner for Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobilebanner",
+        "label": "Select Banner for Mobile"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "BUILD YOUR OWN STACK",
+        "default": "BUILD YOUR OWN STACK"
+      },
+      {
+        "type": "range",
+        "id": "ring_min",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "label": "Set minimum size of ring",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "ring_max",
+        "min": 5,
+        "max": 100,
+        "step": 1,
+        "label": "Set maximum size of ring",
+        "default": 20
+      },
+      {
+          "type": "richtext",
+          "id": "steps1",
+          "label": "Ring size Selection",
+          "default":"<p>Select your ring size here</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "steps2",
+        "label": "Step 2",
+        "default":"<p>Select your tab collection here</p>"
+      },
+      {
+        "type": "header",
+        "content": "Stack Builder Color"
+      },
+      {
+        "type": "color",
+        "id": "stack_builder_bg_color",
+        "label": "Stack Builder Color",
+        "default":"#15315c"
+      },
+      {
+        "type": "color",
+        "id": "stack_builder_text_color",
+        "label": "Stack Builder Text Color",
+        "default":"#fff"
+      }
+     ],
+     "blocks": [
+            {
+         "type": "tab",
+         "name": "tab",
+         "settings": [
+                        {
+                            "type": "text",
+                            "id": "tabname",
+                            "label": "Tab Name"
+                        },
+                        {
+                            "type": "collection",
+                            "id": "tabcollection",
+                            "label": "Tab Collection"
+                        }
+                 ]
+         }
+     ]
+  }
+  {% endschema %}

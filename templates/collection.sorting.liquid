@@ -1,0 +1,13 @@
+{% layout none %}
+{%- for tag in current_tags -%}
+    {%- if tag contains 'limit=' -%}
+        {%- assign limit = tag | remove: 'limit=' -%}
+    {%- elsif tag contains 'grid=' -%}
+        {%- assign grid = tag | remove: 'grid=' | url_decode -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- for product in collections[collection.handle].products limit: limit -%}
+    <div class="{{ grid }}">
+        {% include 'product-collection' with url_without_collection: true %}
+    </div>
+{%- endfor -%}

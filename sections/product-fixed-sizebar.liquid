@@ -1,0 +1,70 @@
+{%- if section.settings.show_product_usage_info and section.blocks.size > 0 -%}
+    <div class="fixed-sidebar__section my-15">
+        <div class="product-fixed-sizebar position-relative px-10 pointer-events-all">
+            <div class="product-fixed-sizebar__btn d-flex flex-center position-absolute top-0 right-100 cursor-lg-pointer">
+                <i>{% include 'icon-theme-232' %}</i>
+            </div>
+            <div class="product-fixed-sizebar__content">
+                {%- for block in section.blocks -%}
+                    {%- assign random_value_diff = block.settings.max_value | minus: block.settings.min_value -%}
+                    {%- assign random_value = "now" | date: "%N" | modulo: random_value_diff | plus: block.settings.min_value -%}
+                    {% capture content_html %}
+                        {%- if block.settings.page_content != blank -%}
+                            {% include 'content-load-template' content: pages[block.settings.page_content].content %}
+                        {%- else -%}
+                            {% include 'content-load-template' content: block.settings.content %}
+                        {%- endif -%}
+                    {% endcapture %}
+                    {%- assign content_html = content_html | replace: '{value}', random_value -%}
+                    <div class="product-fixed-sizebar__line d-flex align-items-center py-9">{{ content_html }}</div>
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+{%- endif -%}
+
+
+{% schema %}
+{
+"name": "Product fixed sidebar",
+"settings": [
+{
+"type": "checkbox",
+"id": "show_product_usage_info",
+"label": "Show product usage information",
+"default": true
+}
+],
+"blocks": [
+{
+"type": "text_line",
+"name": "Text line",
+"settings": [
+{
+"type": "page",
+"id": "page_content",
+"label": "Page content"
+},
+{
+"type": "text",
+"id": "content",
+"label": "Content"
+},
+{
+"type": "text",
+"id": "min_value",
+"label": "Min value",
+"default": "20"
+},
+{
+"type": "text",
+"id": "max_value",
+"label": "Max value",
+"default": "100"
+}
+]
+}
+]
+}
+{% endschema %}
+

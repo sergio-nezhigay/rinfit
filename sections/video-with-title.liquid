@@ -1,0 +1,309 @@
+<style>
+    a.compagin-promotion {
+        text-decoration: none;
+    }
+    .promotion-latest {
+        background-color: {{ section.settings.section_bg_color }};
+        text-align: center;
+        display: flex;
+    }
+    .promotion-latest .text-content-block {
+        text-align: center;
+        order: 1;
+        padding: 0;
+    }
+    span.content-title {
+        display: block;
+        line-height: 1em;
+        letter-spacing: 1.5px;
+        color:{{ section.settings.section_head_color}};
+        text-transform: capitalize;
+        margin-bottom: 8px;
+    }
+    span.content-promotion {
+        display: block;
+        line-height: 1.3em;
+        text-transform: initial;
+        letter-spacing: 0.5px;
+        color: {{ section.settings.section_desc_color}};
+    }
+    span.cta-promotion {
+        display: block;
+        font-size: {{ section.settings.mobile_cta_font_size }}vw;
+        font-weight: 400;
+        line-height: 1.4em;
+        text-transform: initial;
+        text-decoration: underline;
+        margin: 5vw 0;
+        color: {{ section.settings.section_desc_color}};
+        letter-spacing: 1px;
+        text-underline-position: under;
+
+    }
+    .content-logo {
+        padding: 0;        
+    }
+    img:hover {
+            opacity: 0.8;
+        }
+    @media (max-width: 767px) {
+            .promotion-latest {
+                flex-direction: column;
+            }
+            .promotion-latest .text-content-block {
+                order: 2;
+                padding: 18px;
+            }
+            span.content-title {
+            font-size: {{ section.settings.mobile_heading_font_size }}vw;
+            }
+            span.content-promotion {
+            font-size: {{ section.settings.mobile_desc_font_size }}vw;
+            padding: 8px;
+            }
+            span.cta-promotion {
+            font-size: {{ section.settings.mobile_cta_font_size }}vw;
+            margin: 1.5vw 0;
+            }
+    }
+    @media(min-width: 768px) {            
+        .promotion-latest {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .promotion-latest .text-content-block {
+            padding: 0;
+            width: 50%;
+        }
+        .promotion-latest .campaign-image {
+            width: 50%;
+        }
+        span.content-title {
+            font-size: {{ section.settings.desktop_heading_font_size }}vw;
+        }
+        span.content-promotion {
+            font-size: {{ section.settings.desktop_desc_font_size }}vw;
+            margin: 8px 0;
+            padding: 0 38px;
+        }
+        span.cta-promotion {
+            font-size: {{ section.settings.desktop_cta_font_size }}vw;
+            margin: 1.5vw 0;
+        }
+        .content-logo {
+            padding: 0;
+        }
+    }
+    @media (min-width: 1200px) {
+                .section_layout {
+                max-width: {% if section.settings.section_layout == 'full' %}100%;{% else %}1200px;margin: 0 auto;{% endif %}
+                margin-top: {{ section.settings.section_margin_top }}px;
+                margin-bottom: {{ section.settings.section_margin_bottom }}px;
+                }
+    }
+.promotion-latest .campaign-image {
+order: {% if section.settings.switch %} 2 {% else %} 1 {% endif %};
+}
+.campaign-image img {
+max-width: 100%;
+image-rendering: auto;
+flex-shrink: 0;
+min-width: 100%;
+min-height: 100%;
+}
+</style>
+{%- assign video_mp4_url = video_mp4_url | default: section.settings.video_url -%}
+{%- assign video_controls = false -%}
+{%- assign video_autoplay = true -%}
+{%- assign prm_responsive_height = '' -%}
+<div class="content-asset-container-sh block-margin-bottom">
+<div class="promotion-latest">
+<div class="campaign-image">
+    <video muted playsinline preload="metadata" {% if video_controls %} controls{% endif %}{% if video_autoplay %} autoplay loop{% endif %} class="{% if prm_responsive_height %}rimage__video{% endif %} w-100">
+        <source src="{{ video_mp4_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+<div class="text-content-block">
+<span class="content-title">{{ section.settings.title1 }}</span>
+<span class="content-promotion">
+{{ section.settings.description1 }}
+</span>
+<span class="content-title" style="padding-top: 18px;">{{ section.settings.title2 }}</span>
+<span class="content-promotion">
+{{ section.settings.description2 }}
+</span>
+</div>
+</div>
+</div>
+{% schema %}
+{
+"name": "Video with Title",
+"class": "margin-horizon section_layout",
+"settings": [
+    {
+        "type": "header",
+        "content": "Layout"
+    }, 
+    {
+        "type": "select",
+        "id": "section_layout",
+        "label": "Section Layout",
+        "default": "full",
+        "options": [
+                {
+                    "value": "box",
+                    "label": "box"
+                },
+                {
+                    "value": "full",
+                    "label": "full"
+                }  
+                ] 
+    },   
+    {
+        "type": "range",
+        "id": "section_margin_top",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Margin Top",
+        "default": 10
+    },
+    {
+        "type": "range",
+        "id": "section_margin_bottom",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Margin Bottom",
+        "default": 10
+    },      
+    {
+        "type": "header",
+        "content": "Changing left/right position (Large Image)"
+    },
+    {
+        "type": "checkbox",
+        "id": "switch",
+        "label": "Changing Position (default: Large Image in the right position)",
+        "default": true
+    },
+    {
+        "type": "header",
+        "content": "Left/Top Area"
+    },
+    {
+        "type": "text",
+        "id": "title1",
+        "label": "Title",
+        "default": "What are Rinfit Rings?"
+    },
+    {
+        "type": "textarea",
+        "id": "description1",
+        "label": "Description",
+        "default": "Rinfit’s silicone wedding bands are well known for their high quality, comfort and durability to last you a lifetime, and we stand behind it with a LIFETIME WARRANTY! In Rinfit we know that wedding rings are a symbol of the love we have for our life partner, and like that and like your love lasts forever, so will our wedding rings. The rings are made with great love and care, which means using durable, high-quality Silicone material.."
+    },
+    {
+        "type": "text",
+        "id": "title2",
+        "label": "Title",
+        "default": "The Ring That Fits Your Lifestyle"
+    },
+    {
+        "type": "textarea",
+        "id": "description2",
+        "label": "Description",
+        "default": "Rinfit’s silicone rings are specially engineered to comfortably fit your unique lifestyle, whether you have an active lifestyle or your daily job requires you to work with your hands this is the right ring for you! Among our customers are gym members, athletes, firemen, mechanics, carpenters, electricians, painters, police officers, pregnant women, swimmers, rock climbers, hikers, fishermen, port workers, doctors, military personnel and more."
+    },
+    {
+        "type": "url",
+        "id": "section_url",
+        "label": "Section URL"
+    },
+    {
+        "type": "header",
+        "content": "Right/Bottom Area"
+    },
+    {        
+        "type": "url",
+        "id": "video_url",
+        "label": "Only MP4 video url"
+    },
+    {
+        "type": "header",
+        "content": "Colour"
+    },
+    {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Section Background Colour",
+        "default": "#EDEDED"
+    },
+    {
+        "type": "color",
+        "id": "section_head_color",
+        "label": "Section Text Colour",
+        "default": "#c41230"
+    },
+    {
+        "type": "color",
+        "id": "section_desc_color",
+        "label": "Section Text Colour",
+        "default": "#15315c"
+    },
+    {
+        "type": "header",
+        "content": "Desktop Font Size Settings"
+    },
+    {
+        "type": "range",        
+        "id": "desktop_heading_font_size",
+        "min": 0.5,
+        "max": 4,
+        "step": 0.5,
+        "label": "Desktop Heading Font size",
+        "default": 1.5
+    },
+    {
+        "type": "range",        
+        "id": "desktop_desc_font_size",
+        "min": 0.5,
+        "max": 4,
+        "step": 0.5,
+        "label": "Desktop Description Font size",
+        "default": 1
+    },
+    {
+        "type": "header",
+        "content": "Mobile Font Size Settings"
+    },
+    {
+        "type": "range",        
+        "id": "mobile_heading_font_size",
+        "min": 0.5,
+        "max": 8,
+        "step": 0.5,
+        "label": "Mobile Heading Font size",
+        "default": 1.5
+    },
+    {
+        "type": "range",        
+        "id": "mobile_desc_font_size",
+        "min": 0.5,
+        "max": 8,
+        "step": 0.5,
+        "label": "Mobile Description Font size",
+        "default": 1
+    }
+],
+        "presets": [
+            {
+                "name": "Video with Title",
+                "category": "4) Custom Added Feature"
+            }
+        ]
+}
+{% endschema %}

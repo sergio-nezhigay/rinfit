@@ -1,0 +1,356 @@
+{%- if section.settings.grid_responsive != blank -%}
+    {%- assign grid_responsive = section.settings.grid_responsive | split: ',' -%}
+    {% capture grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+{%- else -%}
+    {% capture grid %}col-12 col-md-{{ section.settings.grid }}{% endcapture %}
+{%- endif -%}
+<div data-section-id="{{ section.id }}" data-section-type="list-collections">
+    <div class="container">
+        <div class="list-collections mb-40 mb-lg-30">
+            <div class="row{% if section.settings.masonry_enable %} masonry invisible{% endif %}">
+                {%- for collection in collections -%}
+                    {%- unless collection.handle == 'frontpage' -%}
+                        <div class="{{ grid }} mb-20 mb-lg-30">
+                            {%- assign matches_block = null -%}
+                            {%- for block in section.blocks -%}
+                                {%- if block.settings.for_collection == collection.handle -%}
+                                    {%- assign matches_block = block -%}
+                                    {%- break -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                            {%- if matches_block.settings.type and matches_block.settings.type != 'extend' -%}
+                                {%- assign prm_type = matches_block.settings.type -%}
+                            {%- else -%}
+                                {%- assign prm_type = section.settings.type -%}
+                            {%- endif -%}
+                            {%- assign prm_image = matches_block.settings.image | default: collection.image | default: collection.products.first.images[0] -%}
+                            {%- assign prm_image_size = section.settings.image_size -%}
+                            {%- assign prm_image_format_pjpg = section.settings.format_pjpg -%}
+                            {%- assign disable_lazyload = section.settings.disable_lazyload -%}
+                            {%- assign video_mp4_url = matches_block.settings.video_mp4_url -%}
+                            {%- assign video_external_url = matches_block.settings.video_external_url -%}
+                            {%- assign video_autoplay = matches_block.settings.video_autoplay -%}
+                            {%- assign prm_url = matches_block.settings.url | default: collection.url -%}
+                            {%- assign text_line_1 = matches_block.settings.text_line_1 | default: collection.title -%}
+                            {% capture collection_info %}{{ 'list_collections.collection_info' | t: count: collection.products.size }}{% endcapture %}
+                            {%- assign text_line_2 = matches_block.settings.text_line_2 | default: collection_info -%}
+                            {%- assign text_line_3 = matches_block.settings.text_line_3 -%}
+                            {%- assign button_1 = matches_block.settings.button_1 -%}
+                            {%- assign animation_from = section.settings.animation_from -%}
+                            {%- assign animation_to = section.settings.animation_to -%}
+                            {%- assign animation_from_opacity = section.settings.animation_from_opacity -%}
+                            {%- assign animation_to_opacity = section.settings.animation_to_opacity -%}
+                            {% include 'promobox' %}
+                        </div>
+                    {%- endunless -%}
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    {%- if section.settings.masonry_enable -%}
+        Loader.require({type: "script", name: "plugin_masonry"});
+        Loader.require({type: "script", name: "masonry"});
+    {%- endif -%}
+    Loader.require({type: "script", name: "list_collections"});
+</script>
+
+{% schema %}
+{
+    "name": "List collections",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Grid"
+        },
+        {
+            "type": "select",
+            "id": "grid",
+            "label": "Size",
+            "default": "4",
+            "options": [
+                {
+                    "value": "6",
+                    "label": "6/12"
+                },
+                {
+                    "value": "4",
+                    "label": "4/12"
+                },
+                {
+                    "value": "3",
+                    "label": "3/12"
+                },
+                {
+                    "value": "2",
+                    "label": "2/12"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "grid_responsive",
+            "label": "Responsive size",
+            "info": "Example is '12,12,12,12,12', 1 < value < 12"
+        },
+        {
+            "type": "checkbox",
+            "id": "masonry_enable",
+            "label": "Enable masonry",
+            "default": false
+        },
+        {
+            "type": "header",
+            "content": "Settings"
+        },
+        {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "default": "list_2",
+            "options": [
+                {
+                    "value": "clean",
+                    "label": "Clean (Without text)"
+                },
+                {
+                    "value": "list_1",
+                    "label": "Type #1 (Below the image)"
+                },
+                {
+                    "value": "list_2",
+                    "label": "Type #2 (Ribbon bottom the image)"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "image_size",
+            "min": 200,
+            "max": 2000,
+            "step": 100,
+            "unit": "px",
+            "label": "Image size",
+            "default": 900
+        },
+        {
+            "type": "checkbox",
+            "id": "format_pjpg",
+            "label": "Enable format 'pjpg'",
+            "info": "Don't work with transparent images",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "disable_lazyload",
+            "label": "Disable lazy load",
+            "default": false
+        },
+        {
+            "type": "header",
+            "content": "Animation"
+        },
+        {
+            "type": "select",
+            "id": "animation_from",
+            "label": "From",
+            "default": "default",
+            "options": [
+                {
+                    "value": "default",
+                    "label": "Default"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "top-left",
+                    "label": "Top left"
+                },
+                {
+                    "value": "top",
+                    "label": "Top"
+                },
+                {
+                    "value": "top-right",
+                    "label": "Top right"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "bottom-right",
+                    "label": "Bottom right"
+                },
+                {
+                    "value": "bottom",
+                    "label": "Bottom"
+                },
+                {
+                    "value": "bottom-left",
+                    "label": "Bottom left"
+                },
+                {
+                    "value": "left",
+                    "label": "Left"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "animation_to",
+            "label": "To",
+            "default": "center",
+            "options": [
+                {
+                    "value": "default",
+                    "label": "Default"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "top-left",
+                    "label": "Top left"
+                },
+                {
+                    "value": "top",
+                    "label": "Top"
+                },
+                {
+                    "value": "top-right",
+                    "label": "Top right"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "bottom-right",
+                    "label": "Bottom right"
+                },
+                {
+                    "value": "bottom",
+                    "label": "Bottom"
+                },
+                {
+                    "value": "bottom-left",
+                    "label": "Bottom left"
+                },
+                {
+                    "value": "left",
+                    "label": "Left"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "animation_from_opacity",
+            "label": "From opacity",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "animation_to_opacity",
+            "label": "To opacity",
+            "default": true
+        }
+    ],
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "for_collection",
+                    "label": "For collection"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type",
+                    "default": "extend",
+                    "options": [
+                        {
+                            "value": "extend",
+                            "label": "Extend global settings"
+                        },
+                        {
+                            "value": "clean",
+                            "label": "Clean (Without text)"
+                        },
+                        {
+                            "value": "list_1",
+                            "label": "Type #1 (Below the image)"
+                        },
+                        {
+                            "value": "list_2",
+                            "label": "Type #2 (Ribbon bottom the image)"
+                        }
+                    ]
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "video_mp4_url",
+                    "label": "Video Url",
+                    "info": "Video type is \"mp4\""
+                },
+                {
+                    "type": "video_url",
+                    "id": "video_external_url",
+                    "label": "Youtube or Vimeo video URL",
+                    "accept": ["youtube", "vimeo"]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "video_autoplay",
+                    "label": "Autoplay",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "video_controls",
+                    "label": "Controls",
+                    "default": true
+                },
+                {
+                    "type": "url",
+                    "id": "url",
+                    "label": "Url"
+                },
+                {
+                    "type": "text",
+                    "id": "text_line_1",
+                    "label": "Text line 1"
+                },
+                {
+                    "type": "text",
+                    "id": "text_line_2",
+                    "label": "Text line 2"
+                },
+                {
+                    "type": "text",
+                    "id": "text_line_3",
+                    "label": "Text line 3"
+                },
+                {
+                    "type": "text",
+                    "id": "button_1",
+                    "label": "Button text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

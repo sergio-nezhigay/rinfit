@@ -1,0 +1,14 @@
+{% comment %}
+<div class="spr{% if hide_counter %} spr--text-hide{% endif %}{% if hide_mobile_counter %} spr--text-hide-mobile{% endif %}{% if hide_empty %} spr--empty-hide{% endif %} d-flex flex-column">
+    <span class="shopify-product-reviews-badge" data-id="{{ id }}">
+        {%- if settings.product_show_review_loading -%}
+            {{ 'products.product.reviews.loading' | t }}
+        {%- endif -%}
+    </span>
+</div>
+{% endcomment %}
+
+<a href="#looxReviews">
+	<div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}">
+	</div>
+</a>

@@ -1,0 +1,1385 @@
+//Size List
+window.onload = function() {
+  $(document).on("click", ".stack-builder__head__sizes__circles__single", function() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var elems = document.querySelectorAll(".stack-builder__head__sizes__circles__single");
+  var size = b.getAttribute("data-size");
+       [].forEach.call(elems, function(el) {
+           el.classList.remove("active");
+       });
+  b.classList.add("active"); 
+  if (size == 1) {
+      fetch_size1();
+  }
+  if (size == 2) {
+      fetch_size2();
+  }
+  if (size == 3) {
+      fetch_size3();
+  }
+  if (size == 4) {
+      fetch_size4();
+  }
+  if (size == 5) {
+      fetch_size5();
+  }
+  if (size == 6) {
+      fetch_size6();
+  }
+  if (size == 7) {
+      fetch_size7();
+  }
+  if (size == 8) {
+      fetch_size8();
+  }
+  if (size == 9) {
+      fetch_size9();
+  }
+  if (size == 10) {
+      fetch_size10();
+  }
+  if (size == 11) {
+      fetch_size11();
+  }
+  if (size == 12) {
+      fetch_size12();
+  }
+  if (size == 13) {
+      fetch_size13();
+  }
+  if (size == 14) {
+      fetch_size14();
+  }
+  if (size == 15) {
+      fetch_size15();
+  }
+  if (size == 16) {
+      fetch_size16();
+  }
+  if (size == 17) {
+      fetch_size17();
+  }
+  if (size == 18) {
+      fetch_size18();
+  }
+  if (size == 19) {
+      fetch_size19();
+  }
+  if (size == 20) {
+      fetch_size20();
+  }
+/*else{
+  var e = document.getElementById('stack-products-slider-' + d);
+  e.querySelectorAll('.single-product-container').forEach(n => n.remove());
+  e.innerHTML = block_codes;   
+  }*/
+                  
+ /*else if (size == 4 && d !== 'tab-all') {
+   block_codes = "{% for block in section.blocks %}{% if block.type == 'tab' %}<div id='stack-products-slider-{{ block.settings.tabname }}' class='stack-products-slider'>{% for product in collections[block.settings.tabcollection].products %}<div data-id='{{ product.id }}' class='single-product-container' style='border-color: transparent;'><div data-id='{{ product.id }}' class='single-product'><img src='{{ product.featured_image | img_url: '600x' }}' class='main-image'><div class='product-info'><div class='droppable-container has-item' data-id='{{ product.id }}' data-price='{{ product.price | money_without_currency }}' style='display: none'><div class='item-reorder'><img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}'><span>REORDER</span><img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}'></div><div class='ring-stack droppable'><div class='single-product'><img src='{{ product.featured_image | img_url: '600x' }}' alt='stack image' class='alt-image'></div></div><div class='item-delete'><img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'><span>DELETE</span></div></div><div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'><div class='ring-stack droppable'><span class='droppable-placeholder'>ADD RING</span></div></div><span class='product-title'>{{ product.title }}</span><span>{{ product.type }}</span><span flow-variant='{{ product.id }}' flow-selector='prices.item.label' flow-default='{{ product.price | money }}' class=' flow-localized'>{{ product.price | money }}</span></div></div></div>{% endfor %}</div>{% endif %}{% endfor %}"
+  }
+  if (size == 5 && d == 'tab-all') {
+   block_codes = "{% for block in section.blocks %}{% if block.type == 'tab' %}{% for product in collections[block.settings.tabcollection].products %}{% for variant in product.variants %}{% assign variant_size_title = variant.title | downcase %}{% if variant_size_title contains 'size 5' %}<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'><div data-id='{{ variant.id }}' class='single-product'><img src='{{ variant.image | img_url: '600x' }}' class='main-image'><div class='product-info'><div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'><div class='item-reorder'><img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'><span>REORDER</span><img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'></div><div class='ring-stack droppable'><div class='single-product'><img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'></div></div> <div class='item-delete'><img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'><span>DELETE</span></div></div><div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'><div class='ring-stack droppable'><span class='droppable-placeholder'>ADD RING</span></div></div><span class='product-title'>{{ variant.title }}</span><span>{{ variant.type }}</span><span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span></div></div></div>{% endif %}{% endfor %}{% endfor %}{% endif %}{% endfor %}"; 
+  }else if(size == 5 && d !== 'tab-all') {
+   block_codes = "{% for block in section.blocks %}{% if block.type == 'tab' %}<div id='stack-products-slider-{{ block.settings.tabname }}' class='stack-products-slider'>{% for product in collections[block.settings.tabcollection].products %}<div data-id='{{ product.id }}' class='single-product-container' style='border-color: transparent;'><div data-id='{{ product.id }}' class='single-product'><img src='{{ product.featured_image | img_url: '600x' }}' class='main-image'><div class='product-info'><div class='droppable-container has-item' data-id='{{ product.id }}' data-price='{{ product.price | money_without_currency }}' style='display: none'><div class='item-reorder'><img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}'><span>REORDER</span><img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}'></div><div class='ring-stack droppable'><div class='single-product'><img src='{{ product.featured_image | img_url: '600x' }}' alt='stack image' class='alt-image'></div></div><div class='item-delete'><img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'><span>DELETE</span></div></div><div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'><div class='ring-stack droppable'><span class='droppable-placeholder'>ADD RING</span></div></div><span class='product-title'>{{ product.title }}</span><span>{{ product.type }}</span><span flow-variant='{{ product.id }}' flow-selector='prices.item.label' flow-default='{{ product.price | money }}' class=' flow-localized'>{{ product.price | money }}</span></div></div></div>{% endfor %}</div>{% endif %}{% endfor %}"
+  }
+*/
+
+});
+
+//size 1
+function fetch_size1() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 1' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }
+//size 2
+function fetch_size2() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 2' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }    
+//size 3
+function fetch_size3() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 3' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }
+//size 4
+function fetch_size4() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 4' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }
+//size 5
+function fetch_size5() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 5' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }     
+//size 6
+function fetch_size6() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 6' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+  //size 7
+function fetch_size7() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 7' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }   
+//size 8
+function fetch_size8() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 8' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 9
+function fetch_size9() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 9' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    }   
+//size 10
+function fetch_size10() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 10' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 11
+function fetch_size11() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 11' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 12
+function fetch_size12() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 12' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 13
+function fetch_size13() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 13' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 14
+function fetch_size14() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 14' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 15
+function fetch_size15() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 15' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 16
+function fetch_size16() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 16' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 17
+function fetch_size17() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 17' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 18
+function fetch_size18() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 18' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 19
+function fetch_size19() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 19' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+//size 20
+function fetch_size20() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+  var c = document.getElementById("stack-products-slider-tab-all");
+  var tabs = document.querySelectorAll(".tab-item");
+  var d;
+  [].forEach.call(tabs, function(el) {
+          if(el.classList.contains("active")) {
+           d = el.getAttribute("id");
+          } 
+       });
+   var block_codes = "{% for block in section.blocks %}" +
+                  "{% if block.type == 'tab' %}" + 
+                  "{% for product in collections[block.settings.tabcollection].products %}" + 
+                  "{% for variant in product.variants %}" +
+                  "{% assign variant_size_title = variant.title | downcase %}" +
+                  "{% if variant_size_title contains 'size 20' %}" +
+                  "<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'>" +
+                  "<div data-id='{{ variant.id }}' class='single-product'>" + 
+                  "<img src='{{ variant.image | img_url: '600x' }}' class='main-image'>" +
+                  "<div class='product-info'>" +
+                  "<div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'>" +
+                  "<div class='item-reorder'>" +
+                  "<img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'>" +
+                  "<span>REORDER</span>" +
+                  "<img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'>" +
+                  "</div>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<div class='single-product'>" +
+                  "<img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='item-delete'>" +
+                  "<img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'>" +
+                  "<span>DELETE</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'>" +
+                  "<div class='ring-stack droppable'>" +
+                  "<span class='droppable-placeholder'>ADD RING</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "<span class='product-title'>{{ variant.title }}</span>" +
+                  "<span>{{ variant.type }}</span>" +
+                  "<span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "{% endif %}" +
+                  "{% endfor %}" +
+                  "{% endfor %}" + 
+                  "{% endif %}" +
+                  "{% endfor %}"; 
+               if(d == 'tab-all') {
+               c.querySelectorAll('.single-product-container').forEach(n => n.remove());
+               c.innerHTML = block_codes;
+               }
+    } 
+// Tab List
+$(document).on("click", ".tab-item", function() {
+  var a = $(this).attr("id");
+  var b = document.getElementById(a);
+//   var c = document.getElementById("stack-products-slider-" + a);
+//  block_codes = "<div id='stack-products-slider-" + a + "' class='stack-products-slider'>";
+//   block_codes = block_codes + "{% for block in section.blocks %}{% if block.type == 'tab' %}{% for product in collections[block.settings.tabcollection].products %}{% for variant in product.variants %}{% assign variant_size_default = 'size ' | append: section.settings.size_default | downcase %}{% assign variant_size_title = variant.title | downcase %}{% if variant_size_title contains variant_size_default %}<div data-id='{{ variant.id }}' class='single-product-container' id='product-{{ variant.id }}' data-size='{{ variant.title }}' style='border-color: transparent;'><div data-id='{{ variant.id }}' class='single-product'><img src='{{ variant.image | img_url: '600x' }}' class='main-image'><div class='product-info'><div class='droppable-container has-item' id='{{ 'div' | append: variant.id }}' data-id='{{ variant.id }}' data-price='{{ variant.price | money_without_currency }}' style='display: none'><div class='item-reorder'><img src='{{ 'icon-arrow-down.png' | asset_img_url: '28x' }}' onclick='itemmovedown(this)'><span>REORDER</span><img src='{{ 'icon-arrow-up.png' | asset_img_url: '28x' }}' onclick='itemmoveup(this)'></div><div class='ring-stack droppable'><div class='single-product'><img src='{{ variant.image | img_url: '600x' }}' alt='stack image' class='alt-image'></div></div> <div class='item-delete'><img src='{{ 'icon-delete.png' | asset_img_url: '18x' }}'><span>DELETE</span></div></div><div class='droppable-container has-no-item' style='display: none;margin-top: 8px;'><div class='ring-stack droppable'><span class='droppable-placeholder'>ADD RING</span></div></div><span class='product-title'>{{ variant.title }}</span><span>{{ variant.type }}</span><span flow-variant='{{ variant.id }}' flow-selector='prices.item.label' flow-default='{{ variant.price | money }}' class=' flow-localized'>{{ variant.price | money }}</span></div></div></div>{% endif %}{% endfor %}{% endfor %}{% endif %}{% endfor %}"; 
+//  block_codes = block_codes + "</div>";
+//  e.querySelectorAll('.single-product-container').forEach(n => n.remove());
+//  c.innerHTML = block_codes;
+  var elems = document.querySelectorAll(".tab-item");
+       [].forEach.call(elems, function(el) {
+           el.classList.remove("active");
+       });
+/*   var elems = document.querySelectorAll(".stack-products-slider");
+       [].forEach.call(elems, function(el) {
+           el.style.display = "none";
+       });*/
+  b.classList.add("active");   
+//    c.style.display = "flex";   
+//   console.log(c);
+});
+// Product Add to Stack
+$(document).on("click", ".product-info", function() { 
+  var itemcount = 0;
+  var a = document.getElementById("dropzoneitem");
+  var b = this.children[0];
+  var c = this.children[1];
+  var f = document.getElementById("stack-button-to-cart");
+  var total = 0;
+  var totalcart = document.getElementById("totalcartamount");
+  var elems = document.querySelectorAll(".has-no-item");
+       [].forEach.call(elems, function(el) {
+           itemcount = itemcount + 1;
+           if (el.style.display == "block") {
+               el.remove();
+           }                                     
+       }); 
+  if(itemcount<1) {
+               f.classList.add("disabled");
+               f.classList.remove("enabled");
+  }else{
+               f.classList.add("enabled");
+               f.classList.remove("disabled");
+  }                   
+  var d = b.cloneNode(true);
+  var e = c.cloneNode(true);
+  d.classList.add("stacktocart");
+  e.setAttribute("id", "hasnoitemstacktocart");
+  a.appendChild(d).style.display = "block";
+  a.appendChild(e).style.display = "block";
+  var elems = document.querySelectorAll(".stacktocart");
+       [].forEach.call(elems, function(el) {
+           total = total + Number(el.getAttribute("data-price"));
+           totalcart.innerHTML = "Total: {{ '0.00' | money | remove: '0.00' }}" + total.toFixed(2);                         
+       });
+
+});
+
+// Left Side Ring Stack Delete
+$(document).on("click", ".item-delete", function() { 
+  var itemcount = 0;
+  var a = document.getElementById("dropzoneitem");
+  var b = document.getElementById("stack-button-to-cart");
+  var clonehasnoitem = document.getElementById("hasnoitemstacktocart");
+  var cloneiflessthantwo = clonehasnoitem.cloneNode(true);
+  this.parentElement.remove();
+  var total = 0;
+  var totalcart = document.getElementById("totalcartamount");
+  var elems = document.querySelectorAll(".stacktocart");
+       [].forEach.call(elems, function(el) {
+           itemcount = itemcount + 1;
+       });
+  if(itemcount<1) {
+               a.appendChild(cloneiflessthantwo);
+               b.classList.add("disabled");
+               b.classList.remove("enabled");
+  }else{
+               b.classList.add("enabled");
+               b.classList.remove("disabled");
+  }                   
+  var elems = document.querySelectorAll(".stacktocart");
+       [].forEach.call(elems, function(el) {
+           total = total + Number(el.getAttribute("data-price"));                 
+       });
+  totalcart.innerHTML = "Total: {{ '0.00' | money | remove: '0.00' }}" + total.toFixed(2);        
+});
+
+// Item move down
+function itemmovedown(el) {
+  var parentid = el.parentNode.parentNode.getAttribute("id");
+  var refnode = document.getElementById(parentid);
+  var lastsiblingid = refnode.nextSibling.getAttribute("id");
+  var lastsibling = document.getElementById(lastsiblingid);
+  var hasnoitem = lastsibling.classList.contains("has-no-item");
+  if(hasnoitem == false) {
+  var nextsibling = document.getElementById(refnode.nextSibling.getAttribute("id"));
+  $(refnode).insertAfter(nextsibling);      
+  }
+}
+// Item move up
+function itemmoveup(el) {
+  var parentid = el.parentNode.parentNode.getAttribute("id");
+  var refnode = document.getElementById(parentid);
+  var grandparentid = refnode.parentNode.getAttribute("id");
+  var grandparent = document.getElementById(grandparentid);
+  var firstchildid = grandparent.firstElementChild.getAttribute("id");
+  var firstchild = document.getElementById(firstchildid);
+ if(firstchild !== refnode) {
+   var prevsiblingid = refnode.previousSibling.getAttribute("id");
+   var prevsibling = document.getElementById(prevsiblingid);
+   $(refnode).insertBefore(prevsibling);
+  } 
+}
+};

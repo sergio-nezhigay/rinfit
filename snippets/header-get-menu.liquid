@@ -1,0 +1,32 @@
+{%- if section.settings.menu -%}
+    {%- assign menu = linklists[section.settings.menu] -%}
+    <nav class="menu {% if is_main_menu %}menu--main{% else %}menu--secondary{% endif %}{% if menu.levels > 1 %} js-menu{% endif %} js-position" data-js-position-name="menu">
+        <div class="menu__panel{% if settings.color_header_menu_h_bg == blank or settings.color_header_menu_h_bg == 'rgba(0,0,0,0)' %} menu__panel--on-a-par{% endif %} menu__list menu__level-01 d-flex flex-column flex-lg-row flex-lg-wrap{% if centered %} justify-content-lg-center{% endif %}{% if menu_offset %} menu__panel--bordered{% endif %}">
+            <div class="menu__curtain d-none position-lg-absolute"></div>
+            {%- for link in menu.links -%}
+                {%- capture childrens -%}
+                    {%- assign megamenu = null -%}
+                    {%- for block in section.blocks -%}
+                        {%- if block.type == 'megamenu' -%}
+                            {%- assign for_item_handle = block.settings.for_item | handle -%}
+                            {%- if for_item_handle == link.handle -%}
+                                {%- assign megamenu = block.settings -%}
+                                {% include 'header-get-menu-megamenu' %}
+                            {%- endif -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- if megamenu == null -%}
+                        {% include 'header-get-menu-dropdown' %}
+                    {%- endif -%}
+                {% endcapture %}
+                <div class="menu__item {% if link.levels > 0 %}menu__item--has-children{% if megamenu == null %} position-lg-relative{% endif %}{% endif %}">
+                    {% include 'header-res-menu-labels' with link: link %}
+                    <a href="{{ link.url }}" class="d-flex align-items-center{% if section.settings.show_menu_hover_underline %} text-underline-hover{% endif %}">{% include 'header-get-menu-icons' with link: link %}<span>{{ link.title }}</span>{{ labels }}{% if link.levels > 0 or megamenu != null %} {% if section.settings.show_menu_arrows %}<i class="menu__item_arrow d-none d-lg-flex position-lg-relative">{% include 'icon-theme-229' %}</i>{% endif %}{% if link.levels > 0 %}<i class="menu__item_arrow d-lg-none ml-auto">{% include 'icon-theme-231' %}</i>{% endif %}{% endif %}</a>
+                    {%- if link.levels > 0 or megamenu != null -%}
+                        {{ childrens }}
+                    {%- endif -%}
+                </div>
+            {%- endfor -%}
+        </div>
+    </nav>
+{%- endif -%}

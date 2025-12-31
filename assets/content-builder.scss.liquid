@@ -1,0 +1,443 @@
+@charset "UTF-8";
+
+//utils
+//media
+
+
+//color
+@function color($color, $default) {
+  @if $color == false or lightness($color) == 0 {
+    @if $color != #000000 {
+      $color: $default;
+    }
+  }
+
+  @if $color == $theme-transparent {
+    $color: transparent;
+  }
+
+  @return $color;
+}
+
+@mixin color-class($class, $prop, $color) {
+  @if $color == 'transparent' or $color == $theme-transparent or $color != false and lightness($color) != 0 {
+    @if $color == $theme-transparent {
+      $color: transparent;
+    }
+    .colorize-#{$class} {
+      #{$prop}: $color;
+    }
+    .colorize-#{$class}-h:hover {
+      @media (min-width: $screen-lg-up) {
+        #{$prop}: $color;
+      }
+    }
+    .colorize-#{$class}-imp {
+      #{$prop}: $color !important;
+    }
+    .colorize-#{$class}-h-imp:hover {
+      @media (min-width: $screen-lg-up) {
+        #{$prop}: $color !important;
+      }
+    }
+    .colorize-#{$class}-ins > * {
+      #{$prop}: $color;
+    }
+  }
+}
+
+@mixin colorize-btn($button-bg, $button-bd, $button-c, $button-h-bg, $button-h-bd, $button-h-c, $button-act-bg, $button-act-bd, $button-act-c) {
+  background-color: $button-bg;
+  border-color: $button-bd;
+  @include link-color($button-c);
+  &:focus {
+    color: $button-c;
+  }
+  &,
+  & span {
+    color: $button-c;
+  }
+  & .icon {
+    fill: $button-c;
+  }
+  &:hover {
+    @media (min-width: $screen-lg-up) {
+      background-color: $button-h-bg;
+      border-color: $button-h-bd;
+      color: $button-h-c;
+    }
+    span {
+      @media (min-width: $screen-lg-up) {
+        color: $button-h-c;
+      }
+    }
+    .icon {
+      @media (min-width: $screen-lg-up) {
+        fill: $button-h-c;
+      }
+    }
+  }
+  &.active {
+    background-color: $button-act-bg;
+    border-color: $button-act-bd;
+    @include link-color($button-act-c);
+    &:focus {
+      color: $button-act-c;
+    }
+    span {
+      color: $button-act-c;
+    }
+    .icon {
+      fill: $button-act-c;
+    }
+  }
+};
+
+@mixin color-class-group($class, $color) {
+  @include color-class('#{$class}-bg', 'background-color', $color);
+  @include color-class('#{$class}-c', 'color', $color);
+  @include color-class('#{$class}-f', 'fill', $color);
+  @include color-class('#{$class}-bd', 'border-color', $color);
+}
+
+@mixin link-color($arguments...) {
+  &,
+  &:visited,
+  &:active,
+  &:link {
+    color: $arguments;
+  }
+}
+
+@mixin input-color($arguments...) {
+  color: $arguments;
+  &::-webkit-input-placeholder { color: $arguments; }
+  &::-moz-placeholder { color: $arguments; }
+  &:-ms-input-placeholder { color: $arguments; }
+  &:-moz-placeholder { color: $arguments; }
+}
+
+@mixin desktop-hover-color($property, $arguments) {
+  &:hover {
+    @media (min-width: $screen-lg-up) {
+      #{$property}: $arguments;
+    }
+  }
+}
+
+@mixin shadow($arguments...) {
+  -webkit-box-shadow: $arguments;
+  -moz-box-shadow: $arguments;
+  box-shadow: $arguments;
+}
+
+//animation
+@mixin transition($arguments...) {
+  -webkit-transition: $arguments;
+  -moz-transition: $arguments;
+  -ms-transition: $arguments;
+  transition: $arguments;
+}
+
+//settings
+$screen-xs-down: 0;
+$screen-sm-down: 540px;
+$screen-md-down: 777px;
+$screen-lg-down: 1024px;
+$screen-xl-down: 1259px;
+
+$screen-xs-up: 0;
+$screen-sm-up: 541px;
+$screen-md-up: 778px;
+$screen-lg-up: 1025px;
+$screen-xl-up: 1260px;
+
+
+//colorize
+/*GLOBAL*/
+//palette
+$theme: {{ settings.color_theme }};
+$theme2: {{ settings.color_theme2 }};
+$theme3: {{ settings.color_theme3 }};
+$theme4: {{ settings.color_theme4 }};
+$theme5: {{ settings.color_theme5 }};
+$theme6: {{ settings.color_theme6 }};
+$theme7: {{ settings.color_theme7 }};
+$theme8: {{ settings.color_theme8 }};
+$theme9: {{ settings.color_theme9 }};
+$theme10: {{ settings.color_theme10 }};
+$theme11: {{ settings.color_theme11 }};
+$theme-transparent: {{ settings.color_theme_transparent }};
+$theme-custom: {{ settings.color_theme_custom | default: false }};
+$theme-custom2: {{ settings.color_theme_custom2 | default: false }};
+$theme-custom3: {{ settings.color_theme_custom3 | default: false }};
+$theme-custom4: {{ settings.color_theme_custom4 | default: false }};
+$theme-custom5: {{ settings.color_theme_custom5 | default: false }};
+
+//body
+$theme-primary: color({{ settings.color_theme_primary | default: false }}, $theme);
+$theme-body: color({{ settings.color_theme_body | default: false }}, $theme2);
+
+//typography
+$theme-c: color({{ settings.color_theme_c | default: false }}, $theme3);
+$theme-paragraph-c: color({{ settings.color_theme_paragraph_c | default: false }}, $theme-c);
+$theme-head-c: color({{ settings.color_theme_head_c | default: false }}, $theme);
+$theme-link-c: color({{ settings.color_theme_link_c | default: false }}, $theme);
+$theme-link-act-c: color({{ settings.color_theme_link_act_c | default: false }}, $theme);
+$theme-success: color({{ settings.color_theme_success | default: false }}, $theme7);
+$theme-error: color({{ settings.color_theme_error | default: false }}, $theme8);
+
+/*ELEMENTS & BLOCKS*/
+//inputs
+$input-bg: color({{ settings.color_input_bg | default: false }}, $theme2);
+$input-bd: color({{ settings.color_input_bd | default: false }}, $theme5);
+$input-c: color({{ settings.color_input_c | default: false }}, $theme-c);
+$input-f-bg: color({{ settings.color_input_f_bg | default: false }}, $theme2);
+$input-f-bd: color({{ settings.color_input_f_bd | default: false }}, $theme-primary);
+
+//buttons
+$button-bg: color({{ settings.color_btn_bg | default: false }}, $theme2);
+$button-bd: color({{ settings.color_btn_bd | default: false }}, $theme-primary);
+$button-c: color({{ settings.color_btn_c | default: false }}, $theme-primary);
+$button-h-bg: color({{ settings.color_btn_h_bg | default: false }}, $theme-primary);
+$button-h-bd: color({{ settings.color_btn_h_bd | default: false }}, $theme-primary);
+$button-h-c: color({{ settings.color_btn_h_c | default: false }}, $theme2);
+$button-act-bg: color({{ settings.color_btn_act_bg | default: false }}, $button-h-bg);
+$button-act-bd: color({{ settings.color_btn_act_bd | default: false }}, $button-h-bd);
+$button-act-c: color({{ settings.color_btn_act_c | default: false }}, $button-h-c);
+$button2-bg: color({{ settings.color_btn2_bg | default: false }}, $theme-primary);
+$button2-bd: color({{ settings.color_btn2_bd | default: false }}, $theme2);
+$button2-c: color({{ settings.color_btn2_c | default: false }}, $theme2);
+$button2-h-bg: color({{ settings.color_btn2_h_bg | default: false }}, $theme2);
+$button2-h-bd: color({{ settings.color_btn2_h_bd | default: false }}, $theme2);
+$button2-h-c: color({{ settings.color_btn2_h_c | default: false }}, $theme-primary);
+$button2-act-bg: color({{ settings.color_btn2_act_bg | default: false }}, $button2-h-bg);
+$button2-act-bd: color({{ settings.color_btn2_act_bd | default: false }}, $button2-h-bd);
+$button2-act-c: color({{ settings.color_btn2_act_c | default: false }}, $button2-h-c);
+$button3-bg: color({{ settings.color_btn3_bg | default: false }}, $theme-primary);
+$button3-bd: color({{ settings.color_btn3_bd | default: false }}, $theme-primary);
+$button3-c: color({{ settings.color_btn3_c | default: false }}, $theme2);
+$button3-h-bg: color({{ settings.color_btn3_h_bg | default: false }}, $theme2);
+$button3-h-bd: color({{ settings.color_btn3_h_bd | default: false }}, $theme-primary);
+$button3-h-c: color({{ settings.color_btn3_h_c | default: false }}, $theme-primary);
+$button3-act-bg: color({{ settings.color_btn3_act_bg | default: false }}, $button3-h-bg);
+$button3-act-bd: color({{ settings.color_btn3_act_bd | default: false }}, $button3-h-bd);
+$button3-act-c: color({{ settings.color_btn3_act_c | default: false }}, $button3-h-c);
+$button4-bg: color({{ settings.color_btn4_bg | default: false }}, $theme11);
+$button4-bd: color({{ settings.color_btn4_bd | default: false }}, $theme11);
+$button4-c: color({{ settings.color_btn4_c | default: false }}, $theme-primary);
+$button4-h-bg: color({{ settings.color_btn4_h_bg | default: false }}, $theme11);
+$button4-h-bd: color({{ settings.color_btn4_h_bd | default: false }}, $theme-primary);
+$button4-h-c: color({{ settings.color_btn4_h_c | default: false }}, $theme-primary);
+$button4-act-bg: color({{ settings.color_btn4_act_bg | default: false }}, $theme11);
+$button4-act-bd: color({{ settings.color_btn4_act_bd | default: false }}, $theme-primary);
+$button4-act-c: color({{ settings.color_btn4_act_c | default: false }}, $theme-primary);
+$button5-bg: color({{ settings.color_btn5_bg | default: false }}, $theme2);
+$button5-bd: color({{ settings.color_btn5_bd | default: false }}, $theme2);
+$button5-c: color({{ settings.color_btn5_c | default: false }}, $theme-primary);
+$button5-h-bg: color({{ settings.color_btn5_h_bg | default: false }}, $theme-primary);
+$button5-h-bd: color({{ settings.color_btn5_h_bd | default: false }}, $theme-primary);
+$button5-h-c: color({{ settings.color_btn5_h_c | default: false }}, $theme2);
+$button5-act-bg: color({{ settings.color_btn5_act_bg | default: false }}, $button5-h-bg);
+$button5-act-bd: color({{ settings.color_btn5_act_bd | default: false }}, $button5-h-bd);
+$button5-act-c: color({{ settings.color_btn5_act_c | default: false }}, $button5-h-c);
+$button-text-c: color({{ settings.color_btn_text_c | default: false }}, $theme-primary);
+
+//labels
+$label-c: color({{ settings.color_label_c | default: false }}, $theme2);
+$label-sale-bg: color({{ settings.color_label_sale | default: false }}, $theme8);
+$label-new-bg: color({{ settings.color_label_new | default: false }}, $theme9);
+$label-hot-bg: color({{ settings.color_label_hot | default: false }}, $theme10);
+$label-out-stock-bg: color({{ settings.color_label_out_stock | default: false }}, $theme3);
+$label-in-stock-bg: color({{ settings.color_label_in_stock | default: false }}, $theme7);
+
+//product
+$product-collection-title-c: color({{ settings.color_product_collection_title_c | default: false }}, $theme);
+$product-collection-collections-c: color({{ settings.color_product_collection_collections_c | default: false }}, $theme3);
+$product-page-title-c: color({{ settings.color_product_page_title_c | default: false }}, $theme);
+$product-page-collections-c: color({{ settings.color_product_page_collections_c | default: false }}, $theme3);
+$product-page-details-buttons-c: color({{ settings.color_product_page_details_buttons_c | default: false }}, $theme);
+
+//header
+$header-tape-bg: color({{ settings.color_header_tape_bg | default: false }}, $theme-primary);
+$header-tape-c: color({{ settings.color_header_tape_c | default: false }}, $theme2);
+$header-tape-btn-close-c: color({{ settings.color_header_tape_btn_close_c | default: false }}, $theme3);
+$header-info-line-bg: color({{ settings.color_header_info_line_bg | default: false }}, $theme2);
+$header-info-line-c: color({{ settings.color_header_info_line_c | default: false }}, $theme-c);
+$header-social-media-c: color({{ settings.color_header_social_media_c | default: false }}, $theme6);
+$header-social-media-h-c: color({{ settings.color_header_social_media_h_c | default: false }}, $theme);
+$header-top-line-bg: color({{ settings.color_header_top_line_bg | default: false }}, $theme2);
+$header-bottom-line-bg: color({{ settings.color_header_bottom_line_bg | default: false }}, $theme2);
+$header-additional-line-bg: color({{ settings.color_header_additional_line_bg | default: false }}, $theme2);
+$header-additional-line-c: color({{ settings.color_header_additional_line_c | default: false }}, $theme-c);
+$header-additional-line-highlighted-c: color({{ settings.color_header_additional_line_highlighted_c | default: false }}, $theme);
+$header-additional-line-account-c: color({{ settings.color_header_additional_line_account_c | default: false }}, $theme);
+$header-additional-line-account-h-c: color({{ settings.color_header_additional_line_account_h_c | default: false }}, $theme-c);
+$header-additional-line-services-c: color({{ settings.color_header_additional_line_services_c | default: false }}, $theme);
+$header-additional-line-services-h-c: color({{ settings.color_header_additional_line_services_h_c | default: false }}, $theme-c);
+$header-m-bg: color({{ settings.color_header_m_bg | default: false }}, $theme2);
+$header-d-bd: color({{ settings.color_header_d_bd | default: false }}, $theme5);
+$header-m-bd: color({{ settings.color_header_m_bd | default: false }}, $theme5);
+$header-btns-d-c: color({{ settings.color_header_btns_d_c | default: false }}, $theme);
+$header-btns-d-h-c: color({{ settings.color_header_btns_d_h_c | default: false }}, $theme3);
+$header-btns-sticky-c: color({{ settings.color_header_btns_sticky_c | default: false }}, $header-btns-d-c);
+$header-btns-sticky-h-c: color({{ settings.color_header_btns_sticky_h_c | default: false }}, $header-btns-d-h-c);
+$header-btns-m-c: color({{ settings.color_header_btns_m_c | default: false }}, $theme);
+$header-counter-d-c: color({{ settings.color_header_counter_c | default: false }}, $header-btns-d-c);
+$header-counter-d-h-c: color({{ settings.color_header_counter_c | default: false }}, $header-btns-d-h-c);
+$header-counter-m-c: color({{ settings.color_header_counter_c | default: false }}, $header-btns-m-c);
+$header-btn-search-d-c: color({{ settings.color_header_btn_search_d_c | default: false }}, $header-btns-d-c);
+$header-btn-search-d-h-c: color({{ settings.color_header_btn_search_d_h_c | default: false }}, $header-btns-d-h-c);
+$header-btn-cart-d-c: color({{ settings.color_header_btn_cart_d_c | default: false }}, $header-btns-d-c);
+$header-btn-cart-text-d-c: color({{ settings.color_header_btn_cart_text_d_c | default: false }}, $header-btn-cart-d-c);
+$header-btn-cart-d-h-c: color({{ settings.color_header_btn_cart_d_h_c | default: false }}, $header-btns-d-h-c);
+$header-input-c: color({{ settings.color_header_input_c | default: false }}, $input-c);
+$header-input-bg: color({{ settings.color_header_input_bg | default: false }}, $input-bg);
+$header-input-bd: color({{ settings.color_header_input_bd | default: false }}, $input-bd);
+$header-input-f-bg: color({{ settings.color_header_input_f_bg | default: false }}, $input-f-bg);
+$header-input-f-bd: color({{ settings.color_header_input_f_bd | default: false }}, $input-f-bd);
+$header-menu-h-bg: color({{ settings.color_header_menu_h_bg | default: false }}, $theme-transparent);
+$header-menu-d-c: color({{ settings.color_header_menu_d_c | default: false }}, $theme);
+$header-menu-h-c: color({{ settings.color_header_menu_h_c | default: false }}, $theme3);
+$header-menu-list-h-bg: color({{ settings.color_header_menu_list_h_bg | default: false }}, $theme4);
+$header-menu-list-c: color({{ settings.color_header_menu_list_c | default: false }}, $theme3);
+$header-menu-list-h-c: color({{ settings.color_header_menu_list_h_c | default: false }}, $theme);
+$header-menu-vertical-button-bg: color({{ settings.color_header_menu_vertical_button_bg | default: false }}, $theme-primary);
+$header-menu-vertical-button-c: color({{ settings.color_header_menu_vertical_button_c | default: false }}, $theme2);
+$header-menu-vertical-d-bg: color({{ settings.color_header_menu_vertical_d_bg | default: false }}, $theme2);
+$header-menu-vertical-d-c: color({{ settings.color_header_menu_vertical_d_c | default: false }}, $header-menu-d-c);
+$header-menu-vertical-h-c: color({{ settings.color_header_menu_vertical_h_c | default: false }}, $header-menu-h-c);
+$header-menu-vertical-icon-c: color({{ settings.color_header_menu_vertical_icon_c | default: false }}, $header-menu-vertical-d-c);
+$header-menu-vertical-icon-h-c: color({{ settings.color_header_menu_vertical_icon_h_c | default: false }}, $header-menu-vertical-h-c);
+
+//footer
+$footer-bg: color({{ settings.color_footer_bg | default: false }}, $theme2);
+$footer-bd: color({{ settings.color_footer_bd | default: false }}, $theme5);
+$footer-titles-c: color({{ settings.color_footer_titles_c | default: false }}, $theme-head-c);
+$footer-text-c: color({{ settings.color_footer_text_c | default: false }}, $theme3);
+$footer-links-c: color({{ settings.color_footer_links_c | default: false }}, $footer-text-c);
+$footer-links-h-c: color({{ settings.color_footer_links_h_c | default: false }}, $theme-primary);
+$footer-icons-c: color({{ settings.color_footer_icons_c | default: false }}, $theme-primary);
+$footer-input-c: color({{ settings.color_footer_input_c | default: false }}, $input-c);
+$footer-input-bg: color({{ settings.color_footer_input_bg | default: false }}, $footer-bg);
+$footer-input-bd: color({{ settings.color_footer_input_bd | default: false }}, $footer-bd);
+$footer-input-f-bg: color({{ settings.color_footer_input_f_bg | default: false }}, $footer-bg);
+$footer-input-f-bd: color({{ settings.color_footer_input_f_bd | default: false }}, $theme-primary);
+$footer-button-back-to-top-d-c: color({{ settings.color_footer_back_to_top_d_c | default: false }}, $theme-primary);
+$footer-button-back-to-top-m-bg: color({{ settings.color_footer_back_to_top_m_bg | default: false }}, $theme-primary);
+$footer-button-back-to-top-m-c: color({{ settings.color_footer_back_to_top_m_c | default: false }}, $theme2);
+
+//popup subscription
+$subscription-bg: color({{ settings.color_subscription_bg | default: false }}, $theme2);
+$subscription-icon-close-c: color({{ settings.color_subscription_icon_close_c | default: false }}, $theme);
+$subscription-text-line-01-c: color({{ settings.color_subscription_line_01_c | default: false }}, $theme);
+$subscription-text-line-02-c: color({{ settings.color_subscription_line_02_c | default: false }}, $theme3);
+$subscription-text-line-03-c: color({{ settings.color_subscription_line_03_c | default: false }}, $theme3);
+$subscription-text-line-04-c: color({{ settings.color_subscription_line_04_c | default: false }}, $theme3);
+$subscription-dont-show-again-c: color({{ settings.color_subscription_dont_show_again_c | default: false }}, $theme3);
+$subscription-close-text-c: color({{ settings.color_subscription_close_text_c | default: false }}, $theme);
+$subscription-confirmation-bg: color({{ settings.color_subscription_confirmation_bg | default: false }}, $theme2);
+$subscription-confirmation-icon-close-c: color({{ settings.color_subscription_confirmation_icon_close_c | default: false }}, $theme);
+$subscription-confirmation-success-bg: color({{ settings.color_subscription_confirmation_success_bg | default: false }}, $theme7);
+$subscription-confirmation-success-c: color({{ settings.color_subscription_confirmation_success_c | default: false }}, $theme2);
+$subscription-confirmation-error-bg: color({{ settings.color_subscription_confirmation_error_bg | default: false }}, $theme8);
+$subscription-confirmation-error-c: color({{ settings.color_subscription_confirmation_error_c | default: false }}, $theme2);
+
+//notification cookie
+$notification-cookie-bg: color({{ settings.color_notification_cookie_bg | default: false }}, $theme);
+$notification-cookie-button-info-c: color({{ settings.color_notification_cookie_button_info_c | default: false }}, $theme3);
+$notification-cookie-button-info-h-c: color({{ settings.color_notification_cookie_button_info_h_c | default: false }}, $theme2);
+$notification-cookie-button-close-c: color({{ settings.color_notification_cookie_button_close_c | default: false }}, $theme2);
+
+//other
+$slider-bullets-bg: color({{ settings.color_slider_bullets_bg | default: false }}, $theme);
+$slider-bullets-h-bg: color({{ settings.color_slider_bullets_h_bg | default: false }}, $theme4);
+$slider-bullets-h-opacity: {{ settings.slider_bullets_h_opacity }};
+$slider-arrows-c: color({{ settings.color_slider_arrows_c | default: false }}, $slider-bullets-bg);
+$slider-arrows-h-c: color({{ settings.color_slider_arrows_h_c | default: false }}, $slider-bullets-h-bg);
+$slider-arrows-h-opacity: {{ settings.slider_arrows_h_opacity }};
+$review-icons-c: color({{ settings.color_review_icons_c | default: false }}, $theme-primary);
+$review-caption-c: color({{ settings.color_review_caption_c | default: false }}, $review-icons-c);
+$price-c: color({{ settings.color_price_c | default: false }}, $theme);
+$price-sale-1-c: color({{ settings.color_price_sale_1_c | default: false }}, $theme3);
+$price-sale-2-c: color({{ settings.color_price_sale_2_c | default: false }}, $price-c);
+$article-carousel-title-c: color({{ settings.color_article_carousel_title | default: false }}, $theme-link-c);
+$article-subscription-section-bg: color({{ settings.color_subscription_section_bg | default: false }}, $theme-body);
+$article-subscription-section-title-c: color({{ settings.color_subscription_section_title_c | default: false }}, $theme-head-c);
+$article-subscription-section-paragraph-c: color({{ settings.color_subscription_section_paragraph_c | default: false }}, $theme-paragraph-c);
+$home-sections-title-c: color({{ settings.color_home_sections_title_c | default: false }}, $theme-c);
+$home-sections-title-h-c: color({{ settings.color_home_sections_title_h_c | default: false }}, $theme);
+$content-builder:         #3E50B4;
+$content-builder-act:     #2D3874;
+$content-builder-bd:      #C2C2C2;
+
+.content-builder {
+  &.content-builder--developer-mode {
+    .custom-build > *,
+    [class^='custom-build__text-'],
+    [class^='custom-build__custom-html'] {
+      position: relative;
+    }
+    .custom-build > *:before,
+    [class^='custom-build__text-']:before,
+    [class^='custom-build__custom-html']:before {
+      content: '';
+      display: block;
+      position: absolute;
+      border: dashed 1px $content-builder-bd;
+      opacity: 1;
+      pointer-events: none;
+      transition: 0.1s opacity;
+    }
+    .custom-build > *:before {
+      top: -3px;
+      bottom: -3px;
+      left: -3px;
+      right: -3px;
+    }
+    [class^='custom-build__text-']:before,
+    [class^='custom-build__custom-html']:before {
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+      right: -1px;
+    }
+  }
+  &.content-builder--developer-mode .content-builder__curtain:hover {
+    .custom-build > *:before,
+    [class^='custom-build__text-']:before,
+    [class^='custom-build__custom-html']:before {
+      opacity: 0;
+    }
+  }
+  textarea {
+    &:hover{
+      border-color: $content-builder;
+    }
+    &:focus {
+      border-color: $content-builder-act;
+    }
+  }
+  &.border--dashed {
+    border-color: $content-builder-bd !important;
+  }
+}
+.content-builder__curtain {
+  @include shadow(0px 4px 20px rgba(0, 0, 0, 0.15));
+}
+.content-builder__btn {
+  text-transform: none;
+  border-radius: 2px !important;
+  @include colorize-btn($content-builder !important, $content-builder !important, #ffffff !important, $content-builder-act !important, $content-builder-act !important, #ffffff !important, $content-builder-act !important, $content-builder-act !important, #ffffff !important);
+}
+.content-builder__btn-link {
+  font-weight: bold !important;
+  color: $content-builder;
+  &.open,
+  &:hover {
+    color: $content-builder-act;
+  }
+}
+
+
+

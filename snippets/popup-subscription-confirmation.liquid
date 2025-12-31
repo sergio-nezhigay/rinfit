@@ -1,0 +1,29 @@
+{% capture popup_button_type %}{% if settings.color_subscription_confirmation_button_type == '2' %} btn--invert{% elsif settings.color_subscription_confirmation_button_type == '3' %} btn--secondary{% elsif settings.color_subscription_confirmation_button_type == '5' %} btn--clean{% endif %}{% endcapture %}
+<div class="popup-subscription-confirmation position-relative py-30 px-15" data-popup-content>
+    <i class="popup-subscription-confirmation__close position-absolute cursor-pointer" data-js-popup-close>{% include 'icon-theme-164' %}</i>
+    <div class="popup-subscription-confirmation__content d-flex flex-column mx-auto text-center">
+        <p class="mb-10"><i class="popup-subscription-confirmation__title-icon">{% include 'icon-theme-153' %}</i></p>
+        <div data-popup-subscription-confirmation-success>
+            <div class="popup-subscription-confirmation__message popup-subscription-confirmation__message--success px-15 py-10">
+                <p class="mb-0">{{ section.settings.subscription_confirmation_success_message }}</p>
+            </div>
+            <div class="btn{{ popup_button_type }} mt-25 mx-auto" data-js-popup-close>{{ section.settings.subscription_confirmation_success_button }}</div>
+        </div>
+        <div class="d-none" data-popup-subscription-confirmation-error>
+            <div class="popup-subscription-confirmation__message popup-subscription-confirmation__message--error px-15 py-10 text-left" data-popup-subscription-confirmation-error-message></div>
+            <div class="mt-30">
+                {%- if settings.subscription_method == 'shopify' -%}
+                    {% form 'customer', id: null, novalidate: 'novalidate', class: 'd-flex d-flex flex-column flex-lg-row' %}
+                        {% include 'form-get-check-error-popup' %}
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" placeholder="{{ section.settings.subscription_text_input_placeholder }}" required="required">
+                        <input type="submit" class="btn btn--secondary" name="commit" value="{{ section.settings.subscription_text_submit_button_text }}">
+                    {% endform %}
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    Loader.require({type: "script", name: "popup_subscription_confirmation"});
+</script>

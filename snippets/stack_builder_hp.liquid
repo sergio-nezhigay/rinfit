@@ -1,0 +1,50 @@
+    {%- assign icons = '' -%}
+    {%- for icon_i in (1..235) -%}
+        {%- assign icon_numb = icon_i -%}
+        {%- unless icon_i > 99 -%}
+            {%- assign icon_numb = icon_numb | prepend: 0 -%}
+        {%- endunless -%}
+        {%- unless icon_i > 9 -%}
+            {%- assign icon_numb = icon_numb | prepend: 0 -%}
+        {%- endunless -%}
+        {% capture icons %}{{ icons }}|theme-{{ icon_numb }}{% endcapture %}
+    {%- endfor -%}
+    {%- for icon_i in (301..305) -%}
+        {% capture icons %}{{ icons }}|theme-{{ icon_i }}{% endcapture %}
+    {%- endfor -%}
+    {%- for icon_i in (1..46) -%}
+        {%- assign icon_numb = icon_i -%}
+        {%- unless icon_i > 9 -%}
+            {%- assign icon_numb = icon_numb | prepend: 0 -%}
+        {%- endunless -%}
+        {% capture icons %}{{ icons }}|dry-{{ icon_numb }}{% endcapture %}
+    {%- endfor -%}
+    {%- assign icons = icons | split: '|' -%}
+<div class="homepage_heading_banner">
+    <a href="{{ sb_ring1_url }}">
+    <div class="div-col1" style="border-style:inset">
+    <svg viewbox="8 28 478 128">
+        <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"></path>
+        <text width="500">
+          <textpath xlink:href="#curve" class="h1">
+                 {{ sb_ring1_title }}
+          </textpath>
+        </text>
+      </svg>
+    <h4>{{ sb_ring1_desc | strip_html }}</h4>
+    </div>
+    </a>
+    <a href="{{ sb_ring2_url }}">
+    <div class="div-col2" style="border-style:outset">
+    <svg viewbox="8 28 478 128">
+        <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"></path>
+        <text width="500">
+          <textpath xlink:href="#curve" class="h1">
+            {{ sb_ring2_title }}
+          </textpath>
+        </text>
+      </svg>
+    <h4>{{ sb_ring2_desc | strip_html }}</h4>
+    </div>
+    </a>
+    </div>

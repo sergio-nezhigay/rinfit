@@ -1,0 +1,15 @@
+{%- assign container_class = null -%}
+{%- if section.settings.container == 'inherit' -%}
+    {%- assign container = settings.layout_container -%}
+{%- else -%}
+    {%- assign container = section.settings.container -%}
+{%- endif -%}
+{%- if container == 'boxed' -%}
+    {%- assign container_class = 'container' -%}
+    {%- if boxed_without_paddings -%}
+        {%- assign container_class = container_class | append: ' px-0' -%}
+    {%- endif -%}
+{%- elsif container == 'fullwidth' and fullwidth_need_paddings -%}
+    {%- assign container_class = 'container-fluid' -%}
+{%- endif -%}
+{% if container_class %} class="{{ container_class }}"{% endif %}{% if fullwidth_need_paddings %} data-fullwidth-need-paddings="true"{% endif %}{% if boxed_without_paddings %} data-boxed-without-paddings="true"{% endif %}
