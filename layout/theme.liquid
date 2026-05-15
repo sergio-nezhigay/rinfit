@@ -189,5 +189,13 @@ if (window.matchMedia('(min-width: 679px)').matches) {
     }
   </script>
 {% include 'adroll' %}
+
+{%- comment -%}
+  Hidden Privy form used by the AI chat widget to subscribe customers
+  to email marketing without opening a visible popup.
+  Filled programmatically via assets/privy-chat-subscribe.js.
+{%- endcomment -%}
+<div id="privy-chat-embed" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"></div>
+
 </body>
 </html>

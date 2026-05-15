@@ -96,6 +96,8 @@
                 /*custom*/
                 custom: '{{ 'custom.min.js' | asset_url }}',
                 privy: '//shopify.privy.com/widget.js?shop=rinfit.myshopify.com',
+                // Bridges the AI chat widget → Privy subscription (chat-initiated, no popup)
+                privy_chat_subscribe: '{{ 'privy-chat-subscribe.js' | asset_url }}',
                 productreviews: '//productreviews.shopifycdn.com/assets/v4/spr.js?shop=rinfit.myshopify.com',
                 shop_events_listener: '//cdn.shopify.com/shopifycloud/shopify/assets/shop_events_listener-68ba3f1321f00bf07cb78a03841621079812265e950cdccade3463749ea2705e.js',
                 fbpixel: 'https://cdn.shopify.com/s/trekkie.storefront.e9e663667fe98bc18d8a69f55823f9b0dc77b425.min.js',
