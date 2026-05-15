@@ -3313,8 +3313,8 @@
               "type": "clean",
               "position_v": "center",
               "border_hover": false,
-              "image": "shopify://shop_images/main_f63f9128-5518-449e-983e-ee4a9cba5142.jpg",
-              "url": "shopify://collections/silicone-rings",
+              "image": "shopify://shop_images/Banner_10_Desktop.jpg",
+              "url": "shopify://collections/glowstone",
               "image_size": 2000,
               "format_pjpg": false,
               "disable_lazyload": false,
@@ -3393,8 +3393,8 @@
               "type": "clean",
               "position_v": "center",
               "border_hover": false,
-              "image": "shopify://shop_images/mobile_dec3c0f4-a2e4-4ad6-af17-5d9216318f08.jpg",
-              "url": "shopify://collections/silicone-rings",
+              "image": "shopify://shop_images/Banner_10_Mobile_2.jpg",
+              "url": "shopify://collections/glowstone",
               "image_size": 900,
               "format_pjpg": false,
               "disable_lazyload": false,
@@ -4828,6 +4828,11 @@
       "11724500921838622758": {
         "type": "shopify://apps/frequently-bought-together/blocks/app-embed-block/b1a8cbea-c844-4842-9529-7c62dbab1b1f",
         "disabled": false,
+        "settings": {}
+      },
+      "2567389343055140935": {
+        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": true,
         "settings": {}
       }
     }
