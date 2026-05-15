@@ -1,0 +1,39 @@
+{% if product.available %}
+  <div class="product-video-review shrink-0">
+    <div class="product-video-review__media">
+      {{ video | video_tag: autoplay: false, loop: false, muted: false, controls: false, image_size: '312x', aria-label: product.title }}
+      <div class="product-video-review__play">
+        {% render 'icons', icon: 'play' %}
+        {% render 'icons', icon: 'pause' %}
+      </div>
+      <a href="{{ product.url }}" class="product-video-review__product-view">
+        {% render 'icons', icon: 'bag' %}
+        <span class="tooltip">{{ 'sections.shop_the_look.view_product' | t }}</span>
+      </a>
+    </div>
+    <div class="product-video-review__content">
+      <div>
+        {%- assign alt_text = product.title -%}
+        {% if product.metafields.custom.transparent_featured_image.value != blank %}
+          {{
+            product.metafields.custom.transparent_featured_image
+            | image_url: width: 140
+            | image_tag: loading: 'lazy', alt: alt_text
+          }}
+        {% else %}
+          {{ product.featured_image | image_url: width: 140 | image_tag: loading: 'lazy', alt: alt_text }}
+        {% endif %}
+      </div>
+      <div>
+        <h2 class="h2 line-clamp">
+          <a href="{{ product.url }}">{{ product.title }}</a>
+        </h2>
+
+        {%- render 'price-list', product: product, context: 'card' -%}
+      </div>
+      <div>
+        {% render 'icons', icon: 'chevron-right' %}
+      </div>
+    </div>
+  </div>
+{% endif %}

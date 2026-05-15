@@ -1,0 +1,218 @@
+{%- if section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+  {{- 'section-tiktok.css' | asset_url | stylesheet_tag -}}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --collection-list-item-size: 261px;
+      --collection-list-gap: 10px;
+    }
+
+     @media screen and (min-width: 1000px) {
+      #shopify-section-{{ section.id }} {
+        --collection-list-item-size: calc(100% / 4 - var(--collection-list-gap) * 3/4);
+      }
+    }
+  </style>
+
+  {%- assign remove_vertical_spacing = false -%}
+
+  {%- if section.settings.subheading == blank
+    and section.settings.title == blank
+    and section.settings.content == blank
+  -%}
+    {%- assign reduce_vertical_spacing = true -%}
+
+    {%- unless section.settings.space_items -%}
+      {%- assign remove_vertical_spacing = true -%}
+    {%- endunless -%}
+  {%- endif -%}
+
+  {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient
+    | default: section.settings.color_scheme.settings.background
+    | md5
+  -%}
+
+  {%- capture button_shop_all -%}
+    {%- if section.settings.button_text != blank -%}
+      {%- assign button_link = section.settings.button_url
+        | default: section.settings.collection.url
+        | default: '#'
+      -%}
+
+      <div class="justify-self-center section-heading__view-all">
+        {%- render 'button', href: button_link, content: section.settings.button_text -%}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {% capture collection_list_swiper %}
+    {%- for block in section.blocks -%}
+      <div class="swiper-slide">
+        {% render 'product-video-review', video: block.settings.video, product: block.settings.product  %}
+      </div>
+    {%- endfor -%}
+  {% endcapture %}
+
+  <div class="{% unless remove_vertical_spacing %}section-spacing {% if reduce_vertical_spacing %}section-spacing--tight{% endif %}{% endunless %} color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+    <div class="container">
+      <div class="section-stack">
+        {%- render 'section-header',
+          subheading: section.settings.subheading,
+          heading: section.settings.title,
+          content: section.settings.content,
+          text_alignment: 'stretch',
+          button_shop_all: button_shop_all
+        -%}
+
+        <div class="bleed floating-controls-container floating-controls-container--on-hover relative">
+          <button class="floating-controls-container__control">
+            <div class="prev-next-button prev-next-button--prev circle-button circle-button--lg hover:animate-icon-inline">
+              <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+              {%- render 'icons', icon: 'chevron-left' -%}
+            </div>
+          </button>
+          <div class="swiper section-slider is-scrollable">
+            <div class="swiper-wrapper">
+              {{ collection_list_swiper }}
+            </div>
+          </div>
+          <button class="floating-controls-container__control">
+            <div class="prev-next-button prev-next-button--next circle-button circle-button--lg hover:animate-icon-inline">
+              <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+              {%- render 'icons', icon: 'chevron-right' -%}
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Delegation: use one listener for all buttons
+    document.addEventListener('click', function (e) {
+      const playButton = e.target.closest('.product-video-review__play');
+
+      if (playButton) {
+        const videoContainer = playButton.closest('.product-video-review');
+        if (videoContainer) {
+          const video = videoContainer.querySelector('video');
+          if (video) {
+            if (video.paused) {
+              video.play();
+              videoContainer.classList.add('active');
+            } else {
+              video.pause();
+              videoContainer.classList.remove('active');
+            }
+          }
+        }
+      }
+    });
+
+    var swiper = new Swiper('#shopify-section-{{ section.id }} .section-slider', {
+      slidesPerView: 'auto',
+      loop: true,
+      centeredSlides: true,
+      spaceBetween: 0,
+      // Navigation arrows
+      navigation: {
+        prevEl: '#shopify-section-{{ section.id }} .prev-next-button--prev',
+        nextEl: '#shopify-section-{{ section.id }} .prev-next-button--next',
+      },
+      a11y: false,
+      breakpoints: {
+        700: {
+          slidesPerView: 3,
+        },
+        1000: {
+          slidesPerView: 5,
+        },
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "TikTok",
+  "class": "shopify-section--tiktok",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:global.section.header_category"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "t:global.text.subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:global.text.heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:global.text.content"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button link",
+      "default": "Shop all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TikTok",
+      "category": "t:global.categories.media"
+    }
+  ]
+}
+{% endschema %}

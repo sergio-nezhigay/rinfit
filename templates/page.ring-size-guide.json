@@ -1,0 +1,444 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "main_page_heading_3qQGGB": {
+      "type": "main-page-heading",
+      "name": "Page Heading",
+      "settings": {
+        "color_background": "#e9e9e9",
+        "color_text": "#807371",
+        "color_scheme": "",
+        "heading": "<em>{{ page.title }}</em>",
+        "subheading": "Easy Ways to Measure <em>Your ring Size</em>",
+        "content": "<p>Not sure where to start? Watch our quick video guide to learn how to measure your finger at home using simple tools. It’s the easiest way to find your perfect fit before you order!</p>"
+      }
+    },
+    "video_UDgb8K": {
+      "type": "video",
+      "blocks": {
+        "play_LfaprE": {
+          "type": "play",
+          "settings": {
+            "icon_color": "#373a36"
+          }
+        }
+      },
+      "block_order": [
+        "play_LfaprE"
+      ],
+      "name": "t:sections.video.presets.video.name",
+      "settings": {
+        "content_width": "container",
+        "remove_vertical_spacing": true,
+        "autoplay": false,
+        "show_controls": true,
+        "video_size": "md",
+        "external_video_url": "https://youtu.be/zFJwilvRG4w?si=5Jd_TKTpLwzCUJOJ",
+        "poster": "shopify://shop_images/Ring_Size_video_guide_cover.png",
+        "text_color": "#ffffff"
+      }
+    },
+    "size_calculator_hm3rHD": {
+      "type": "size-calculator",
+      "name": "Size calculator",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "subheading": "",
+        "title": "Ring size <em><strong>calculator</strong></em>",
+        "content": "",
+        "remove_vertical_spacing": false
+      }
+    },
+    "guide_AHnHXx": {
+      "type": "guide",
+      "blocks": {
+        "image_with_text_t7Uafc": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Sizer_Mesa_de_trabajo_1.jpg",
+            "title": "step one",
+            "heading_tag": "h2",
+            "content": "<p>Collect a strip of paper, a pen/pencil and a ruler.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_VLiFdg": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Sizer_Mesa_de_trabajo_1_copia.jpg",
+            "title": "step two",
+            "heading_tag": "h2",
+            "content": "<p>Wrap the paper strip around your finger so you make a “ring”.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_tgekFj": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Sizer_Mesa_de_trabajo_1_copia_2.jpg",
+            "title": "step three",
+            "heading_tag": "h2",
+            "content": "<p>Once you have the paper fitted, use the pen/pencil to mark where the edges overlap.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_LGBcMY": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Sizer_Mesa_de_trabajo_1_copia_3.jpg",
+            "title": "step four",
+            "heading_tag": "h2",
+            "content": "<p>Now, measure the length of the ring using the ruler and compare it to the chart.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_t7Uafc",
+        "image_with_text_VLiFdg",
+        "image_with_text_tgekFj",
+        "image_with_text_LGBcMY"
+      ],
+      "name": "Guide",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "columns_per_row": 4,
+        "stack_on_mobile": true,
+        "content_alignment": "center",
+        "text_alignment": "center",
+        "spacing": "md",
+        "subheading": "",
+        "title": "how to manually measure <em><strong>your ring size</strong></em>",
+        "content": "",
+        "size_table_desktop": "shopify://shop_images/Chart_desktop.png",
+        "size_table_mobile": "shopify://shop_images/Chart_mobile.png"
+      }
+    },
+    "video_with_text_hNBYeC": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_yB4pXh": {
+          "type": "heading",
+          "settings": {
+            "text": "find your <em>ring size using a ruler</em>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MBRwnp": {
+          "type": "richtext",
+          "settings": {
+            "content": "<ol><li>Select a ring that properly fits your ring finger.</li><li>Measure the inside diameter of the ring in millimeters.</li><li>Once you have your measurement, refer to the sizing chart to get your ring measurement. </li></ol>"
+          }
+        },
+        "button_Jh8Qim": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "style": "solid",
+            "text": "Download Our Size Tool",
+            "url": "https://cdn.shopify.com/s/files/1/1471/8740/files/RingSizingTool.pdf?v=1679586354",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_yB4pXh",
+        "richtext_MBRwnp",
+        "button_Jh8Qim"
+      ],
+      "name": "t:sections.video_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "video_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": false,
+        "autoplay": false,
+        "show_controls": true,
+        "video_size": "md",
+        "external_video_url": "https://youtu.be/2UtMGwpix4E?si=w6-zjMxsMANi3H9l",
+        "poster": "shopify://shop_images/Size_guide_Video_cover_1.jpg",
+        "text_color": "#ffffff"
+      }
+    },
+    "video_with_text_jGCbt3": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_KfBJDC": {
+          "type": "heading",
+          "settings": {
+            "text": "Use Ring Sizing Tool <em>To Measure Your Ring Size</em>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_qAwgrq": {
+          "type": "richtext",
+          "settings": {
+            "content": "<ol><li>Print out the sizing chart. When you do so, make sure you're printing at *100% size. Any larger or smaller and your measurement will turn out inaccurate.</li><li>Use a pair of scissors to cut out the sizer.</li><li>Gently slice through the line between the black 'READ SIZE HERE' arrow and the letter 'A'.</li><li>Insert the tapered end of the sizer through the slit to create a ring.</li><li>Place the ring on your finger and pull the tapered end of the sizer until the ring fits comfortably on your finger. Make sure it is not too tight/loose.</li></ol>"
+          }
+        },
+        "button_tknhXc": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Download Our Size Tool",
+            "url": "https://cdn.shopify.com/s/files/1/1471/8740/files/MeasureYourRing.pdf?v=1679586354",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_KfBJDC",
+        "richtext_qAwgrq",
+        "button_tknhXc"
+      ],
+      "name": "t:sections.video_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "video_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": false,
+        "autoplay": false,
+        "show_controls": true,
+        "video_size": "md",
+        "external_video_url": "https://youtu.be/VhoB4nbazsI?si=6CCBZjBh0zxSP4aS",
+        "poster": "shopify://shop_images/Size_guide_Video_cover_2.jpg",
+        "text_color": "#ffffff"
+      }
+    },
+    "video_with_text_TarERG": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_FNwqt6": {
+          "type": "heading",
+          "settings": {
+            "text": "Measure Your <em>existing ring</em>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Eb8WEy": {
+          "type": "richtext",
+          "settings": {
+            "content": "<ol><li>Print out the sizing chart. When you do so, make sure you’re printing at *100% size. Any larger or smaller and your measurement will turn out inaccurate.</li><li>Take a ring that best fits your finger and place it on each circle until you find one that matches the size. The black circle should fill the ring entirely</li><li>Open up your printer dialogue box and look for the ‘scaling’ settings. Make sure it’s set at “none” or uncheck the box for page scaling.</li></ol>"
+          }
+        },
+        "button_kLfMTt": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Download Our Size Tool",
+            "url": "https://cdn.shopify.com/s/files/1/1471/8740/files/RingSizingTool.pdf?v=1679586354",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_FNwqt6",
+        "richtext_Eb8WEy",
+        "button_kLfMTt"
+      ],
+      "name": "t:sections.video_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "video_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": false,
+        "autoplay": false,
+        "show_controls": true,
+        "video_size": "md",
+        "external_video_url": "https://youtu.be/_ViE6t6NJBg?si=5dJUUURmv7jF_W-p",
+        "poster": "shopify://shop_images/Size_guide_Video_cover_3.jpg",
+        "text_color": "#ffffff"
+      }
+    },
+    "text_with_icons_aYqgqK": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_ryyNzt": {
+          "type": "item",
+          "settings": {
+            "icon": "infinity",
+            "icon_color": "#ff69b4",
+            "icon_width": 30,
+            "mobile_icon_width": 30,
+            "title": "Lifetime warranty",
+            "content": "<p>If, at any time, your Rinfit rings fail to perform just contact us for a free replacement.</p>"
+          }
+        },
+        "item_tA4zJM": {
+          "type": "item",
+          "settings": {
+            "icon": "protect",
+            "icon_color": "#ff69b4",
+            "icon_width": 28,
+            "mobile_icon_width": 28,
+            "title": "patented designs",
+            "content": "<p>Our rings are protected by exclusive design patents. Stand out with unique details.</p>"
+          }
+        },
+        "item_jXMnKF": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-shield",
+            "icon_color": "#ff69b4",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Secure payment",
+            "content": "<p>Your payment information is processed securely.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_ryyNzt",
+        "item_tA4zJM",
+        "item_jXMnKF"
+      ],
+      "name": "t:sections.text_with_icons.presets.text_with_icons.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "image_with_text_overlay_8Gqpfw": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_AKhQWT": {
+          "type": "heading",
+          "settings": {
+            "text": "Emerald Frame <em><strong>collection</strong></em>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_e9YKYB": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Bold, elegant, and built to last - the Emerald Frame Ring brings vibrant color and sleek design together in one standout piece. Featuring a rich emerald-toned frame wrapped in soft, skin-friendly silicone, it’s the perfect blend of style and comfort.</p>"
+          }
+        },
+        "button_ggwCUf": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "shop the collection",
+            "url": "shopify://products/oversized-metal-framed-emerald-collection",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_AKhQWT",
+        "richtext_e9YKYB",
+        "button_ggwCUf"
+      ],
+      "name": "t:sections.image_with_text_overlay.presets.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "section_width": "full",
+        "image_size": "design",
+        "image": "shopify://shop_images/Emerald_frame_copia.jpg",
+        "mobile_image": "shopify://shop_images/Emerald_frame_Mobile_copia.jpg",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": true,
+        "content_width": "md",
+        "mobile_text_position": "place-self-end-center text-center",
+        "content_outside_mobile": true,
+        "desktop_text_position": "sm:place-self-end-start sm:text-start",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "image_with_text_6axGGM": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_9f3VT7": {
+          "type": "heading",
+          "settings": {
+            "text": "meet Glowstone <em><strong>collection</strong></em>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_NWEmid": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Designed to shine through every part of your day, the Gemstone Collection brings together soft, flexible bands and sparkling stone details for a ring that feels as good as it looks.</p>"
+          }
+        },
+        "button_dgf7bH": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "shop the collection",
+            "url": "shopify://collections/glowstone",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_9f3VT7",
+        "richtext_NWEmid",
+        "button_dgf7bH"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/2259fb4291792bb63e64b6fa1620e46d0580b91f_bdcbf73c-be55-4a5d-b0cb-a7bbcd6a93b9.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "image_link": "",
+        "text_alignment": "start",
+        "image_overlap": false,
+        "content_width": "sm",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "main_page_heading_3qQGGB",
+    "video_UDgb8K",
+    "size_calculator_hm3rHD",
+    "guide_AHnHXx",
+    "video_with_text_hNBYeC",
+    "video_with_text_jGCbt3",
+    "video_with_text_TarERG",
+    "text_with_icons_aYqgqK",
+    "image_with_text_overlay_8Gqpfw",
+    "image_with_text_6axGGM"
+  ]
+}

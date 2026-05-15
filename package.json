@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "shopify theme dev --store=rinfit.myshopify.com --theme 124245442602",
-    "push": "shopify theme push --store=rinfit.myshopify.com --theme 124245442602",
-    "pull": "shopify theme pull --store=rinfit.myshopify.com --theme 124245442602"
+    "dev": "shopify theme dev --store=rinfit.myshopify.com --theme 188506538272",
+    "push": "shopify theme push --store=rinfit.myshopify.com --theme 188506538272",
+    "pull": "shopify theme pull --store=rinfit.myshopify.com --theme 188506538272"
   },
   "repository": {
     "type": "git",

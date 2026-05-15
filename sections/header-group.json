@@ -1,0 +1,119 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement_bar_TNWK6g": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_ydbVhX": {
+          "type": "message",
+          "settings": {
+            "text": "The Comfortable Alternative to Metal Rings ♥ Since 2016"
+          }
+        }
+      },
+      "block_order": [
+        "message_ydbVhX"
+      ],
+      "name": "t:sections.announcement_bar.name",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "enable_sticky": false,
+        "autoplay": true,
+        "cycle_speed": 5,
+        "desktop_font_size": 12,
+        "mobile_font_size": 12
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_7NWKtk": {
+          "type": "mega_menu",
+          "disabled": true,
+          "settings": {
+            "show_menu_items_images": false,
+            "menu_item": "Company",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_3CM8q8": {
+          "type": "mega_menu",
+          "settings": {
+            "show_menu_items_images": false,
+            "menu_item": "Shop",
+            "images_position": "right",
+            "image_1": "shopify://shop_images/BBS75.jpg",
+            "image_1_heading": "new <em><strong>arrivals</strong></em>",
+            "image_1_text": "",
+            "image_1_link": "shopify://collections/new-arrivals",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_7NWKtk",
+        "mega_menu_3CM8q8"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_sticky": true,
+        "hide_on_scroll": false,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "logo": "shopify://shop_images/Rinfit_Main_Logo_Compact_a9083f7f-c8f1-49b5-a605-6352d95d503a.svg",
+        "logo_max_width": 165,
+        "logo_mobile_max_width": 120,
+        "menu": "header-menu-miledev",
+        "sidebar_menu_collection_list": [
+          "glowstone",
+          "gemstones",
+          "metal-framed-collection",
+          "metal-accent",
+          "classic-rings",
+          "diamond-collection-sale",
+          "stackables",
+          "ring-protector"
+        ],
+        "sidebar_menu": "shop",
+        "sidebar_menu_second": "second-menu",
+        "menu_open_trigger": "click",
+        "menu_text_font": "heading",
+        "enable_search": true,
+        "sidebar_color_scheme": "scheme-1",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": false,
+        "sidebar_open_second_level_menus": false,
+        "layout": "logo_center_navigation_inline",
+        "show_icons": true,
+        "show_country_selector": false,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": false,
+        "transparent_header_text_color": "#ffffff",
+        "transparent_logo": "shopify://shop_images/Rinfit_Main_Logo_Compact_Inverted.svg"
+      }
+    }
+  },
+  "order": [
+    "announcement_bar_TNWK6g",
+    "header"
+  ]
+}

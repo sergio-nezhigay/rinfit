@@ -1,6 +1,0 @@
-{% assign symbols = '-+!"#$€₹%&* ,./:;<=>?@[\\]_`{|}~()°^' | append: "'" | split: '' -%}
-{%- assign strip_value = value -%}
-{%- for symbol in symbols -%}
-    {%- assign strip_value = strip_value | remove: symbol -%}
-{%- endfor -%}
-{{- strip_value }}

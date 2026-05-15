@@ -1,0 +1,81 @@
+<div class="product-tabs__wrapper">
+  <ul class="product-tabs__switchers-list">
+    {% for tab in product_tabs %}
+      {% assign tab_target = tab.id | default: forloop.index0 %}
+      <li>
+        <button
+          data-tab-opener="{{ tab_target }}"
+          class="product-tabs__switcher{% if forloop.first %} active{% endif %}"
+          type="button"
+        >
+          {{ tab.settings.heading }}
+        </button>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="product-tabs__content">
+    {% for tab in product_tabs %}
+      {% assign tab_target = tab.id | default: forloop.index0 %}
+      <div data-tab-content="{{ tab_target }}" class="product-tabs__panel{% if forloop.first %} active{% endif %}">
+        {% unless tab.settings.page == blank %}
+          {{ tab.settings.page.content }}
+        {% endunless %}
+
+        {% unless tab.settings.content == blank %}
+          {{ tab.settings.content }}
+        {% endunless %}
+
+        {% unless tab.settings.html == blank %}
+          {{ tab.settings.html }}
+        {% endunless %}
+
+        {% unless tab.settings.liquid == blank %}
+          {{ tab.settings.liquid }}
+        {% endunless %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initProductTabs() {
+      document.querySelectorAll('.product-tabs__wrapper').forEach(function (wrapper) {
+        var switchers = wrapper.querySelectorAll('[data-tab-opener]');
+        var panels = wrapper.querySelectorAll('[data-tab-content]');
+
+        if (!switchers.length || !panels.length || wrapper.dataset.tabsBound === 'true') return;
+
+        function setActiveTab(tabId) {
+          switchers.forEach(function (switcher) {
+            switcher.classList.toggle('active', switcher.dataset.tabOpener === tabId);
+          });
+
+          panels.forEach(function (panel) {
+            panel.classList.toggle('active', panel.dataset.tabContent === tabId);
+          });
+        }
+
+        var currentActive = wrapper.querySelector('[data-tab-opener].active') || switchers[0];
+        setActiveTab(currentActive.dataset.tabOpener);
+
+        switchers.forEach(function (switcher) {
+          switcher.addEventListener('click', function () {
+            setActiveTab(switcher.dataset.tabOpener);
+          });
+        });
+
+        wrapper.dataset.tabsBound = 'true';
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProductTabs);
+    } else {
+      initProductTabs();
+    }
+
+    document.addEventListener('theme:loading:end', initProductTabs);
+  })();
+</script>

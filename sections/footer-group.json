@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "newsletter_cgTdgq": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.presets.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "image_size": "auto",
+        "subheading": "",
+        "title": "10% off your 1st order",
+        "content": "<p>First time shopping with us? Just add your favorite ring to cart and the discount is yours.</p>",
+        "button_text": "Subscribe",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "logo": "shopify://shop_images/big-logo.png",
+            "title": "",
+            "content": "<p>Rinfit rings combine comfort, durability, and safety with unique, stylish, and fashionable high-end designs.</p>",
+            "enable_follow_on_shop": false
+          }
+        },
+        "links_fFLErh": {
+          "type": "links",
+          "disabled": true,
+          "settings": {
+            "menu": "collections",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "shop",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links_L44Btp": {
+          "type": "links",
+          "settings": {
+            "menu": "need-help",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "links_fFLErh",
+        "links",
+        "links_L44Btp"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "separate_section_with_border": false,
+        "show_social_media": true,
+        "show_payment_icons": false,
+        "show_powered_by_shopify": false,
+        "show_policies_links": true,
+        "show_country_selector": false,
+        "show_country_name": true,
+        "show_country_flag": false,
+        "show_locale_selector": false
+      }
+    }
+  },
+  "order": [
+    "newsletter_cgTdgq",
+    "footer"
+  ]
+}

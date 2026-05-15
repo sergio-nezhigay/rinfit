@@ -1,0 +1,293 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "promotion_bLFtYP": {
+      "type": "promotion",
+      "blocks": {
+        "subheading_jYUr4p": {
+          "type": "subheading",
+          "settings": {
+            "text": "Thank you for your order"
+          }
+        },
+        "heading_xBznFB": {
+          "type": "heading",
+          "settings": {
+            "text": "get your <strong>20% Off</strong>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_6yhEnh": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Enter your email to get your code instantly + early access to new drops and exclusive offers.</p>"
+          }
+        },
+        "form_dhaGim": {
+          "type": "form",
+          "settings": {
+            "placeholder": "Enter your Email",
+            "submit_text": "Get my 20% off"
+          }
+        },
+        "note_FfxTL9": {
+          "type": "note",
+          "settings": {
+            "content": "<p><em>You’re signing up to receive Rinfit emails. No spam. Unsubscribe anytime.</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_jYUr4p",
+        "heading_xBznFB",
+        "richtext_6yhEnh",
+        "form_dhaGim",
+        "note_FfxTL9"
+      ],
+      "name": "t:sections.promotion.presets.promotion.name",
+      "settings": {
+        "color_scheme": "scheme-8688ad98-0d63-498a-855e-5735be2280d2",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/Promotion-banner.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "md",
+        "remove_vertical_spacing": true
+      }
+    },
+    "text_with_icons_banner_XWGFaB": {
+      "type": "text-with-icons-banner",
+      "blocks": {
+        "item_zNJJ3i": {
+          "type": "item",
+          "settings": {
+            "icon": "men",
+            "icon_width": 68,
+            "mobile_icon_width": 50,
+            "title": "<strong>1M+</strong> Happy Customers",
+            "content": ""
+          }
+        },
+        "item_MhmitJ": {
+          "type": "item",
+          "settings": {
+            "icon": "award",
+            "icon_width": 36,
+            "mobile_icon_width": 34,
+            "title": "<strong>U.S. Design</strong> Patent Protected",
+            "content": ""
+          }
+        },
+        "item_DQwwDE": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "icon_width": 52,
+            "mobile_icon_width": 44,
+            "title": "<strong>Loved across</strong> the U.S.",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_zNJJ3i",
+        "item_MhmitJ",
+        "item_DQwwDE"
+      ],
+      "name": "t:sections.text_with_icons_banner.presets.text_with_icons_banner.name",
+      "settings": {
+        "color_scheme": "scheme-ccc90142-a087-490f-9252-376a779d4419",
+        "separate_section_with_border": false,
+        "stack_on_mobile": true,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "start"
+      }
+    },
+    "x_why_us_VpJaW4": {
+      "type": "x-why-us",
+      "blocks": {
+        "item_W7dnpr": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "icon_width": 48,
+            "mobile_icon_width": 32,
+            "title": "Early Access",
+            "content": "<p>Be the first to shop new collections</p>"
+          }
+        },
+        "item_pJNMKQ": {
+          "type": "item",
+          "settings": {
+            "icon": "sale",
+            "icon_width": 46,
+            "mobile_icon_width": 30,
+            "title": "Exclusive Offers",
+            "content": "<p>Private deals you won’t find anywhere else</p>"
+          }
+        },
+        "item_6Y8jcK": {
+          "type": "item",
+          "settings": {
+            "icon": "bell",
+            "icon_width": 40,
+            "mobile_icon_width": 26,
+            "title": "New Drops First",
+            "content": "<p>Get notified before everyone else</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_W7dnpr",
+        "item_pJNMKQ",
+        "item_6Y8jcK"
+      ],
+      "name": "t:sections.why_us.presets.why_us.name",
+      "settings": {
+        "color_scheme": "scheme-4e4bb27f-3ac0-4203-b01f-3e5170d7968b",
+        "separate_section_with_border": false,
+        "stack_on_mobile": true,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "Why Join Rinfit?",
+        "content": ""
+      }
+    },
+    "x_promotion_banner_aaMKcx": {
+      "type": "x-promotion-banner",
+      "blocks": {
+        "image_pJrQrp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Promotion-banner-ring-01.png"
+          }
+        },
+        "image_XPrJLb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Promotion-banner-ring-02.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_pJrQrp",
+        "image_XPrJLb"
+      ],
+      "name": "X: Promotion banner",
+      "settings": {
+        "color_scheme": "scheme-4e4bb27f-3ac0-4203-b01f-3e5170d7968b",
+        "separate_section_with_border": true,
+        "subheading": "",
+        "title": "Limited-time offer",
+        "content": "<p>Your <strong>20%OFF</strong> is reserved for you now.</p>",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "x_join_community_nDpiqD": {
+      "type": "x-join-community",
+      "blocks": {
+        "heading_iFYemP": {
+          "type": "heading",
+          "settings": {
+            "text": "Join the Community",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_NLE4mw": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>See how people style Rinfit every day.</p>"
+          }
+        },
+        "nickname_iYwkXc": {
+          "type": "nickname",
+          "settings": {
+            "text": "@rinfitrings"
+          }
+        },
+        "social_media_bjr7w6": {
+          "type": "social_media",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_iFYemP",
+        "richtext_NLE4mw",
+        "nickname_iYwkXc",
+        "social_media_bjr7w6"
+      ],
+      "name": "t:sections.x_join_community.presets.x_join_community.name",
+      "settings": {
+        "color_scheme": "scheme-6c46320a-45a2-49a4-9185-b85f69516dae",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/Join-us-desktop.jpg",
+        "mobile_image": "shopify://shop_images/Join-us-mobile.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "md",
+        "remove_vertical_spacing": true
+      }
+    },
+    "x_rich_text_4DcArB": {
+      "type": "x-rich-text",
+      "blocks": {
+        "heading_LNRXY6": {
+          "type": "heading",
+          "settings": {
+            "text": "Questions?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_GibPR8": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>We’re here to help.</p><p><a href=\"mailto:support@rinfit.com\" target=\"_blank\" title=\"mailto:support@rinfit.com\"><strong>support@rinfit.com</strong></a></p>"
+          }
+        },
+        "button_jPEgJC": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "CONTACT us",
+            "url": "shopify://pages/contact-us",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_LNRXY6",
+        "richtext_GibPR8",
+        "button_jPEgJC"
+      ],
+      "name": "t:sections.x_rich_text.presets.x_rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-8688ad98-0d63-498a-855e-5735be2280d2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "start",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "promotion_bLFtYP",
+    "text_with_icons_banner_XWGFaB",
+    "x_why_us_VpJaW4",
+    "x_promotion_banner_aaMKcx",
+    "x_join_community_nDpiqD",
+    "x_rich_text_4DcArB"
+  ]
+}
